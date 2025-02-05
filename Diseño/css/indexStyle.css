@@ -9,3 +9,16 @@ html, body{
     border-width: 0.2em;
     border-radius: 0.3em;
 }
+
+.card:hover{
+    background-color: #c9c8c7;
+}
+
+.scroll-column {
+    height: 100vh; 
+    overflow-y: auto;
+}
+
+#scroll{
+    --bs-gutter-x : 0 !important; 
+}
