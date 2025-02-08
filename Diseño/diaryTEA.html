@@ -13,23 +13,37 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/indexStyle.css">
     </link>
+    <!--JQUERY-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <title>Diario digital</title>
 </head>
 
 <body>
 
-    <div class="row justify-content-center d-flex align-items-center" id="scroll" >
-        <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
+    <div class="row justify-content-center d-flex align-items-center" id="scrollView">
+        <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12" id="columnaAddDiario">
             <div class="contanier d-flex flex-column justify-content-center align-items-center" id="addDiario">
                 <p>Añadir entrada al diario</p>
-                <button type="button" class="btn btn-success" style="width: 100px; height: 50px; border-radius: 20px;">
+                <button type="button" class="btn btn-success" id="addRegistro"
+                    style="width: 100px; height: 50px; border-radius: 20px;">
                     <i class="bi bi-plus"></i>
                 </button>
             </div>
         </div>
+        <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12" id="columnaGuardarDiario">
+            <div class="contanier d-flex flex-column justify-content-center align-items-center" id="addDiario">
+                <button type="button" class="btn btn-success" id="buttonSaveRegistro"
+                    style="width: 100px; height: 50px; border-radius: 20px;">
+                    GUARDAR
+                </button>
+                <br>
+                <button type="button" class="btn btn-danger" id="buttonDeleteRegistro"
+                    style="width: 100px; height: 50px; border-radius: 20px;">ELIMINAR</button>
+            </div>
+        </div>
 
-        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 scroll-column">
+        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 scroll-column" id="columnaVistaDiario">
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
                 <p>Fecha: 05 de febrero</p>
                 <p>Hora: 12 AM</p>
@@ -98,8 +112,62 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 scroll-column mr-1" id="columnaFormDiario">
+          
+                <form>
+                    <div class="form-group">
+                        <label for="fecha">Fecha</label>
+                        <input type="date" class="form-control" id="fecha" name="fecha">
+                    </div>
+                    <div class="form-group">
+                        <label for="hora">Hora</label>
+                        <input type="time" class="form-control" id="hora" name="hora">
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="asociarRutina" name="asociarRutina">
+                        <label class="form-check-label" for="asociarRutina">Asociar a una rutina</label>
+                    </div>
+                    <div id="selectRutinaContainer"></div>
+                </form>
+           
+
+            <h5>Emociones</h5>
+            <div class="container d-flex">
+                <div class="card">
+                    <img class="card-img" src="images/confusión.png" alt="Diario digital">
+                </div>
+                <div class="card">
+                    <img class="card-img" src="images/enfadado.png" alt="Diario digital">
+                </div>
+                <div class="card">
+                    <img class="card-img" src="images/triste.png" alt="Diario digital">
+                </div>
+            </div>
+            <h5>Tarjetas de comunicación</h5>
+            <div class="container d-flex">
+                <div class="card">
+                    <img class="card-img" src="images/diario.png" alt="Diario digital">
+                </div>
+                <div class="card">
+                    <img class="card-img" src="images/rutinas.png" alt="Diario digital">
+                </div>
+
+                <div class="card">
+                    <img class="card-img" src="images/galletas.png" alt="Diario digital">
+                </div>
+                <div class="card">
+                    <img class="card-img" src="images/recreo.png" alt="Diario digital">
+                </div>
+                <div class="card">
+                    <img class="card-img" src="images/yo.png" alt="Diario digital">
+                </div>
+            </div>
+
+        </div>
     </div>
 
+
+    <script src="/Diseño/js/addRegistros.js"></script>
 </body>
 
 </html>
