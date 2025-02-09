@@ -33,3 +33,36 @@ html, body{
 .diario{
     padding: 1em;
 }
+
+.card {
+    max-width: 120px; /* Ajusta según necesidad */
+    max-height: 120px; /* Ajusta según necesidad */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card img {
+    width: 100%; /* Ajusta el ancho de la imagen */
+    height: 100%; /* Ajusta la altura de la imagen */
+    object-fit: cover; /* Recorta la imagen para ajustarse sin deformarse */
+}
+
+.cross-icon {
+    display: none;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#contenedorPictogramas .card:hover{
+  background-color: red;
+    
+}
+
+#contenedorPictogramas .card:hover .cross-icon{
+    display: block;
+    
+}

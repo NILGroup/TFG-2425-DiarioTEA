@@ -24,22 +24,29 @@
     <div class="row justify-content-center d-flex align-items-center" id="scrollView">
         <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12" id="columnaAddDiario">
             <div class="contanier d-flex flex-column justify-content-center align-items-center" id="addDiario">
-                <p>Añadir entrada al diario</p>
-                <button type="button" class="btn btn-success" id="addRegistro"
-                    style="width: 100px; height: 50px; border-radius: 20px;">
-                    <i class="bi bi-plus"></i>
+
+                <button type="button" class="btn" id="addRegistro">
+                    <div class="card">
+                        <img class="card-img" src="images/add.png" alt="Add" style="max-height: 100px;">
+                    </div>
                 </button>
             </div>
         </div>
         <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12" id="columnaGuardarDiario">
             <div class="contanier d-flex flex-column justify-content-center align-items-center" id="addDiario">
-                <button type="button" class="btn btn-success" id="buttonSaveRegistro"
-                    style="width: 100px; height: 50px; border-radius: 20px;">
-                    GUARDAR
+                <button type="button" class="btn" id="buttonSaveRegistro">
+                    <div class="card">
+                        <img class="card-img" src="images/add.png" alt="Add" style="max-height: 100px;">
+                    </div>
                 </button>
-                <br>
-                <button type="button" class="btn btn-danger" id="buttonDeleteRegistro"
-                    style="width: 100px; height: 50px; border-radius: 20px;">ELIMINAR</button>
+                <button type="button" class="btn" id="buttonDeleteRegistro">
+                    <a href="diaryTEA.html">
+                        <div class="card">
+
+                            <img class="card-img" src="images/botonBorrar.png" alt="Add" style="max-height: 100px;">
+                        </div>
+                    </a>
+                </button>
             </div>
         </div>
 
@@ -113,23 +120,23 @@
             </div>
         </div>
         <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 scroll-column mr-1" id="columnaFormDiario">
-          
-                <form>
-                    <div class="form-group">
-                        <label for="fecha">Fecha</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha">
-                    </div>
-                    <div class="form-group">
-                        <label for="hora">Hora</label>
-                        <input type="time" class="form-control" id="hora" name="hora">
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="asociarRutina" name="asociarRutina">
-                        <label class="form-check-label" for="asociarRutina">Asociar a una rutina</label>
-                    </div>
-                    <div id="selectRutinaContainer"></div>
-                </form>
-           
+
+            <form>
+                <div class="form-group">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha">
+                </div>
+                <div class="form-group">
+                    <label for="hora">Hora</label>
+                    <input type="time" class="form-control" id="hora" name="hora">
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="asociarRutina" name="asociarRutina">
+                    <label class="form-check-label" for="asociarRutina">Asociar a una rutina</label>
+                </div>
+                <div id="selectRutinaContainer"></div>
+            </form>
+
 
             <h5>Emociones</h5>
             <div class="container d-flex">
@@ -163,6 +170,12 @@
                 </div>
             </div>
 
+
+            <h5>Tablero</h5>
+            <div class="container d-flex mt-3" id="contenedorPictogramas"
+                style="border: 2px solid black; border-radius: 3px;">
+
+            </div>
         </div>
     </div>
 
