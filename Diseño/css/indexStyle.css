@@ -22,3 +22,14 @@ html, body{
 #scrollView{
     --bs-gutter-x : 0 !important; 
 }
+
+.fijar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 1em 0;
+}
+
+.diario{
+    padding: 1em;
+}
