@@ -39,14 +39,41 @@ $(document).ready(function () {
         }
     })
 
-    
+    $("#buttonSaveRegistro").on('click', function () {
+        let fecha = $("#fecha").val();
+        let hora = $("#hora").val();
 
-    $("#columnaFormDiario .card").each(function(index) {
+        var cards = $('#contenedorPictogramas .card').clone();
+
+
+
+        let container = `<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+                <div class="col-auto">
+                    <p>Fecha: ${fecha}</p>
+                    <p>Hora: ${hora}</p>
+                    <div class="container d-flex">
+                        ${cards.map(function () { return this.outerHTML; }).get().join('')}
+                    </div>
+                </div>
+            </div>`;
+
+        $("#columnaVistaDiario").prepend(container);
+
+        $("#columnaGuardarDiario").hide();
+        $("#columnaFormDiario").hide();
+        $("#columnaAddDiario").show();
+        $("#columnaVistaDiario").show();
+
+
+    })
+
+
+    $("#columnaFormDiario .card").each(function (index) {
         $(this).attr("data-index", index); // Guarda el índice original
         $(this).data("originalContainer", $(this).parent()); // Guarda el contenedor original
     });
 
-    $(".container.d-flex").on("click", ".card", function() {
+    $(".container.d-flex").on("click", ".card", function () {
         let card = $(this);
         let contenedorPictogramas = $("#contenedorPictogramas");
 
@@ -56,7 +83,7 @@ $(document).ready(function () {
             let index = card.attr("data-index");
 
             let inserted = false;
-            originalContainer.children(".card").each(function() {
+            originalContainer.children(".card").each(function () {
                 if (parseInt($(this).attr("data-index")) > index) {
                     $(this).before(card);
                     inserted = true;
@@ -74,7 +101,7 @@ $(document).ready(function () {
             // Mover al contenedor de pictogramas
             contenedorPictogramas.append(card);
             card.append('<span class="cross-icon">✖</span>');
-            
+
         }
     });
 
