@@ -34,18 +34,10 @@ html, body{
     padding: 1em;
 }
 
-.card {
-    max-width: 120px; /* Ajusta según necesidad */
-    max-height: 120px; /* Ajusta según necesidad */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .card img {
-    width: 100%; /* Ajusta el ancho de la imagen */
-    height: 100%; /* Ajusta la altura de la imagen */
-    object-fit: cover; /* Recorta la imagen para ajustarse sin deformarse */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .cross-icon {
@@ -65,4 +57,25 @@ html, body{
 #contenedorPictogramas .card:hover .cross-icon{
     display: block;
     
+}
+
+.navegacion{
+    background-color: #a7a6a6;
+}
+
+.navegacion-icono {
+    width: 6em; 
+    height: 6em;
+    object-fit: contain;
+}
+
+.titulo-hora{
+    font-size: 1.5em;
+}
+
+
+.tamaño-lista {
+    width: 7em; 
+    height: 7em;
+    object-fit: contain;
 }

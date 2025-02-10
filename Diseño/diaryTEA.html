@@ -20,167 +20,121 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navegacion">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto"> <!--me-auto los aline a al izq-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="diaryTEA.html">
+                            <img src="images/diario.png" alt="Diario digital"
+                                class="nav-icon img-fluid navegacion-icono">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <img src="images/rutinas.png" alt="Rutinas" class="img-fluid navegacion-icono">
+                        </a>
+                    </li>
+                </ul>
 
-    <div class="row justify-content-center d-flex align-items-center" id="scrollView">
-        <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12" id="columnaAddDiario">
-            <div class="contanier d-flex flex-column justify-content-center align-items-center" id="addDiario">
-
-                <button type="button" class="btn" id="addRegistro">
-                    <div class="card">
-                        <img class="card-img" src="images/add.png" alt="Add" style="max-height: 100px;">
-                    </div>
-                </button>
+                <ul class="navbar-nav ms-auto"> <!--ms-auto los aline a al derecha-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <img src="images/add.png" alt="Añadir entrada al diario" class="img-fluid navegacion-icono">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <img src="images/yo.png" alt="Mi perfils" class="img-fluid navegacion-icono">
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12" id="columnaGuardarDiario">
-            <div class="contanier d-flex flex-column justify-content-center align-items-center" id="addDiario">
-                <button type="button" class="btn" id="buttonSaveRegistro">
-                    <div class="card">
-                        <img class="card-img" src="images/add.png" alt="Add" style="max-height: 100px;">
-                    </div>
-                </button>
-                <button type="button" class="btn" id="buttonDeleteRegistro">
-                    <a href="diaryTEA.html">
-                        <div class="card">
+    </nav>
 
-                            <img class="card-img" src="images/botonBorrar.png" alt="Add" style="max-height: 100px;">
-                        </div>
-                    </a>
-                </button>
-            </div>
-        </div>
+    <section class="container" id="columnaVistaDiario">
+        <div class="row mt-4">
+            <div class="">
+                <h1 class="mt-4 d-inline">5 de Febrero - </h1>
+                <h2 class="titulo-hora d-inline">12 AM</h2>
+                <div class="d-flex gap-3 mt-4">
+                    <div class="card tamaño-lista">
+                        <img class="card-img-top" src="images/yo.png" alt="Yo">
+                    </div>
+                    <div class="card tamaño-lista">
+                        <img class="card-img-top" src="images/enfadado.png" alt="Emoción enfado">
+                    </div>
 
-        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 scroll-column" id="columnaVistaDiario">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-                <p>Fecha: 05 de febrero</p>
-                <p>Hora: 12 AM</p>
-                <div class="container d-flex">
-                    <div class="card">
-                        <img class="card-img" src="images/diario.png" alt="Diario digital">
+                    <div class="card tamaño-lista">
+                        <img class="card-img-top" src="images/recreo.png" alt="Recreo">
                     </div>
-                    <div class="card">
-                        <img class="card-img" src="images/rutinas.png" alt="Diario digital">
+
+                    <div class="card tamaño-lista ms-auto">
+                        <a href="register.html">
+                            <img class="card-img-top" src="images/ir.png" alt="Ver entrada del diario">
+                        </a>
                     </div>
+
                 </div>
             </div>
             <hr class="my-4 bg-success">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-                <p>Fecha: 05 de febrero</p>
-                <p>Hora: 11 AM</p>
-                <div class="container d-flex">
-                    <div class="card">
-                        <img class="card-img" src="images/diario.png" alt="Diario digital">
+
+            <div class="">
+                <h1 class="mt-4 d-inline">5 de Febrero - </h1>
+                <h2 class="titulo-hora d-inline">11 AM</h2>
+                <div class="d-flex gap-3 mt-4">
+                    <div class="card tamaño-lista">
+                        <img class="card-img-top" src="images/yo.png" alt="Yo">
                     </div>
-                    <div class="card">
-                        <img class="card-img" src="images/rutinas.png" alt="Diario digital">
+                    <div class="card tamaño-lista">
+                        <img class="card-img-top" src="images/confusión.png" alt="Emoción confusión">
                     </div>
+
+                    <div class="card tamaño-lista">
+                        <img class="card-img-top" src="images/galletas.png" alt="galletas">
+                    </div>
+
+                    <div class="card tamaño-lista ms-auto">
+                        <a href="register.html">
+                            <img class="card-img-top" src="images/ir.png" alt="Ver entrada del diario">
+                        </a>
+                    </div>
+
                 </div>
             </div>
             <hr class="my-4 bg-success">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-                <div class="col-auto">
-                    <p>Fecha: 05 de febrero</p>
-                    <p>Hora: 10 AM</p>
-                    <div class="container d-flex">
-                        <div class="card">
-                            <img class="card-img" src="images/diario.png" alt="Diario digital">
-                        </div>
-                        <div class="card">
-                            <img class="card-img" src="images/rutinas.png" alt="Diario digital">
-                        </div>
+
+            <div class="">
+                <h1 class="mt-4 d-inline">4 de Febrero - </h1>
+                <h2 class="titulo-hora d-inline">13 AM</h2>
+                <div class="d-flex gap-3 mt-4">
+                    <div class="card tamaño-lista">
+                        <img class="card-img-top" src="images/yo.png" alt="Yo">
                     </div>
+                    <div class="card tamaño-lista">
+                        <img class="card-img-top" src="images/confusión.png" alt="Emoción confusión">
+                    </div>
+
+                    <div class="card tamaño-lista">
+                        <img class="card-img-top" src="images/galletas.png" alt="galletas">
+                    </div>
+
+                    <div class="card tamaño-lista ms-auto">
+                        <a href="register.html">
+                            <img class="card-img-top" src="images/ir.png" alt="Ver entrada del diario">
+                        </a>
+                    </div>
+
                 </div>
             </div>
             <hr class="my-4 bg-success">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-                <p>Fecha: 05 de febrero</p>
-                <p>Hora: </p>
-                <div class="container d-flex">
-                    <div class="card">
-                        <img class="card-img" src="images/diario.png" alt="Diario digital">
-                    </div>
-                    <div class="card">
-                        <img class="card-img" src="images/rutinas.png" alt="Diario digital">
-                    </div>
-                    <hr class="my-4 bg-success">
-                </div>
-            </div>
-            <hr class="my-4 bg-success">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <p>Fecha: 01 de febrero</p>
-                <div class="container d-flex">
-                    <div class="card">
-                        <img class="card-img" src="images/diario.png" alt="Diario digital">
-                    </div>
-                    <div class="card">
-                        <img class="card-img" src="images/rutinas.png" alt="Diario digital">
-                    </div>
-                    <hr class="my-4 bg-success">
-                </div>
-            </div>
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 scroll-column mr-1" id="columnaFormDiario">
+    </section>
 
-            <form>
-                <div class="form-group">
-                    <label for="fecha">Fecha</label>
-                    <input type="date" class="form-control" id="fecha" name="fecha">
-                </div>
-                <div class="form-group">
-                    <label for="hora">Hora</label>
-                    <input type="time" class="form-control" id="hora" name="hora">
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="asociarRutina" name="asociarRutina">
-                    <label class="form-check-label" for="asociarRutina">Asociar a una rutina</label>
-                </div>
-                <div id="selectRutinaContainer"></div>
-            </form>
-
-
-            <h5>Emociones</h5>
-            <div class="container d-flex">
-                <div class="card">
-                    <img class="card-img" src="images/confusión.png" alt="Diario digital">
-                </div>
-                <div class="card">
-                    <img class="card-img" src="images/enfadado.png" alt="Diario digital">
-                </div>
-                <div class="card">
-                    <img class="card-img" src="images/triste.png" alt="Diario digital">
-                </div>
-            </div>
-            <h5>Tarjetas de comunicación</h5>
-            <div class="container d-flex">
-                <div class="card">
-                    <img class="card-img" src="images/diario.png" alt="Diario digital">
-                </div>
-                <div class="card">
-                    <img class="card-img" src="images/rutinas.png" alt="Diario digital">
-                </div>
-
-                <div class="card">
-                    <img class="card-img" src="images/galletas.png" alt="Diario digital">
-                </div>
-                <div class="card">
-                    <img class="card-img" src="images/recreo.png" alt="Diario digital">
-                </div>
-                <div class="card">
-                    <img class="card-img" src="images/yo.png" alt="Diario digital">
-                </div>
-            </div>
-
-
-            <h5>Tablero</h5>
-            <div class="container d-flex mt-3" id="contenedorPictogramas"
-                style="border: 2px solid black; border-radius: 3px;">
-
-            </div>
-        </div>
-    </div>
-
-
-    <script src="/Diseño/js/addRegistros.js"></script>
 </body>
 
 </html>
