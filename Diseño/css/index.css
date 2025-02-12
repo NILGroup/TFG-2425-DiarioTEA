@@ -27,8 +27,19 @@ a {
 
 .manage-btn-group .btn {
     border-radius: 0 !important;
+    
 }
 
 .finale{
     height: 1em;
+}
+#pantallaprincipal{
+
+   
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 90vh;
+        flex-direction: column;
+    
 }

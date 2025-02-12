@@ -1,0 +1,20 @@
+.sidebar{
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    padding-top: 200px;
+    background-color: gainsboro;
+}
+a{
+    text-decoration: none;
+
+}
+.nav-link{
+    color: black;
+}
+.main-container {
+    display: flex;
+    height: 100vh; /* Hace que el contenedor ocupe el 100% de la altura de la pantalla */
+}
