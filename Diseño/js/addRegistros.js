@@ -108,8 +108,10 @@ $("#mostrarPictos, #mostrarEmociones, #contenedorPictogramas").on("click", ".car
             card.attr("data-index", card.index());
         }
 
-        contenedorPictogramas.append(card);
-        card.append('<span class="cross-icon">✖</span>');
+        let tarjeta = card.find(".card"); // Busca la tarjeta dentro de la columna
+        tarjeta.append('<span class="cross-icon">&times</span>'); // Añade el icono dentro de la tarjeta
+        contenedorPictogramas.append(card); // Mueve la columna completa
+        
     }
 });
 

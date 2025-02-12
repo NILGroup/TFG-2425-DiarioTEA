@@ -43,10 +43,11 @@ html, body{
 .cross-icon {
     display: none;
     position: absolute;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 50%;
-    padding: 5px;
+    top: 0;
+    right: 0;
+    transform: translate(-10%, -30%);
     cursor: pointer;
+    font-size: 3em;
 }
 
 #contenedorPictogramas .card:hover{
