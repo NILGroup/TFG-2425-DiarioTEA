@@ -12,6 +12,7 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/indexStyle.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>Añadir entrada</title>
 </head>
 
@@ -39,7 +40,8 @@
                 <ul class="navbar-nav ms-auto"> <!--ms-auto los aline a al derecha-->
                     <li class="nav-item">
                         <a class="nav-link" href="addEntry.html">
-                            <img src="images/config/add.png" alt="Añadir entrada al diario" class="img-fluid navegacion-icono">
+                            <img src="images/config/add.png" alt="Añadir entrada al diario"
+                                class="img-fluid navegacion-icono">
                         </a>
                     </li>
                     <li class="nav-item">
@@ -52,7 +54,7 @@
         </div>
     </nav>
 
-    <div class=" container mt-5">
+    <div class=" container justify-content-center mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-9">
                 <form>
@@ -60,7 +62,7 @@
                         <label for="fecha">Fecha</label>
                         <input type="date" class="form-control" id="fecha" name="fecha">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                         <label for="hora">Hora</label>
                         <input type="time" class="form-control" id="hora" name="hora">
                     </div>
@@ -73,43 +75,264 @@
             </div>
         </div>
 
-        <div class="row justify-content-center mt-5">
+        <div class="row mt-3">
+            <h1 class="titulo-hora">Tablero</h5>
+            <div class="container mt-3"
+                style="border: 2px solid black; border-radius: 3px;">
+                <div class="row pb-3" id="contenedorPictogramas">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center" id="decisionPictos">
             <div class="col-lg-4 col-md-5 col-sm-6">
-                <div class="card w-75">
-                    <a href="">
+                <div class="card mt-5">
+                    <a href="" id="eleccionEmociones">
                         <img class="img-card" src="images/config/emociones.png" alt="Emociones">
                     </a>
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-5 col-sm-6">
-                <div class="card w-75">
-                    <a href="">
+                <div class="card mt-5">
+                    <a href="" id="eleccionPictos">
                         <img class="img-card" src="images/config/pictogramas.png" alt="Pictogramas">
                     </a>
                 </div>
             </div>
         </div>
 
-        <h5 class="mt-5">Tablero</h5>
-        <div class="container d-flex mt-3" id="contenedorPictogramas"
-            style="border: 2px solid black; border-radius: 3px;">
 
-        </div>
-    </div>
+        <div class="container" id="mostrarEmociones">
+            <div class="row mt-3">
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="emocionAburrido">
+                            <img src="images/emotions/aburrido.png" alt="Estar aburrido" class="card-img">
+                        </a>
+                    </div>
+                </div>
 
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <a class="col-6" href="">
-                <img class="w-25" src="images/config/add.png" alt="Añadir al diario">
-            </a>
-    
-            <a class="col-6" href="">
-                <img class="w-25" src="images/config/botonBorrar.png" alt="Cancelar entrada">
-            </a>
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="emocionAlegre">
+                            <img src="images/emotions/alegre.png" alt="Estar alegre" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="emocionAsustado">
+                            <img src="images/emotions/asustado.png" alt="Estar asustado" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="emocionConfusion">
+                            <img src="images/emotions/confusión.png" alt="Estar confuso" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="emocionContento">
+                            <img src="images/emotions/contento.png" alt="Estar contento" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="emocionHambriento">
+                            <img src="images/emotions/hambriento.png" alt="Tener hambre" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="emocionEnfadado">
+                            <img src="images/emotions/enfadado.png" alt="Estar enfadado" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="emocionSorprendido">
+                            <img src="images/emotions/sorprendido.png" alt="Estar sorprendido" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="emocionTriste">
+                            <img src="images/emotions/triste.png" alt="Estar triste" class="card-img">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12 me-auto">
+                    <a href="" class="col-lg-1 col-md-2 col-sm-3 d-block me-auto" id="volverEmociones">
+                        <img src="images/config/botonVolver.png" alt="Volver" class="img-fluid">
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-    <script src="/Diseño/js/addRegistros.js"></script>
+
+        <div class="container" id="mostrarPictos">
+            <div class="row mt-3">
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoCasa">
+                            <img src="images/pictos/casa.png" alt="Casa" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoColegio">
+                            <img src="images/pictos/colegio.png" alt="Colegio" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoComer">
+                            <img src="images/pictos/comer.png" alt="Comer" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoDormir">
+                            <img src="images/pictos/dormir.png" alt="Dormir" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoEstudiar">
+                            <img src="images/pictos/estudiar.png" alt="Estudiar" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoGalletas">
+                            <img src="images/pictos/galletas.png" alt="Galletas" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoJugar">
+                            <img src="images/pictos/jugar.png" alt="Jugar" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoJuguete">
+                            <img src="images/pictos/juguete.png" alt="Juguete" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoManzana">
+                            <img src="images/pictos/manzana.png" alt="Manzana" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoRecreo">
+                            <img src="images/pictos/recreo.png" alt="Recreo" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoRetrete">
+                            <img src="images/pictos/retrete.png" alt="Retrete" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoTu">
+                            <img src="images/pictos/tú.png" alt="Tu" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoYo">
+                            <img src="images/pictos/yo.png" alt="Yo" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoLeer">
+                            <img src="images/pictos/leer.png" alt="Leer" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 mt-3 d-flex">
+                    <div class="card">
+                        <a href="" id="pictoDucha">
+                            <img src="images/pictos/ducha.png" alt="Ducha" class="card-img">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-12 me-auto">
+                        <a href="" class="col-lg-1 col-md-2 col-sm-3 d-block me-auto" id="volverPictos">
+                            <img src="images/config/botonVolver.png" alt="Volver" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-4 pb-4">
+            <div class="row d-flex justify-content-center">
+                <a class="col-lg-2 col-md-3 col-sm-4" href="">
+                    <img class="img-fluid" src="images/config/add.png" alt="Añadir al diario">
+                </a>
+        
+                <a class="col-lg-2 col-md-3 col-sm-4" href="">
+                    <img class="img-fluid" src="images/config/botonBorrar.png" alt="Cancelar entrada">
+                </a>
+            </div>
+        </div>
+        
+        <script src="/Diseño/js/addRegistros.js"></script>
 </body>
 
 </html>

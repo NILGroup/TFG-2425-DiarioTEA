@@ -1,79 +1,47 @@
 
 $(document).ready(function () {
 
-    //escondidos por defecto
-    $("#columnaGuardarDiario").hide();
-    $("#columnaFormDiario").hide();
+    var fecha = new Date().toISOString().split('T')[0];
+    var hora = new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
 
+    $('#fecha').val(fecha);
+    $('#hora').val(hora);
 
+    $('#mostrarEmociones').hide();
+    $('#mostrarPictos').hide();
 
-    $("#addRegistro").on('click', function () {
-        $("#columnaGuardarDiario").show();
-        $("#columnaFormDiario").show();
-        $("#columnaAddDiario").hide();
-        $("#columnaVistaDiario").hide();
-
-        // Obtener la fecha actual en formato ISO (AAAA-MM-DD)
-        var fecha = new Date().toISOString().split('T')[0];
-        // Obtener la hora actual en formato de 24 horas (HH:MM)
-        var hora = new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
-
-        // Asignar la fecha y hora a los campos del formulario
-        $('#fecha').val(fecha);
-        $('#hora').val(hora);
+    $('#eleccionEmociones').on('click', function (event) {
+        event.preventDefault();
+        $("#decisionPictos").fadeOut(function(){
+            $('#mostrarEmociones').fadeIn();
+        });
     });
 
-    $("#asociarRutina").on('change', function () {
-        if ($('#asociarRutina').is(':checked')) {
-            $('#selectRutinaContainer').append(`
-                <div class="form-group mt-3" id="selectRutinaGroup">
-                    <label for="rutina">Seleccionar rutina</label>
-                    <select class="form-control" id="rutina" name="rutina">
-                        <option value="rutina1">Colegio</option>
-                        <option value="rutina2">Casa</option>
-                    </select>
-                </div>
-            `);
-        } else {
-            $('#selectRutinaGroup').remove();
-        }
-    })
-
-    $("#buttonSaveRegistro").on('click', function () {
-        let fecha = $("#fecha").val();
-        let hora = $("#hora").val();
-
-        var cards = $('#contenedorPictogramas .card').clone();
-
-
-
-        let container = `<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-                <div class="col-auto">
-                    <p>Fecha: ${fecha}</p>
-                    <p>Hora: ${hora}</p>
-                    <div class="container d-flex">
-                        ${cards.map(function () { return this.outerHTML; }).get().join('')}
-                    </div>
-                </div>
-            </div>`;
-
-        $("#columnaVistaDiario").prepend(container);
-
-        $("#columnaGuardarDiario").hide();
-        $("#columnaFormDiario").hide();
-        $("#columnaAddDiario").show();
-        $("#columnaVistaDiario").show();
-
-
-    })
-
-
-    $("#columnaFormDiario .card").each(function (index) {
-        $(this).attr("data-index", index); // Guarda el índice original
-        $(this).data("originalContainer", $(this).parent()); // Guarda el contenedor original
+    $('#eleccionPictos').on('click', function (event) {
+        event.preventDefault();
+        $("#decisionPictos").fadeOut(function(){
+            $('#mostrarPictos').fadeIn();
+        });
     });
 
-    $(".container.d-flex").on("click", ".card", function () {
+
+    $('#volverEmociones').on('click', function(event){
+        event.preventDefault();
+        $("#mostrarEmociones").fadeOut(function(){
+            $('#decisionPictos').fadeIn();
+        });
+    });
+
+    $('#volverPictos').on('click', function(event){
+        event.preventDefault();
+        $("#mostrarPictos").fadeOut(function(){
+            $('#decisionPictos').fadeIn();
+        });
+    });
+
+    /*
+    $("#mostrarPictos, #mostrarEmociones, #tablero").on("click", ".col-lg-3, .col-md-4", function (event) {
+        event.preventDefault();
         let card = $(this);
         let contenedorPictogramas = $("#contenedorPictogramas");
 
@@ -93,7 +61,7 @@ $(document).ready(function () {
 
             // Si no se insertó antes de otro, agregar al final
             if (!inserted) {
-                originalContainer.append(card);
+                $('#tablero').append(card);
             }
             card.find(".cross-icon").remove();
 
@@ -104,7 +72,53 @@ $(document).ready(function () {
 
         }
     });
+*/
 
+$("#mostrarPictos, #mostrarEmociones, #contenedorPictogramas").on("click", ".card", function (event) {
+    event.preventDefault();
+    
+    let card = $(this).closest(".col-lg-3, .col-md-4"); // Selecciona la columna que contiene la tarjeta
+    let contenedorPictogramas = $("#contenedorPictogramas");
+
+    // Verificar si la tarjeta ya está en el contenedor de pictogramas
+    if (card.parent().is(contenedorPictogramas)) {
+        // Recuperar el contenedor original
+        let originalContainer = card.data("originalContainer");
+        let index = card.attr("data-index");
+
+        if (originalContainer && originalContainer.length) {
+            let inserted = false;
+
+            // Restaurar en la posición correcta
+            originalContainer.children(".col-lg-3, .col-md-4").each(function () {
+                if (parseInt($(this).attr("data-index")) > index) {
+                    $(this).before(card);
+                    inserted = true;
+                    return false; // Salir del bucle
+                }
+            });
+
+            // Si no se insertó antes de otro, agregar al final
+            if (!inserted) {
+                originalContainer.append(card);
+            }
+
+            // Eliminar el botón de cierre
+            card.find(".cross-icon").remove();
+        }
+
+    } else {
+        // Guardar el contenedor original solo la primera vez que se mueve
+        if (!card.data("originalContainer")) {
+            card.data("originalContainer", card.parent());
+            card.attr("data-index", card.index()); // Guarda su posición original
+        }
+
+        // Mover la tarjeta al contenedor de pictogramas
+        contenedorPictogramas.append(card);
+        card.append('<span class="cross-icon">✖</span>'); // Agrega el botón de eliminar
+    }
+});
 
 
 
