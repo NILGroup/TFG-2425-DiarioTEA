@@ -4,3 +4,8 @@
 #compartirUsuario:hover{
     background-color: rgb(120, 212, 145);
 }
+
+a{
+    text-decoration: none;
+    color: black;
+}

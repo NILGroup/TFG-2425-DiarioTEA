@@ -15,10 +15,46 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navegacion">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavCuidadores">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavCuidadores">
+                <ul class="navbar-nav me-auto"> <!--me-auto los aline a al izq-->
+                <a href="index.html"><h2>RecordaTEA</h2></a>
+                </ul>
+
+                <ul class="navbar-nav ms-auto"> <!--ms-auto los aline a al derecha-->
+                    <li class="nav-item">
+                        <!-- Ejemplo de Dropdown en Bootstrap -->
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Gestión de usuarios
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#" id="crearUsuario">Crear Usuario</a></li>
+                                <li><a class="dropdown-item" href="#" id="compartirUsuario">Compartir Usuario</a></li>
+
+                            </ul>
+                        </div>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-circle"></i> Mi perfil
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> 
     <div class="container" id="columnaFormDiario">
         <h5>Tarjetas de comunicación por defecto</h5>
         <div class="container d-flex">
-            <div class="row d-flex">
+            <div class="row">
                 <div class="col-md-2 card">
                     <img class="card-img" src="images/pictos/diario.png" alt="Diario digital">
                 </div>
@@ -47,12 +83,14 @@
         </div>
 
         <h5>Tablero</h5>
-        <div class="container d-flex mt-3" id="contenedorPictogramas"
+        <div class="container mt-3" id="contenedorPictogramas"
             style="border: 2px solid black; border-radius: 3px;">
-            <div class="row d-flex" id="rowPictogramas">
+            <div class="row" id="rowPictogramas">
                 <!-- Añade aquí las tarjetas del tablero -->
             </div>
         </div>
+
+        
     </div>
 
     <script src="js/manageCardsTablero.js"></script>

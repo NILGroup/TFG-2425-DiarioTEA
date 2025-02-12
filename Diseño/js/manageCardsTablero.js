@@ -7,7 +7,7 @@ $(document).ready(function () {
         $(this).data("originalContainer", $(this).parent()); // Guarda el contenedor original
     });
 
-    $(".container.d-flex").on("click", ".card", function () {
+    $(".row").on("click", ".card", function () {
         let card = $(this);
         let contenedorPictogramas = $("#rowPictogramas");
 
@@ -34,7 +34,7 @@ $(document).ready(function () {
         } else {
             // Mover al contenedor de pictogramas
             contenedorPictogramas.append(card);
-            card.append('<span class="cross-icon">✖</span>');
+            card.append('<span class="cross-icon">&times</span>');
 
         }
     });
