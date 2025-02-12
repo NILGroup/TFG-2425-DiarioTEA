@@ -60,6 +60,10 @@ html, body{
     
 }
 
+#contenedorPictogramas{
+    background-color: #dedddb;
+}
+
 .navegacion{
     background-color: #a7a6a6;
 }
