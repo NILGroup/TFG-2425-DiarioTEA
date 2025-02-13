@@ -34,8 +34,6 @@ a {
     height: 1em;
 }
 #pantallaprincipal{
-
-   
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -46,4 +44,8 @@ a {
 
 .texto-centro{
     height: 50vh;
+}
+
+.seleccionada{
+    background-color:forestgreen;
 }
