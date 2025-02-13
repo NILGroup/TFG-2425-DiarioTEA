@@ -7,6 +7,10 @@ $(document).ready(function () {
         $(this).data("originalContainer", $(this).parent()); // Guarda el contenedor original
     });
 
+    $('#volverManagePictos').on('click', function(){
+        
+    });
+
     $(".row").on("click", ".card", function (event) {
         event.preventDefault();
     

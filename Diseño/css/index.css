@@ -43,3 +43,7 @@ a {
         flex-direction: column;
     
 }
+
+.texto-centro{
+    height: 50vh;
+}
