@@ -55,24 +55,25 @@
     .nav-link{
         color: black;
     }
+    .img-registro img{
+        max-width: 100px;
+        max-height: 100px;
+    }
 }
 /* Ajustes para pantallas más grandes */
 @media (min-width: 769px) {
     .sidebar {
         width: 200px; /* Ancho del sidebar */
-        height: 100vh; /* Ocupa el 100% del viewport height */
-        position: fixed; /* Fija el sidebar en su posición */
         left: 0; /* Lo coloca a la izquierda */
         padding-top: 200px; /* Espacio superior (ajusta según tu diseño) */
         background-color: gainsboro; /* Color de fondo */
         overflow-y: auto; /* Permite scroll dentro del sidebar si el contenido es muy largo */
-    
         text-decoration: none;
        
     }
 
     .main-content {
-        margin-left: 220px; /* Ajusta el margen para que no se superponga con la barra lateral */
+        margin-left: 1rem; /* Ajusta el margen para que no se superponga con la barra lateral */
         margin-right: 1rem;
     }
     .tarjeta-diario{
@@ -84,6 +85,10 @@
     }
     .nav-link{
         color: black;
+    }
+    .img-registro img{
+        max-width: 100px;
+        max-height: 100px;
     }
 
 }
