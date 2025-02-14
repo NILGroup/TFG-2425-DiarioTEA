@@ -84,3 +84,12 @@ html, body{
     height: 7em;
     object-fit: contain;
 }
+
+.tableros{
+    background-color: #dedddb;
+}
+
+.tableros .card:hover{
+    background-color: red;
+      
+}

@@ -62,29 +62,193 @@
         <div class="row d-flex text-center">
             <h1 class="titulo-hora">Crear nueva rutina para Juan</h1>
         </div>
-        <div class="row d-flex text-center justify-content-center mt-4">
-            <form action="submit">
-                <div class="row align-items-center justify-content-start">
-                    <div class="col-lg-4 col-md-5 col-sm-7">
-                        <p>Portada: </p>
-                        <a href="#" id="portadaRutina" data-bs-toggle="modal" data-bs-target="#portadaModal">
-                            <img id="portadaImagen" src="images/config/noPortada.png" alt="Portada de la rutina"
-                                class="img-fluid border rounded">
-                        </a>
-                        <a href="" class="btn btn-danger mt-2" id="eliminarPortada">Eliminar portada</a>
+        <div class="row mt-3">
+            <div class="d-flex justify-content-end">
+                <a href="rutinas.html" class="btn btn-secondary">Ir a gestionar rutinas</a>
+            </div>
+        </div>
+        <div id="basicoRutina">
+            <div class="row d-flex text-center justify-content-center mt-4">
+                <form action="submit" id="form-rutina">
+                    <div class="row align-items-center justify-content-start">
+                        <div class="col-lg-4 col-md-5 col-sm-7">
+                            <p>Portada: </p>
+                            <a href="#" id="portadaRutina" data-bs-toggle="modal" data-bs-target="#portadaModal">
+                                <img id="portadaImagen" src="images/config/noPortada.png" alt="Portada de la rutina"
+                                    class="img-fluid border rounded">
+                            </a>
+                            <a href="" class="btn btn-danger mt-2" id="eliminarPortada">Eliminar portada</a>
+                        </div>
+                        <div class="col-lg-8 col-md-7 col-sm-6">
+                            <label for="nombreRutina">Nombre:</label>
+                            <input type="text" class="form-control mt-2">
+                        </div>
                     </div>
-                    <div class="col-lg-8 col-md-7 col-sm-6">
-                        <label for="nombreRutina">Nombre:</label>
-                        <input type="text" class="form-control mt-2">
-                    </div>
+                </form>
+                <div class="d-flex justify-content-end">
+                    <a href="" class="btn btn-secondary" id="stepDos">Seleccionar Tarjetas</a>
                 </div>
-            </form>
+            </div>
         </div>
 
-        <div class="row">
-            
+        <div id="stepTarjetas">
+
+            <div class="row mt-3">
+                <h1 class="titulo-hora">Registro:</h5>
+                    <div class="container mt-3 tableros" style="border: 2px solid black; border-radius: 3px;">
+                        <div class="row pb-3" id="composiciónRutina">
+
+                        </div>
+                    </div>
+            </div>
+
+            <div class="row mt-5">
+                <h1 class="titulo-hora">Vocabulario de Juan:</h5>
+                    <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;">
+                        <div class="row pb-3" id="tarjetasRutinas">
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="emocionAsustado">
+                                        <img src="images/emotions/asustado.png" alt="Estar asustado" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="emocionContento">
+                                        <img src="images/emotions/contento.png" alt="Estar contento" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="emocionEnfadado">
+                                        <img src="images/emotions/enfadado.png" alt="Estar enfadado" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="emocionSorprendido">
+                                        <img src="images/emotions/sorprendido.png" alt="Estar sorprendido"
+                                            class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="emocionTriste">
+                                        <img src="images/emotions/triste.png" alt="Estar triste" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoCasa">
+                                        <img src="images/pictos/casa.png" alt="Casa" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoColegio">
+                                        <img src="images/pictos/colegio.png" alt="Colegio" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoComer">
+                                        <img src="images/pictos/comer.png" alt="Comer" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoDormir">
+                                        <img src="images/pictos/dormir.png" alt="Dormir" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoGalletas">
+                                        <img src="images/pictos/galletas.png" alt="Galletas" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoJugar">
+                                        <img src="images/pictos/jugar.png" alt="Jugar" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoJuguete">
+                                        <img src="images/pictos/juguete.png" alt="Juguete" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoRecreo">
+                                        <img src="images/pictos/recreo.png" alt="Recreo" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoRetrete">
+                                        <img src="images/pictos/retrete.png" alt="Retrete" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoYo">
+                                        <img src="images/pictos/yo.png" alt="Yo" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                <div class="card">
+                                    <a href="" id="pictoLeer">
+                                        <img src="images/pictos/leer.png" alt="Leer" class="card-img">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="d-flex gap-3 mt-3 justify-content-end">
+                    <a href="" class="btn btn-secondary" id="stepAnterior">Anterior</a>
+                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmacionModal"
+                        id="guardarRutina">Crear rutina</a>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="container finale"></div>
+
 
     <div class="modal fade" id="portadaModal" tabindex="-1" aria-labelledby="imagenModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -223,6 +387,25 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        id="cancelarPortada">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="seleccionarPortada">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="#confirmacionModal" tabindex="-1" aria-labelledby="confir" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confir">Mensaje de confirmación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Tu rutina se ha creado correctamente.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
