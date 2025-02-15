@@ -143,6 +143,11 @@ html, body{
     color: #213555;
 }
 
+.seleccion{
+    background-color: #213555;
+    color: #F9F7F7 !important;
+}
+
 .manage-btn-group button:hover {
     background-color: #213555;
     color: #F9F7F7;
