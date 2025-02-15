@@ -71,3 +71,11 @@ html, body{
 .card-usuarios .card-title{
     color: #2A3335;
 }
+
+/*ESTILO SIDEBAR*/
+
+.sidebar-estilo{
+    background-color: #979ea8;
+    color: white;
+    text-decoration: none;
+}
