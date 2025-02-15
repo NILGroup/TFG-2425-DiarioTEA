@@ -68,6 +68,10 @@ html, body{
     object-fit: contain;
 }
 
+.navegacion{
+    background-color: #a7a6a6;
+}
+
 .titulo-hora{
     font-size: 1.5em;
 }
