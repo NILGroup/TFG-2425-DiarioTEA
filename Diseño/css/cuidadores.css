@@ -1,0 +1,73 @@
+html, body{
+    background-color: #F9F7F7;
+}
+
+/*BARRA DE NAVEGACIÓN*/
+.navegacion{
+    background-color: #213555;
+}
+
+.item-navbar{
+    color: #F9F7F7;
+    padding: 0;
+    margin-right: 2em;
+    font-size: 1em;
+}
+
+.perfil{
+    font-size: 3em;
+    padding: 0;
+    color: #F9F7F7;
+    margin-right: 0.5em;
+}
+
+.perfil:hover{
+    font-size: 3em;
+    padding: 0;
+    color: #F9F7F7;
+}
+
+.recordaTEA{
+    margin-top: 0.3em;
+    margin-left: 0.2em;
+    font-family: 'Courier New', Courier, monospace;
+    color: #F9F7F7;
+    font-size: 2em;
+    transition: transform 0.3s;
+}
+
+.recordaTEA:hover{
+    transform: scale(1.03);
+}
+
+#crearUsuario:hover {
+    background-color: #e0e0e0;
+}
+
+#compartirUsuario:hover {
+    background-color:#e0e0e0;
+}
+/*TIPOGRAFÍA Y ESTILOS DE TEXTO*/
+.titulos-1{
+    color: #2A3335;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.3em;
+}
+
+/*CARDS DE LOS USUARIOS*/
+.card-usuarios{
+    background-color: #F9F7F7;
+    border-color: #2A3335;
+    border-width: 0.2em;
+    border-radius: 0.3em;
+    transition: transform 0.3s;
+}
+
+.card-usuarios:hover{
+    transform: scale(1.03);
+    background-color: none;
+}
+
+.card-usuarios .card-title{
+    color: #2A3335;
+}

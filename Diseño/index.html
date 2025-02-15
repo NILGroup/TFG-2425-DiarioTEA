@@ -12,59 +12,50 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/indexStyle.css">
 
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/cuidadores.css">
     <!--JQUERY-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
-    <!--NAV BAR-->
-    <nav class="navbar navbar-expand-lg navegacion">
+    <nav class="navbar navbar-expand-lg navegacion align-items-center">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavCuidadores">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavCuidadores">
-                <ul class="navbar-nav me-auto"> <!--me-auto los aline a al izq-->
-                    <h2>RecordaTEA</h2>
+                <ul class="navbar-nav me-auto">
+                    <a href="index.html">
+                        <h1 class="recordaTEA">RecordaTEA</h1>
+                    </a>
                 </ul>
+                <div class="dropdown ">
+                    <a class="dropdown-toggle item-navbar" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Gestión de usuarios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#" id="crearUsuario">Crear Usuario</a></li>
+                        <li><a class="dropdown-item" href="#" id="compartirUsuario">Compartir Usuario</a></li>
 
-                <ul class="navbar-nav ms-auto"> <!--ms-auto los aline a al derecha-->
-                    <li class="nav-item">
-                        <!-- Ejemplo de Dropdown en Bootstrap -->
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Gestión de usuarios
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#" id="crearUsuario">Crear Usuario</a></li>
-                                <li><a class="dropdown-item" href="#" id="compartirUsuario">Compartir Usuario</a></li>
-
-                            </ul>
-                        </div>
-
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-person-circle"></i> Mi perfil
-                        </a>
-                    </li>
-                </ul>
+                    </ul>
+                </div>
+                <a class="nav-link perfil" href="#">
+                    <i class="bi bi-person-circle"></i>
+                </a>
             </div>
         </div>
     </nav>
-    <!--CONTAINER USUARIOS-->
-    <h2 class="text-center">Mis usuarios</h2>
-    <div class="container mt-4">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-md-3 col-xs-3">
-                <a href="diary.html">
-                    <div class="card">
 
+    <div class="container">
+        <h2 class="text-center mt-4 titulos-1">Mis usuarios</h2>
+        <div class="row mt-5 justify-content-center align-items-center">
+            <div class="col-md-3 col-xs-3">
+                <a href="diary.html"class="">
+                    <div class="card card-usuarios">
                         <h5 class="card-title text-center">Martina</h5>
                         <div class="card-body">
                             <img src="images/pictos/yo.png">
@@ -74,8 +65,7 @@
             </div>
             <div class="col-md-3 col-xs-3">
                 <a href="diary.html">
-                    <div class="card">
-
+                    <div class="card card-usuarios">
                         <h5 class="card-title text-center">Miguel</h5>
                         <div class="card-body">
                             <img src="images/pictos/yo.png">
@@ -85,8 +75,7 @@
             </div>
             <div class="col-md-3 col-xs-3">
                 <a href="diary.html">
-                    <div class="card">
-
+                    <div class="card card-usuarios">
                         <h5 class="card-title text-center">Juan</h5>
                         <div class="card-body">
                             <img src="images/pictos/yo.png">

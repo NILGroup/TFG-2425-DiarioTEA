@@ -51,8 +51,7 @@ html, body{
 }
 
 #contenedorPictogramas .card:hover{
-  background-color: red;
-    
+  background-color: #FF4545; 
 }
 
 #contenedorPictogramas .card:hover .cross-icon{
@@ -63,11 +62,6 @@ html, body{
 #contenedorPictogramas{
     background-color: #dedddb;
 }
-
-.navegacion{
-    background-color: #a7a6a6;
-}
-
 .navegacion-icono {
     width: 6em; 
     height: 6em;
