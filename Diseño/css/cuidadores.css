@@ -75,7 +75,45 @@ html, body{
 /*ESTILO SIDEBAR*/
 
 .sidebar-estilo{
-    background-color: #979ea8;
-    color: white;
+    background-color: #2c3c53;
+    color: #F9F7F7;
     text-decoration: none;
+}
+
+.elemento-sideBar{
+    color: #F9F7F7;
+    border-color: #2A3335;
+    transition: transform 0.3s ease-in-out;
+    margin-left: 5%;
+}
+
+.elemento-sideBar:hover{
+    transform: translateX(0.5em);
+    color: #F9F7F7;
+}
+
+/*DIARIO*/
+.hoy{
+    border-color: #213555;
+    border-width: 0.3em;
+}
+
+.entrada{
+    border-radius: 15px;
+    background-color: white;
+}
+
+.entrada:hover{
+    background-color: rgb(223, 223, 223);
+}
+
+.tarjeta-diario button{
+    border-color: #213555;
+    border-width: 0.1em;
+    color: #213555;
+}
+
+.tarjeta-diario button:hover{
+    background-color: #213555;
+    color: #F9F7F7;
 }
