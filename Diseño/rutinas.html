@@ -21,52 +21,43 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navegacion">
+    <nav class="navbar navbar-expand-lg navegacion align-items-center">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavCuidadores">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavCuidadores">
-                <ul class="navbar-nav me-auto"> <!--me-auto los aline a al izq-->
+                <ul class="navbar-nav me-auto">
                     <a href="index.html">
-                        <h2>RecordaTEA</h2>
+                        <h1 class="recordaTEA">RecordaTEA</h1>
                     </a>
                 </ul>
+                <div class="dropdown ">
+                    <a class="dropdown-toggle item-navbar" type="button" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Gestión de usuarios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#" id="crearUsuario">Crear Usuario</a></li>
+                        <li><a class="dropdown-item" href="#" id="compartirUsuario">Compartir Usuario</a></li>
 
-                <ul class="navbar-nav ms-auto"> <!--ms-auto los aline a al derecha-->
-                    <li class="nav-item">
-                        <!-- Ejemplo de Dropdown en Bootstrap -->
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Gestión de usuarios
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#" id="crearUsuario">Crear Usuario</a></li>
-                                <li><a class="dropdown-item" href="#" id="compartirUsuario">Compartir Usuario</a></li>
-
-                            </ul>
-                        </div>
-
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-person-circle"></i> Mi perfil
-                        </a>
-                    </li>
-                </ul>
+                    </ul>
+                </div>
+                <a class="nav-link perfil" href="#">
+                    <i class="bi bi-person-circle"></i>
+                </a>
             </div>
         </div>
     </nav>
 
     <div class="main-container d-flex">
-        <div class="sidebar" id="sidebar">
+        <div class="sidebar sidebar-estilo" id="sidebar">
             <nav class="nav flex-column">
-                <a class="nav-link" href="diary.html">
+                <a class="nav-link elemento-sideBar" href="diary.html">
                     <span class="description">Diario de Juan</span>
                 </a>
-                <a class="nav-link" href="manageCards.html">
+                <a class="nav-link elemento-sideBar" href="manageCards.html">
                     <span class="description">Gestionar tarjetas</span>
                 </a>
                 <!--<a class="nav-link" href="#">
@@ -75,7 +66,7 @@
                     </span>
                     <span class="description">Personalizar tarjetas</span>
                 </a>-->
-                <a class="nav-link" href="rutinas.html">
+                <a class="nav-link elemento-sideBar" href="rutinas.html">
                     <span class="description">Gestionar rutinas</span>
 
                 </a>
@@ -83,13 +74,13 @@
         </div>
 
 
-        <div class="container text-center vh-100">
-            <div class="row mt-3">
-                <h1>Rutinas de Juan</h1>
+        <div class="container text-center vh-100 margen">
+            <div class="row mt-4">
+                <h1 class="titulos-1">Rutinas de Juan</h1>
             </div>
             <div class="row mt-3">
                 <div class="d-flex justify-content-end">
-                    <a href="crearRutina.html" class="btn btn-outline-secondary">Crear Rutina</a>
+                    <a href="crearRutina.html" class="btn btn-borde">Crear Rutina</a>
                 </div>
             </div>
             <div class="row mt-3 d-flex align-items-center justify-content-center texto-centro">

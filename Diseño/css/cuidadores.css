@@ -164,3 +164,8 @@ html, body{
     color: #213555;
     background-color: #F9F7F7;
 }
+
+.btn-borde:hover{
+    background-color: #213555;
+    color: #F9F7F7;
+}
