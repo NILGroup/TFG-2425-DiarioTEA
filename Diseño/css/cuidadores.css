@@ -155,7 +155,14 @@ html, body{
 /*GENERALES*/
 .btn-background{
     background-color: #213555;
-    color: #F9F7F7 !important;
+    color: #F9F7F7;
+}
+
+.btn-background:hover{
+    border-color: #213555;
+    border-width: 0.1em;
+    color: #213555;
+    background-color: #F9F7F7;
 }
 
 .btn-borde{
@@ -167,5 +174,10 @@ html, body{
 
 .btn-borde:hover{
     background-color: #213555;
+    color: #F9F7F7;
+}
+
+.btn-eliminar{
+    background-color: #B82132;
     color: #F9F7F7;
 }

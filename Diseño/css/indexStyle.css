@@ -51,7 +51,7 @@ html, body{
 }
 
 #contenedorPictogramas .card:hover{
-  background-color: #FF4545; 
+  background-color: #B82132; 
 }
 
 #contenedorPictogramas .card:hover .cross-icon{
@@ -88,6 +88,6 @@ html, body{
 }
 
 .tableros .card:hover{
-    background-color: red;
+    background-color: #B82132;
       
 }

@@ -13,6 +13,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/indexStyle.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/cuidadores.css">
     <!--JQUERY-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -20,54 +21,63 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navegacion">
+    <nav class="navbar navbar-expand-lg navegacion align-items-center">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavCuidadores">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavCuidadores">
-                <ul class="navbar-nav me-auto"> <!--me-auto los aline a al izq-->
+                <ul class="navbar-nav me-auto">
                     <a href="index.html">
-                        <h2>RecordaTEA</h2>
+                        <h1 class="recordaTEA">RecordaTEA</h1>
                     </a>
                 </ul>
+                <div class="dropdown ">
+                    <a class="dropdown-toggle item-navbar" type="button" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Gestión de usuarios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#" id="crearUsuario">Crear Usuario</a></li>
+                        <li><a class="dropdown-item" href="#" id="compartirUsuario">Compartir Usuario</a></li>
 
-                <ul class="navbar-nav ms-auto"> <!--ms-auto los aline a al derecha-->
-                    <li class="nav-item">
-                        <!-- Ejemplo de Dropdown en Bootstrap -->
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Gestión de usuarios
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#" id="crearUsuario">Crear Usuario</a></li>
-                                <li><a class="dropdown-item" href="#" id="compartirUsuario">Compartir Usuario</a></li>
-
-                            </ul>
-                        </div>
-
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="bi bi-person-circle"></i> Mi perfil
-                        </a>
-                    </li>
-                </ul>
+                    </ul>
+                </div>
+                <a class="nav-link perfil" href="#">
+                    <i class="bi bi-person-circle"></i>
+                </a>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-3">
-        <div class="row d-flex text-center">
-            <h1 class="titulo-hora">Crear nueva rutina para Juan</h1>
+    <div class="main-container d-flex">
+        <div class="sidebar sidebar-estilo" id="sidebar">
+            <nav class="nav flex-column">
+                <a class="nav-link elemento-sideBar" href="diary.html">
+                    <span class="description">Diario de Juan</span>
+                </a>
+                <a class="nav-link elemento-sideBar" href="manageCards.html">
+                    <span class="description">Gestionar tarjetas</span>
+                </a>
+                <!--<a class="nav-link" href="#">
+                    <span class="icon">
+                        <i class="bi bi-person"></i>
+                    </span>
+                    <span class="description">Personalizar tarjetas</span>
+                </a>-->
+                <a class="nav-link elemento-sideBar" href="rutinas.html">
+                    <span class="description">Gestionar rutinas</span>
+
+                </a>
+            </nav>
         </div>
-        <div class="row mt-3">
-            <div class="d-flex justify-content-end">
-                <a href="rutinas.html" class="btn btn-secondary">Ir a gestionar rutinas</a>
-            </div>
+
+    <div class="container margen">
+        <div class="row d-flex text-center mt-4">
+            <h1 class="titulos-1">Crear nueva rutina para Juan</h1>
         </div>
+
         <div id="basicoRutina">
             <div class="row d-flex text-center justify-content-center mt-4">
                 <form action="submit" id="form-rutina">
@@ -78,7 +88,7 @@
                                 <img id="portadaImagen" src="images/config/noPortada.png" alt="Portada de la rutina"
                                     class="img-fluid border rounded">
                             </a>
-                            <a href="" class="btn btn-danger mt-2" id="eliminarPortada">Eliminar portada</a>
+                            <a href="" class="btn btn-eliminar mt-2" id="eliminarPortada">Eliminar portada</a>
                         </div>
                         <div class="col-lg-8 col-md-7 col-sm-6">
                             <label for="nombreRutina">Nombre:</label>
@@ -87,8 +97,9 @@
                     </div>
                 </form>
                 <div class="d-flex justify-content-end">
-                    <a href="" class="btn btn-secondary" id="stepDos">Seleccionar Tarjetas</a>
+                    <a href="" class="btn btn-background" id="stepDos">Seleccionar Tarjetas</a>
                 </div>
+                <div class="row finale"></div>
             </div>
         </div>
 
@@ -200,15 +211,14 @@
             </div>
             <div class="row">
                 <div class="d-flex gap-3 mt-3 justify-content-end">
-                    <a href="" class="btn btn-secondary" id="stepAnterior">Anterior</a>
-                    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmacionModal"
+                    <a href="" class="btn btn-borde" id="stepAnterior">Anterior</a>
+                    <a class="btn btn-background" data-bs-toggle="modal" data-bs-target="#confirmacionModal"
                         id="guardarRutina">Crear rutina</a>
                 </div>
             </div>
+            <div class="row finale"></div>
         </div>
     </div>
-
-    <div class="container finale"></div>
 
 
     <div class="modal fade" id="portadaModal" tabindex="-1" aria-labelledby="imagenModalLabel" aria-hidden="true">
@@ -350,15 +360,15 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-borde" data-bs-dismiss="modal"
                         id="cancelarPortada">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="seleccionarPortada">Guardar</button>
+                    <button type="button" class="btn btn-background" id="seleccionarPortada">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="#confirmacionModal" tabindex="-1" aria-labelledby="confir" aria-hidden="true">
+    <div class="modal fade" id="confirmacionModal" tabindex="-1" aria-labelledby="confir" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -368,10 +378,9 @@
                 <div class="modal-body">
                     <p>Tu rutina se ha creado correctamente.</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        id="cancelarPortada">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="seleccionarPortada">Guardar</button>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-background" data-bs-dismiss="modal"
+                        id="cancelarPortada">Aceptar</button>
                 </div>
             </div>
         </div>
