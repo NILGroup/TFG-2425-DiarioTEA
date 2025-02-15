@@ -16,7 +16,7 @@ $(document).ready(function () {
     
         let cardContainer = $(this).closest(".col-lg-2, .col-md-3");
         let contenedorPictogramas = $("#contenedorPictogramas");
-        let rowPictos = $("#columnaFormDiario .row.mt-3");
+        let rowPictos = $("#columnaFormDiario");
     
         if (cardContainer.parent().is(contenedorPictogramas)) {
             let originalContainer = cardContainer.data("originalContainer");

@@ -71,7 +71,7 @@
     }
 
     .main-container {
-        margin-left: 20%; /* Ajusta para evitar que el contenido se superponga */
+        margin-left: 18%; /* Ajusta para evitar que el contenido se superponga */
         width: 80%; /* Evita que el contenido se superponga a la sidebar */
     }
 
@@ -82,6 +82,10 @@
     }
     .margen{
         margin-top: 8%;
+    }
+
+    .margen-manage{
+        margin-top: 10%;
     }
     .tarjeta-diario{
         padding: 1em;

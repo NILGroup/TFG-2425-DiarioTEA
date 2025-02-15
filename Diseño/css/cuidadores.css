@@ -54,6 +54,12 @@ html, body{
     font-size: 2.3em;
 }
 
+.titulos-2{
+    color: #2A3335;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+}
+
 /*CARDS DE LOS USUARIOS*/
 .card-usuarios{
     background-color: #F9F7F7;
@@ -116,4 +122,45 @@ html, body{
 .tarjeta-diario button:hover{
     background-color: #213555;
     color: #F9F7F7;
+}
+
+/*GESTIÓN DE TARJETAS*/
+.borde{
+    border-color: #213555;
+    border-width: 0.1em;
+    border-style: solid;
+    border-radius: 0.2em;
+}
+
+.manage-btn-group {
+    border-radius: 10px 10px 0 0 !important;
+    overflow: hidden;
+    border: 0.1em solid #213555;
+    border-bottom: 0 !important;
+}
+
+.manage-btn-group button {
+    color: #213555;
+}
+
+.manage-btn-group button:hover {
+    background-color: #213555;
+    color: #F9F7F7;
+}
+
+.manage-buttons{
+    border-right: 0.1em solid #213555;
+}
+
+/*GENERALES*/
+.btn-background{
+    background-color: #213555;
+    color: #F9F7F7 !important;
+}
+
+.btn-borde{
+    border-color: #213555;
+    border-width: 0.1em;
+    color: #213555;
+    background-color: #F9F7F7;
 }
