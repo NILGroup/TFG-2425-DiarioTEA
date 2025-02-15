@@ -160,6 +160,8 @@ html, body{
 /*GENERALES*/
 .btn-background{
     background-color: #213555;
+    border-color: #213555;
+    border-width: 0.1em;
     color: #F9F7F7;
 }
 
