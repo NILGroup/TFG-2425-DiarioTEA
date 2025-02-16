@@ -1,36 +1,37 @@
-html, body{
+html,
+body {
     background-color: #F8F6F4;
     height: 100%;
 }
 
-.card{
+.card {
     background-color: #F8F6F4;
     border-color: black;
     border-width: 0.2em;
     border-radius: 0.3em;
 }
 
-.card:hover{
+.card:hover {
     background-color: #c9c8c7;
 }
 
 .scroll-column {
-    height: 100vh; 
+    height: 100vh;
     overflow-y: auto;
 }
 
-#scrollView{
-    --bs-gutter-x : 0 !important; 
+#scrollView {
+    --bs-gutter-x: 0 !important;
 }
 
-.fijar{
+.fijar {
     position: fixed;
     bottom: 0;
     left: 0;
     padding: 1em 0;
 }
 
-.diario{
+.diario {
     padding: 1em;
 }
 
@@ -50,44 +51,49 @@ html, body{
     font-size: 3em;
 }
 
-#contenedorPictogramas .card:hover{
-  background-color: #B82132; 
+#contenedorPictogramas .card:hover {
+    background-color: #B82132;
 }
 
-#contenedorPictogramas .card:hover .cross-icon{
+#contenedorPictogramas .card:hover .cross-icon {
     display: block;
-    
+
 }
 
-#contenedorPictogramas{
+#contenedorPictogramas {
     background-color: #dedddb;
 }
+
 .navegacion-icono {
-    width: 6em; 
+    width: 6em;
     height: 6em;
     object-fit: contain;
 }
 
-.navegacion{
+.navegacion {
     background-color: #a7a6a6;
 }
 
-.titulo-hora{
+.titulo-hora {
     font-size: 1.5em;
 }
 
 
 .tamaño-lista {
-    width: 7em; 
+    width: 7em;
     height: 7em;
     object-fit: contain;
 }
 
-.tableros{
+.tableros {
     background-color: #dedddb;
 }
 
-.tableros .card:hover{
+.tableros .card:hover {
     background-color: #B82132;
-      
+
+}
+
+a {
+    text-decoration: none;
 }

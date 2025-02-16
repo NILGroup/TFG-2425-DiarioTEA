@@ -20,4 +20,12 @@ $(document).ready(function(){
             $('#consultaDia').fadeIn();
         });
     });
+
+
+    $(".ir-detalle").on('click', function(e){
+        //e.preventDefault();
+        //var card = $(this).closest(".tarjeta-diario");
+        window.location.href="viewEntry.html";
+    })
+
 });
