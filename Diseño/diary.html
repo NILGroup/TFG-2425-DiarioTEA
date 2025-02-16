@@ -36,8 +36,8 @@
                     </a>
                 </ul>
                 <div class="dropdown ">
-                    <a class="dropdown-toggle item-navbar" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <a class="dropdown-toggle item-navbar" type="button" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         Gestión de usuarios
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -79,15 +79,16 @@
             <div class="row mt-4 text-center">
                 <h1 class="titulos-1">Diario de Juan</h1>
             </div>
-            <div class="list-group mt-5">
+            <div class="list-group mt-5" id="consultaDiario">
                 <div class="d-flex align-items-center tarjeta-diario">
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start hoy entrada">
+                    <a href="#"
+                        class="list-group-item list-group-item-action flex-column align-items-start hoy entrada" id="consultaDia2">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">14 de febrero 2025</h5>
-                            <small>Today</small>
+                            <small>Hoy</small>
 
                         </div>
-                        <p class="mb-1">Numero de registros: 10</p>
+                        <p class="mb-1">Numero de registros: 3</p>
                         <p>Emociones registradas: 2</p>
                         <div class="img-registro gap-3">
                             <img src="images/pictos/colegio.png" alt="">
@@ -96,13 +97,10 @@
                         </div>
 
 
-                        <small>10 registros de Juan</small>
-
-
-
+                        <small>2 registros de Juan, 1 registro del terapeuta</small>
                     </a>
                     <div class="d-flex">
-                        <button type="button" class="btn">Consultar día</button>
+                        <button type="button" class="btn" id="btnConsultarDía">Consultar día</button>
                     </div>
                 </div>
 
@@ -111,7 +109,7 @@
                     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start entrada">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">13 de febrero 2025</h5>
-                            <small>1 day ago</small>
+                            <small>Hace un día</small>
 
                         </div>
                         <p class="mb-1">Numero de registros: 2</p>
@@ -119,7 +117,7 @@
                         <div class="img-registro gap-3">
                             <img src="images/pictos/galletas.png" alt="">
                             <img src="images/pictos/ducha.png" alt="">
-                            
+
                         </div>
 
 
@@ -136,20 +134,15 @@
                     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start entrada">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">12 de febero 2025</h5>
-                            <small>2 days ago</small>
+                            <small>Hace 2 días</small>
 
                         </div>
                         <p class="mb-1">Numero de registros: 2</p>
                         <p>Emociones registradas: 1</p>
                         <div class="img-registro gap-3">
                             <img src="images/emotions/enfadado.png" alt="">
-                            
+
                         </div>
-
-
-                        
-
-
                     </a>
                     <div class="">
                         <button type="button" class="btn">Consultar día</button>
@@ -157,18 +150,67 @@
                 </div>
             </div>
 
+            <div class="list-group mt-5" id="consultaDia">
+                <div class="row d-flex align-items-center justify-content-between">
+                    <h2 class="titulos-2 col-10">14 de Febrero</h2>
+                    <button class="btn btn-borde col-2" id="consultaMes">Ir al mes</button>
+                </div>
+                <div class="d-flex align-items-center tarjeta-diario mt-4">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start entrada">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">17:00 PM</h5>
+
+                        </div>
+                        <p class="mb-1">Registro de Juan</p>
+                        <div class="img-registro gap-3">
+                            <img src="images/pictos/colegio.png" alt="">
+                            <img src="images/pictos/casa.png" alt="">
+                            <img src="images/emotions/enfadado.png" alt="">
+                            <img src="images/pictos/leer.png" alt="">
+                        </div>
+                    </a>
+                    <div class="d-flex">
+                        <button type="button" class="btn">Ir</button>
+                    </div>
+                </div>
+
+
+                <div class="d-flex align-items-center tarjeta-diario">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start entrada">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">12:00 PM</h5>
+                        </div>
+                        <p class="mb-1 ">Registro del terapeuta.</p>
+                        <p>Juan progresa adecuadamente, hoy hemos trabajado con su vocabulario, y hemos ampliado los
+                            pictogramas que tiene disposibles.</p>
+
+                    </a>
+                    <div class="d-flex">
+                        <button type="button" class="btn">Ir</button>
+
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center tarjeta-diario">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start entrada">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">10:00 AM</h5>
+                        </div>
+                        <p class="mb-1">Registro de Juan</p>
+                        <div class="img-registro gap-3">
+                            <img src="images/emotions/alegre.png" alt="">
+                            <img src="images/pictos/jugar.png" alt="">
+                            <img src="images/pictos/juguete.png" alt="">
+                        </div>
+                    </a>
+                    <div class="">
+                        <button type="button" class="btn">Ir</button>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
-
+    <script src="js/diary.js"></script>
 </body>
-<script>
-
-$(document).ready(function(){
-    $(".btn").on('click', function(){
-        window.location.href='verRegistros.html';
-    })
-})
-
-</script>
 
 </html>
