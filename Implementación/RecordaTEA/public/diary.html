@@ -15,9 +15,8 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/cuidadores.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="stylesheets/cuidadores.css">
     <!--JQUERY-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
@@ -35,7 +34,7 @@
                         <h1 class="recordaTEA">RecordaTEA</h1>
                     </a>
                 </ul>
-                <div class="dropdown ">
+                <!-- <div class="dropdown ">
                     <a class="dropdown-toggle item-navbar" type="button" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Gestión de usuarios
@@ -45,108 +44,65 @@
                         <li><a class="dropdown-item" href="#" id="compartirUsuario">Compartir Usuario</a></li>
 
                     </ul>
-                </div>
-                <a class="nav-link perfil" href="#">
+                </div> -->
+                <!-- <a class="nav-link perfil" href="#">
                     <i class="bi bi-person-circle"></i>
-                </a>
+                </a> -->
             </div>
         </div>
     </nav>
-
-    <div class="main-container d-flex">
-        <div class="sidebar sidebar-estilo" id="sidebar">
-            <nav class="nav flex-column">
-                <a class="nav-link elemento-sideBar" href="diary.html">
-                    <span class="description">Diario de Juan</span>
-                </a>
-                <a class="nav-link elemento-sideBar" href="manageCards.html">
-                    <span class="description">Gestionar tarjetas</span>
-                </a>
-                <!--<a class="nav-link" href="#">
-                    <span class="icon">
-                        <i class="bi bi-person"></i>
-                    </span>
-                    <span class="description">Personalizar tarjetas</span>
-                </a>-->
-                <a class="nav-link elemento-sideBar" href="rutinas.html">
-                    <span class="description">Gestionar rutinas</span>
-
-                </a>
-            </nav>
-        </div>
 
         <main class="container margen">
             <div class="row mt-4 text-center">
                 <h1 class="titulos-1">Diario de Juan</h1>
             </div>
-            <div class="list-group mt-5" id="consultaDiario">
+            <div class="row list-group mt-5" id="consultaDiario">
                 <div class="d-flex align-items-center tarjeta-diario">
                     <a href="#"
                         class="list-group-item list-group-item-action flex-column align-items-start hoy entrada" id="consultaDia2">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">14 de febrero 2025</h5>
+                            <h5 class="mb-1">14 de febrero 2025 (3 registros)</h5>
                             <small>Hoy</small>
-
                         </div>
-                        <p class="mb-1">Numero de registros: 3</p>
-                        <p>Emociones registradas: 2</p>
+                        <p class="mb-1">Último registro:</p>
                         <div class="img-registro gap-3">
                             <img src="images/pictos/colegio.png" alt="">
                             <img src="images/pictos/casa.png" alt="">
                             <img src="images/pictos/leer.png" alt="">
                         </div>
-
-
-                        <small>2 registros de Juan, 1 registro del terapeuta</small>
                     </a>
-                    <div class="d-flex">
-                        <button type="button" class="btn" id="btnConsultarDía">Consultar día</button>
-                    </div>
                 </div>
 
 
                 <div class="d-flex align-items-center tarjeta-diario">
                     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start entrada">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">13 de febrero 2025</h5>
+                            <h5 class="mb-1">13 de febrero 2025 (2 registros)</h5>
                             <small>Hace un día</small>
 
                         </div>
-                        <p class="mb-1">Numero de registros: 2</p>
-                        <p>Emociones registradas: 0</p>
+                        <p class="mb-1">Último registro:</p>
                         <div class="img-registro gap-3">
                             <img src="images/pictos/galletas.png" alt="">
                             <img src="images/pictos/ducha.png" alt="">
 
                         </div>
-
-
-                        <small>2 registros de Juan</small>
-
                     </a>
-                    <div class="d-flex">
-                        <button type="button" class="btn">Consultar día</button>
-
-                    </div>
                 </div>
 
                 <div class="d-flex align-items-center tarjeta-diario">
                     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start entrada">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">12 de febero 2025</h5>
+                            <h5 class="mb-1">12 de febero 2025 (2 registros)</h5>
                             <small>Hace 2 días</small>
 
                         </div>
-                        <p class="mb-1">Numero de registros: 2</p>
-                        <p>Emociones registradas: 1</p>
+                        <p class="mb-1">Último registro:</p>
                         <div class="img-registro gap-3">
                             <img src="images/emotions/enfadado.png" alt="">
 
                         </div>
                     </a>
-                    <div class="">
-                        <button type="button" class="btn">Consultar día</button>
-                    </div>
                 </div>
             </div>
 
