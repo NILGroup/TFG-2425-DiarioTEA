@@ -57,53 +57,28 @@
                 <h1 class="titulos-1">Diario de Juan</h1>
             </div>
             <div class="row list-group mt-5" id="consultaDiario">
-                <div class="d-flex align-items-center tarjeta-diario">
-                    <a href="#"
-                        class="list-group-item list-group-item-action flex-column align-items-start hoy entrada" id="consultaDia2">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">14 de febrero 2025 (3 registros)</h5>
-                            <small>Hoy</small>
+                <a href="#" id="consultaDia2">
+                    <div class="d-flex align-items-center tarjeta-diario hoy">
+                        <div class="list-group-item list-dia flex-column align-items-center entrada">
+                            <div class="flex justify-content-center text-center">
+                                <h2>14</h2>
+                                <h3>FEB</h3>
+                            </div>
                         </div>
-                        <p class="mb-1">Último registro:</p>
-                        <div class="img-registro gap-3">
-                            <img src="images/pictos/colegio.png" alt="">
-                            <img src="images/pictos/casa.png" alt="">
-                            <img src="images/pictos/leer.png" alt="">
+                        <div class="list-group-item list-contenido flex-column align-items-start entrada" >
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">14 de febrero 2025 (3 registros)</h5>
+                                <small>Hoy</small>
+                            </div>
+                            <p class="mb-1">Último registro:</p>
+                            <div class="img-registro gap-3">
+                                <img src="images/pictos/colegio.png" alt="">
+                                <img src="images/pictos/casa.png" alt="">
+                                <img src="images/pictos/leer.png" alt="">
+                            </div>
                         </div>
-                    </a>
-                </div>
-
-
-                <div class="d-flex align-items-center tarjeta-diario">
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start entrada">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">13 de febrero 2025 (2 registros)</h5>
-                            <small>Hace un día</small>
-
-                        </div>
-                        <p class="mb-1">Último registro:</p>
-                        <div class="img-registro gap-3">
-                            <img src="images/pictos/galletas.png" alt="">
-                            <img src="images/pictos/ducha.png" alt="">
-
-                        </div>
-                    </a>
-                </div>
-
-                <div class="d-flex align-items-center tarjeta-diario">
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start entrada">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">12 de febero 2025 (2 registros)</h5>
-                            <small>Hace 2 días</small>
-
-                        </div>
-                        <p class="mb-1">Último registro:</p>
-                        <div class="img-registro gap-3">
-                            <img src="images/emotions/enfadado.png" alt="">
-
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             </div>
 
             <div class="list-group mt-5" id="consultaDia">
@@ -111,24 +86,23 @@
                     <h2 class="titulos-2 col-10">14 de Febrero</h2>
                     <button class="btn btn-borde col-2" id="consultaMes">Ir al mes</button>
                 </div>
-                <div class="d-flex align-items-center tarjeta-diario mt-4">
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start entrada">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">17:00 PM</h5>
-
+                <a href="#" id="consultaDia2">
+                    <div class="d-flex align-items-center tarjeta-diario hoy">
+                        <div class="list-group-item list-hora flex-column align-items-center entrada">
+                            <div class="flex justify-content-center text-center">
+                                <h2>17:00</h2>
+                                <p>Juan</p>
+                            </div>
                         </div>
-                        <p class="mb-1">Registro de Juan</p>
-                        <div class="img-registro gap-3">
-                            <img src="images/pictos/colegio.png" alt="">
-                            <img src="images/pictos/casa.png" alt="">
-                            <img src="images/emotions/enfadado.png" alt="">
-                            <img src="images/pictos/leer.png" alt="">
+                        <div class="list-group-item list-contenido d-flex flex-column align-items-start entrada">
+                            <div class="img-registro gap-3">
+                                <img src="images/pictos/colegio.png" alt="">
+                                <img src="images/pictos/casa.png" alt="">
+                                <img src="images/pictos/leer.png" alt="">
+                            </div>
                         </div>
-                    </a>
-                    <div class="d-flex">
-                        <button type="button" class="btn ir-detalle">Ir</button>
                     </div>
-                </div>
+                </a>
 
 
                 <div class="d-flex align-items-center tarjeta-diario">
@@ -166,7 +140,7 @@
             </div>
         </main>
     </div>
-    <script src="js/diary.js"></script>
+    <script src="javascripts/diary.js"></script>
 </body>
 
 </html>

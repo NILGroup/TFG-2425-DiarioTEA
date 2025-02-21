@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    ajustarAlturas();
     $('#consultaDia').hide();
 
     $('#btnConsultarDía').on('click', function(){
@@ -27,5 +28,10 @@ $(document).ready(function(){
         //var card = $(this).closest(".tarjeta-diario");
         window.location.href="viewEntry.html";
     })
+
+    function ajustarAlturas() {
+        let maxHeight = Math.max($(".list-dia").outerHeight(), $(".list-contenido").outerHeight(), $(".list-hora").outerHeight());
+        $(".list-dia, .list-contenido, .list-hora").height(maxHeight);
+    }
 
 });

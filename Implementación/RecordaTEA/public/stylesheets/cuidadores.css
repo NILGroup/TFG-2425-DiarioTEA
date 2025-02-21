@@ -78,30 +78,11 @@ html, body{
     color: #2A3335;
 }
 
-/*ESTILO SIDEBAR*/
-
-.sidebar-estilo{
-    background-color: #2c3c53;
-    color: #F9F7F7;
-    text-decoration: none;
-}
-
-.elemento-sideBar{
-    color: #F9F7F7;
-    border-color: #2A3335;
-    transition: transform 0.3s ease-in-out;
-    margin-left: 5%;
-}
-
-.elemento-sideBar:hover{
-    transform: translateX(0.5em);
-    color: #F9F7F7;
-}
 
 /*DIARIO*/
 .hoy{
-    border-color: #213555;
-    border-width: 0.3em;
+    border-color: #213555 !important;
+    border-width: 0.3em !important;
 }
 
 .entrada{
@@ -124,6 +105,67 @@ html, body{
     color: #F9F7F7;
 }
 
+.list-contenido {
+    width: 100%;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.list-dia{
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.list-dia h2{
+    font-weight: bolder;
+    color: #213555;
+    font-size: 4.7em;
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+    padding: 0;
+}
+
+.list-dia h3{
+    font-weight: bolder;
+    color: #213555;
+    font-size: 2.7em;
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.list-hora{
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.list-hora h2{
+    font-weight: bolder;
+    color: #213555;
+    font-size: 3em;
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+    padding: 0;
+}
+
+.list-hora p{
+    color: #213555;
+    font-size: 2em;
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.tarjeta-diario{
+    padding: 1em;
+    gap: 1em;
+    margin-bottom: 2em;
+    border: 1px rgba(0, 0, 0, 0.275) solid;
+    border-radius: 15px;
+}
+
+.img-registro img{
+    max-width: 100px;
+    max-height: 100px;
+}
 /*GESTIÓN DE TARJETAS*/
 .borde{
     border-color: #213555;
