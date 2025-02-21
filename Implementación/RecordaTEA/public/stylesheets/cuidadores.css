@@ -1,0 +1,190 @@
+html, body{
+    background-color: #F9F7F7;
+}
+
+/*BARRA DE NAVEGACIÓN*/
+.navegacion{
+    background-color: #213555;
+}
+
+.item-navbar{
+    color: #F9F7F7;
+    padding: 0;
+    margin-right: 2em;
+    font-size: 1em;
+}
+
+.perfil{
+    font-size: 3em;
+    padding: 0;
+    color: #F9F7F7;
+    margin-right: 0.5em;
+}
+
+.perfil:hover{
+    font-size: 3em;
+    padding: 0;
+    color: #F9F7F7;
+}
+
+.recordaTEA{
+    margin-top: 0.3em;
+    margin-left: 0.2em;
+    font-family: 'Courier New', Courier, monospace;
+    color: #F9F7F7;
+    font-size: 2em;
+    transition: transform 0.3s;
+}
+
+.recordaTEA:hover{
+    transform: scale(1.03);
+}
+
+#crearUsuario:hover {
+    background-color: #e0e0e0;
+}
+
+#compartirUsuario:hover {
+    background-color:#e0e0e0;
+}
+/*TIPOGRAFÍA Y ESTILOS DE TEXTO*/
+.titulos-1{
+    color: #2A3335;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.3em;
+}
+
+.titulos-2{
+    color: #2A3335;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+}
+
+/*CARDS DE LOS USUARIOS*/
+.card-usuarios{
+    background-color: #F9F7F7;
+    border-color: #2A3335;
+    border-width: 0.2em;
+    border-radius: 0.3em;
+    transition: transform 0.3s;
+}
+
+.card-usuarios:hover{
+    transform: scale(1.03);
+    background-color: none;
+}
+
+.card-usuarios .card-title{
+    color: #2A3335;
+}
+
+/*ESTILO SIDEBAR*/
+
+.sidebar-estilo{
+    background-color: #2c3c53;
+    color: #F9F7F7;
+    text-decoration: none;
+}
+
+.elemento-sideBar{
+    color: #F9F7F7;
+    border-color: #2A3335;
+    transition: transform 0.3s ease-in-out;
+    margin-left: 5%;
+}
+
+.elemento-sideBar:hover{
+    transform: translateX(0.5em);
+    color: #F9F7F7;
+}
+
+/*DIARIO*/
+.hoy{
+    border-color: #213555;
+    border-width: 0.3em;
+}
+
+.entrada{
+    border-radius: 15px;
+    background-color: white;
+}
+
+.entrada:hover{
+    background-color: rgb(223, 223, 223);
+}
+
+.tarjeta-diario button{
+    border-color: #213555;
+    border-width: 0.1em;
+    color: #213555;
+}
+
+.tarjeta-diario button:hover{
+    background-color: #213555;
+    color: #F9F7F7;
+}
+
+/*GESTIÓN DE TARJETAS*/
+.borde{
+    border-color: #213555;
+    border-width: 0.1em;
+    border-style: solid;
+    border-radius: 0.2em;
+}
+
+.manage-btn-group {
+    border-radius: 10px 10px 0 0 !important;
+    overflow: hidden;
+    border: 0.1em solid #213555;
+    border-bottom: 0 !important;
+}
+
+.manage-btn-group button {
+    color: #213555;
+}
+
+.seleccion{
+    background-color: #213555;
+    color: #F9F7F7 !important;
+}
+
+.manage-btn-group button:hover {
+    background-color: #213555;
+    color: #F9F7F7;
+}
+
+.manage-buttons{
+    border-right: 0.1em solid #213555;
+}
+
+/*GENERALES*/
+.btn-background{
+    background-color: #213555;
+    border-color: #213555;
+    border-width: 0.1em;
+    color: #F9F7F7;
+}
+
+.btn-background:hover{
+    border-color: #213555;
+    border-width: 0.1em;
+    color: #213555;
+    background-color: #F9F7F7;
+}
+
+.btn-borde{
+    border-color: #213555;
+    border-width: 0.1em;
+    color: #213555;
+    background-color: #F9F7F7;
+}
+
+.btn-borde:hover{
+    background-color: #213555;
+    color: #F9F7F7;
+}
+
+.btn-eliminar{
+    background-color: #B82132;
+    color: #F9F7F7;
+}

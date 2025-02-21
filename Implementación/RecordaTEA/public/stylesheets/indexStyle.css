@@ -1,0 +1,99 @@
+html,
+body {
+    background-color: #F8F6F4;
+    height: 100%;
+}
+
+.card {
+    background-color: #F8F6F4;
+    border-color: black;
+    border-width: 0.2em;
+    border-radius: 0.3em;
+}
+
+.card:hover {
+    background-color: #c9c8c7;
+}
+
+.scroll-column {
+    height: 100vh;
+    overflow-y: auto;
+}
+
+#scrollView {
+    --bs-gutter-x: 0 !important;
+}
+
+.fijar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 1em 0;
+}
+
+.diario {
+    padding: 1em;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cross-icon {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-10%, -30%);
+    cursor: pointer;
+    font-size: 3em;
+}
+
+#contenedorPictogramas .card:hover {
+    background-color: #B82132;
+}
+
+#contenedorPictogramas .card:hover .cross-icon {
+    display: block;
+
+}
+
+#contenedorPictogramas {
+    background-color: #dedddb;
+}
+
+.navegacion-icono {
+    width: 6em;
+    height: 6em;
+    object-fit: contain;
+}
+
+.navegacion {
+    background-color: #a7a6a6;
+}
+
+.titulo-hora {
+    font-size: 1.5em;
+}
+
+
+.tamaño-lista {
+    width: 7em;
+    height: 7em;
+    object-fit: contain;
+}
+
+.tableros {
+    background-color: #dedddb;
+}
+
+.tableros .card:hover {
+    background-color: #B82132;
+
+}
+
+a {
+    text-decoration: none;
+}
