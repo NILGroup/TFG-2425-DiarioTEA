@@ -7,37 +7,12 @@ $(document).ready(function () {
     $('#fecha').val(fecha);
     $('#hora').val(hora);
 
-    $('#mostrarEmociones').hide();
-    $('#mostrarPictos').hide();
-
-    $('#eleccionEmociones').on('click', function (event) {
-        event.preventDefault();
-        $("#decisionPictos").fadeOut(function(){
-            $('#mostrarEmociones').fadeIn();
-        });
+    $('#editar-btn').click(function () {
+        $('#fecha').removeAttr('readonly');
+        $('#hora').removeAttr('readonly');
+        $('#editar-btn').hide();
     });
 
-    $('#eleccionPictos').on('click', function (event) {
-        event.preventDefault();
-        $("#decisionPictos").fadeOut(function(){
-            $('#mostrarPictos').fadeIn();
-        });
-    });
-
-
-    $('#volverEmociones').on('click', function(event){
-        event.preventDefault();
-        $("#mostrarEmociones").fadeOut(function(){
-            $('#decisionPictos').fadeIn();
-        });
-    });
-
-    $('#volverPictos').on('click', function(event){
-        event.preventDefault();
-        $("#mostrarPictos").fadeOut(function(){
-            $('#decisionPictos').fadeIn();
-        });
-    });
 
     /*
     $("#mostrarPictos, #mostrarEmociones, #tablero").on("click", ".col-lg-3, .col-md-4", function (event) {
@@ -74,46 +49,47 @@ $(document).ready(function () {
     });
 */
 
-$("#mostrarPictos, #mostrarEmociones, #contenedorPictogramas").on("click", ".card", function (event) {
-    event.preventDefault();
-    
-    let card = $(this).closest(".col-lg-3, .col-md-4");
-    let contenedorPictogramas = $("#contenedorPictogramas");
+    $("#mostrarPictos, #mostrarEmociones, #contenedorPictogramas").on("click", ".card", function (event) {
+        event.preventDefault();
 
-    if (card.parent().is(contenedorPictogramas)) {
-        let originalContainer = card.data("originalContainer");
-        let index = card.attr("data-index");
+        let card = $(this).closest(".col-lg-3, .col-md-4");
+        let contenedorPictogramas = $("#contenedorPictogramas");
 
-        if (originalContainer && originalContainer.length) {
-            let inserted = false;
+        if (card.parent().is(contenedorPictogramas)) {
+            let originalContainer = card.data("originalContainer");
+            let index = card.attr("data-index");
 
-            originalContainer.children(".col-lg-3, .col-md-4").each(function () {
-                if (parseInt($(this).attr("data-index")) > index) {
-                    $(this).before(card);
-                    inserted = true;
-                    return false;
+            if (originalContainer && originalContainer.length) {
+                let inserted = false;
+
+                originalContainer.children(".col-lg-3, .col-md-4").each(function () {
+                    if (parseInt($(this).attr("data-index")) > index) {
+                        $(this).before(card);
+                        inserted = true;
+                        return false;
+                    }
+                });
+
+                if (!inserted) {
+                    originalContainer.append(card);
                 }
-            });
 
-            if (!inserted) {
-                originalContainer.append(card);
+                card.find(".cross-icon").remove();
             }
 
-            card.find(".cross-icon").remove();
-        }
+        } else {
+            if (!card.data("originalContainer")) {
+                card.data("originalContainer", card.parent());
+                card.attr("data-index", card.index());
+            }
 
-    } else {
-        if (!card.data("originalContainer")) {
-            card.data("originalContainer", card.parent());
-            card.attr("data-index", card.index());
-        }
+            let tarjeta = card.find(".card"); // Busca la tarjeta dentro de la columna
+            tarjeta.append('<span class="cross-icon">&times</span>'); // Añade el icono dentro de la tarjeta
+            contenedorPictogramas.append(card); // Mueve la columna completa
 
-        let tarjeta = card.find(".card"); // Busca la tarjeta dentro de la columna
-        tarjeta.append('<span class="cross-icon">&times</span>'); // Añade el icono dentro de la tarjeta
-        contenedorPictogramas.append(card); // Mueve la columna completa
-        
-    }
-});
+        }
+    });
+
 
 
 

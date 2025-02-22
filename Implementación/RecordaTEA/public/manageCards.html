@@ -12,10 +12,10 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/indexStyle.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/cuidadores.css">
+    <link rel="stylesheet" href="stylesheets/indexStyle.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="stylesheets/sidebar.css">
+    <link rel="stylesheet" href="stylesheets/cuidadores.css">
     <!--JQUERY-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
@@ -51,27 +51,8 @@
         </div>
     </nav>
 
-    <div class="main-container d-flex">
-        <div class="sidebar sidebar-estilo" id="sidebar">
-            <nav class="nav flex-column">
-                <a class="nav-link elemento-sideBar" href="diary.html">
-                    <span class="description">Diario de Juan</span>
-                </a>
-                <a class="nav-link elemento-sideBar" href="manageCards.html">
-                    <span class="description">Gestionar tarjetas</span>
-                </a>
-                <!--<a class="nav-link" href="#">
-                    <span class="icon">
-                        <i class="bi bi-person"></i>
-                    </span>
-                    <span class="description">Personalizar tarjetas</span>
-                </a>-->
-                <a class="nav-link elemento-sideBar" href="rutinas.html">
-                    <span class="description">Gestionar rutinas</span>
-
-                </a>
-            </nav>
-        </div>
+    <div class="main-container d-flex mt-3">
+        
 
         <div class="container margen-manage" id="containerPrincipal">
             <div class="btn-group manage-btn-group" role="group" aria-label="Opciones de seleccion de pictos">
@@ -89,6 +70,7 @@
                     </form>
                 </div>
 
+                <!--
                 <div class="row mt-3" id="columnaFormDiario">
                     <h1 class="titulos-2">Tarjetas de comunicación por defecto:</h1>
                     <div class="col-lg-2 col-md-3 mt-3 d-flex">
@@ -155,7 +137,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div>--> <!--TARJETAS POR DEFECTO QUITADAS-->
 
                 <div class="row mt-5">
                     <h1 class="titulos-2">Vocabulario de Juan:</h5>
@@ -304,7 +286,7 @@
             <div class="row finale"></div>
         </div>
 
-        <script src="js/manageCardsTablero.js"></script>
+        <script src="javascripts/manageCardsTablero.js"></script>
 </body>
 
 </html>

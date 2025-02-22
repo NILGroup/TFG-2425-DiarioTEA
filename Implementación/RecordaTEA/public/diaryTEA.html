@@ -11,7 +11,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/indexStyle.css">
+    <link rel="stylesheet" href="stylesheets/indexStyle.css">
     </link>
     <!--JQUERY-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -27,12 +27,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto"> <!--me-auto los aline a al izq-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="diaryTEA.html">
-                            <img src="images/pictos/diario.png" alt="Diario digital"
-                                class="nav-icon img-fluid navegacion-icono">
-                        </a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="rutinasTEA.html">
                             <img src="images/pictos/rutinas.png" alt="Rutinas" class="img-fluid navegacion-icono">
@@ -41,11 +36,7 @@
                 </ul>
 
                 <ul class="navbar-nav ms-auto"> <!--ms-auto los aline a al derecha-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="addEntry.html">
-                            <img src="images/config/add.png" alt="Añadir entrada al diario" class="img-fluid navegacion-icono">
-                        </a>
-                    </li>
+                
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <img src="images/pictos/yo.png" alt="Mi perfils" class="img-fluid navegacion-icono">
@@ -58,7 +49,16 @@
 
     <section class="container" id="columnaVistaDiario">
         <div class="row mt-4">
+            <div class="d-flex justify-content-center">
+
+                <a class="nav-link" href="addEntry.html">
+                    <img src="images/config/add.png" alt="Añadir entrada al diario" style="max-width: 250px; max-width: 250px;">
+                </a>
+
+            </div>
+            <hr class="my-4 bg-success">
             <div class="">
+
                 <h1 class="mt-4 d-inline">5 de Febrero - </h1>
                 <h2 class="titulo-hora d-inline">12 AM</h2>
                 <div class="d-flex gap-3 mt-4">
