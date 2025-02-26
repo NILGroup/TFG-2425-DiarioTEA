@@ -3,9 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var mysql = require('mysql');
 
 var app = express();
 
@@ -19,7 +17,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+s
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'diary.html'));
+});
+
+app.get('/buscar', async (req, res) => {
+  const busqueda = req.query.query;
+  try {
+    const resultado = await fetchData(busqueda); // Espera el resultado
+    res.json(resultado); // Envía el JSON al cliente
+  } catch (error) {
+    res.status(500).json({ error: 'Error en la búsqueda' });
+  }
+});
+
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

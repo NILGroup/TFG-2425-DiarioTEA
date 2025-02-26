@@ -33,20 +33,6 @@
                         <h1 class="recordaTEA">RecordaTEA</h1>
                     </a>
                 </ul>
-                <div class="dropdown ">
-                    <a class="dropdown-toggle item-navbar" type="button" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Gestión de usuarios
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#" id="crearUsuario">Crear Usuario</a></li>
-                        <li><a class="dropdown-item" href="#" id="compartirUsuario">Compartir Usuario</a></li>
-
-                    </ul>
-                </div>
-                <a class="nav-link perfil" href="#">
-                    <i class="bi bi-person-circle"></i>
-                </a>
             </div>
         </div>
     </nav>
@@ -57,87 +43,18 @@
         <div class="container margen-manage" id="containerPrincipal">
             <div class="btn-group manage-btn-group" role="group" aria-label="Opciones de seleccion de pictos">
                 <button type="button" class="btn manage-buttons seleccion">Pictogramas</button>
-                <button type="button" class="btn manage-buttons">Imágenes</button>
-                <button type="button" class="btn">Texto</button>
+               <!--  <button type="button" class="btn manage-buttons">Imágenes</button>
+                <button type="button" class="btn">Texto</button> -->
             </div>
 
             <div class="row p-3 borde">
                 <div class="row">
-                    <form action="" class="d-flex" id="buscadorARASAAC">
+                    <form method="GET" action="/buscar" class="d-flex" id="buscadorARASAAC">
                         <input class="form-control me-2" type="search" placeholder="Buscar pictogramas en ARASAAC"
                             aria-label="Buscar pictogramas en ARASAAC">
                         <button class="btn btn-background" type="submit">Buscar</button>
                     </form>
                 </div>
-
-                <!--
-                <div class="row mt-3" id="columnaFormDiario">
-                    <h1 class="titulos-2">Tarjetas de comunicación por defecto:</h1>
-                    <div class="col-lg-2 col-md-3 mt-3 d-flex">
-                        <div class="card">
-                            <a href="" id="emocionAburrido">
-                                <img src="images/emotions/aburrido.png" alt="Estar aburrido" class="card-img">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 mt-3 d-flex">
-                        <div class="card">
-                            <a href="" id="emocionAlegre">
-                                <img src="images/emotions/alegre.png" alt="Estar alegre" class="card-img">
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="col-lg-2 col-md-3 mt-3 d-flex">
-                        <div class="card">
-                            <a href="" id="emocionConfusion">
-                                <img src="images/emotions/confusión.png" alt="Estar confuso" class="card-img">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 mt-3 d-flex">
-                        <div class="card">
-                            <a href="" id="emocionHambriento">
-                                <img src="images/emotions/hambriento.png" alt="Tener hambre" class="card-img">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 mt-3 d-flex">
-                        <div class="card">
-                            <a href="" id="pictoTu">
-                                <img src="images/pictos/tú.png" alt="Tu" class="card-img">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 mt-3 d-flex">
-                        <div class="card">
-                            <a href="" id="pictoDucha">
-                                <img src="images/pictos/ducha.png" alt="Ducha" class="card-img">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 mt-3 d-flex">
-                        <div class="card">
-                            <a href="" id="pictoManzana">
-                                <img src="images/pictos/manzana.png" alt="Manzana" class="card-img">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 mt-3 d-flex">
-                        <div class="card">
-                            <a href="" id="pictoEstudiar">
-                                <img src="images/pictos/estudiar.png" alt="Estudiar" class="card-img">
-                            </a>
-                        </div>
-                    </div>
-                </div>--> <!--TARJETAS POR DEFECTO QUITADAS-->
 
                 <div class="row mt-5">
                     <h1 class="titulos-2">Vocabulario de Juan:</h5>
@@ -276,11 +193,6 @@
                                 </div>
                             </div>
                         </div>
-                </div>
-
-                <div class="d-flex gap-2 mt-4">
-                    <a href="diary.html" class="btn btn-borde">Cancelar</a>
-                    <button type="button" class="btn btn-background">Guardar</button>
                 </div>
             </div>
             <div class="row finale"></div>
