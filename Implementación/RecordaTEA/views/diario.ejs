@@ -22,36 +22,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navegacion align-items-center">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNavCuidadores">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavCuidadores">
-                <ul class="navbar-nav me-auto">
-                    <a href="index.html">
-                        <h1 class="recordaTEA">RecordaTEA</h1>
-                    </a>
-                </ul>
-                <!-- <div class="dropdown ">
-                    <a class="dropdown-toggle item-navbar" type="button" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Gestión de usuarios
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#" id="crearUsuario">Crear Usuario</a></li>
-                        <li><a class="dropdown-item" href="#" id="compartirUsuario">Compartir Usuario</a></li>
-
-                    </ul>
-                </div> -->
-                <!-- <a class="nav-link perfil" href="#">
-                    <i class="bi bi-person-circle"></i>
-                </a> -->
-            </div>
-        </div>
-    </nav>
-
+    <%-include ("navbar",  { nombreUsuario: usuarios[0].nombre })%>
         <main class="container margen">
             <div class="row mt-4 text-center">
                 <h1 class="titulos-1">Diario de Juan</h1>

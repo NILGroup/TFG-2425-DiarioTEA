@@ -7,24 +7,28 @@ html, body{
     background-color: #213555;
 }
 
+.distribuidor{
+    background-color: #213555eb;
+}
+
+.distribuidor a, span{
+    color:#F9F7F7;
+    padding: 0.5em;
+}
+
+.distribuidor a:hover{
+    color:#F9F7F7;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
 .item-navbar{
     color: #F9F7F7;
     padding: 0;
     margin-right: 2em;
     font-size: 1em;
-}
-
-.perfil{
-    font-size: 3em;
-    padding: 0;
-    color: #F9F7F7;
-    margin-right: 0.5em;
-}
-
-.perfil:hover{
-    font-size: 3em;
-    padding: 0;
-    color: #F9F7F7;
 }
 
 .recordaTEA{
@@ -40,13 +44,7 @@ html, body{
     transform: scale(1.03);
 }
 
-#crearUsuario:hover {
-    background-color: #e0e0e0;
-}
 
-#compartirUsuario:hover {
-    background-color:#e0e0e0;
-}
 /*TIPOGRAFÍA Y ESTILOS DE TEXTO*/
 .titulos-1{
     color: #2A3335;

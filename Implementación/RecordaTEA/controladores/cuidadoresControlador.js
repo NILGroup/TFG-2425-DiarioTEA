@@ -1,16 +1,22 @@
-const CuidadoresService = require('../servicios/cuidadoresService')
+const CuidadoresService = require('../servicios/cuidadoresService');
+const UsuariosService = require('../servicios/usuariosService');
+
 const cuidadoresService = new CuidadoresService();
+const usuariosService = new UsuariosService();
 
 class CuidadoresController{
     constructor(){}
 
     async login(req, res){
+        let cuidador = null;
+        cuidador = await cuidadoresService.leerCuidadorId(1);
         if(req.session.logged === 0 || req.session.logged === undefined){
-            const cuidador = await cuidadoresService.leerCuidadorId(1);
             req.session.logged = 1;
             req.session.nombre = cuidador.nombre;
         }
-        res.render('diario');
+        const usuarios = await usuariosService.leerUsuariosCuidador(cuidador.id);
+        console.log(usuarios[0])
+        res.render('diario', { usuarios: usuarios });
     }
 }
 

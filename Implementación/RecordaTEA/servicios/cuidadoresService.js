@@ -6,7 +6,7 @@ class CuidadoresService{
 
     async leerCuidadorId(id){
         const cuidador = await cuidadoresDao.leerCuidadorId(id);
-        return cuidador;
+        return cuidador[0];
     }
 }
 

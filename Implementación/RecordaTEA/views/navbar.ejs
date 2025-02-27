@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navegacion align-items-center">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavCuidadores">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavCuidadores">
+                <ul class="navbar-nav me-auto">
+                    <a href="index.html">
+                        <h1 class="recordaTEA">RecordaTEA</h1>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg distribuidor align-items-center">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNavCuidadores">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/diario">Diario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/diario">Gestionar tarjetas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/diario">Rutinas</a>
+                    </li>
+                </ul>
+                <div class="dropdown">
+                    <span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <%= nombreUsuario %></span>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                        <li><span class="dropdown-item">No tienes más usuarios</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</body>
+</html>
