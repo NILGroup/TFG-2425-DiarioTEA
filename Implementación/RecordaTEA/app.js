@@ -17,20 +17,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-s
-
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'diary.html'));
-});
-
-app.get('/buscar', async (req, res) => {
-  const busqueda = req.query.query;
-  try {
-    const resultado = await fetchData(busqueda); // Espera el resultado
-    res.json(resultado); // Envía el JSON al cliente
-  } catch (error) {
-    res.status(500).json({ error: 'Error en la búsqueda' });
-  }
 });
 
 app.use('/users', usersRouter);

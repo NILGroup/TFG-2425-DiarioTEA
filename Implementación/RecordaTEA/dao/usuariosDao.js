@@ -1,11 +1,11 @@
+const pool = require('../db');
+
 class UsuariosDao{
-    constructor(pool) {
-        this.pool = pool;
-    }
+    constructor() {}
 
     async leerUsuarioId(id){
         try{
-            const resultado = await this.pool.query('SELECT * FROM Usuarios WHERE id = ?', [id]);
+            const resultado = await pool.query('SELECT * FROM Usuarios WHERE id = ?', [id]);
             return resultado[0];
         }
         catch(error){
@@ -14,3 +14,5 @@ class UsuariosDao{
         }
     }
 }
+
+module.exports = UsuariosDao;
