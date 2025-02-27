@@ -4,6 +4,6 @@ const UsuariosController = require('../controladores/usuariosControlador')
 const controller = new UsuariosController();
 
 
-router.get('/', function (req, res){controller.leerUsuarioId(req, res)});
+router.get('/', controller.leerUsuarioId);
 
 module.exports = router;

@@ -3,9 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mysql = require('mysql');
+var session = require('express-session');
+var mysqlSession = require("express-mysql-session");
 
 var usuariosRouter = require('./routes/usuarios');
+var cuidadoresRouter = require('./routes/cuidadores');
+
+const MySQLStore = mysqlSession(session);
+const sessionStore = new MySQLStore({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
+});
 
 var app = express();
 
@@ -17,13 +28,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(session({
+  saveUninitialized: false,
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  store: sessionStore
+}));
+
+app.use('/', cuidadoresRouter);
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'diary.html'));
-});
 
 app.use('/users', usuariosRouter);
 
