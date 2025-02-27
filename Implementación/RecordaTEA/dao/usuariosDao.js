@@ -1,4 +1,4 @@
-const pool = require('../db');
+const pool = require('../config/conexionbbdd');
 
 class UsuariosDao{
     constructor() {}
