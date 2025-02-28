@@ -8,6 +8,7 @@ var mysqlSession = require("express-mysql-session");
 
 var usuariosRouter = require('./routes/usuarios');
 var cuidadoresRouter = require('./routes/cuidadores');
+var tarjetasRouter = require('./routes/tarjetas');
 
 const MySQLStore = mysqlSession(session);
 const sessionStore = new MySQLStore({
@@ -28,6 +29,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   saveUninitialized: false,
@@ -37,8 +39,7 @@ app.use(session({
 }));
 
 app.use('/', cuidadoresRouter);
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/tarjetas-comunicacion', tarjetasRouter);
 app.use('/users', usuariosRouter);
 
 // catch 404 and forward to error handler

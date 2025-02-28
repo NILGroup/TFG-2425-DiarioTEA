@@ -25,7 +25,7 @@
     <%-include ("navbar",  { nombreUsuario: usuarios[0].nombre })%>
         <main class="container margen">
             <div class="row mt-4 text-center">
-                <h1 class="titulos-1">Diario de Juan</h1>
+                <h1 class="titulos-1">Diario de <%= usuarios[0].nombre %></h1>
             </div>
             <div class="row list-group mt-5" id="consultaDiario">
                 <a href="#" id="consultaDia2">
