@@ -1,37 +1,39 @@
-html, body{
+html,
+body {
     background-color: #F9F7F7;
 }
 
 /*BARRA DE NAVEGACIÓN*/
-.navegacion{
+.navegacion {
     background-color: #213555;
 }
 
-.distribuidor{
+.distribuidor {
     background-color: #213555eb;
 }
 
-.distribuidor a, span{
-    color:#F9F7F7;
+.distribuidor a,
+span {
+    color: #F9F7F7;
     padding: 0.5em;
 }
 
-.distribuidor a:hover{
-    color:#F9F7F7;
+.distribuidor a:hover {
+    color: #F9F7F7;
 }
 
 .dropdown-toggle {
     cursor: pointer;
 }
 
-.item-navbar{
+.item-navbar {
     color: #F9F7F7;
     padding: 0;
     margin-right: 2em;
     font-size: 1em;
 }
 
-.recordaTEA{
+.recordaTEA {
     margin-top: 0.3em;
     margin-left: 0.2em;
     font-family: 'Courier New', Courier, monospace;
@@ -40,26 +42,26 @@ html, body{
     transition: transform 0.3s;
 }
 
-.recordaTEA:hover{
+.recordaTEA:hover {
     transform: scale(1.03);
 }
 
 
 /*TIPOGRAFÍA Y ESTILOS DE TEXTO*/
-.titulos-1{
+.titulos-1 {
     color: #2A3335;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2.3em;
 }
 
-.titulos-2{
+.titulos-2 {
     color: #2A3335;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5em;
 }
 
 /*CARDS DE LOS USUARIOS*/
-.card-usuarios{
+.card-usuarios {
     background-color: #F9F7F7;
     border-color: #2A3335;
     border-width: 0.2em;
@@ -67,38 +69,38 @@ html, body{
     transition: transform 0.3s;
 }
 
-.card-usuarios:hover{
+.card-usuarios:hover {
     transform: scale(1.03);
     background-color: none;
 }
 
-.card-usuarios .card-title{
+.card-usuarios .card-title {
     color: #2A3335;
 }
 
 
 /*DIARIO*/
-.hoy{
+.hoy {
     border-color: #213555 !important;
     border-width: 0.3em !important;
 }
 
-.entrada{
+.entrada {
     border-radius: 15px;
     background-color: white;
 }
 
-.entrada:hover{
+.entrada:hover {
     background-color: rgb(223, 223, 223);
 }
 
-.tarjeta-diario button{
+.tarjeta-diario button {
     border-color: #213555;
     border-width: 0.1em;
     color: #213555;
 }
 
-.tarjeta-diario button:hover{
+.tarjeta-diario button:hover {
     background-color: #213555;
     color: #F9F7F7;
 }
@@ -109,50 +111,50 @@ html, body{
     margin-top: 1em;
 }
 
-.list-dia{
+.list-dia {
     margin-bottom: 1em;
     margin-top: 1em;
 }
 
-.list-dia h2{
+.list-dia h2 {
     font-weight: bolder;
     color: #213555;
     font-size: 4.7em;
     margin: 0;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 0;
 }
 
-.list-dia h3{
+.list-dia h3 {
     font-weight: bolder;
     color: #213555;
     font-size: 2.7em;
     margin: 0;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.list-hora{
+.list-hora {
     margin-bottom: 1em;
     margin-top: 1em;
 }
 
-.list-hora h2{
+.list-hora h2 {
     font-weight: bolder;
     color: #213555;
     font-size: 3em;
     margin: 0;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 0;
 }
 
-.list-hora p{
+.list-hora p {
     color: #213555;
     font-size: 2em;
     margin: 0;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.tarjeta-diario{
+.tarjeta-diario {
     padding: 1em;
     gap: 1em;
     margin-bottom: 2em;
@@ -160,12 +162,13 @@ html, body{
     border-radius: 15px;
 }
 
-.img-registro img{
+.img-registro img {
     max-width: 100px;
     max-height: 100px;
 }
+
 /*GESTIÓN DE TARJETAS*/
-.borde{
+.borde {
     border-color: #213555;
     border-width: 0.1em;
     border-style: solid;
@@ -183,7 +186,7 @@ html, body{
     color: #213555;
 }
 
-.seleccion{
+.seleccion {
     background-color: #213555;
     color: #F9F7F7 !important;
 }
@@ -193,49 +196,81 @@ html, body{
     color: #F9F7F7;
 }
 
-.manage-buttons{
+.manage-buttons {
     border-right: 0.1em solid #213555;
 }
 
-.cargando{
-    color:#213555;
+.cargando {
+    color: #213555;
     width: 4em;
     height: 4em;
 }
 
+.add-picto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(97, 150, 97, 0.621);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover .add-picto, .card:hover .mas {
+    opacity: 1;
+}
+
+.gestion{
+    position: relative !important;
+}
+
+.mas{
+    position: absolute;
+    top: -1em;
+    left: -0.5em; 
+    color:#F9F7F7; 
+    font-size: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+}
 
 /*GENERALES*/
-.btn-background{
+.btn-background {
     background-color: #213555;
     border-color: #213555;
     border-width: 0.1em;
     color: #F9F7F7;
 }
 
-.btn-background:hover{
+.btn-background:hover {
     border-color: #213555;
     border-width: 0.1em;
     color: #213555;
     background-color: #F9F7F7;
 }
 
-.btn-borde{
+.btn-borde {
     border-color: #213555;
     border-width: 0.1em;
     color: #213555;
     background-color: #F9F7F7;
 }
 
-.btn-borde:hover{
+.btn-borde:hover {
     background-color: #213555;
     color: #F9F7F7;
 }
 
-.btn-eliminar{
+.btn-eliminar {
     background-color: #B82132;
     color: #F9F7F7;
 }
 
-.aviso{
+.aviso {
     color: black;
 }

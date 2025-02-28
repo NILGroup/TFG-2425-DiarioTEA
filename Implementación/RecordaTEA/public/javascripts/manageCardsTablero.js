@@ -23,11 +23,13 @@ $(document).ready(function () {
                     if(data.length > 0){
                         data.forEach(picto => {
                             const divPicto = $('<div>').addClass('col-lg-2 col-md-3 mt-3 d-flex');
-                            const card = $('<div>').addClass('card');
-                            const enlace = $('<a>').attr('href', '').attr('id', picto.id);
-                            const imagen = $('<img>').attr('src', picto.enlace).attr('alt', picto.consulta).addClass('card-img');
+                            const card = $('<div>').addClass('card').addClass('gestion');
+                            const enlace = $('<a>').attr('href', '').attr('id', picto.id_arasaac);
+                            const imagen = $('<img>').attr('src', picto.enlace).attr('alt', consulta).addClass('card-img');
+                            const fondo = $('<div>').addClass('add-picto');
+                            const mas = $('<span>').addClass('mas').text('+');
                             enlace.append(imagen);
-                            card.append(enlace);
+                            card.append(enlace, fondo, mas);
                             divPicto.append(card);
                             contenedorPictos.append(divPicto);
                         });
@@ -44,5 +46,9 @@ $(document).ready(function () {
                 }
             });
         }
+    });
+
+    $('a').on('click', function(e){
+
     });
 })

@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <%-include ("navbar", { nombreUsuario: data.usuario.id })%>
+    <%-include ("navbar", { nombreUsuario: data.usuario.nombre })%>
         <div class="main-container d-flex mt-3">
 
             <div class="container margen-manage" id="containerPrincipal">
@@ -38,13 +38,12 @@
                     </div>
 
                     <div class="row mt-5" id="matrizBusqueda" style="display: none;">
-                        <h2 class="titulos-2">Resultados de ARASAAC:</h2>
-                        <div class="d-flex justify-content-center text-center mt-3" id="avisos">
+                        <div class="d-flex justify-content-center text-center" id="avisos">
                             <div id="cargando" class="spinner-border cargando" role="status" style="display: none;">
                                 <span class="visually-hidden">Loading...</span>
                             </div>
                         </div>
-                        <div class="container mt-3">
+                        <div class="container">
                             <div class="row pb-3" id="resultBusqueda" style="display: none;">
 
                             </div>
