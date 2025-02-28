@@ -6,9 +6,9 @@ var logger = require('morgan');
 var session = require('express-session');
 var mysqlSession = require("express-mysql-session");
 
-var usuariosRouter = require('./routes/usuarios');
-var cuidadoresRouter = require('./routes/cuidadores');
-var tarjetasRouter = require('./routes/tarjetas');
+var usuariosRouter = require('./routes/usuariosRouter');
+var cuidadoresRouter = require('./routes/cuidadoresRouter');
+var tarjetasRouter = require('./routes/tarjetasRouter');
 
 const MySQLStore = mysqlSession(session);
 const sessionStore = new MySQLStore({

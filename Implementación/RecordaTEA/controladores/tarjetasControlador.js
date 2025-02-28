@@ -28,16 +28,20 @@ class TarjetasControlador {
             let pictos = [];
             this.resultadoArasaac = [];
             this.indice = 0;
-            if (1) {
-                console.log('Paso el if');
+            let ultimoElem = 0;
+            if (consulta !== null && consulta !== undefined) {
                 this.resultadoArasaac = await tarjetasService.consultaArasaac(consulta);
-                res.send(this.resultadoArasaac);
                 if (this.resultadoArasaac.length > 0) {
-                    for (let i = 0; i < 20; i++) {
+                    for (let i = 0; i < this.resultadoArasaac.length && i < 20; i++) {
                         let picto = await tarjetasService.pictosArasaac(this.resultadoArasaac[i]._id);
+                        pictos.push({id_arasaac: this.resultadoArasaac[i]._id, enlace: picto.image});
+                        ultimoElem = i;
                     }
                 }
+                this.indice += ultimoElem;
+                res.send(pictos);
             }
+
         } catch (error) {
             console.log(error);
             res.status(500);

@@ -197,6 +197,12 @@ html, body{
     border-right: 0.1em solid #213555;
 }
 
+.cargando{
+    color:#213555;
+    width: 4em;
+    height: 4em;
+}
+
 /*GENERALES*/
 .btn-background{
     background-color: #213555;

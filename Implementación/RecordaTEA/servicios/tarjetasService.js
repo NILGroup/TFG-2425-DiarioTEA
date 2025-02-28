@@ -25,19 +25,25 @@ class TarjetasService {
     }
 
     async consultaArasaac(consulta){
-        console.log('estoy arasaac')
         try{
             let response = await axios.get(`https://api.arasaac.org/api/pictograms/es/search/${consulta}`);
-            console.log(response);
-            return response;
+            return response.data;
         }
         catch(error){
+            console.log('ERROR[TarjetasService]: obtener consulta de ARASAAC: ', error)
             throw error;
         }
     }
 
     async pictosArasaac(id_picto){
-
+        try{
+            let response = await axios.get(`https://api.arasaac.org/api/pictograms/${id_picto}?url=true&download=false`);
+            return response.data;
+        }
+        catch(error){
+            console.log('ERROR[TarjetasService]: obtener pictograma de ARASAAC: ', error)
+            throw error;
+        }
     }
 }
 

@@ -6,6 +6,8 @@ const tarjetasControlador = new TarjetasControlador();
 
 router.get('/', tarjetasControlador.vocabularioUsuarioId);
 
-router.get('/arasaac', tarjetasControlador.consultaArasaac);
+router.get('/arasaac', (req, res) => {
+    tarjetasControlador.consultaArasaac(req, res);
+  });
 
 module.exports = router;

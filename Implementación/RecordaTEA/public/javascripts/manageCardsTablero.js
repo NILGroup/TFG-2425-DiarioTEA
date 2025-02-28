@@ -1,51 +1,47 @@
 $(document).ready(function () {
 
-
-
-    $("#columnaFormDiario .card").each(function (index) {
-        $(this).attr("data-index", index); // Guarda el índice original
-        $(this).data("originalContainer", $(this).parent()); // Guarda el contenedor original
-    });
-
-    $('#volverManagePictos').on('click', function(){
-        
-    });
-
-    $(".row").on("click", ".card", function (event) {
-        event.preventDefault();
-    
-        let cardContainer = $(this).closest(".col-lg-2, .col-md-3");
-        let contenedorPictogramas = $("#contenedorPictogramas");
-        let rowPictos = $("#columnaFormDiario");
-    
-        if (cardContainer.parent().is(contenedorPictogramas)) {
-            let originalContainer = cardContainer.data("originalContainer");
-            if (originalContainer && originalContainer.length) {
-                let inserted = false;
-                let index = parseInt(cardContainer.attr("data-index"));
-
-                originalContainer.children(".col-lg-2, .col-md-3").each(function () {
-                    if (parseInt($(this).attr("data-index")) > index) {
-                        $(this).before(cardContainer);
-                        inserted = true;
-                        return false;
+    $('#buscaArasaac').on('click', function (e) {
+        e.preventDefault();
+        let consulta = $('#campoBusqueda').val();
+        console.log(consulta);
+        if (consulta === null || consulta === undefined || consulta === "") {
+            alert('La consulta está vacía o no definida.');
+        }
+        else {
+            console.log('ajax')
+            $.ajax({
+                url: '/tarjetas-comunicacion/arasaac',
+                method: 'GET',
+                data: {consulta: consulta},
+                beforeSend: function() {
+                    $('#matrizBusqueda').show();
+                    $('#cargando').show();
+                },
+                success: function (data, status, xhr) {
+                    let contenedorPictos = $('#resultBusqueda');
+                    if(data.length > 0){
+                        data.forEach(picto => {
+                            const divPicto = $('<div>').addClass('col-lg-2 col-md-3 mt-3 d-flex');
+                            const card = $('<div>').addClass('card');
+                            const enlace = $('<a>').attr('href', '').attr('id', picto.id);
+                            const imagen = $('<img>').attr('src', picto.enlace).attr('alt', picto.consulta).addClass('card-img');
+                            enlace.append(imagen);
+                            card.append(enlace);
+                            divPicto.append(card);
+                            contenedorPictos.append(divPicto);
+                        });
                     }
-                });
-                if (!inserted) {
-                    originalContainer.append(cardContainer);
+                    else{
+                        const sp = $('<span>').val('No hay pictos');
+                        contenedorPictos.append(sp)
+                    }
+                    $('#cargando').hide();
+                    contenedorPictos.show();
+                },
+                error: function (xhr, status, error) {
+
                 }
-            } else {
-                rowPictos.append(cardContainer);
-            }
-            cardContainer.find(".cross-icon").remove(); 
-        } else {
-            if (!cardContainer.data("originalContainer")) {
-                cardContainer.data("originalContainer", cardContainer.parent());
-                cardContainer.attr("data-index", cardContainer.index());
-            }
-            cardContainer.append('<span class="cross-icon">&times</span>'); 
-            contenedorPictogramas.append(cardContainer);
+            });
         }
     });
-    
 })
