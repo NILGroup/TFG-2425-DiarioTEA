@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#buscaArasaac').on('click', function (e) {
         e.preventDefault();
         let consulta = $('#campoBusqueda').val();
-        console.log(consulta);
+        let contenedorPictos = $('#resultBusqueda');
         if (consulta === null || consulta === undefined || consulta === "") {
             alert('La consulta está vacía o no definida.');
         }
@@ -16,9 +16,9 @@ $(document).ready(function () {
                 beforeSend: function() {
                     $('#matrizBusqueda').show();
                     $('#cargando').show();
+                    contenedorPictos.hide().empty();
                 },
                 success: function (data, status, xhr) {
-                    let contenedorPictos = $('#resultBusqueda');
                     if(data.length > 0){
                         data.forEach(picto => {
                             const divPicto = $('<div>').addClass('col-lg-2 col-md-3 mt-3 d-flex');
