@@ -43,8 +43,12 @@ class TarjetasControlador {
             }
 
         } catch (error) {
-            console.log(error);
-            res.status(500);
+            if (error.response && error.response.status === 404) {
+                res.send(this.resultadoArasaac);
+            }
+            else{
+                throw error;
+            }
         }
     }
 }

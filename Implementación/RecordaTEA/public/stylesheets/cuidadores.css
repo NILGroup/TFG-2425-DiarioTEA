@@ -203,6 +203,7 @@ html, body{
     height: 4em;
 }
 
+
 /*GENERALES*/
 .btn-background{
     background-color: #213555;
@@ -233,4 +234,8 @@ html, body{
 .btn-eliminar{
     background-color: #B82132;
     color: #F9F7F7;
+}
+
+.aviso{
+    color: black;
 }

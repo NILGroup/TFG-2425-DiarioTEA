@@ -17,6 +17,7 @@ $(document).ready(function () {
                     $('#matrizBusqueda').show();
                     $('#cargando').show();
                     contenedorPictos.hide().empty();
+                    $('#avisos').find('span').remove();
                 },
                 success: function (data, status, xhr) {
                     if(data.length > 0){
@@ -32,8 +33,8 @@ $(document).ready(function () {
                         });
                     }
                     else{
-                        const sp = $('<span>').val('No hay pictos');
-                        contenedorPictos.append(sp)
+                        const sp = $('<span>').text('No se encontraron pictogramas que coincidan con su búsqueda.').addClass('aviso');
+                        $('#avisos').append(sp);
                     }
                     $('#cargando').hide();
                     contenedorPictos.show();
