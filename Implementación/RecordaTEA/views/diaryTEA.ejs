@@ -1,0 +1,51 @@
+<%-include ("navbarTEA")%>
+
+    <body>
+        <section class="container" id="columnaVistaDiario">
+            <div class="row mt-4">
+                <div class="d-flex justify-content-center">
+
+                    <a class="nav-link" href="/users/add-entry">
+                        <img src="/images/config/add.png" alt="Añadir entrada al diario"
+                            style="max-width: 250px; max-width: 250px;">
+                    </a>
+
+                </div>
+                <hr class="my-4 bg-success">
+                <% entradas.forEach(function(item) { %>
+                    <div class="">
+                        <h1 class="mt-4 d-inline">
+                            <%= item.fecha_registro %> -
+                        </h1>
+                        <h2 class="titulo-hora d-inline">
+                            <%= item.hora_registro %>
+                        </h2>
+                        <div class="d-flex gap-3 mt-4" id="<%=item.idEntrada%>"">
+                        <% item.tarjetas.forEach(function(picto) { %>
+                            <div class=" card tamaño-lista">
+                            <img class="card-img-top" src="<%= picto.enlace %>">
+                        </div>
+                        <% }); %>
+                            <div class="card tamaño-lista ms-auto">
+
+                                <a href="/users/diary/view-entry/<%= item.idEntrada %>">
+                                    <img class="card-img-top" src="/images/config/ir.png" alt="Ver entrada del diario">
+                                </a>
+
+                            </div>
+                            <div class="card tamaño-lista">
+                                <a href="#">
+                                    <img class="card-img-top" src="/images/config/botonBorrar.png" alt="Borrar entrada">
+                                </a>
+                            </div>
+                    </div>
+            </div>
+            <hr class="my-4 bg-success">
+            <% }); %>
+                </div>
+        </section>
+
+
+
+
+    </body>

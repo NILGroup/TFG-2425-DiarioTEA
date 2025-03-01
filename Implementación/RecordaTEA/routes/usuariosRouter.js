@@ -6,4 +6,15 @@ const controller = new UsuariosController();
 
 router.get('/', controller.leerUsuarioId);
 
+router.get('/diary', controller.redirectToDiary);
+
+//router.get('/routines', controller.);
+
+router.get("/add-entry", controller.addEntry);
+
+router.get('/diary/view-entry/:idEntrada', controller.viewEntry);
+
+
+
+
 module.exports = router;
