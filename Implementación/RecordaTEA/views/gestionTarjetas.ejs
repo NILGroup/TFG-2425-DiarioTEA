@@ -12,6 +12,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="stylesheets/indexStyle.css">
     <link rel="stylesheet" href="stylesheets/index.css">
     <link rel="stylesheet" href="stylesheets/cuidadores.css">
@@ -22,7 +23,6 @@
 <body>
     <%-include ("navbar", { nombreUsuario: data.usuario.nombre })%>
         <div class="main-container d-flex mt-3">
-
             <div class="container margen-manage" id="containerPrincipal">
                 <div class="btn-group manage-btn-group" role="group" aria-label="Opciones de seleccion de pictos">
                     <button type="button" class="btn manage-buttons seleccion">Pictogramas</button>
@@ -68,16 +68,20 @@
                         <div class="container mt-3 borde-cont">
                             <div class="row pb-3" id="contenedorPictogramas">
                                 <div class="d-flex text-center justify-content-center align-items-center">
-                                    <span><%= data.usuario.nombre %> todavía no tiene pictogramas</span>
+                                    <span>
+                                        <%= data.usuario.nombre %> todavía no tiene pictogramas
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="avisosPictos">
+                </div>
                 <div class="row finale"></div>
             </div>
-
-            <script src="javascripts/manageCardsTablero.js"></script>
+        </div>
+        <script src="javascripts/manageCardsTablero.js"></script>
 </body>
 
 </html>

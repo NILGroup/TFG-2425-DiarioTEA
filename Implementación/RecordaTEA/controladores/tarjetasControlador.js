@@ -68,7 +68,12 @@ class TarjetasControlador {
 
     async addTarjetaVocabulario(req, res){
         try{
+            let id_usuario = req.session.usuario.id;
+            let id_arasaac = req.body.id_arasaac;
+            let enlace = req.body.enlace;
 
+            let success = await tarjetasService.addTarjetaVocabulario(id_arasaac, enlace, id_usuario);
+            res.send(success);
         }
         catch (error){
             throw error;

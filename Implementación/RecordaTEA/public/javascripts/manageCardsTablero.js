@@ -29,7 +29,7 @@ $(document).ready(function () {
                         data.pictos.forEach(picto => {
                             const divPicto = $('<div>').addClass('col-lg-2 col-md-3 mt-3 d-flex');
                             const card = $('<div>').addClass('card').addClass('gestion');
-                            const enlace = $('<a>').attr('href', '').attr('id', picto.id_arasaac);
+                            const enlace = $('<a>').attr('href', '');
                             const imagen = $('<img>').attr('src', picto.enlace).attr('alt', consulta).addClass('card-img');
                             const fondo = $('<div>').addClass('add-picto');
                             const mas = $('<span>').attr('id', picto.id_arasaac).attr('data-enlace', picto.enlace).addClass('mas').text('+');
@@ -124,6 +124,9 @@ $(document).ready(function () {
         e.preventDefault();
         let id = $(this).attr('id');
         let enlace = $(this).attr('data-enlace');
+        let divPicto = $(this).closest('.col-lg-2.col-md-3.mt-3.d-flex');
+        let copia = divPicto.clone(true);
+        let alerta = $('<div>').addClass('alert alert-dark alert-custom').attr('role', 'alert');
         $.ajax({
             url: '/tarjetas-comunicacion/picto-vocabulario',
             method: 'POST',
@@ -132,7 +135,24 @@ $(document).ready(function () {
                 enlace: enlace
             },
             success: function(data, status, xhr){
-
+                if(data.success){
+                    copia.find(`#${data.id_arasaac}`).remove();
+                    copia.find('.add-picto').remove();
+                    let hov = $('<div>').addClass('remove-picto');
+                    let basura = $('<span>').attr('id', data.id).addClass('trash').html('<i class="bi bi-trash3-fill"></i>');
+                    let carta = copia.find('.card.gestion');
+                    carta.append(hov, basura);
+                    $('#contenedorPictogramas').append(copia);
+                    alerta.text('Cambios guardados').attr('id', `alert-${data.id}`).hide();
+                    $('#avisosPictos').append(alerta);
+                    $(`#alert-${data.id}`).fadeIn();
+                    setTimeout(function () {
+                        $(`#alert-${data.id}`).fadeOut();
+                    }, 3000);
+                }
+                else{
+                    alert('Pictograma ya añadido');
+                }
             },
             error: function(xhr, status, error){
                 

@@ -46,12 +46,20 @@ class TarjetasService {
         }
     }
 
-    async addTarjetaVocabulario(id_arasaac, enlace){
+    async addTarjetaVocabulario(id_arasaac, enlace, id_usuario){
         try{
-
+            let existe = await tarjetasDao.comprobarExistenciaPicto(id_arasaac, enlace, id_usuario);
+            if(existe.length > 0){
+                return {success: false, id: 0, id_arasaac: id_arasaac};
+            }
+            else{
+                let insertado = await tarjetasDao.addTarjetaVocabulario(id_arasaac, enlace, id_usuario);
+                return {success: true, id: insertado, id_arasaac: id_arasaac};
+            }
         }
         catch (error){
-
+            console.log('ERROR[TarjetasService]: añadir pictograma al vocabulario: ', error)
+            throw error;
         }
     }
 }
