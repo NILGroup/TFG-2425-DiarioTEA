@@ -66,7 +66,7 @@ class TarjetasControlador {
         }
     }
 
-    async añadirTarjetaVocabulario(req, res){
+    async addTarjetaVocabulario(req, res){
         try{
 
         }

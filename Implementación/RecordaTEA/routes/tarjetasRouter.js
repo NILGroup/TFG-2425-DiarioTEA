@@ -14,4 +14,6 @@ router.get('/pagina', (req, res) => {
   tarjetasControlador.pasarPagina(req, res);
 });
 
+router.post('/picto-vocabulario', tarjetasControlador.addTarjetaVocabulario);
+
 module.exports = router;

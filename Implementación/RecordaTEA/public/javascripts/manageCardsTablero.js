@@ -122,8 +122,21 @@ $(document).ready(function () {
 
     $('#resultBusqueda').on('click', '.mas', function (e) {
         e.preventDefault();
-        const id = $(this).attr('id');
-        const miAtributo = $(this).attr('data-enlace');
-        console.log(id, miAtributo);
+        let id = $(this).attr('id');
+        let enlace = $(this).attr('data-enlace');
+        $.ajax({
+            url: '/tarjetas-comunicacion/picto-vocabulario',
+            method: 'POST',
+            data: {
+                id_arasaac: id,
+                enlace: enlace
+            },
+            success: function(data, status, xhr){
+
+            },
+            error: function(xhr, status, error){
+                
+            }
+        });
     });
 })

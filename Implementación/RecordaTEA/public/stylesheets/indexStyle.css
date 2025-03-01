@@ -50,20 +50,6 @@ body {
     cursor: pointer;
     font-size: 3em;
 }
-
-#contenedorPictogramas .card:hover {
-    background-color: #B82132;
-}
-
-#contenedorPictogramas .card:hover .cross-icon {
-    display: block;
-
-}
-
-#contenedorPictogramas {
-    background-color: #dedddb;
-}
-
 .navegacion-icono {
     width: 6em;
     height: 6em;

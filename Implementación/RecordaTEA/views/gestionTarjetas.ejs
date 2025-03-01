@@ -65,9 +65,11 @@
 
                     <div class="row mt-5">
                         <h1 class="titulos-2">Vocabulario de <%= data.usuario.nombre %>:</h1>
-                        <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;">
+                        <div class="container mt-3 borde-cont">
                             <div class="row pb-3" id="contenedorPictogramas">
-                                <span style="color: black;">No hay pictogramas</span>
+                                <div class="d-flex text-center justify-content-center align-items-center">
+                                    <span><%= data.usuario.nombre %> todavía no tiene pictogramas</span>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -45,6 +45,15 @@ class TarjetasService {
             throw error;
         }
     }
+
+    async addTarjetaVocabulario(id_arasaac, enlace){
+        try{
+
+        }
+        catch (error){
+
+        }
+    }
 }
 
 module.exports = TarjetasService;

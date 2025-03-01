@@ -55,7 +55,7 @@ span {
 }
 
 .titulos-2 {
-    color: #2A3335;
+    color: #213555;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5em;
 }
@@ -244,8 +244,18 @@ span {
 
 .mas:hover{
     transform: scale(1.15);
-    color: rgb(140, 204, 140); 
 }
+
+.borde-cont{
+    border: 0.1em solid #213555; 
+    border-radius: 0.1em;
+}
+
+#contenedorPictogramas {
+    background-color: #213555a5;
+    min-height: 10.736em;
+}
+
 
 /*GENERALES*/
 .btn-background {
