@@ -32,7 +32,7 @@ $(document).ready(function () {
                             const enlace = $('<a>').attr('href', '').attr('id', picto.id_arasaac);
                             const imagen = $('<img>').attr('src', picto.enlace).attr('alt', consulta).addClass('card-img');
                             const fondo = $('<div>').addClass('add-picto');
-                            const mas = $('<span>').addClass('mas').text('+');
+                            const mas = $('<span>').attr('id', picto.id_arasaac).attr('data-enlace', picto.enlace).addClass('mas').text('+');
                             enlace.append(imagen);
                             card.append(enlace, fondo, mas);
                             divPicto.append(card);
@@ -66,7 +66,7 @@ $(document).ready(function () {
         if (document.getElementById(`page-${(pagina)}`)) {
             $(`#page-${(pagina)}`).show();
             $('#anteriorPag').prop('disabled', false);
-            if(ultPag !== undefined && ultPag === pagina){
+            if (ultPag !== undefined && ultPag === pagina) {
                 $('#siguientePag').prop('disabled', true);
             }
         }
@@ -85,10 +85,10 @@ $(document).ready(function () {
                         data.pictos.forEach(picto => {
                             const divPicto = $('<div>').addClass('col-lg-2 col-md-3 mt-3 d-flex');
                             const card = $('<div>').addClass('card').addClass('gestion');
-                            const enlace = $('<a>').attr('href', '').attr('id', picto.id_arasaac);
+                            const enlace = $('<a>').attr('href', '');
                             const imagen = $('<img>').attr('src', picto.enlace).attr('alt', consulta).addClass('card-img');
                             const fondo = $('<div>').addClass('add-picto');
-                            const mas = $('<span>').addClass('mas').text('+');
+                            const mas = $('<span>').attr('id', picto.id_arasaac).attr('data-enlace', picto.enlace).addClass('mas').text('+');
                             enlace.append(imagen);
                             card.append(enlace, fondo, mas);
                             divPicto.append(card);
@@ -120,7 +120,10 @@ $(document).ready(function () {
         }
     });
 
-    $('a').on('click', function (e) {
-
+    $('#resultBusqueda').on('click', '.mas', function (e) {
+        e.preventDefault();
+        const id = $(this).attr('id');
+        const miAtributo = $(this).attr('data-enlace');
+        console.log(id, miAtributo);
     });
 })

@@ -228,8 +228,8 @@ span {
 
 .mas{
     position: absolute;
-    top: -1em;
-    left: -0.5em; 
+    top: -0.5em;
+    left: 0em; 
     color: rgb(170, 234, 170); 
     font-size: 4em;
     display: flex;
@@ -237,6 +237,13 @@ span {
     align-items: center;
     cursor: pointer;
     opacity: 0;
+    transition: transform 0.3s;
+    padding: 0;
+    margin: 0;
+}
+
+.mas:hover{
+    transform: scale(1.15);
 }
 
 /*GENERALES*/
@@ -273,6 +280,10 @@ span {
     border-width: 0.1em;
     color: #213555a3;
     background-color: #F9F7F7a3;
+}
+
+.btn-borde:active{
+    box-shadow: none;
 }
 
 .btn-eliminar {
