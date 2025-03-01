@@ -125,7 +125,8 @@ $(document).ready(function () {
         let id = $(this).attr('id');
         let enlace = $(this).attr('data-enlace');
         let divPicto = $(this).closest('.col-lg-2.col-md-3.mt-3.d-flex');
-        let copia = divPicto.clone(true);
+        let carta = $(this).closest('.card.gestion');
+        let copia = carta.clone(true);
         let alerta = $('<div>').addClass('alert alert-dark alert-custom').attr('role', 'alert');
         $.ajax({
             url: '/tarjetas-comunicacion/picto-vocabulario',
@@ -141,11 +142,14 @@ $(document).ready(function () {
                     copia.find('.add-picto').remove();
                     let hov = $('<div>').addClass('remove-picto');
                     let basura = $('<span>').attr('id', data.id).addClass('trash').html('<i class="bi bi-trash3-fill"></i>');
-                    let carta = copia.find('.card.gestion');
-                    carta.append(hov, basura);
+                    copia.append(hov, basura);
+                    let div = divPicto.clone(true);
+                    div.empty().removeClass('d-flex');
+                    let d = $('<div>').addClass('d-flex');
+                    div.append(d).append(copia);
 
                     //Añadirlo al contenedor del vocabulario
-                    $('#contenedorPictogramas').prepend(copia);
+                    $('#contenedorPictogramas').prepend(div);
 
                     // Eliminar texto de no pictos (si lo hubiese)
                     $('#no-pictos').hide();
@@ -157,7 +161,7 @@ $(document).ready(function () {
                     $('#avisosPictos').append(alerta);
                     $(`#alert-${data.id}`).fadeIn();
                     setTimeout(function () {
-                        $(`#alert-${data.id}`).fadeOut();
+                        $(`#alert-${data.id}`).fadeOut().remove();
                     }, 2000);
                 }
                 else {
@@ -168,5 +172,54 @@ $(document).ready(function () {
 
             }
         });
+    });
+
+    $('#contenedorPictogramas').on('click', '.trash', function (e) {
+        e.preventDefault();
+        //Obtenemos los datos
+        let id = $(this).attr('id');
+        let divPicto = $(this).closest('.col-lg-2.col-md-3.mt-3');
+        let card = $(this).closest('.card');
+        let persiste = true;
+
+        //Escondemos el picto como si estuviese eliminado
+        divPicto.hide();
+
+        //Avisamos de que ha eliminaod un picto y que lo puede deshacer
+        let alerta = $('<div>').addClass('alert alert-dark alert-custom').attr('role', 'alert');
+        let mensaje = $('<span>').text('Se ha eliminado el pictograma');
+        let deshacer = $('<button>').addClass('btn btn-sm btn-deshacer').attr('id', 'deshacer-elim').text('Deshacer');
+        alerta.append(mensaje, deshacer).hide();
+        $('#avisosPictos').append(alerta);
+        alerta.fadeIn();
+        let temp = setTimeout(function () {
+            alerta.fadeOut(function(){
+                alerta.remove();
+            });
+        }, 5000);
+
+        deshacer.on('click', function(e){
+            e.preventDefault();
+            persiste = false;
+            clearTimeout(temp); 
+            alerta.fadeOut();
+            divPicto.show();
+        });
+
+        if(persiste){
+            $.ajax({
+                url: '/tarjetas-comunicacion/eliminar-picto',
+                method: 'DELETE',
+                data: {
+                    id: id
+                },
+                success: function (data, status, xhr) {
+    
+                },
+                error: function (data, status, xhr) {
+    
+                }
+            }); 
+        }
     });
 })

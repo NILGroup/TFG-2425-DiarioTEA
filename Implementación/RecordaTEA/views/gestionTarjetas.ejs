@@ -67,27 +67,30 @@
                         <h1 class="titulos-2">Vocabulario de <%= data.usuario.nombre %>:</h1>
                         <div class="container mt-3 borde-cont">
                             <div class="row pb-3" id="contenedorPictogramas">
-                                <% if (data.voc.length > 0) { %>
+                                <% if (data.voc.length> 0) { %>
                                     <% data.voc.forEach(function(elem){%>
-                                        <div class="col-lg-2 col-md-3 mt-3 d-flex">
-                                            <div class="card">
-                                                <a href="">
-                                                    <img src="<%= elem.enlace%>"
-                                                        class="card-img">
-                                                </a>
-                                                <div class="remove-picto"></div>
-                                                <span id="<%= elem.id %>" class="trash"><i class="bi bi-trash3-fill"></i></span>
+                                        <div class="col-lg-2 col-md-3 mt-3">
+                                            <div class="dflex">
+                                                <div class="card">
+                                                    <a href="">
+                                                        <img src="<%= elem.enlace%>" class="card-img">
+                                                    </a>
+                                                    <div class="remove-picto"></div>
+                                                    <span id="<%= elem.id %>" class="trash"><i
+                                                            class="bi bi-trash3-fill"></i></span>
+                                                </div>
                                             </div>
+
                                         </div>
-                                    <% }) %>
-                                    <% } else {%>
-                                        <div class="d-flex text-center justify-content-center align-items-center"
-                                            id="no-pictos">
-                                            <span>
-                                                <%= data.usuario.nombre %> todavía no tiene pictogramas
-                                            </span>
-                                        </div>
-                                        <% } %>
+                                        <% }) %>
+                                            <% } else {%>
+                                                <div class="d-flex text-center justify-content-center align-items-center"
+                                                    id="no-pictos">
+                                                    <span>
+                                                        <%= data.usuario.nombre %> todavía no tiene pictogramas
+                                                    </span>
+                                                </div>
+                                                <% } %>
                             </div>
                         </div>
                     </div>
