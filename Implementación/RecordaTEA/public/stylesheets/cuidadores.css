@@ -244,6 +244,7 @@ span {
 
 .mas:hover{
     transform: scale(1.15);
+    color: rgb(140, 204, 140); 
 }
 
 /*GENERALES*/

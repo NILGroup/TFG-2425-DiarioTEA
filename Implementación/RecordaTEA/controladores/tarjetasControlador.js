@@ -65,6 +65,15 @@ class TarjetasControlador {
             throw error;
         }
     }
+
+    async añadirTarjetaVocabulario(req, res){
+        try{
+
+        }
+        catch (error){
+            throw error;
+        }
+    }
 }
 
 module.exports = TarjetasControlador;
