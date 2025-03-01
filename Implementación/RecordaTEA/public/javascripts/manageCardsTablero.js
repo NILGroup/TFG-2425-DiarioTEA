@@ -136,22 +136,27 @@ $(document).ready(function () {
             },
             success: function(data, status, xhr){
                 if(data.success){
+                    //Contruir la papelera y eliminar el +
                     copia.find(`#${data.id_arasaac}`).remove();
                     copia.find('.add-picto').remove();
                     let hov = $('<div>').addClass('remove-picto');
                     let basura = $('<span>').attr('id', data.id).addClass('trash').html('<i class="bi bi-trash3-fill"></i>');
                     let carta = copia.find('.card.gestion');
                     carta.append(hov, basura);
-                    $('#contenedorPictogramas').append(copia);
+                    
+                    //Añadirlo al contenedor del vocabulario
+                    $('#contenedorPictogramas').prepend(copia);
+
+                    //Mostrar el aviso de cambios guardados
                     alerta.text('Cambios guardados').attr('id', `alert-${data.id}`).hide();
                     $('#avisosPictos').append(alerta);
                     $(`#alert-${data.id}`).fadeIn();
                     setTimeout(function () {
                         $(`#alert-${data.id}`).fadeOut();
-                    }, 3000);
+                    }, 2000);
                 }
                 else{
-                    alert('Pictograma ya añadido');
+                    
                 }
             },
             error: function(xhr, status, error){

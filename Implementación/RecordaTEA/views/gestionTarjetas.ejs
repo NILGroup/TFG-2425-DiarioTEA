@@ -12,7 +12,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="stylesheets/indexStyle.css">
     <link rel="stylesheet" href="stylesheets/index.css">
     <link rel="stylesheet" href="stylesheets/cuidadores.css">
@@ -67,11 +67,27 @@
                         <h1 class="titulos-2">Vocabulario de <%= data.usuario.nombre %>:</h1>
                         <div class="container mt-3 borde-cont">
                             <div class="row pb-3" id="contenedorPictogramas">
-                                <div class="d-flex text-center justify-content-center align-items-center">
-                                    <span>
-                                        <%= data.usuario.nombre %> todavía no tiene pictogramas
-                                    </span>
-                                </div>
+                                <% if (data.voc.length > 0) { %>
+                                    <% data.voc.forEach(function(elem){%>
+                                        <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                                            <div class="card">
+                                                <a href="">
+                                                    <img src="<%= elem.enlace%>"
+                                                        class="card-img">
+                                                </a>
+                                                <div class="remove-picto"></div>
+                                                <span id="<%= elem.id %>" class="trash"><i class="bi bi-trash3-fill"></i></span>
+                                            </div>
+                                        </div>
+                                    <% }) %>
+                                    <% } else {%>
+                                        <div class="d-flex text-center justify-content-center align-items-center"
+                                            id="no-pictos">
+                                            <span>
+                                                <%= data.usuario.nombre %> todavía no tiene pictogramas
+                                            </span>
+                                        </div>
+                                        <% } %>
                             </div>
                         </div>
                     </div>
