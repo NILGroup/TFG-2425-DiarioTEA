@@ -230,7 +230,7 @@ span {
     position: absolute;
     top: -1em;
     left: -0.5em; 
-    color:#F9F7F7; 
+    color: rgb(170, 234, 170); 
     font-size: 4em;
     display: flex;
     justify-content: center;
@@ -264,6 +264,15 @@ span {
 .btn-borde:hover {
     background-color: #213555;
     color: #F9F7F7;
+    border-color: #213555;
+}
+
+.btn-borde:disabled{
+    cursor:not-allowed;
+    border-color: #213555a3;
+    border-width: 0.1em;
+    color: #213555a3;
+    background-color: #F9F7F7a3;
 }
 
 .btn-eliminar {

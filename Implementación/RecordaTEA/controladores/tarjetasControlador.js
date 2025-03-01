@@ -4,7 +4,6 @@ const tarjetasService = new TarjetasService();
 class TarjetasControlador {
     constructor() {
         this.resultadoArasaac = [];
-        this.indice = 0;
     }
 
     async vocabularioUsuarioId(req, res) {
@@ -27,28 +26,43 @@ class TarjetasControlador {
             let consulta = req.query.consulta;
             let pictos = [];
             this.resultadoArasaac = [];
-            this.indice = 0;
-            let ultimoElem = 0;
             if (consulta !== null && consulta !== undefined) {
                 this.resultadoArasaac = await tarjetasService.consultaArasaac(consulta);
                 if (this.resultadoArasaac.length > 0) {
-                    for (let i = 0; i < this.resultadoArasaac.length && i < 20; i++) {
+                    for (let i = 0; i < this.resultadoArasaac.length && i < 18; i++) {
                         let picto = await tarjetasService.pictosArasaac(this.resultadoArasaac[i]._id);
-                        pictos.push({id_arasaac: this.resultadoArasaac[i]._id, enlace: picto.image});
-                        ultimoElem = i;
+                        pictos.push({ id_arasaac: this.resultadoArasaac[i]._id, enlace: picto.image });
                     }
                 }
-                this.indice += ultimoElem;
-                res.send(pictos);
+                res.send({ pictos: pictos, paginacion: this.resultadoArasaac.length });
             }
 
         } catch (error) {
             if (error.response && error.response.status === 404) {
                 res.send(this.resultadoArasaac);
             }
-            else{
+            else {
                 throw error;
             }
+        }
+    }
+
+    async pasarPagina(req, res) {
+        try {
+            let pagina = req.query.pagina;
+            let pictos = [];
+            let index = this.resultadoArasaac.length;
+            let pag = (index - (18 * (pagina - 1)));
+            if (this.resultadoArasaac.length > 0) {
+                for (let i = (18 * (pagina - 1)); i < index && i < (18 * pagina); i++) {
+                    let picto = await tarjetasService.pictosArasaac(this.resultadoArasaac[i]._id);
+                    pictos.push({ id_arasaac: this.resultadoArasaac[i]._id, enlace: picto.image });
+                }
+            }
+            res.send({ pictos: pictos, paginacion: pag });
+        }
+        catch (error) {
+            throw error;
         }
     }
 }
