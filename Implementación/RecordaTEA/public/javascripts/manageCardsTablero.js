@@ -134,8 +134,8 @@ $(document).ready(function () {
                 id_arasaac: id,
                 enlace: enlace
             },
-            success: function(data, status, xhr){
-                if(data.success){
+            success: function (data, status, xhr) {
+                if (data.success) {
                     //Contruir la papelera y eliminar el +
                     copia.find(`#${data.id_arasaac}`).remove();
                     copia.find('.add-picto').remove();
@@ -143,9 +143,14 @@ $(document).ready(function () {
                     let basura = $('<span>').attr('id', data.id).addClass('trash').html('<i class="bi bi-trash3-fill"></i>');
                     let carta = copia.find('.card.gestion');
                     carta.append(hov, basura);
-                    
+
                     //Añadirlo al contenedor del vocabulario
                     $('#contenedorPictogramas').prepend(copia);
+
+                    // Eliminar texto de no pictos (si lo hubiese)
+                    $('#no-pictos').hide();
+                    $('#no-pictos span').hide();
+
 
                     //Mostrar el aviso de cambios guardados
                     alerta.text('Cambios guardados').attr('id', `alert-${data.id}`).hide();
@@ -155,12 +160,12 @@ $(document).ready(function () {
                         $(`#alert-${data.id}`).fadeOut();
                     }, 2000);
                 }
-                else{
-                    
+                else {
+
                 }
             },
-            error: function(xhr, status, error){
-                
+            error: function (xhr, status, error) {
+
             }
         });
     });

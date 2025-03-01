@@ -13,7 +13,7 @@ body {
 }
 
 .distribuidor a,
-span {
+.distribuidor span {
     color: #F9F7F7;
     padding: 0.5em;
 }
@@ -293,6 +293,10 @@ span {
 #contenedorPictogramas {
     background-color: #213555a5;
     min-height: 10.736em;
+}
+
+#contenedorPictogramas span{
+    color:#F9F7F7;
 }
 
 .alert-custom{
