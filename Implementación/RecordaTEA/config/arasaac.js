@@ -1,1 +1,0 @@
-const base_url = "https://api.arasaac.org/api";

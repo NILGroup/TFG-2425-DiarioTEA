@@ -17,7 +17,6 @@ class UsuariosDao {
     async leerUsuariosCuidador(idCuidador) {
         try {
             const usuarios = await pool.query('SELECT Usuarios.nombre, Usuarios.id FROM Usuarios JOIN Cuidadores_Usu ON Usuarios.id = Cuidadores_Usu.id_usuario WHERE Cuidadores_Usu.id_cuidador = ?', [idCuidador]);
-            console.log(usuarios);
             return usuarios[0];
         }
         catch (error) {
