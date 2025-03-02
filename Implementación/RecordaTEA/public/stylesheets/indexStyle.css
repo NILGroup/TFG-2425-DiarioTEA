@@ -9,6 +9,7 @@ body {
     border-color: black;
     border-width: 0.2em;
     border-radius: 0.3em;
+    cursor: pointer;
 }
 
 .card:hover {
@@ -34,6 +35,7 @@ body {
 .diario {
     padding: 1em;
 }
+
 
 .card img {
     width: 100%;
@@ -82,4 +84,9 @@ body {
 
 a {
     text-decoration: none;
+}
+
+#contenedorPictogramas{
+    background-color: #213555a5;
+    min-height: 10.736em;
 }

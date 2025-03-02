@@ -90,6 +90,8 @@ class UsuariosService {
 
     async obtenerTarjetasPorUsuario(idUsuario) {
         const response = await usuariosDao.obtenerTarjetasPorUsuario(idUsuario);
+
+        return response[0];
     }
 
     async viewEntryById(idEntrada, idUsuario) {

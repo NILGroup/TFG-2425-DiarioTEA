@@ -9,7 +9,7 @@ class CuidadoresController{
 
     async login(req, res){
         let cuidador = null;
-        cuidador = await cuidadoresService.leerCuidadorId(1);
+        cuidador = await cuidadoresService.leerCuidadorId(2);
         const usuarios = await usuariosService.leerUsuariosCuidador(cuidador.id);
         req.session.logged = 1;
         req.session.nombre = cuidador.nombre;

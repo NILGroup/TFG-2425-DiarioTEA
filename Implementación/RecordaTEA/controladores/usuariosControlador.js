@@ -24,6 +24,9 @@ class UsuariosContorlador {
 
         const response = await usuariosServicio.obtenerTarjetasPorUsuario(req.session.usuario.id);
 
+        console.log(response);
+        res.render('addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre })
+
         //OBTENER PICTOGRAMAS DEL USUARIO PARA ADD ENTRY Y RENDERIZAR
 
     }

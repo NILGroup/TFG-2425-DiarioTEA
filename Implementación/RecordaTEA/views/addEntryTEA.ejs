@@ -1,21 +1,88 @@
-<!DOCTYPE html>
-<html lang="es">
+<%-include ("navbarTEA")%>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="stylesheets/indexStyle.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <title>Añadir entrada</title>
-</head>
+    <body>
+        <div class=" container justify-content-center mt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label for="fecha">Fecha</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" readonly>
+                        </div>
 
-<body>
-    <%-include ("navbarTEA")%>
-</body>
+                        <div class="col-6">
+                            <label for="hora">Hora</label>
+                            <input type="time" class="form-control" id="hora" name="hora" readonly>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <button id="editar-btn" class="btn btn-primary">
+                            <i class="bi bi-pencil"></i> Editar
+                        </button>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="main-container d-flex mt-3">
+            <div class="container margen-manage" id="containerPrincipal"
+                style="border: 2px solid black; border-radius: 3px;">
+                <div class="row m-3">
+                    <h5>Registro:</h5>
+                    <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;">
+                        <div class="row pb-3" id="contenedorPictogramas">
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-3">
+                    <h5 class="titulos-2">Vocabulario de <%= usuario %>:</h5>
+                    <div class="container mt-3 borde-cont" style="border: 2px solid black; border-radius: 3px;">
+                        <div class="row pb-3" id="contenedorPictogramas">
+                            <% vocabulario.forEach(function(item) { %>
+                                <div class="col-lg-2 col-md-3 mt-3">
+                                    <div class="dflex">
+                                        <div class="card">
+                                            <img src="<%= item.enlace %>" class="card-img">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <% }); %>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-5 pb-5">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-lg-2 col-md-3 col-sm-4" style="cursor:pointer">
+                            <img class="img-fluid" src="/images/config/add.png" alt="Añadir al diario"
+                                style="max-width: 150px; max-height: 150px;">
+                        </div>
+
+
+                        <div class="col-lg-2 col-md-3 col-sm-4" style="cursor:pointer">
+                            <a href="/users/diary">
+                                <img class="img-fluid" src="/images/config/cancelar.png" alt="Cancelar entrada"
+                                    style="max-width: 150px; max-height: 150px; cursor: pointer;"></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <script src="/javascripts/addRegistros.js"></script>
+    </body>

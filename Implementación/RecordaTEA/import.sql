@@ -4,9 +4,10 @@ CREATE TABLE Usuarios(
 );
 
 CREATE TABLE Cuidadores(
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
-    rol VARCHAR(10)
+    rol VARCHAR(10),
+    FOREIGN KEY (id) REFERENCES Usuarios(id)
 );
 
 CREATE TABLE Pictos(
@@ -71,8 +72,32 @@ CREATE TABLE Cuidadores_Usu(
 INSERT INTO Usuarios (id, nombre) 
 VALUES ('1', 'Pedro');
 
+INSERT INTO Usuarios(id, nombre)
+VALUES ('2', 'Lorena');
+
 INSERT INTO Cuidadores (id, nombre, rol) 
-VALUES ('1', 'Lorena', 'Profesora');
+VALUES ('2', 'Lorena', 'Profesora');
 
 INSERT INTO Cuidadores_Usu(id_cuidador, id_usuario)
-VALUES ('1', '1')
+VALUES ('2', '1');
+
+
+INSERT INTO Pictos (id, idArasaac, enlace) VALUES
+(1, 2245, 'https://api.arasaac.org/v1/pictograms/2245'),
+(2, 3250, 'https://api.arasaac.org/v1/pictograms/3250'),
+(3, 2261, 'https://api.arasaac.org/v1/pictograms/2261'),
+(4, 6964, 'https://api.arasaac.org/v1/pictograms/6964');
+
+INSERT INTO Entradas (id, id_usuario, autor, cuerpo, fecha_registro, tipo) VALUES
+('1','1', '1', NULL, '2025-03-01 11:30:00', NULL),
+('2', '1', '2', 'Progresa adecuadamente', '2025-03-01 10:10:00', NULL);
+
+INSERT INTO Tarjetas (id, id_usuario, id_picto) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3);
+
+INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES
+(1, 1, 1),
+(1, 2, 2),
+(1, 3, 3);
