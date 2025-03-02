@@ -45,18 +45,19 @@ class UsuariosService {
     async leerDiarioPorUsuario(idUsuario) {
         try {
             const entradas = await usuariosDao.leerDiarioPorUsuario(idUsuario);
-
-            //para poder agrupar los datos por entrada
-            const groupedData = entradas[0].reduce((acc, item) => {
-                //basicamente itero con item sobre entradas, y voy metiendo en acc los datos para luego retornarlos en groupedData
-
+    
+            // Agrupa los datos en un array para mantener el orden
+            const groupedData = [];
+            const entryMap = new Map(); // Usamos un Map para hacer referencia rápida por idEntrada
+    
+            entradas[0].forEach((item) => {
                 const { formattedDate, formattedTime } = formatDateTime(item.fecha_registro);
-
-
+    
                 const id = item.idEntrada;
-                //si no está metido se crea
-                if (!acc[id]) {
-                    acc[id] = {
+    
+                // Si la entrada aún no existe en el Map, la creamos
+                if (!entryMap.has(id)) {
+                    const newEntry = {
                         idEntrada: id,
                         autor: item.autor,
                         fecha_registro: formattedDate,
@@ -64,29 +65,28 @@ class UsuariosService {
                         cuerpo: item.cuerpo,
                         tarjetas: []
                     };
+                    groupedData.push(newEntry); // Mantenemos el orden al agregar en el array
+                    entryMap.set(id, newEntry);
                 }
-                //para saber si es una entrada con pictos o solo texto del cuerpo
+    
+                // Añadimos la tarjeta si existe
                 if (item.id_tarjeta !== null) {
-                    acc[id].tarjetas.push({
+                    entryMap.get(id).tarjetas.push({
                         id_tarjeta: item.id_tarjeta,
                         orden: item.orden,
                         enlace: item.enlace
                     });
                 }
-
-                return acc;
-            }, {});
-
-            const result = Object.values(groupedData);
-
-            console.log(result);
-
-            return result;
-        }
-        catch (error) {
-            console.log(error);
+            });
+    
+            console.log(groupedData);
+    
+            return groupedData;
+        } catch (error) {
+            console.error(error);
         }
     }
+    
 
     async obtenerTarjetasPorUsuario(idUsuario) {
         const response = await usuariosDao.obtenerTarjetasPorUsuario(idUsuario);
@@ -109,6 +109,7 @@ class UsuariosService {
                 //si no está metido se crea
                 if (!acc[id]) {
                     acc[id] = {
+                        
                         idEntrada: id,
                         autor: item.autor,
                         fecha_registro: formattedDate,
@@ -139,6 +140,10 @@ class UsuariosService {
         }
     }
 
+    async submitEntry(data){
+        const response = await usuariosDao.submitEntry(data);
+        return response;
+    }
 
 }
 

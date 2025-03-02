@@ -86,7 +86,7 @@ a {
     text-decoration: none;
 }
 
-#contenedorPictogramas{
+.contenedorPictogramas{
     background-color: #213555a5;
     min-height: 10.736em;
 }

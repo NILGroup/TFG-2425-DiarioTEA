@@ -31,6 +31,26 @@ class UsuariosContorlador {
 
     }
 
+    async submitEntry(req, res){
+        
+
+        const registrosString = req.body.registros; 
+        const registros = JSON.parse(registrosString); 
+        
+        console.log('Datos recibidos:', registros);
+
+
+        const response = await usuariosServicio.submitEntry(registros);
+
+        if(response.success){
+            res.redirect('/users/diary'); // Redirigir a la página del diario, por ejemplo
+        }
+        
+    
+       
+        
+    }
+
     async viewEntry(req, res) {
         const idEntrada = req.params.idEntrada;
         const idUsuario = req.session.usuario.id; // Asumiendo que tienes la información del usuario autenticado

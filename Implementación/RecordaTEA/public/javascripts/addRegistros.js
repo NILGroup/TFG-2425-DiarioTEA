@@ -15,11 +15,11 @@ $(document).ready(function () {
 
 
 
-    $("#mostrarPictos, #mostrarEmociones, #contenedorPictogramas").on("click", ".card", function (event) {
+    $("#mostrarPictos, #mostrarEmociones, .contenedorPictogramas").on("click", ".card", function (event) {
         event.preventDefault();
 
         let card = $(this).closest(".col-lg-2, .col-md-3, .mt-3");
-        let contenedorPictogramas = $("#contenedorPictogramas");
+        let contenedorPictogramas = $("#contenedorRegistros");
 
         if (card.parent().is(contenedorPictogramas)) {
             let originalContainer = card.data("originalContainer");
@@ -56,6 +56,37 @@ $(document).ready(function () {
         }
     });
 
+    $('#addButton').on('click', function (e) {
+        e.preventDefault();
+        const tarjetas = []; // Array para almacenar los datos de las cards
+
+        
+
+        // Recorrer todas las cards dentro del contenedorRegistros
+        $('#contenedorRegistros .card').each(function (index) {
+            const card = $(this); // Obtener la card actual
+            const idTarjeta = card.attr('id'); // Obtener el id de la tarjeta
+            const orden = index + 1; // Obtener el orden (posición) de la tarjeta (empezando desde 1)
+
+            
+            tarjetas.push({
+                id: idTarjeta, // Guardar el id de la tarjeta
+                orden: orden   // Guardar el orden de la tarjeta
+            });
+        });
+
+        const entrada = {
+            id_usuario: 1,
+            fecha_registro: new Date(),
+            tarjetas: tarjetas
+        };
+
+        // Convertir el array a JSON y asignarlo al input del formulario
+        $('#registrosInput').val(JSON.stringify(entrada));
+
+        // Enviar el formulario
+        $('#registrosForm').submit();
+    });
 
 
 

@@ -88,6 +88,41 @@ class UsuariosDao {
 
 
     }
+    async submitEntry(data) {
+        try {
+            // Inserta en la tabla 'entradas'
+            const [entrada] = await pool.query(
+                `INSERT INTO entradas (id_usuario, autor, fecha_registro) VALUES (?, ?, ?);`,
+                [data.id_usuario, data.id_usuario, data.fecha_registro]
+            );
+    
+            // Verifica que la fila fue insertada correctamente
+            if (entrada.affectedRows === 1) {
+                // Prepara los valores para la inserción masiva
+                const queries = data.tarjetas.map(tarjeta => [
+                    entrada.insertId,
+                    tarjeta.id,
+                    tarjeta.orden
+                ]);
+    
+                // Inserta en la tabla 'entradas_tarjeta'
+                const [entradas_tarjeta] = await pool.query(
+                    `INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES ?;`,
+                    [queries]
+                );
+
+                return { success: true, id: entrada.insertId }; // Devuelve el ID de la entrada
+    
+            }
+
+        } catch (error) {
+            console.error('Error al registrar la entrada:', error);
+            throw error; // Lanza el error para que el llamador lo maneje
+        }
+    }
+    
+
+    
 };
 
 

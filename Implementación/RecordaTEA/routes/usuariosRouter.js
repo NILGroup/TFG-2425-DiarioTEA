@@ -14,6 +14,8 @@ router.get("/add-entry", controller.addEntry);
 
 router.get('/diary/view-entry/:idEntrada', controller.viewEntry);
 
+router.post('/submit-entry', controller.submitEntry);
+
 
 
 

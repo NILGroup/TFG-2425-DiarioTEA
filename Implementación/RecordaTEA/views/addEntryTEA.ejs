@@ -1,88 +1,77 @@
 <%-include ("navbarTEA")%>
 
-    <body>
-        <div class=" container justify-content-center mt-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-6 col-xs-6">
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <label for="fecha">Fecha</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" readonly>
-                        </div>
-
-                        <div class="col-6">
-                            <label for="hora">Hora</label>
-                            <input type="time" class="form-control" id="hora" name="hora" readonly>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <button id="editar-btn" class="btn btn-primary">
-                            <i class="bi bi-pencil"></i> Editar
-                        </button>
+<body>
+    <div class="container justify-content-center mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-6 col-xs-6">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="fecha">Fecha</label>
+                        <input type="date" class="form-control" id="fecha" name="fecha" readonly>
                     </div>
 
-
-
+                    <div class="col-6">
+                        <label for="hora">Hora</label>
+                        <input type="time" class="form-control" id="hora" name="hora" readonly>
+                    </div>
                 </div>
-
+                <div class="d-flex align-items-center justify-content-center">
+                    <button id="editar-btn" class="btn btn-primary">
+                        <i class="bi bi-pencil"></i> Editar
+                    </button>
+                </div>
             </div>
         </div>
+    </div>
 
-
-        <div class="main-container d-flex mt-3">
-            <div class="container margen-manage" id="containerPrincipal"
-                style="border: 2px solid black; border-radius: 3px;">
-                <div class="row m-3">
-                    <h5>Registro:</h5>
-                    <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;">
-                        <div class="row pb-3" id="contenedorPictogramas">
-
-
-
-                        </div>
+    <div class="main-container d-flex mt-3">
+        <div class="container margen-manage" id="containerPrincipal" style="border: 2px solid black; border-radius: 3px;">
+            <div class="row m-3">
+                <h5>Registro:</h5>
+                <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;">
+                    <div class="row pb-3 contenedorPictogramas" id="contenedorRegistros">
+                        <!-- Aquí van las cards -->
                     </div>
                 </div>
+            </div>
 
-                <div class="row m-3">
-                    <h5 class="titulos-2">Vocabulario de <%= usuario %>:</h5>
-                    <div class="container mt-3 borde-cont" style="border: 2px solid black; border-radius: 3px;">
-                        <div class="row pb-3" id="contenedorPictogramas">
-                            <% vocabulario.forEach(function(item) { %>
-                                <div class="col-lg-2 col-md-3 mt-3">
-                                    <div class="dflex">
-                                        <div class="card">
-                                            <img src="<%= item.enlace %>" class="card-img">
-                                        </div>
+            <div class="row m-3">
+                <h5 class="titulos-2">Vocabulario de <%= usuario %>:</h5>
+                <div class="container mt-3 borde-cont" style="border: 2px solid black; border-radius: 3px;">
+                    <div class="row pb-3 contenedorPictogramas" id="contenedorVocabulario">
+                        <% vocabulario.forEach(function(item) { %>
+                            <div class="col-lg-2 col-md-3 mt-3">
+                                <div class="dflex">
+                                    <div class="card" id="<%= item.id %>">
+                                        <img src="<%= item.enlace %>" class="card-img">
                                     </div>
-
                                 </div>
-
-
-                                <% }); %>
-                        </div>
-                    </div>
-                </div>
-                <div class="container mt-5 pb-5">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-lg-2 col-md-3 col-sm-4" style="cursor:pointer">
-                            <img class="img-fluid" src="/images/config/add.png" alt="Añadir al diario"
-                                style="max-width: 150px; max-height: 150px;">
-                        </div>
-
-
-                        <div class="col-lg-2 col-md-3 col-sm-4" style="cursor:pointer">
-                            <a href="/users/diary">
-                                <img class="img-fluid" src="/images/config/cancelar.png" alt="Cancelar entrada"
-                                    style="max-width: 150px; max-height: 150px; cursor: pointer;"></a>
-                        </div>
-
+                            </div>
+                        <% }); %>
                     </div>
                 </div>
             </div>
 
+            <div class="container mt-5 pb-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-2 col-md-3 col-sm-4" style="cursor:pointer" id="addButton">
+                        <img class="img-fluid" src="/images/config/add.png" alt="Añadir al diario" style="max-width: 150px; max-height: 150px;">
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-4" style="cursor:pointer">
+                        <a href="/users/diary">
+                            <img class="img-fluid" src="/images/config/cancelar.png" alt="Cancelar entrada" style="max-width: 150px; max-height: 150px; cursor: pointer;">
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-
-
-        <script src="/javascripts/addRegistros.js"></script>
-    </body>
+    <!-- Formulario oculto para enviar los datos -->
+    <form id="registrosForm" action="./submit-entry" method="POST" style="display: none;">
+        <input type="hidden" name="registros" id="registrosInput">
+    </form>
+    
+    <script src="/javascripts/addRegistros.js"></script>
+</body>
