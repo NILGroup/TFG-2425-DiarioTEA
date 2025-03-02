@@ -19,7 +19,7 @@ CREATE TABLE Tarjetas(
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_picto INT NOT NULL,
-    FOREIGN KEY (id_picto) REFERENCES Pictos(id),
+    FOREIGN KEY (id_picto) REFERENCES Pictos(id) ON DELETE CASCADE,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
 

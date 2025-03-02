@@ -58,8 +58,27 @@ class TarjetasService {
             }
         }
         catch (error){
-            console.log('ERROR[TarjetasService]: añadir pictograma al vocabulario: ', error)
+            console.log('ERROR[TarjetasService]: añadir pictograma al vocabulario: ', error);
             throw error;
+        }
+    }
+
+    async eliminarTarjetaVocabulario(idTarjeta){
+        try{
+            let recurso = await tarjetasDao.buscarPictoIdTarjeta(idTarjeta);
+            console.log(recurso);
+            let eliminar = await tarjetasDao.eliminarTarjetaVocabulario(idTarjeta, recurso[0].id);
+            let elim = true;
+            if(eliminar > 0){
+                elim = true;
+            }
+            else{
+                elim = false;
+            }
+            return {success: elim};
+        }
+        catch (error){
+            console.log('ERROR[TarjetasService]: eliminar tarjeta vocabulario: ', error);
         }
     }
 }

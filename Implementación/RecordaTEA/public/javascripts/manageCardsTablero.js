@@ -196,6 +196,23 @@ $(document).ready(function () {
             alerta.fadeOut(function(){
                 alerta.remove();
             });
+            if(persiste){
+            $.ajax({
+                url: '/tarjetas-comunicacion/eliminar-picto',
+                method: 'DELETE',
+                data: {
+                    id: id
+                },
+                success: function (data, status, xhr) {
+                    if(data.success){
+                        $(`#${id}`).closest('.col-lg-2.col-md-3.mt-3').remove();
+                    }
+                },
+                error: function (data, status, xhr) {
+    
+                }
+            }); 
+        }
         }, 5000);
 
         deshacer.on('click', function(e){
@@ -205,21 +222,5 @@ $(document).ready(function () {
             alerta.fadeOut();
             divPicto.show();
         });
-
-        if(persiste){
-            $.ajax({
-                url: '/tarjetas-comunicacion/eliminar-picto',
-                method: 'DELETE',
-                data: {
-                    id: id
-                },
-                success: function (data, status, xhr) {
-    
-                },
-                error: function (data, status, xhr) {
-    
-                }
-            }); 
-        }
     });
 })

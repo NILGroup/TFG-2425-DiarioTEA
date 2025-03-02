@@ -79,6 +79,17 @@ class TarjetasControlador {
             throw error;
         }
     }
+
+    async eliminarTarjetaVocabulario(req, res){
+        try{
+            let id = req.body.id;
+            let eliminacion = await tarjetasService.eliminarTarjetaVocabulario(id);
+            res.send(eliminacion);
+        }
+        catch(error){
+            throw error;
+        }
+    }
 }
 
 module.exports = TarjetasControlador;
