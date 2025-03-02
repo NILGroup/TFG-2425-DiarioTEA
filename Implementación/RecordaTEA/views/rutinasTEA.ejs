@@ -1,0 +1,31 @@
+<%- include("navbarTEA") %>
+
+    <body>
+        <div class="container" id="conjuntoRutinas">
+            <div class="row mt-5 justify-content-center align-items-center">
+                <h3 class="text-center mb-3">Mis rutinas</h3>
+                <% if (rutinas.length> 0) { %>
+                    <% rutinas.forEach(function(item) { %>
+                        <div class="col-md-3 col-xs-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/images/pictos/rutinas.png">
+                                </div>
+                                <h5 class="card-title text-center">
+                                    <%= item.nombre %>
+                                </h5>
+                            </div>
+                        </div>
+                        <% }); %>
+                            <% } else { %>
+                                <div class="col-md-3 col-xs-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="card-title">No tienes rutinas</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+            </div>
+        </div>
+    </body>

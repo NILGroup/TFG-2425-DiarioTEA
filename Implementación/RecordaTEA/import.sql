@@ -40,6 +40,7 @@ CREATE TABLE Rutinas(
     nombre VARCHAR(50) NOT NULL,
     autor INT NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
 

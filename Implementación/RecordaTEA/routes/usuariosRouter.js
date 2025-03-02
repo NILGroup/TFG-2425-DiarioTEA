@@ -8,7 +8,7 @@ router.get('/', controller.leerUsuarioId);
 
 router.get('/diary', controller.redirectToDiary);
 
-//router.get('/routines', controller.);
+router.get('/routines', controller.getUserRutinas);
 
 router.get("/add-entry", controller.addEntry);
 

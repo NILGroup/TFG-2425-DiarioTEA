@@ -145,6 +145,16 @@ class UsuariosService {
         return response;
     }
 
+    async getRutinasById(idUsuario){
+        const response = await usuariosDao.getRutinasById(idUsuario);
+        return response[0];
+    }
+
+    async getTarjetasByIdRutina(idRutina){
+        const response = await usuariosDao.getRutinasById(idUsuario);
+        return response[0];
+    }
+
 }
 
 module.exports = UsuariosService;

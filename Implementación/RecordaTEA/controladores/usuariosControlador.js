@@ -36,18 +36,12 @@ class UsuariosContorlador {
 
         const registrosString = req.body.registros; 
         const registros = JSON.parse(registrosString); 
-        
-        console.log('Datos recibidos:', registros);
-
 
         const response = await usuariosServicio.submitEntry(registros);
 
         if(response.success){
             res.redirect('/users/diary'); // Redirigir a la página del diario, por ejemplo
-        }
-        
-    
-       
+        }   
         
     }
 
@@ -81,6 +75,14 @@ class UsuariosContorlador {
             console.log(error);
             return res.status(500).send('Error interno del servidor');
         }
+    }
+
+    async getUserRutinas(req, res){
+        const idUsuario = req.session.usuario.id;
+
+        const response = await usuariosServicio.getRutinasById(idUsuario);
+
+        res.render('rutinasTEA', {rutinas: response, diary: false})
     }
 
 

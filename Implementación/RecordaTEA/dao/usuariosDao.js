@@ -121,6 +121,38 @@ class UsuariosDao {
         }
     }
     
+    async getRutinasById(idUsuario){
+        try {
+            const response = await pool.query(`SELECT * 
+                FROM Rutinas
+                WHERE Rutinas.id_usuario = ?
+                `, [idUsuario]);
+
+            return response;
+        }
+
+
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getTarjetasByIdRutina(idRutina){
+        try {
+            const tarjetas = await pool.query(`
+                SELECT Rutinas.id, Rutinas.nombre, Tarjetas.id, Tarjetas.id_pico, Pictos.enlace
+                FROM Rutinas JOIN Rutinas_tarjeta ON Rutinas.id = Rutinas_tarjeta.id_rutina
+                JOIN Tarjetas ON Rutinas_tarjeta.id_tarjeta = Tarjetas.id
+                JOIN Pictos ON Tarjetas.id_picto = Pictos.id
+                WHERE Rutinas.id = ?
+           `, [idRutina]);
+        }
+
+        
+        catch (error) {
+            console.log(error);
+        }
+    }
 
     
 };

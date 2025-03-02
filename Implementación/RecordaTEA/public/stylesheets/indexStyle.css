@@ -86,6 +86,12 @@ a {
     text-decoration: none;
 }
 
+#contenedorRegistros .card:hover {
+    background-color: #B82132;
+
+}
+
+
 .contenedorPictogramas{
     background-color: #213555a5;
     min-height: 10.736em;
