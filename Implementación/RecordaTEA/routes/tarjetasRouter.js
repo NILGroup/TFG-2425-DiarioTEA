@@ -16,4 +16,6 @@ router.get('/pagina', (req, res) => {
 
 router.post('/picto-vocabulario', tarjetasControlador.addTarjetaVocabulario);
 
+router.delete('/eliminar-picto', tarjetasControlador.eliminarTarjetaVocabulario);
+
 module.exports = router;

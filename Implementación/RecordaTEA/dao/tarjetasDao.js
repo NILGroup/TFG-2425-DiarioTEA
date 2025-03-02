@@ -38,6 +38,29 @@ class TarjetasDao {
             throw error;
         }
     }
+
+    async eliminarTarjetaVocabulario(idTarjeta, idRecurso){
+        try{
+            let [response] = await pool.query('DELETE FROM Tarjetas WHERE id = ?', [idTarjeta]);
+            let a = await pool.query('DELETE FROM Pictos WHERE id = ?', [idRecurso]);
+            return response.affectedRows;
+        }
+        catch (error){
+            console.error('ERROR[TarjetasDao]: eliminar tarjeta: ', error);
+            throw error;
+        }
+    }
+
+    async buscarPictoIdTarjeta(idTarjeta){
+        try{
+            let [picto] = await pool.query('SELECT Pictos.id FROM Pictos JOIN Tarjetas ON Pictos.id = Tarjetas.id_picto WHERE Tarjetas.id = ?', [idTarjeta]);
+            return picto;
+        }
+        catch(error){
+            console.error('ERROR[TarjetasDao]: buscra picto con id tarjeta: ', error);
+            throw error;
+        }
+    }
 }
 
 module.exports = TarjetasDao;

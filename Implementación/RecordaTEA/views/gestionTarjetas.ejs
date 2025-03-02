@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="row mt-5">
-                        <h1 class="titulos-2">Vocabulario de <%= data.usuario.nombre %>:</h1>
+                        <h1 class="titulos-2" data-nombre="<%= data.usuario.nombre %>" id="nomVoc">Vocabulario de <%= data.usuario.nombre %>:</h1>
                         <div class="container mt-3 borde-cont">
                             <div class="row pb-3" id="contenedorPictogramas">
                                 <% if (data.voc.length> 0) { %>
