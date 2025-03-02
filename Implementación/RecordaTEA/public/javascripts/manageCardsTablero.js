@@ -127,7 +127,7 @@ $(document).ready(function () {
         let divPicto = $(this).closest('.col-lg-2.col-md-3.mt-3.d-flex');
         let carta = $(this).closest('.card.gestion');
         let copia = carta.clone(true);
-        let alerta = $('<div>').addClass('alert alert-secondary alert-custom').attr('role', 'alert');
+        let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
         $.ajax({
             url: '/tarjetas-comunicacion/picto-vocabulario',
             method: 'POST',
