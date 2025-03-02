@@ -127,7 +127,7 @@ $(document).ready(function () {
         let divPicto = $(this).closest('.col-lg-2.col-md-3.mt-3.d-flex');
         let carta = $(this).closest('.card.gestion');
         let copia = carta.clone(true);
-        let alerta = $('<div>').addClass('alert alert-dark alert-custom').attr('role', 'alert');
+        let alerta = $('<div>').addClass('alert alert-secondary alert-custom').attr('role', 'alert');
         $.ajax({
             url: '/tarjetas-comunicacion/picto-vocabulario',
             method: 'POST',
@@ -186,7 +186,7 @@ $(document).ready(function () {
         divPicto.hide();
 
         //Avisamos de que ha eliminaod un picto y que lo puede deshacer
-        let alerta = $('<div>').addClass('alert alert-dark alert-custom').attr('role', 'alert');
+        let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
         let mensaje = $('<span>').text('Se ha eliminado el pictograma');
         let deshacer = $('<button>').addClass('btn btn-sm btn-deshacer').attr('id', 'deshacer-elim').text('Deshacer');
         alerta.append(mensaje, deshacer).hide();
