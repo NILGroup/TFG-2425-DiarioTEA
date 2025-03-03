@@ -151,7 +151,7 @@ class UsuariosService {
     }
 
     async getTarjetasByIdRutina(idRutina){
-        const response = await usuariosDao.getRutinasById(idUsuario);
+        const response = await usuariosDao.getTarjetasByIdRutina(idRutina);
         return response[0];
     }
 

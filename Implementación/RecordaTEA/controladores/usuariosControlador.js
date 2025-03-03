@@ -85,6 +85,14 @@ class UsuariosContorlador {
         res.render('rutinasTEA', {rutinas: response, diary: false})
     }
 
+    async getTarjetasByIdRutina(req, res){
+
+        const idRutina = req.params.idRutina;
+        const response = await usuariosServicio.getTarjetasByIdRutina(idRutina);
+
+        res.render('viewRutinaTEA', {rutinas: response, diary:false})
+    }
+
 
 
 }

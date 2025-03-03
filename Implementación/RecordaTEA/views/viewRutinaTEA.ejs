@@ -1,0 +1,35 @@
+<%- include("navbarTEA") %>
+
+    <body>
+        <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;" id="contenedorRutina">
+            <h3 class="text-center">Rutina de colegio</h3>
+            <div class="row pb-3">
+                <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                    <div class="card">
+
+                        <% rutinas.forEach(function(item) { %>
+                            <a href="/users/routines/<%= item.id %>">
+                                <img src=" <%= item.enlace %>" class="card-img">
+                            </a>
+
+
+                            <% }); %>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="container mt-5 pb-5" id="buttonsRutina">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-2 col-md-3 col-sm-4" id="botonVolverRutinas">
+                        <img class="img-fluid" src="images/config/botonVolver.png" alt="Volver a las rutinas">
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-4" id="botonIniciarRutina">
+                        <img class="img-fluid" src="images/config/ir.png" alt="Ir">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
