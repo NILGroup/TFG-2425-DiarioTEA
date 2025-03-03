@@ -140,12 +140,15 @@ class UsuariosDao {
     async getTarjetasByIdRutina(idRutina){
         try {
             const tarjetas = await pool.query(`
-                SELECT Rutinas.id, Rutinas.nombre, Tarjetas.id, Tarjetas.id_pico, Pictos.enlace
-                FROM Rutinas JOIN Rutinas_tarjeta ON Rutinas.id = Rutinas_tarjeta.id_rutina
-                JOIN Tarjetas ON Rutinas_tarjeta.id_tarjeta = Tarjetas.id
-                JOIN Pictos ON Tarjetas.id_picto = Pictos.id
+                SELECT Rutinas.id, Rutinas.nombre, Tarjetas.id, Tarjetas.id_picto, Pictos.enlace
+                FROM Rutinas LEFT JOIN Rutinas_tarjeta ON Rutinas.id = Rutinas_tarjeta.id_rutina
+                LEFT JOIN Tarjetas ON Rutinas_tarjeta.id_tarjeta = Tarjetas.id
+                LEFT JOIN Pictos ON Tarjetas.id_picto = Pictos.id
                 WHERE Rutinas.id = ?
+                ORDER BY Rutinas_tarjeta.orden ASC;
            `, [idRutina]);
+
+           return tarjetas;
         }
 
         

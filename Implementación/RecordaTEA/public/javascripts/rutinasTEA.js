@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-
+    /*
     $("#contenedorRutina").hide();
 
     $(".card").on('click', function (e) {
@@ -16,17 +16,20 @@ $(document).ready(function () {
         $('#conjuntoRutinas').fadeOut(function () {
             $('#contenedorRutina').fadeIn();
         });
-    })
+    })*/
+
+    $("#containerInicioRutina").hide();
+
 
     $("#botonVolverRutinas").on('click', function(e){
-        e.preventDefault();
-        $('#contenedorRutina').fadeOut(function () {
-            $('#conjuntoRutinas').fadeIn();
-        });
+        window.location.href="/users/routines/";
     })
 
     $("#botonIniciarRutina").on('click', function(){
-        window.location.href="iniciarRutinaTEA.html";
+        //window.location.href="iniciarRutinaTEA.html";
+        $("#buttonsRutina").fadeOut(function(){
+            $("#containerInicioRutina").fadeIn();
+        })
     })
 
     

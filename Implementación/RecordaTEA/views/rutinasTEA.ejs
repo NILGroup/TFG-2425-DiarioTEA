@@ -8,12 +8,14 @@
                     <% rutinas.forEach(function(item) { %>
                         <div class="col-md-3 col-xs-3">
                             <div class="card">
-                                <div class="card-body">
-                                    <img src="/images/pictos/rutinas.png">
-                                </div>
-                                <h5 class="card-title text-center">
-                                    <%= item.nombre %>
-                                </h5>
+                                <a href="/users/routines/<%= item.id %>">
+                                    <div class="card-body">
+                                        <img src="/images/pictos/rutinas.png">
+                                    </div>
+                                    <h5 class="card-title text-center">
+                                        <%= item.nombre %>
+                                    </h5>
+                                </a>
                             </div>
                         </div>
                         <% }); %>

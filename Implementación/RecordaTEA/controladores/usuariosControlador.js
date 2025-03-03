@@ -90,7 +90,7 @@ class UsuariosContorlador {
         const idRutina = req.params.idRutina;
         const response = await usuariosServicio.getTarjetasByIdRutina(idRutina);
 
-        res.render('viewRutinaTEA', {rutinas: response, diary:false})
+        res.render('viewRutinaTEA', {rutinas: response, diary: false, nombre: response[0].nombre})
     }
 
 
