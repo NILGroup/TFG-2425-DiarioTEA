@@ -239,6 +239,12 @@ body {
     opacity: 1;
 }
 
+.modal-body .card:hover {
+    background-color: #c0c1c3; /* Cambia al color que prefieras */
+    cursor: pointer; /* Añade un indicador visual */
+    transition: background-color 0.3s ease; /* Animación suave */
+}
+
 .gestion {
     position: relative !important;
 }

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/stylesheets/index.css">
     <link rel="stylesheet" href="/stylesheets/cuidadores.css">
 
+
     <!--JQUERY-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
@@ -36,23 +37,22 @@
 
                 <div id="basicoRutina">
                     <div class="row d-flex text-center justify-content-center mt-4">
-                       
-                            <div class="row align-items-center justify-content-start">
-                                <div class="col-lg-4 col-md-5 col-sm-7">
-                                    <p>Portada: </p>
-                                    <a href="#" id="portadaRutina" data-bs-toggle="modal"
-                                        data-bs-target="#portadaModal">
-                                        <img id="portadaImagen" src="/images/config/noPortada.png"
-                                            alt="Portada de la rutina" class="img-fluid border rounded">
-                                    </a>
-                                    <a href="" class="btn btn-eliminar mt-2" id="eliminarPortada">Eliminar portada</a>
-                                </div>
-                                <div class="col-lg-8 col-md-7 col-sm-6">
-                                    <label for="nombreRutina">Nombre:</label>
-                                    <input type="text" class="form-control mt-2" id="nombreRutina">
-                                </div>
+
+                        <div class="row align-items-center justify-content-start">
+                            <div class="col-lg-4 col-md-5 col-sm-7">
+                                <p>Portada: </p>
+                                <a href="#" id="portadaRutina" data-bs-toggle="modal" data-bs-target="#portadaModal">
+                                    <img id="portadaImagen" src="/images/config/noPortada.png"
+                                        alt="Portada de la rutina" class="img-fluid border rounded">
+                                </a>
+                                <a href="" class="btn btn-eliminar mt-2" id="eliminarPortada">Eliminar portada</a>
                             </div>
-                        
+                            <div class="col-lg-8 col-md-7 col-sm-6">
+                                <label for="nombreRutina">Nombre:</label>
+                                <input type="text" class="form-control mt-2" id="nombreRutina">
+                            </div>
+                        </div>
+
                         <div class="d-flex justify-content-end">
                             <a href="" class="btn btn-background" id="stepDos">Seleccionar Tarjetas</a>
                         </div>
@@ -64,11 +64,11 @@
 
                     <div class="row mt-3">
                         <h5 class="titulo-hora">Rutina:</h5>
-                            <div class="container mt-3 tableros" style="border: 2px solid black; border-radius: 3px;">
-                                <div class="row pb-3" id="composiciónRutina">
+                        <div class="container mt-3 tableros" style="border: 2px solid black; border-radius: 3px;">
+                            <div class="row pb-3" id="composiciónRutina">
 
-                                </div>
                             </div>
+                        </div>
                     </div>
 
                     <div class="row mt-5">
@@ -79,12 +79,13 @@
                                 <%vocabulario.forEach(function(item){%>
                                     <div class="col-lg-2 col-md-3 mt-3 d-flex">
                                         <div class="card" id="<%= item.idTarjeta %>">
-                                            
+
                                             <img src="<%= item.enlace %>" class="card-img">
 
                                             <div class="add-picto"></div>
-                                            <span class="trash"><i
-                                                    class="bi bi-trash3-fill"></i></span>
+                                            <span
+                                               
+                                                class="mas">+</span>
                                         </div>
                                     </div>
                                     <%})%>
@@ -119,7 +120,7 @@
                                     <div class="col-lg-2 col-md-3 mt-3 d-flex">
                                         <div class="card" id="<%= item.idTarjeta %>">
                                             <img src="<%= item.enlace %>" class="card-img">
-                                            
+
                                         </div>
                                     </div>
                                     <%})%>
