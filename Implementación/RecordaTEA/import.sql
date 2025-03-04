@@ -96,9 +96,18 @@ INSERT INTO Entradas (id, id_usuario, autor, cuerpo, fecha_registro, tipo) VALUE
 INSERT INTO Tarjetas (id, id_usuario, id_picto) VALUES
 (1, 1, 1),
 (2, 1, 2),
-(3, 1, 3);
+(3, 1, 4);
 
 INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES
 (1, 1, 1),
 (1, 2, 2),
 (1, 3, 3);
+
+INSERT INTO rutinas (id, id_usuario, nombre, autor, fecha_creacion) VALUES
+(1, 1, 'Colegio', 2, '2025-03-01 23:00:00'),
+(2, 1, 'Casa', 2, '2025-03-01 23:00:00'),
+(3, 1, 'Aseo', 2, '2025-03-01 23:00:00');
+
+INSERT INTO rutinas_tarjeta (id_rutina, id_tarjeta, orden) VALUES
+(1, 1, 2),
+(1, 3, 1);

@@ -65,7 +65,7 @@ $(document).ready(function () {
         // Recorrer todas las cards dentro del contenedorRegistros
         $('#contenedorRegistros .card').each(function (index) {
             const card = $(this); // Obtener la card actual
-            const idTarjeta = card.attr('id'); // Obtener el id de la tarjeta
+            const idTarjeta = parseInt(card.attr('id')); // Obtener el id de la tarjeta
             const orden = index + 1; // Obtener el orden (posición) de la tarjeta (empezando desde 1)
 
             
