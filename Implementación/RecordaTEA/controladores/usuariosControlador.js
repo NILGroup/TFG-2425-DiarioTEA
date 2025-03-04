@@ -1,7 +1,7 @@
 const UsuariosService = require('../servicios/usuariosService')
 const usuariosServicio = new UsuariosService();
 
-class UsuariosContorlador {
+class UsuariosControlador {
     constructor() { }
 
     async leerUsuarioId(req, res) {
@@ -77,23 +77,9 @@ class UsuariosContorlador {
         }
     }
 
-    async getUserRutinas(req, res){
-        const idUsuario = req.session.usuario.id;
-
-        const response = await usuariosServicio.getRutinasById(idUsuario);
-
-        res.render('rutinasTEA', {rutinas: response, diary: false})
-    }
-
-    async getTarjetasByIdRutina(req, res){
-
-        const idRutina = req.params.idRutina;
-        const response = await usuariosServicio.getTarjetasByIdRutina(idRutina);
-
-        res.render('viewRutinaTEA', {rutinas: response, diary: false, nombre: response[0].nombre})
-    }
+    
 
 
 
 }
-module.exports = UsuariosContorlador;
+module.exports = UsuariosControlador;

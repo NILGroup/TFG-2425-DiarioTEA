@@ -1,22 +1,24 @@
 var express = require('express');
 var router = express.Router();
 const UsuariosController = require('../controladores/usuariosControlador')
-const controller = new UsuariosController();
+const controllerUsuarios = new UsuariosController();
+const RutinasController = require('../controladores/rutinasControlador')
+const controllerRutinas = new RutinasController();
 
 
-router.get('/', controller.leerUsuarioId);
+router.get('/', controllerUsuarios.leerUsuarioId);
 
-router.get('/diary', controller.redirectToDiary);
+router.get('/diary', controllerUsuarios.redirectToDiary);
 
-router.get('/routines', controller.getUserRutinas);
+router.get('/routines', controllerRutinas.getUserRutinas);
 
-router.get("/add-entry", controller.addEntry);
+router.get("/add-entry", controllerUsuarios.addEntry);
 
-router.get('/diary/view-entry/:idEntrada', controller.viewEntry);
+router.get('/diary/view-entry/:idEntrada', controllerUsuarios.viewEntry);
 
-router.post('/submit-entry', controller.submitEntry);
+router.post('/submit-entry', controllerUsuarios.submitEntry);
 
-router.get('/routines/:idRutina', controller.getTarjetasByIdRutina);
+router.get('/routines/:idRutina', controllerRutinas.getTarjetasByIdRutina);
 
 
 
