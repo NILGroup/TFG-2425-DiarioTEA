@@ -30,8 +30,8 @@ $(document).ready(function(){
     })
 
     function ajustarAlturas() {
-        let maxHeight = Math.max($(".list-dia").outerHeight(), $(".list-contenido").outerHeight(), $(".list-hora").outerHeight());
-        $(".list-dia, .list-contenido, .list-hora").height(maxHeight);
+        let maxHeight = Math.max($(".list-dia").outerHeight(), $(".list-contenido").outerHeight());
+        $(".list-dia, .list-contenido").height(maxHeight);
     }
 
 });
