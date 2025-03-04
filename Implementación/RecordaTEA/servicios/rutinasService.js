@@ -18,6 +18,11 @@ class RutinasService{
         const response = await rutinasDao.getTarjetasByIdRutina(idRutina);
         return response[0];
     }
+
+    async crearRutina(data){
+        const response = await rutinasDao.crearRutina(data);
+        return response;
+    }
 }
 
 module.exports = RutinasService;

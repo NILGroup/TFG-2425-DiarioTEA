@@ -4,5 +4,8 @@ const RutinasController = require('../controladores/rutinasControlador');
 const rutinasControlador = new RutinasController();
 
 router.get('/', rutinasControlador.getCuidadoresRutinas);
+router.get('/addRutina',rutinasControlador.addRutina);
+router.post('/submit', rutinasControlador.submitRutina);
+router.get("/:idRutina", rutinasControlador.getTarjetasByIdRutinaCuidador);
 
 module.exports = router;

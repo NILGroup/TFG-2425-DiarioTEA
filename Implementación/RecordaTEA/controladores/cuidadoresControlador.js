@@ -13,6 +13,7 @@ class CuidadoresController{
         const usuarios = await usuariosService.leerUsuariosCuidador(cuidador.id);
         req.session.logged = 1;
         req.session.nombre = cuidador.nombre;
+        req.session.idUsuario =cuidador.id;
         req.session.usuario = usuarios[0];
         res.render('diario', { usuarios: usuarios });
     }

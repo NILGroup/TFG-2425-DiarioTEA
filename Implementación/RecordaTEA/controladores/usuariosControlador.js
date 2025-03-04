@@ -8,6 +8,7 @@ class UsuariosControlador {
         const r = await usuariosServicio.leerUsuarioId(1);
         req.session.logged = 1;
         req.session.nombre = r.nombre;
+        req.session.id= r.id;
         req.session.usuario = r[0];
         res.render('indexTEA');
     }

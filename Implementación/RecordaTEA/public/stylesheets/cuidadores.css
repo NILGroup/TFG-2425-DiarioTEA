@@ -283,9 +283,14 @@ body {
     margin: 0;
 }
 
+.card{
+    cursor: pointer;
+}
+
 .card:hover .remove-picto,
 .card:hover .trash {
     opacity: 1;
+    cursor: pointer;
 }
 
 .borde-cont {
