@@ -44,21 +44,21 @@
                                         <small>
                                             <% 
                                                 const hoy = new Date(); 
-                                                const fechaElem = new Date(elem.fecha); 
+                                                const fechaEntrada = new Date(elem.fecha); 
                                                 
-                                                const diffTiempo = hoy - fechaElem;
-                                                const diffDias = Math.floor(diffTiempo / (1000 * 60 * 60 * 24)); 
+                                                const milis = hoy - fechaEntrada;
+                                                const diasPasados = Math.floor(milis / (1000 * 60 * 60 * 24)); 
                                         
-                                                let textoFecha;
-                                                if (diffDias === 0) {
-                                                    textoFecha = "Hoy";
-                                                } else if (diffDias === 1) {
-                                                    textoFecha = "Hace 1 día";
+                                                let diaTexto;
+                                                if (diasPasados === 0) {
+                                                    diaTexto = "Hoy";
+                                                } else if (diasPasados === 1) {
+                                                    diaTexto = "Hace 1 día";
                                                 } else {
-                                                    textoFecha = `Hace ${diffDias} días`;
+                                                    diaTexto = `Hace ${diasPasados} días`;
                                                 }
                                             %>
-                                            <%= textoFecha %>
+                                            <%= diaTexto %>
                                         </small>
                                     </div>
                                     <p class="mb-1 texto-diario">Último registro:</p>
