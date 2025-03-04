@@ -23,9 +23,23 @@ function esHoy(fecha) {
     return ( f.getDate() === hoy.getDate() && f.getMonth() === hoy.getMonth() && f.getFullYear() === hoy.getFullYear());
   }
 
+  function fechaSinHora(fecha) {
+    let f = new Date(fecha.getTime() - fecha.getTimezoneOffset() * 60000); 
+    return f.toISOString().split('T')[0];
+}
+
+function horaMinutos(fecha){
+    let f = new Date(fecha.getTime() - fecha.getTimezoneOffset() * 60000); 
+    let hora = f.toISOString().split('T')[1];
+    let [h, m] = hora.split(':');
+    return h +':' + m;
+}
+
 module.exports = {
     fechaCompleta,
     mesAbreviatura,
     dia,
-    esHoy
+    esHoy,
+    fechaSinHora,
+    horaMinutos
 };

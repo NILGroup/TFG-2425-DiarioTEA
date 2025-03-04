@@ -34,7 +34,7 @@ class EntradasDao {
 
     async entradaDia(dia, usuario) {
         try {
-            let [entradas] = await pool.query('SELECT * FROM Entradas e WHERE DATE(e.fecha_registro) = ? AND e.id_usuario = ? ORDER BY e.fecha_registro DESC LIMIT 1', [dia, usuario]);
+            let [entradas] = await pool.query('SELECT * FROM Entradas WHERE DATE(fecha_registro) = ? AND id_usuario = ? ORDER BY fecha_registro DESC', [dia, usuario]);
             return entradas;
         }
         catch (error) {

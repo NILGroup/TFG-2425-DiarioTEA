@@ -178,6 +178,11 @@ body {
     color: #213555;
 }
 
+.no-margen{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 /*GESTIÓN DE TARJETAS*/
 .borde {
     border-color: #213555;

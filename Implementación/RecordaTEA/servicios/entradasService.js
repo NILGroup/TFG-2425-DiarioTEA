@@ -9,8 +9,19 @@ class EntradasService{
 
     async entradasMes(usuario){
         try{
-            let data = await entradasDao.entradasMes(usuario);
-            return data;
+            let entradasMes = await entradasDao.entradasMes(usuario);
+            return entradasMes;
+        }
+        catch(error){
+            console.error('ERROR[EntradasService]: obtener entradas de un mes: ', error);
+            throw error;
+        }
+    }
+
+    async entradasDia(fecha, usuario){
+        try{
+            let entradasDia = await entradasDao.entradaDia(fecha, usuario);
+            return entradasDia;
         }
         catch(error){
             console.error('ERROR[EntradasService]: obtener entradas de un mes: ', error);

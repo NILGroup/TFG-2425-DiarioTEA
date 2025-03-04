@@ -65,7 +65,6 @@ class TarjetasDao {
     async tarjetasEntrada(id_entrada) {
         try{
             let [pictos] = await pool.query('SELECT p.enlace FROM Pictos p JOIN Tarjetas t ON p.id = t.id_picto JOIN Entradas_tarjeta et ON t.id = et.id_tarjeta WHERE et.id_entrada = ? ORDER BY et.orden', [id_entrada]);
-            console.log(pictos)
             return pictos;
         }
         catch (error){
