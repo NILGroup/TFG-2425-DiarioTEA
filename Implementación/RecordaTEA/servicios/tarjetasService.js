@@ -79,6 +79,18 @@ class TarjetasService {
         }
         catch (error){
             console.log('ERROR[TarjetasService]: eliminar tarjeta vocabulario: ', error);
+            throw error;
+        }
+    }
+
+    async tarjetasEntrada(id_entrada){
+        try{
+            let pictos = tarjetasDao.tarjetasEntrada(id_entrada);
+            return pictos;
+        }
+        catch (error){
+            console.log('ERROR[TarjetasService]: buscar tarjetas de una entrada: ', error);
+            throw error;
         }
     }
 }

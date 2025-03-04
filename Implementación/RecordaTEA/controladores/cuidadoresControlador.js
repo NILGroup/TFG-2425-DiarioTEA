@@ -15,7 +15,7 @@ class CuidadoresController{
         req.session.nombre = cuidador.nombre;
         req.session.idUsuario =cuidador.id;
         req.session.usuario = usuarios[0];
-        res.render('diario', { usuarios: usuarios });
+        res.redirect('/diario');
     }
 }
 

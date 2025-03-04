@@ -10,6 +10,7 @@ var usuariosRouter = require('./routes/usuariosRouter');
 var cuidadoresRouter = require('./routes/cuidadoresRouter');
 var tarjetasRouter = require('./routes/tarjetasRouter');
 var rutinasRouter = require('./routes/rutinasRouter');
+var entradasRouter = require('./routes/entradasRouter');
 
 const MySQLStore = mysqlSession(session);
 const sessionStore = new MySQLStore({
@@ -43,6 +44,7 @@ app.use('/', cuidadoresRouter);
 app.use('/tarjetas-comunicacion', tarjetasRouter);
 app.use('/users', usuariosRouter);
 app.use('/rutinas',rutinasRouter);
+app.use('/diario', entradasRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

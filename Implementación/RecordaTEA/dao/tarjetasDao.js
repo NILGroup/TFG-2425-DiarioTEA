@@ -39,25 +39,36 @@ class TarjetasDao {
         }
     }
 
-    async eliminarTarjetaVocabulario(idTarjeta, idRecurso){
-        try{
+    async eliminarTarjetaVocabulario(idTarjeta, idRecurso) {
+        try {
             let [response] = await pool.query('DELETE FROM Tarjetas WHERE id = ?', [idTarjeta]);
             let a = await pool.query('DELETE FROM Pictos WHERE id = ?', [idRecurso]);
             return response.affectedRows;
         }
-        catch (error){
+        catch (error) {
             console.error('ERROR[TarjetasDao]: eliminar tarjeta: ', error);
             throw error;
         }
     }
 
-    async buscarPictoIdTarjeta(idTarjeta){
-        try{
+    async buscarPictoIdTarjeta(idTarjeta) {
+        try {
             let [picto] = await pool.query('SELECT Pictos.id FROM Pictos JOIN Tarjetas ON Pictos.id = Tarjetas.id_picto WHERE Tarjetas.id = ?', [idTarjeta]);
             return picto;
         }
-        catch(error){
-            console.error('ERROR[TarjetasDao]: buscra picto con id tarjeta: ', error);
+        catch (error) {
+            console.error('ERROR[TarjetasDao]: buscar picto con id tarjeta: ', error);
+            throw error;
+        }
+    }
+
+    async tarjetasEntrada(id_entrada) {
+        try{
+            let [pictos] = await pool.query('SELECT p.enlace FROM Pictos p JOIN Tarjetas t ON p.id = t.id_picto JOIN Entradas_tarjeta et ON t.id = et.id_tarjeta WHERE et.id_entrada = ? ORDER BY et.orden', [id_entrada]);
+            return pictos;
+        }
+        catch (error){
+            console.error('ERROR[TarjetasDao]: buscar picto con id entrada: ', error);
             throw error;
         }
     }
