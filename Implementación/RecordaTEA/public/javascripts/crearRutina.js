@@ -1,77 +1,110 @@
-$(document).ready(function(){
+$(document).ready(function () {
     let imgSeleccionadaAnt = null;
 
     $('#stepTarjetas').hide();
 
-    $('#portadaModal img').on('click', function(e){
+    $('#portadaModal img').on('click', function (e) {
         e.preventDefault();
-        if(imgSeleccionadaAnt != null){
+        if (imgSeleccionadaAnt != null) {
             imgSeleccionadaAnt.removeClass('seleccionada');
         }
-        imgSeleccionadaAnt =  $(this);
+        imgSeleccionadaAnt = $(this);
         $(this).addClass('seleccionada');
     });
 
-    $('#seleccionarPortada').on('click', function(){
-        if(imgSeleccionadaAnt != null){
+    $('#seleccionarPortada').on('click', function () {
+        if (imgSeleccionadaAnt != null) {
             let imgSeleccionada = imgSeleccionadaAnt.attr('src');
             $('#portadaImagen').attr('src', imgSeleccionada);
         }
         $("#portadaModal").modal("hide");
     });
 
-    $('#eliminarPortada').on('click', function(e){
+    $('#eliminarPortada').on('click', function (e) {
         e.preventDefault();
         imgSeleccionadaAnt.removeClass('seleccionada');
         $('#portadaImagen').attr('src', '/images/config/noPortada.png');
     });
 
-    $('#cancelarPortada').on('click', function(){
+    $('#cancelarPortada').on('click', function () {
         imgSeleccionadaAnt.removeClass('seleccionada');
     });
 
-    $('#stepDos').on('click', function(e){
+    $('#stepDos').on('click', function (e) {
         e.preventDefault();
-        $('#basicoRutina').fadeOut(function(){
+        $('#basicoRutina').fadeOut(function () {
             $('#stepTarjetas').fadeIn();
         });
     });
 
-    $('#stepAnterior').on('click', function(e){
+    $('#stepAnterior').on('click', function (e) {
         e.preventDefault();
-        $('#stepTarjetas').fadeOut(function(){
+        $('#stepTarjetas').fadeOut(function () {
             $('#basicoRutina').fadeIn();
         });
     });
 
-    $('#tarjetasRutinas').on('click', ".card",function(e){
-        e.preventDefault();
 
-        let cardContainer = $(this).closest(".col-lg-2, .col-md-3");
-        $(this).append('<span class="cross-icon">&times</span>');
-        $('#composiciónRutina').append(cardContainer);
+    $("#tarjetasRutinas").on("click", ".card", function () {
+        let $card = $(this).closest(".col-lg-2.col-md-3"); // Capturar toda la columna
+        let imgSrc = $card.find("img").attr("src");
+        let cardId = $card.find(".card").attr("id");
+
+        // Crear nueva tarjeta con el formato de eliminación
+        let newCard = $(`
+            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                <div class="card" id="${cardId}">
+                    <img src="${imgSrc}" class="card-img">
+                    <div class="remove-picto"></div>
+                    <span class="trash"><i class="bi bi-trash3-fill"></i></span>
+                </div>
+            </div>
+        `);
+
+        // Agregar al contenedor de la rutina
+        $("#composiciónRutina").append(newCard);
+
+        // Remover del contenedor original
+        $card.remove();
     });
 
-    $('#composiciónRutina').on('click', ".card",function(e){
-        e.preventDefault();
+    // Evento para devolver la tarjeta de #composiciónRutina a #tarjetasRutinas
+    $("#composiciónRutina").on("click", ".card", function () {
+        let $card = $(this).closest(".col-lg-2.col-md-3"); // Capturar toda la columna
+        let imgSrc = $card.find("img").attr("src");
+        let cardId = $card.find(".card").attr("id");
 
-        let cardContainer = $(this).closest(".col-lg-2, .col-md-3");
-        cardContainer.find(".cross-icon").remove();
-        $('#tarjetasRutinas').append(cardContainer);
+        // Crear nueva tarjeta con el formato original
+        let newCard = $(`
+            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+                <div class="card" id="${cardId}">
+                    <img src="${imgSrc}" class="card-img">
+                    <div class="add-picto"></div>
+                    <span class="mas">+</span>
+                </div>
+            </div>
+        `);
+
+        // Agregar de vuelta al contenedor original
+        $("#tarjetasRutinas").append(newCard);
+
+        // Remover del contenedor de la rutina
+        $card.remove();
     });
 
 
-    $("#guardarRutina").on('click', function(e){
+
+    $("#guardarRutina").on('click', function (e) {
         e.preventDefault();
 
-        const tarjetas=[];
-         // Recorrer todas las cards dentro del contenedorRegistros
-         $('#composiciónRutina .card').each(function (index) {
+        const tarjetas = [];
+        // Recorrer todas las cards dentro del contenedorRegistros
+        $('#composiciónRutina .card').each(function (index) {
             const card = $(this); // Obtener la card actual
             const idTarjeta = parseInt(card.attr('id')); // Obtener el id de la tarjeta
             const orden = index + 1; // Obtener el orden (posición) de la tarjeta (empezando desde 1)
 
-            
+
             tarjetas.push({
                 id_tarjeta: idTarjeta, // Guardar el id de la tarjeta
                 orden: orden   // Guardar el orden de la tarjeta
