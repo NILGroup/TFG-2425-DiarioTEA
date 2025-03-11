@@ -22,18 +22,18 @@
 
 <body>
     <%-include ("navbar", { nombreUsuario: data.usuario.nombre })%>
-        <div class="main-container d-flex mt-3">
-            <div class="container margen-manage" id="containerPrincipal">
+
+            <div class="container mt-5 justify-content-center" id="containerPrincipal">
                 <div class="btn-group manage-btn-group" role="group" aria-label="Opciones de seleccion de pictos">
                     <button type="button" class="btn manage-buttons seleccion">Pictogramas</button>
                 </div>
 
-                <div class="row p-3 borde">
+                <div class="row p-3 borde justify-content-center">
                     <div class="row">
                         <form method="GET" action="" class="d-flex" id="buscadorARASAAC">
                             <input class="form-control me-2" type="search" placeholder="Buscar pictogramas en ARASAAC"
                                 aria-label="Buscar pictogramas en ARASAAC" name="consulta" required id="campoBusqueda">
-                            <button class="btn btn-background" type="" id="buscaArasaac">Buscar</button>
+                            <button class="btn btn-background d-flex" type="" id="buscaArasaac"><i class="bi bi-search me-2"></i> Buscar</button>
                         </form>
                     </div>
 
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="container">
-                            <div class="row pb-3" id="resultBusqueda" style="display: none;">
+                            <div class="row pb-3 justify-content-center" id="resultBusqueda" style="display: none;">
 
                             </div>
                             <div class="row mt-2" style="display: none;" id="paginas">
@@ -66,7 +66,7 @@
                     <div class="row mt-5">
                         <h1 class="titulos-2" data-nombre="<%= data.usuario.nombre %>" id="nomVoc">Vocabulario de <%= data.usuario.nombre %>:</h1>
                         <div class="container mt-3 borde-cont">
-                            <div class="row pb-3" id="contenedorPictogramas">
+                            <div class="row pb-3 vocabulario" id="contenedorPictogramas">
                                 <% if (data.voc.length> 0) { %>
                                     <% data.voc.forEach(function(elem){%>
                                         <div class="col-lg-2 col-md-3 mt-3">
@@ -99,7 +99,7 @@
                 </div>
                 <div class="row finale"></div>
             </div>
-        </div>
+
         <script src="javascripts/manageCardsTablero.js"></script>
 </body>
 

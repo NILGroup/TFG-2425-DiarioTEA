@@ -20,7 +20,6 @@ class EntradasController{
                 entrada.hoy = fechaUtils.esHoy(entrada.fecha);
                 entrada.f = fechaUtils.fechaCompleta(entrada.fecha);
                 entrada.fecha = fechaUtils.fechaSinHora(entrada.fecha);
-                console.log(entrada.fecha);
                 if(entrada.cuerpo === null){
                     let pictos = await tarjetasService.tarjetasEntrada(entrada.id);
                     entrada.pictos = pictos;

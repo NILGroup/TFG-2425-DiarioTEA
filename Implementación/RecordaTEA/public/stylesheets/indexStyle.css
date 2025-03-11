@@ -75,6 +75,7 @@ body {
 
 .tableros {
     background-color: #dedddb;
+    min-height: 10.736em;
 }
 
 .tableros .card:hover {
