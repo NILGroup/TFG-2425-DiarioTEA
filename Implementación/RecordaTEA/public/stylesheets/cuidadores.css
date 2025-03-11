@@ -319,6 +319,16 @@ body {
     min-height: 10.736em;
 }
 
+.barra-personalizada{
+    border-radius: 0em;
+    background-color: #c0c1c3;
+    height: 0.7em;
+}
+
+.barra-color{
+    background-color: #214055;
+}
+
 #no-pictos span {
     color: #F9F7F7;
 }

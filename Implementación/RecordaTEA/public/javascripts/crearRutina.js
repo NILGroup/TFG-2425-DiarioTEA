@@ -1,5 +1,8 @@
 $(document).ready(function () {
-    let imgSeleccionadaAnt = null;
+    var imgSeleccionadaAnt = null;
+    var progreso = 0;
+    var escrito = false;
+    var pictos = false;
 
     $('#stepTarjetas').hide();
 
@@ -17,17 +20,36 @@ $(document).ready(function () {
             let imgSeleccionada = imgSeleccionadaAnt.attr('src');
             $('#portadaImagen').attr('src', imgSeleccionada);
         }
+        progreso+=25;
+        $('#barra-progreso').css('width', progreso +'%');
         $("#portadaModal").modal("hide");
     });
 
     $('#eliminarPortada').on('click', function (e) {
         e.preventDefault();
         imgSeleccionadaAnt.removeClass('seleccionada');
+        progreso-=25;
+        $('#barra-progreso').css('width', progreso +'%');
         $('#portadaImagen').attr('src', '/images/config/noPortada.png');
     });
 
     $('#cancelarPortada').on('click', function () {
         imgSeleccionadaAnt.removeClass('seleccionada');
+    });
+
+    $('#nombreRutina').on('input', function(){
+        if ($(this).val().trim() === "") {
+            progreso-=25;
+            $('#barra-progreso').css('width', progreso +'%');
+            escrito = false;
+        } 
+        else {
+            if(!escrito){
+                progreso+=25;
+                $('#barra-progreso').css('width', progreso +'%');
+                escrito = true;
+            }
+        }
     });
 
     $('#stepDos').on('click', function (e) {
@@ -63,9 +85,12 @@ $(document).ready(function () {
 
         // Agregar al contenedor de la rutina
         $("#composiciónRutina").append(newCard);
+        if(!pictos){
+            pictos = true;
+            progreso+=50;
+            $('#barra-progreso').css('width', progreso +'%');
+        }
 
-        // Remover del contenedor original
-        $card.remove();
     });
 
     // Evento para devolver la tarjeta de #composiciónRutina a #tarjetasRutinas
@@ -85,11 +110,13 @@ $(document).ready(function () {
             </div>
         `);
 
-        // Agregar de vuelta al contenedor original
-        $("#tarjetasRutinas").append(newCard);
-
-        // Remover del contenedor de la rutina
         $card.remove();
+
+        if ($('#composiciónRutina').children().length === 0) {
+            pictos = false;
+            progreso-=50;
+            $('#barra-progreso').css('width', progreso +'%');
+        }
     });
 
 
