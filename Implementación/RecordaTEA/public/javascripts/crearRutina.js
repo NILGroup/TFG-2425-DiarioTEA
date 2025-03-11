@@ -4,8 +4,6 @@ $(document).ready(function () {
     var escrito = false;
     var pictos = false;
 
-    $('#stepTarjetas').hide();
-
     $('#portadaModal img').on('click', function (e) {
         e.preventDefault();
         if (imgSeleccionadaAnt != null) {
