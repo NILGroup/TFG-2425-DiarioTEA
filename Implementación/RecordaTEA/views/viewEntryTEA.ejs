@@ -1,6 +1,6 @@
 <%- include("navbarTEA") %>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <h1 class="container"><%= entrada.fecha_registro %> a las <%= entrada.hora_registro %></h1>
         <div class="row mt-5">
             <% entrada.tarjetas.forEach(function(picto) { %>
@@ -12,27 +12,30 @@
             <% }); %>
         </div>
     </div>
-    <div class="container-fluid fijar">
+    <div class="container-fluid mt-5">
         <div class="row d-flex text-center justify-content-center">
             <div class="col-lg-1 col-md-3 col-sm-5 col-xs-6">
-                <div class="card">
+                <div class="card no-border text-center">
                     <a href="/users/diary">
                         <img class="card-img" src="/images/config/botonVolver.png" alt="Volver a la pestaña anterior">
                     </a>
+                    <p class="card-title texto-boton">VOLVER</p>
                 </div>
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-5 col-xs-6">
-                <div class="card">
+            <!-- <div class="col-lg-1 col-md-3 col-sm-5 col-xs-6">
+                <div class="card no-border text-center">
                     <img class="card-img" src="/images/config/botonEditar.png" alt="Editar entrada del diario">
+                    <p class="card-title texto-boton">EDITAR</p>
                 </div>
             </div>
             <div class="col-lg-1 col-md-3 col-sm-5 col-xs-6">
-                <div class="card">
+                <div class="card no-border">
                     <a href="diaryTEA.html">
                         <img class="card-img" src="/images/config/botonBorrar.png" alt="Borrar entrada del diario">
+                        <p class="card-title texto-boton">BORRAR</p>
                     </a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

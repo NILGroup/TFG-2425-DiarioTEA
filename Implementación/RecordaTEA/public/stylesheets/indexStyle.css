@@ -120,6 +120,10 @@ a {
     border-width: 0em;
 }
 
+.no-border:hover{
+    background-color:#ffffff00;
+}
+
 .btn-nav{
   min-width: 5em;
   min-height: 5em;
