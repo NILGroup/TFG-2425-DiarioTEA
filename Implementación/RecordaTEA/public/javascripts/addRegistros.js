@@ -8,9 +8,17 @@ $(document).ready(function () {
     $('#hora').val(hora);
 
     $('#editar-btn').click(function () {
-        $('#fecha').removeAttr('readonly');
-        $('#hora').removeAttr('readonly');
+        $('#fecha').removeAttr('readonly').removeClass('no-editable');;
+        $('#hora').removeAttr('readonly').removeClass('no-editable');
         $('#editar-btn').hide();
+        $('#cancel-btn').show();
+    });
+
+    $('#cancel-btn').click(function(){
+        $('#fecha').addClass('no-editable').prop("readonly", true);
+        $('#hora').addClass('no-editable').prop("readonly", true);
+        $('#editar-btn').show();
+        $('#cancel-btn').hide();
     });
 
 
@@ -51,7 +59,7 @@ $(document).ready(function () {
 
             let tarjeta = card.find(".card"); // Busca la tarjeta dentro de la columna
             tarjeta.append('<span class="cross-icon">&times</span>'); // Añade el icono dentro de la tarjeta
-            contenedorPictogramas.append(card); // Mueve la columna completa
+            contenedorPictogramas.append(card.clone()); // Mueve la columna completa
 
         }
     });

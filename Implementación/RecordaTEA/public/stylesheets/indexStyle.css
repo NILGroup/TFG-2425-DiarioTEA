@@ -94,11 +94,37 @@ a {
 
 
 .contenedorPictogramas{
-    background-color: #213555a5;
+
     min-height: 10.736em;
+}
+
+.color-voc{
+    background-color: #213555a5;
 }
 
 .texto-TEA{
     font-size: 1.5em;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.texto-boton{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+}
+
+.boton-add-entry{
+    max-width: 8em; 
+}
+
+.no-border{
+    border-width: 0em;
+}
+
+.btn-nav{
+  min-width: 5em;
+  min-height: 5em;
+}
+
+.no-editable{
+    pointer-events: none;
 }
