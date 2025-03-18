@@ -12,14 +12,14 @@ class RutinasControlador {
 
         const response = await rutinasServicio.getRutinasById(idUsuario);
 
-        res.render('rutinasTEA', {rutinas: response, diary: false})
+        res.render('TEA/rutinasTEA', {rutinas: response, diary: false})
     }
 
     async getCuidadoresRutinas(req, res){
 
         const response = await rutinasServicio.getRutinasById(1);
 
-        res.render('rutinas', {rutinas: response, nombre: req.session.usuario.nombre})
+        res.render('cuidadores/rutinas', {rutinas: response, nombre: req.session.usuario.nombre})
     }
 
     async getTarjetasByIdRutina(req, res){
@@ -27,7 +27,7 @@ class RutinasControlador {
         const idRutina = req.params.idRutina;
         const response = await rutinasServicio.getTarjetasByIdRutina(idRutina);
 
-        res.render('viewRutinaTEA', {rutinas: response, diary: false, nombre: response[0].nombre})
+        res.render('TEA/viewRutinaTEA', {rutinas: response, diary: false, nombre: response[0].nombre})
     }
 
     async getTarjetasByIdRutinaCuidador(req, res){
@@ -35,14 +35,14 @@ class RutinasControlador {
         const idRutina = req.params.idRutina;
         const response = await rutinasServicio.getTarjetasByIdRutina(idRutina);
 
-        res.render('viewRutina', {rutinas: response, nombre: response[0].nombre})
+        res.render('cuidadores/viewRutina', {rutinas: response, nombre: response[0].nombre})
     }
 
     async addRutina(req, res){
         //let id_usuario = req.session.usuario.id;
         let vocabulario = await tarjetasService.vocabularioUsuarioId(1);
         
-        res.render('crearRutina', { vocabulario: vocabulario, nombre: req.session.usuario.nombre });
+        res.render('cuidadores/crearRutina', { vocabulario: vocabulario, nombre: req.session.usuario.nombre });
     }
 
     async submitRutina(req, res){

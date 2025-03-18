@@ -8,7 +8,7 @@ class UsuariosControlador {
         const r = await usuariosServicio.leerUsuarioId(1);
         req.session.logged = 1;
         req.session.usuario = r[0];
-        res.render('indexTEA');
+        res.render('TEA/indexTEA');
     }
 
     async redirectToDiary(req, res) {
@@ -16,7 +16,7 @@ class UsuariosControlador {
         req.session.entradas = response;
         //siempre le paso diary true si me encuentro en una vista del diario para que solo 
         // se muestre en la navbar el dibujo de rutina
-        res.render('diaryTEA', { entradas: response, diary: true });
+        res.render('TEA/diaryTEA', { entradas: response, diary: true });
     }
 
     async addEntry(req, res) {
@@ -24,7 +24,7 @@ class UsuariosControlador {
         const response = await usuariosServicio.obtenerTarjetasPorUsuario(req.session.usuario.id);
 
         console.log(response);
-        res.render('addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre })
+        res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre })
 
         //OBTENER PICTOGRAMAS DEL USUARIO PARA ADD ENTRY Y RENDERIZAR
 
@@ -53,7 +53,7 @@ class UsuariosControlador {
             if (req.session.entradas) {
                 const entradaSeleccionada = req.session.entradas.find(item => item.idEntrada.toString() === idEntrada.toString());
                 if (entradaSeleccionada) {
-                    return res.render('viewEntryTEA', { entrada: entradaSeleccionada, diary: true });
+                    return res.render('TEA/viewEntryTEA', { entrada: entradaSeleccionada, diary: true });
                 }
             }
 
@@ -61,7 +61,7 @@ class UsuariosControlador {
             const entrada = await usuariosServicio.viewEntryById(idEntrada, idUsuario);
 
             if (entrada) {
-                return res.render('viewEntryTEA', { entrada: entrada });
+                return res.render('TEA/viewEntryTEA', { entrada: entrada });
             } else {
                 const error = {
                     status: 403,

@@ -28,7 +28,7 @@ class EntradasController{
                     entrada.pictos = [];
                 }
             }
-            res.render('diario', {data: {entradas: entradas, usuario: usuario}});
+            res.render('cuidadores/diario', {data: {entradas: entradas, usuario: usuario}});
         }
         catch (error){
             throw error;
@@ -53,7 +53,7 @@ class EntradasController{
                 }
             }
             let diaCompleto = fechaUtils.fechaCompleta(dia);
-            res.render('verDia', {data: {entradas: entradas, usuario: usuario, dia: diaCompleto}});
+            res.render('cuidadores/verDia', {data: {entradas: entradas, usuario: usuario, dia: diaCompleto}});
         }
         catch (error){
             throw error;
