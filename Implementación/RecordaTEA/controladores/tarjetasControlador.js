@@ -22,10 +22,10 @@ class TarjetasControlador {
     }
 
     async consultaArasaac(req, res) {
+        let pictos = [];
+        this.resultadoArasaac = [];
         try {
             let consulta = req.query.consulta;
-            let pictos = [];
-            this.resultadoArasaac = [];
             if (consulta !== null && consulta !== undefined) {
                 this.resultadoArasaac = await tarjetasService.consultaArasaac(consulta);
                 if (this.resultadoArasaac.length > 0) {
@@ -39,7 +39,7 @@ class TarjetasControlador {
 
         } catch (error) {
             if (error.response && error.response.status === 404) {
-                res.send(this.resultadoArasaac);
+                res.send({ pictos: pictos, paginacion: this.resultadoArasaac.length });
             }
             else {
                 throw error;

@@ -25,7 +25,7 @@ $(document).ready(function () {
                     $('#avisos').find('span').remove();
                 },
                 success: function (data, status, xhr) {
-                    if (data.pictos.length > 0) {
+                    if (data.pictos.length > 0 || !data) {
                         data.pictos.forEach(picto => {
                             const divPicto = $('<div>').addClass('col-lg-2 col-md-3 mt-3 d-flex');
                             const card = $('<div>').addClass('card').addClass('gestion');

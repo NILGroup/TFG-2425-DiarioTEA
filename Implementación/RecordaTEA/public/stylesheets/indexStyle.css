@@ -10,6 +10,10 @@ body {
     border-width: 0.2em;
     border-radius: 0.3em;
     cursor: pointer;
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Estándar */
 }
 
 .card:hover {
@@ -41,6 +45,11 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Estándar */
 }
 
 .cross-icon {
@@ -81,6 +90,10 @@ body {
 .tableros .card:hover {
     background-color: #B82132;
 
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Estándar */
 }
 
 a {
@@ -89,6 +102,11 @@ a {
 
 #contenedorRegistros .card:hover {
     background-color: #B82132;
+
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Estándar */
 
 }
 
