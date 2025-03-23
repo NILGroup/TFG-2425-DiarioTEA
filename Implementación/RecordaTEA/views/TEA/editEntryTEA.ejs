@@ -1,48 +1,103 @@
 <%-include ("navbarTEA")%>
 
-    <body>
-        <div class="container justify-content-center mt-5">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-6 col-md-6 col-xs-6">
-                    <div class="d-flex align-items-center justify-content-between mb-3">
+<body>
+    <div class="container justify-content-center mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 col-md-6 col-xs-6">
+                <div class="d-flex align-items-center justify-content-between mb-3">
 
-                        <label for="fecha">Fecha:</label>
-                        <div class="me-3 mt-0 ms-2">
-                            <input type="date" class="form-control no-editable" id="fecha" name="fecha" readonly>
-                        </div>
-
-                        <label for="hora">Hora:</label>
-                        <div class="me-3 mt-0 ms-2">
-                            <input type="time" class="form-control no-editable" id="hora" name="hora" readonly>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <button id="editar-btn" class="btn btn-outline-secondary">
-                                <i class="bi bi-pencil"></i> Editar
-                            </button>
-                            <button id="cancel-btn" class="btn btn-outline-secondary" style="display: none;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-x-lg" viewBox="0 0 16 16">
-                                    <path
-                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-                                </svg></i> Cancelar
-                            </button>
-                        </div>
+                    <label for="fecha">Fecha:</label>
+                    <div class="me-3 mt-0 ms-2">
+                        <input type="date" class="form-control no-editable" id="fecha-edit" name="fecha" value="<%= entrada.fecha_editable %>" readonly>
+                    </div>
+                    
+                    <label for="hora">Hora:</label>
+                    <div class="me-3 mt-0 ms-2">
+                        <input type="time" class="form-control no-editable" id="hora-edit" name="hora" value="<%= entrada.hora_registro %>" readonly>
+                    </div>
+                    
+                    <div class="d-flex align-items-center justify-content-center">
+                        <button id="editar-btn-edit" class="btn btn-outline-secondary">
+                            <i class="bi bi-pencil"></i> Editar
+                        </button>
+                        <button id="cancel-btn-edit" class="btn btn-outline-secondary" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                              </svg></i> Cancelar
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="main-container d-flex mt-3">
-            <div class="container margen-manage" id="containerPrincipal"
-                style="border: 2px solid black; border-radius: 3px;">
-                <div class="row m-3">
-                    <h5>Registro:</h5>
-                    <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;">
-                        <div class="row pb-3 contenedorPictogramas" id="contenedorRegistros">
-                            <!-- Aquí van las cards -->
-                        </div>
+    <div class="main-container d-flex mt-3">
+        <div class="container margen-manage" id="containerPrincipal" style="border: 2px solid black; border-radius: 3px;">
+            <div class="row m-3">
+                <h5>Registro:</h5>
+                <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;">
+                    <div class="row pb-3 contenedorPictogramas" id="contenedorRegistros">
+                        <% entrada.tarjetas.forEach(function(item) { %>
+                            <div class="col-lg-2 col-md-3 mt-3">
+                                <div class="dflex">
+                                    <div class="card" id="<%= item.id %>">
+                                        <img src="<%= item.enlace %>" class="card-img">
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-3 mt-5">
+                <div class="container mt-3 borde-cont" style="border: 2px solid black; border-radius: 3px;">
+                    <div class="row pb-3 contenedorPictogramas color-voc" id="contenedorVocabulario">
+                        <% vocabulario.forEach(function(item) { %>
+                            <div class="col-lg-2 col-md-3 mt-3">
+                                <div class="dflex">
+                                    <div class="card" id="<%= item.id %>">
+                                        <img src="<%= item.enlace %>" class="card-img">
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-5 pb-5">
+                <div class="row d-flex justify-content-center">
+                    
+                    <div class="card no-border col-lg-2 col-md-3 col-sm-4 text-center" style="cursor:pointer">
+                        <a href="/users/diary">
+                            <img class="card-img img-fluid" src="/images/config/cancelar.png" alt="Cancelar entrada" style="max-width: 150px; max-height: 150px; cursor: pointer;">
+                        </a>
+                        <p class="card-title texto-boton">CANCELAR</p>
+                    </div>
+                    <div class="card no-border col-lg-2 col-md-3 col-sm-4 text-center" style="cursor:pointer" id="addButton">
+                        <a href="/users/diary">
+                            <img class="card-img img-fluid" src="/images/config/tick.png" alt="Añadir entrada" style="max-width: 150px; max-height: 150px; cursor: pointer;">
+                        </a>
+                        <p class="card-title texto-boton">AÑADIR</p>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+
+    <div class="container finale">
+
+    </div>
+
+    <!-- Formulario oculto para enviar los datos -->
+    <form id="registrosForm" action="./submit-edit-entry" method="POST" style="display: none;">
+        <input type="hidden" name="registros" id="registrosInput">
+    </form>
+    
+    <script src="/javascripts/addRegistros.js"></script>
+    <script src="/javascripts/editRegistros.js"></script>
+    <script src="https://unpkg.com/sortablejs-make/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+    <script src="/javascripts/sortableCards.js"></script>
+</body>

@@ -76,6 +76,47 @@ class UsuariosControlador {
         }
     }
 
+    async editEntry(req, res){
+
+        const idEntrada = req.params.idEntrada;
+        const idUsuario = req.session.usuario.id;
+
+        try {
+            // ya se ha guardado
+
+            const vocabulario = await usuariosServicio.obtenerTarjetasPorUsuario(idUsuario);
+
+
+            if (req.session.entradas) {
+                const entradaSeleccionada = req.session.entradas.find(item => item.idEntrada.toString() === idEntrada.toString());
+                if (entradaSeleccionada) {
+                    
+                    return res.render('TEA/editEntryTEA', { entrada: entradaSeleccionada, diary: true, vocabulario: vocabulario });
+                }
+            }
+
+            // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
+            const entrada = await usuariosServicio.viewEntryById(idEntrada, idUsuario);
+            
+
+            if (entrada) {
+                return res.render('TEA/editEntryTEA', { entrada: entrada, diary: true, vocabulario: vocabulario });
+            } else {
+                const error = {
+                    status: 403,
+                    info: "No tienes permisos para ver esta página"
+                };
+                // si no existe, es porque no ha cumplido con que sea el idUsuario
+                return res.render('error', { error: error });
+            }
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send('Error interno del servidor');
+        }
+
+
+    }
+
     
 
 

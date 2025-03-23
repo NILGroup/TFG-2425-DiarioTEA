@@ -16,6 +16,8 @@ router.get("/add-entry", controllerUsuarios.addEntry);
 
 router.get('/diary/view-entry/:idEntrada', controllerUsuarios.viewEntry);
 
+router.get('/diary/edit-entry/:idEntrada', controllerUsuarios.editEntry);
+
 router.post('/submit-entry', controllerUsuarios.submitEntry);
 
 router.get('/routines/:idRutina', controllerRutinas.getTarjetasByIdRutina);
