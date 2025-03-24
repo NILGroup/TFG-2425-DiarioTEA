@@ -34,7 +34,7 @@ class UsuariosDao {
                 LEFT JOIN Pictos ON Tarjetas.id_picto = Pictos.id
                 WHERE Entradas.id_usuario = ?
                 AND Entradas.autor = ?
-                ORDER BY Entradas.fecha_registro DESC;
+                ORDER BY Entradas.fecha_registro DESC, Entradas_tarjeta.orden ASC;
             `, [idUsuario, idUsuario]);
 
 
@@ -76,7 +76,7 @@ class UsuariosDao {
                 LEFT JOIN Pictos ON Tarjetas.id_picto = Pictos.id
                 WHERE Entradas.id = ?
                 AND Entradas.id_Usuario = ?
-                ORDER BY Entradas.fecha_registro DESC;
+                ORDER BY Entradas.fecha_registro DESC, Entradas_tarjeta.orden ASC;
             `, [idEntrada, idUsuario]);
 
             
@@ -118,6 +118,65 @@ class UsuariosDao {
         } catch (error) {
             console.error('Error al registrar la entrada:', error);
             throw error; // Lanza el error para que el llamador lo maneje
+        }
+    }
+
+    async actualizarTarjetasEntrada(data){
+        const conn = await pool.getConnection();
+        try {
+          await conn.beginTransaction();
+      
+          // 1. Actualizar la entrada
+          await conn.execute(
+            'UPDATE entradas SET fecha_registro = ? WHERE id = ?',
+            [data.fecha_registro, data.id]
+          );
+      
+          // 2. Obtener tarjetas actuales de la base de datos
+          const [rows] = await conn.execute(
+            'SELECT id_tarjeta, orden FROM entradas_tarjeta WHERE id_entrada = ?',
+            [data.id]
+          );
+      
+          const actuales = new Map(rows.map(t => [t.id_tarjeta, t.orden]));
+          const nuevas = new Map(data.tarjetas.map(t => [t.id, t.orden]));
+      
+          // 3. Eliminar tarjetas que ya no están
+          for (const [id_tarjeta_actual] of actuales) {
+            if (!nuevas.has(id_tarjeta_actual)) {
+              await conn.execute(
+                'DELETE FROM entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
+                [data.id, id_tarjeta_actual]
+              );
+            }
+          }
+      
+          // 4. Insertar nuevas tarjetas o actualizar orden
+          for (const { id, orden } of data.tarjetas) {
+            if (!actuales.has(id)) {
+              // No existía antes: insertar
+              await conn.execute(
+                'INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES (?, ?, ?)',
+                [data.id, id, orden]
+              );
+            } else if (actuales.get(id) !== orden) {
+              // Existía pero con distinto orden: actualizar
+              await conn.execute(
+                'UPDATE entradas_tarjeta SET orden = ? WHERE id_entrada = ? AND id_tarjeta = ?',
+                [orden, data.id, id]
+              );
+            }
+          }
+      
+          await conn.commit();
+          return {success: true};
+      
+        } catch (err) {
+          await conn.rollback();
+          console.error(err);
+          return {success: false, error: err};
+        } finally {
+          conn.release();
         }
     }
     

@@ -25,44 +25,27 @@ $(document).ready(function () {
 
     $("#mostrarPictos, #mostrarEmociones, .contenedorPictogramas").on("click", ".card", function (event) {
         event.preventDefault();
-
-        let card = $(this).closest(".col-lg-2, .col-md-3, .mt-3");
-        let contenedorPictogramas = $("#contenedorRegistros");
-
-        if (card.parent().is(contenedorPictogramas)) {
-            let originalContainer = card.data("originalContainer");
-            let index = card.attr("data-index");
-
-            if (originalContainer && originalContainer.length) {
-                let inserted = false;
-
-                originalContainer.children(".col-lg-3, .col-md-4").each(function () {
-                    if (parseInt($(this).attr("data-index")) > index) {
-                        $(this).before(card);
-                        inserted = true;
-                        return false;
-                    }
-                });
-
-                if (!inserted) {
-                    originalContainer.append(card);
-                }
-
-                card.find(".cross-icon").remove();
-            }
-
+    
+        let card = $(this);
+        let column = card.closest(".col-lg-2, .col-md-3, .mt-3");
+        let contenedorRegistros = $("#contenedorRegistros");
+    
+        // Si la card está en el contenedor de registros, eliminarla
+        if (card.closest("#contenedorRegistros").length > 0) {
+            column.remove();
         } else {
-            if (!card.data("originalContainer")) {
-                card.data("originalContainer", card.parent());
-                card.attr("data-index", card.index());
+            // Si no está en contenedorRegistros, moverla ahí
+            let clonedColumn = column.clone();
+    
+            // Añadir la X solo si no existe
+            if (clonedColumn.find(".cross-icon").length === 0) {
+                clonedColumn.find(".card").append('<span class="cross-icon">&times;</span>');
             }
-
-            let tarjeta = card.find(".card"); // Busca la tarjeta dentro de la columna
-            tarjeta.append('<span class="cross-icon">&times</span>'); // Añade el icono dentro de la tarjeta
-            contenedorPictogramas.append(card.clone()); // Mueve la columna completa
-
+    
+            contenedorRegistros.append(clonedColumn);
         }
     });
+    
 
     $('#addButton').on('click', function (e) {
         e.preventDefault();
@@ -83,9 +66,18 @@ $(document).ready(function () {
             });
         });
 
+        const fecha = $('#fecha').val(); // Ej: "2025-03-23"
+        const hora = $('#hora').val();   // Ej: "10:30"
+
+        // Combinamos en string ISO y luego lo parseamos a Date
+        const fechaHoraStr = `${fecha}T${hora}:00`; // "2025-03-23T10:30:00"
+        const fechaHora = new Date(fechaHoraStr);
+
+        // Formateamos como string para MySQL: "YYYY-MM-DD HH:MM:SS"
+        const fechaHoraFormatted = fechaHora.toISOString().slice(0, 19).replace('T', ' ');
+
         const entrada = {
-            id_usuario: 1,
-            fecha_registro: new Date(),
+            fecha_registro: fechaHoraFormatted,
             tarjetas: tarjetas
         };
 

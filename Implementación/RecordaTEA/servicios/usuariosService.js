@@ -150,6 +150,11 @@ class UsuariosService {
         return response;
     }
 
+    async submitEditEntry(data){
+        const response = await usuariosDao.actualizarTarjetasEntrada(data);
+        return response;
+    }
+
 
 }
 

@@ -13,9 +13,6 @@ class UsuariosControlador {
 
     async redirectToDiary(req, res) {
         const response = await usuariosServicio.leerDiarioPorUsuario(req.session.usuario.id);
-        req.session.entradas = response;
-        //siempre le paso diary true si me encuentro en una vista del diario para que solo 
-        // se muestre en la navbar el dibujo de rutina
         res.render('TEA/diaryTEA', { entradas: response, diary: true });
     }
 
@@ -35,6 +32,7 @@ class UsuariosControlador {
 
         const registrosString = req.body.registros; 
         const registros = JSON.parse(registrosString); 
+        registros.id_usuario = req.session.usuario.id;
 
         const response = await usuariosServicio.submitEntry(registros);
 
@@ -49,19 +47,12 @@ class UsuariosControlador {
         const idUsuario = req.session.usuario.id; // Asumiendo que tienes la información del usuario autenticado
 
         try {
-            // ya se ha guardado
-            if (req.session.entradas) {
-                const entradaSeleccionada = req.session.entradas.find(item => item.idEntrada.toString() === idEntrada.toString());
-                if (entradaSeleccionada) {
-                    return res.render('TEA/viewEntryTEA', { entrada: entradaSeleccionada, diary: true });
-                }
-            }
-
+    
             // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
             const entrada = await usuariosServicio.viewEntryById(idEntrada, idUsuario);
 
             if (entrada) {
-                return res.render('TEA/viewEntryTEA', { entrada: entrada });
+                return res.render('TEA/viewEntryTEA', { entrada: entrada[0],  diary: true  });
             } else {
                 const error = {
                     status: 403,
@@ -76,31 +67,21 @@ class UsuariosControlador {
         }
     }
 
-    async editEntry(req, res){
+    async editEntryView(req, res){
 
         const idEntrada = req.params.idEntrada;
         const idUsuario = req.session.usuario.id;
 
         try {
-            // ya se ha guardado
 
             const vocabulario = await usuariosServicio.obtenerTarjetasPorUsuario(idUsuario);
-
-
-            if (req.session.entradas) {
-                const entradaSeleccionada = req.session.entradas.find(item => item.idEntrada.toString() === idEntrada.toString());
-                if (entradaSeleccionada) {
-                    
-                    return res.render('TEA/editEntryTEA', { entrada: entradaSeleccionada, diary: true, vocabulario: vocabulario });
-                }
-            }
 
             // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
             const entrada = await usuariosServicio.viewEntryById(idEntrada, idUsuario);
             
 
             if (entrada) {
-                return res.render('TEA/editEntryTEA', { entrada: entrada, diary: true, vocabulario: vocabulario });
+                return res.render('TEA/editEntryTEA', { entrada: entrada[0], diary: true, vocabulario: vocabulario });
             } else {
                 const error = {
                     status: 403,
@@ -117,6 +98,20 @@ class UsuariosControlador {
 
     }
 
+    async submitEditEntry(req, res){
+        const registrosString = req.body.registros; 
+        const registros = JSON.parse(registrosString); 
+       
+        const response = await usuariosServicio.submitEditEntry(registros);
+
+        if(response.success){
+            return res.redirect('/users/diary'); // Redirigir a la página del diario, por ejemplo
+        }   
+        else{
+            return res.status(500).send('Error interno del servidor');
+        }
+
+    }
     
 
 

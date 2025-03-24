@@ -1,6 +1,8 @@
 CREATE TABLE Usuarios(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL
+    nombre VARCHAR(50) NOT NULL,
+    usuario VARCHAR(50) NOT NULL,
+    contraseña VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE Cuidadores(
@@ -20,6 +22,7 @@ CREATE TABLE Tarjetas(
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_picto INT NOT NULL,
+    orden INT NOT NULL,
     FOREIGN KEY (id_picto) REFERENCES Pictos(id) ON DELETE CASCADE,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
