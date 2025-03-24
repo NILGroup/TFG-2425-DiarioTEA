@@ -51,8 +51,8 @@ class UsuariosDao {
 
     async obtenerTarjetasPorUsuario(idUsuario) {
         try {
-            const response = await pool.query(`SELECT Tarjetas.id, Pictos.enlace, Pictos.id as id_picto
-                FROM Tarjetas JOIN Pictos ON Tarjetas.id_picto = Pictos.id
+            const response = await pool.query(`SELECT Tarjetas.id, Pictos.enlace, Pictos.id as id_picto, Tarjetas.categoria
+                FROM Tarjetas LEFT JOIN Pictos ON Tarjetas.id_picto = Pictos.id
                 WHERE Tarjetas.id_usuario = ?
                 `, [idUsuario]);
 

@@ -23,6 +23,7 @@ CREATE TABLE Tarjetas(
     id_usuario INT NOT NULL,
     id_picto INT NOT NULL,
     orden INT NOT NULL,
+    categoria VARCHAR(100),
     FOREIGN KEY (id_picto) REFERENCES Pictos(id) ON DELETE CASCADE,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
@@ -73,11 +74,11 @@ CREATE TABLE Cuidadores_Usu(
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
 
-INSERT INTO Usuarios (id, nombre) 
-VALUES ('1', 'Pedro');
+INSERT INTO Usuarios (id, nombre, usuario, contraseña) 
+VALUES ('1', 'Pedro', 'pedro08', 'test');
 
-INSERT INTO Usuarios(id, nombre)
-VALUES ('2', 'Lorena');
+INSERT INTO Usuarios(id, nombre, usuario, contraseña)
+VALUES ('2', 'Lorena', 'lorena_gutierrez','test123');
 
 INSERT INTO Cuidadores (id, nombre, rol) 
 VALUES ('2', 'Lorena', 'Profesora');
@@ -96,10 +97,14 @@ INSERT INTO Entradas (id, id_usuario, autor, cuerpo, fecha_registro, tipo) VALUE
 ('1','1', '1', NULL, '2025-03-01 11:30:00', NULL),
 ('2', '1', '2', 'Progresa adecuadamente', '2025-03-01 10:10:00', NULL);
 
-INSERT INTO Tarjetas (id, id_usuario, id_picto) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 4);
+INSERT INTO Tarjetas (id, id_usuario, id_picto, orden, categoria) VALUES
+(1, 1, 1, 1, 'Emocion'),
+(2, 1, 2, 2, 'Emocion');
+
+
+INSERT INTO Tarjetas (id, id_usuario, id_picto, orden) VALUES
+(3, 1, 4, 3),
+(4, 1, 3, 4);
 
 INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES
 (1, 1, 1),

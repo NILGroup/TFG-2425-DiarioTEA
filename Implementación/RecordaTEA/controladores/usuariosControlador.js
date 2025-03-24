@@ -21,7 +21,9 @@ class UsuariosControlador {
         const response = await usuariosServicio.obtenerTarjetasPorUsuario(req.session.usuario.id);
 
         console.log(response);
-        res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre })
+        const tarjetas_emocion = response.filter(t=>t.categoria="Emocion" && t.categoria!=null);
+
+        res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre, emocion:  tarjetas_emocion})
 
         //OBTENER PICTOGRAMAS DEL USUARIO PARA ADD ENTRY Y RENDERIZAR
 

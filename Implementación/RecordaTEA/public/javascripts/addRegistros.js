@@ -46,6 +46,10 @@ $(document).ready(function () {
         }
     });
     
+    $("#contenedorEmocion").on('click', function(e){
+        
+
+    })
 
     $('#addButton').on('click', function (e) {
         e.preventDefault();

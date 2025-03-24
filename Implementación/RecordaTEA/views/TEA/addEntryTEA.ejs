@@ -1,91 +1,135 @@
 <%-include ("navbarTEA")%>
 
-<body>
-    <div class="container justify-content-center mt-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 col-md-6 col-xs-6">
-                <div class="d-flex align-items-center justify-content-between mb-3">
+    <body>
 
-                    <label for="fecha">Fecha:</label>
-                    <div class="me-3 mt-0 ms-2">
-                        <input type="date" class="form-control no-editable" id="fecha" name="fecha" readonly>
+        <div class="modal fade" id="emocionModal" tabindex="-1" aria-labelledby="emocionModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="emocionnModalLabel">Seleccionar una emocion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
-    
-                    <label for="hora">Hora:</label>
-                    <div class="me-3 mt-0 ms-2">
-                        <input type="time" class="form-control no-editable" id="hora" name="hora" readonly>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <button id="editar-btn" class="btn btn-outline-secondary">
-                            <i class="bi bi-pencil"></i> Editar
-                        </button>
-                        <button id="cancel-btn" class="btn btn-outline-secondary" style="display: none;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                              </svg></i> Cancelar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="main-container d-flex mt-3">
-        <div class="container margen-manage" id="containerPrincipal" style="border: 2px solid black; border-radius: 3px;">
-            <div class="row m-3">
-                <h5>Registro:</h5>
-                <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;">
-                    <div class="row pb-3 contenedorPictogramas" id="contenedorRegistros">
-                        <!-- Aquí van las cards -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="row m-3 mt-5">
-                <h5 class="titulos-2">Vocabulario de <%= usuario %>:</h5>
-                <div class="container mt-3 borde-cont" style="border: 2px solid black; border-radius: 3px;">
-                    <div class="row pb-3 contenedorPictogramas color-voc" id="contenedorVocabulario">
-                        <% vocabulario.forEach(function(item) { %>
-                            <div class="col-lg-2 col-md-3 mt-3">
-                                <div class="dflex">
+                    <div class="modal-body">
+                        <div class="row pb-3">
+                            <%emocion.forEach(function(item){%>
+                                <div class="col-lg-2 col-md-3 mt-3 d-flex">
                                     <div class="card" id="<%= item.id %>">
                                         <img src="<%= item.enlace %>" class="card-img">
+
                                     </div>
                                 </div>
-                            </div>
-                        <% }); %>
+                                <%})%>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="container mt-5 pb-5">
-                <div class="row d-flex justify-content-center">
-                    
-                    <div class="card no-border col-lg-2 col-md-3 col-sm-4 text-center" style="cursor:pointer">
-                        <a href="/users/diary">
-                            <img class="card-img img-fluid" src="/images/config/cancelar.png" alt="Cancelar entrada" style="max-width: 150px; max-height: 150px; cursor: pointer;">
-                        </a>
-                        <p class="card-title texto-boton">CANCELAR</p>
-                    </div>
-                    <div class="card no-border col-lg-2 col-md-3 col-sm-4 text-center" style="cursor:pointer" id="addButton">
-                        <a href="/users/diary">
-                            <img class="card-img img-fluid" src="/images/config/tick.png" alt="Añadir entrada" style="max-width: 150px; max-height: 150px; cursor: pointer;">
-                        </a>
-                        <p class="card-title texto-boton">AÑADIR</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-borde" data-bs-dismiss="modal"
+                            id="cancelarEmocion">Cancelar</button>
+                        <button type="button" class="btn btn-background" id="seleccionarEmocion">Guardar</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="container justify-content-center mt-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
 
-    <div class="container finale">
+                        <label for="fecha">Fecha:</label>
+                        <div class="me-3 mt-0 ms-2">
+                            <input type="date" class="form-control no-editable" id="fecha" name="fecha" readonly>
+                        </div>
 
-    </div>
+                        <label for="hora">Hora:</label>
+                        <div class="me-3 mt-0 ms-2">
+                            <input type="time" class="form-control no-editable" id="hora" name="hora" readonly>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button id="editar-btn" class="btn btn-outline-secondary">
+                                <i class="bi bi-pencil"></i> Editar
+                            </button>
+                            <button id="cancel-btn" class="btn btn-outline-secondary" style="display: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-x-lg" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                                </svg></i> Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Formulario oculto para enviar los datos -->
-    <form id="registrosForm" action="./submit-entry" method="POST" style="display: none;">
-        <input type="hidden" name="registros" id="registrosInput">
-    </form>
-    
-    <script src="/javascripts/addRegistros.js"></script>
-</body>
+        <div class="main-container d-flex mt-3">
+            <div class="container margen-manage" id="containerPrincipal"
+                style="border: 2px solid black; border-radius: 3px;">
+                <div class="row m-3">
+                    <h5>Registro:</h5>
+                    <div class="container mt-3 col-lg-10 col-md-10 mt-3"
+                        style="border: 2px solid black; border-radius: 3px;">
+                        <div class="row pb-3 contenedorPictogramas" id="contenedorRegistros">
+                            <!-- Aquí van las cards -->
+                        </div>
+                    </div>
+                    <div class="container mt-3 col-lg-2 col-md-2 mt-3"
+                        style="border: 2px solid black; border-radius: 3px;">
+                        <a href="#" id="emocionRegistro" data-bs-toggle="modal" data-bs-target="#emocionModal">
+                            <div class="row pb-3 contenedorEmocion" id="contenedorEmocion">
+                                <!-- Aquí van las cards -->
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="row m-3 mt-5">
+                    <h5 class="titulos-2">Vocabulario de <%= usuario %>:</h5>
+                    <div class="container mt-3 borde-cont" style="border: 2px solid black; border-radius: 3px;">
+                        <div class="row pb-3 contenedorPictogramas color-voc" id="contenedorVocabulario">
+                            <% vocabulario.forEach(function(item) { %>
+                                <div class="col-lg-2 col-md-3 mt-3">
+                                    <div class="dflex">
+                                        <div class="card" id="<%= item.id %>">
+                                            <img src="<%= item.enlace %>" class="card-img">
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }); %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container mt-5 pb-5">
+                    <div class="row d-flex justify-content-center">
+
+                        <div class="card no-border col-lg-2 col-md-3 col-sm-4 text-center" style="cursor:pointer">
+                            <a href="/users/diary">
+                                <img class="card-img img-fluid" src="/images/config/cancelar.png" alt="Cancelar entrada"
+                                    style="max-width: 150px; max-height: 150px; cursor: pointer;">
+                            </a>
+                            <p class="card-title texto-boton">CANCELAR</p>
+                        </div>
+                        <div class="card no-border col-lg-2 col-md-3 col-sm-4 text-center" style="cursor:pointer"
+                            id="addButton">
+                            <a href="/users/diary">
+                                <img class="card-img img-fluid" src="/images/config/tick.png" alt="Añadir entrada"
+                                    style="max-width: 150px; max-height: 150px; cursor: pointer;">
+                            </a>
+                            <p class="card-title texto-boton">AÑADIR</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container finale">
+
+        </div>
+
+        <!-- Formulario oculto para enviar los datos -->
+        <form id="registrosForm" action="./submit-entry" method="POST" style="display: none;">
+            <input type="hidden" name="registros" id="registrosInput">
+        </form>
+
+        <script src="/javascripts/addRegistros.js"></script>
+    </body>
