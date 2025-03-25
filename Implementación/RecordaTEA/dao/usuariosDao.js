@@ -27,7 +27,7 @@ class UsuariosDao {
     async leerDiarioPorUsuario(idUsuario) {
         try {
             const entradas = await pool.query(`
-                SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo
+                SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas_tarjeta.emocion
                 FROM Entradas
                 LEFT JOIN Entradas_tarjeta ON Entradas.id = Entradas_tarjeta.id_entrada
                 LEFT JOIN Tarjetas ON Entradas_tarjeta.id_tarjeta = Tarjetas.id
@@ -69,7 +69,7 @@ class UsuariosDao {
     async viewEntryById(idEntrada, idUsuario) {
         try {
             const entradas = await pool.query(`
-                 SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo
+                 SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas_tarjeta.emocion
                 FROM Entradas
                 LEFT JOIN Entradas_tarjeta ON Entradas.id = Entradas_tarjeta.id_entrada
                 LEFT JOIN Tarjetas ON Entradas_tarjeta.id_tarjeta = Tarjetas.id
@@ -102,12 +102,13 @@ class UsuariosDao {
                 const queries = data.tarjetas.map(tarjeta => [
                     entrada.insertId,
                     tarjeta.id,
-                    tarjeta.orden
+                    tarjeta.orden,
+                    tarjeta.emocion
                 ]);
     
                 // Inserta en la tabla 'entradas_tarjeta'
                 const [entradas_tarjeta] = await pool.query(
-                    `INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES ?;`,
+                    `INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden, emocion) VALUES ?;`,
                     [queries]
                 );
 

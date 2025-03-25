@@ -60,6 +60,7 @@ CREATE TABLE Entradas_tarjeta(
     id_entrada INT NOT NULL,
     id_tarjeta INT NOT NULL,
     orden INT NOT NULL,
+    emocion BOOLEAN,
     PRIMARY KEY (id_entrada, id_tarjeta),
     FOREIGN KEY (id_entrada) REFERENCES Entradas(id),
     FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas(id)
@@ -79,8 +80,8 @@ VALUES ('1', 'Pedro', 'pedro08', 'test');
 INSERT INTO Usuarios(id, nombre, usuario, contraseña)
 VALUES ('2', 'Lorena', 'lorena_gutierrez','test123');
 
-INSERT INTO Cuidadores (id, nombre, rol) 
-VALUES ('2', 'Lorena', 'Profesora');
+INSERT INTO Cuidadores (id, rol) 
+VALUES ('2', 'Profesora');
 
 INSERT INTO Cuidadores_Usu(id_cuidador, id_usuario)
 VALUES ('2', '1');
@@ -98,17 +99,18 @@ INSERT INTO Entradas (id, id_usuario, autor, cuerpo, fecha_registro, tipo) VALUE
 
 INSERT INTO Tarjetas (id, id_usuario, id_picto, orden, categoria) VALUES
 (1, 1, 1, 1, 'Emocion'),
-(2, 1, 2, 2, 'Emocion');
+(2, 1, 2, 2, 'Emocion'),
+(4, 1, 3, 4, 'Emocion');
 
 
 INSERT INTO Tarjetas (id, id_usuario, id_picto, orden) VALUES
-(3, 1, 4, 3),
-(4, 1, 3, 4);
+(3, 1, 4, 3);
 
-INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES
-(1, 1, 1),
-(1, 2, 2),
-(1, 3, 3);
+
+INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden, emocion) VALUES
+(1, 1, 1, true),
+(1, 2, 2, false),
+(1, 3, 3, false);
 
 INSERT INTO rutinas (id, id_usuario, nombre, autor, fecha_creacion) VALUES
 (1, 1, 'Colegio', 2, '2025-03-01 23:00:00'),

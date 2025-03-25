@@ -14,7 +14,7 @@ $(document).ready(function () {
         $('#cancel-btn').show();
     });
 
-    $('#cancel-btn').click(function(){
+    $('#cancel-btn').click(function () {
         $('#fecha').addClass('no-editable').prop("readonly", true);
         $('#hora').addClass('no-editable').prop("readonly", true);
         $('#editar-btn').show();
@@ -25,29 +25,29 @@ $(document).ready(function () {
 
     $("#mostrarPictos, #mostrarEmociones, .contenedorPictogramas").on("click", ".card", function (event) {
         event.preventDefault();
-    
+
         let card = $(this);
         let column = card.closest(".col-lg-2, .col-md-3, .mt-3");
         let contenedorRegistros = $("#contenedorRegistros");
-    
+
         // Si la card está en el contenedor de registros, eliminarla
         if (card.closest("#contenedorRegistros").length > 0) {
             column.remove();
         } else {
             // Si no está en contenedorRegistros, moverla ahí
             let clonedColumn = column.clone();
-    
+
             // Añadir la X solo si no existe
             if (clonedColumn.find(".cross-icon").length === 0) {
                 clonedColumn.find(".card").append('<span class="cross-icon">&times;</span>');
             }
-    
+
             contenedorRegistros.append(clonedColumn);
         }
     });
-    
-    $("#contenedorEmocion").on('click', function(e){
-        
+
+    $("#contenedorEmocion").on('click', function (e) {
+
 
     })
 
@@ -55,7 +55,7 @@ $(document).ready(function () {
         e.preventDefault();
         const tarjetas = []; // Array para almacenar los datos de las cards
 
-        
+
 
         // Recorrer todas las cards dentro del contenedorRegistros
         $('#contenedorRegistros .card').each(function (index) {
@@ -63,12 +63,24 @@ $(document).ready(function () {
             const idTarjeta = parseInt(card.attr('id')); // Obtener el id de la tarjeta
             const orden = index + 1; // Obtener el orden (posición) de la tarjeta (empezando desde 1)
 
-            
+
             tarjetas.push({
                 id: idTarjeta, // Guardar el id de la tarjeta
-                orden: orden   // Guardar el orden de la tarjeta
+                orden: orden,   // Guardar el orden de la tarjeta
+                emocion: false
             });
         });
+
+        if(emocionSeleccionadaAnt!=null){
+            idTarjeta = parseInt(emocionSeleccionadaAnt.attr('id'));
+            orden= tarjetas.length+1;
+            
+            tarjetas.push({
+                id: idTarjeta,
+                orden: orden,
+                emocion: true
+            })
+        }
 
         const fecha = $('#fecha').val(); // Ej: "2025-03-23"
         const hora = $('#hora').val();   // Ej: "10:30"
@@ -92,7 +104,23 @@ $(document).ready(function () {
         $('#registrosForm').submit();
     });
 
+    var emocionSeleccionadaAnt = null;
 
+    $('#emocionModal .card').on('click', function (e) {
+        e.preventDefault();
+        if (emocionSeleccionadaAnt != null) {
+            emocionSeleccionadaAnt.find('img').removeClass('seleccionada');
+        }
+        emocionSeleccionadaAnt = $(this);
+        $(this).find('img').addClass('seleccionada');
+    });
+
+    $("#addEmocionButton").on('click', function(){
+        var img= emocionSeleccionadaAnt.find('img').attr('src');
+        $("#emocionSeleccionada").attr('src', img);
+        $('#emocionModal').modal('hide');
+     
+    })
 
 });
 

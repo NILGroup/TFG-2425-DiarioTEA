@@ -82,7 +82,8 @@ class UsuariosService {
                     entryMap.get(id).tarjetas.push({
                         id_tarjeta: item.id_tarjeta,
                         orden: item.orden,
-                        enlace: item.enlace
+                        enlace: item.enlace,
+                        emocion: item.emocion
                     });
                 }
             });
@@ -132,7 +133,8 @@ class UsuariosService {
                     acc[id].tarjetas.push({
                         id_tarjeta: item.id_tarjeta,
                         orden: item.orden,
-                        enlace: item.enlace
+                        enlace: item.enlace,
+                        emocion: item.emocion
                     });
                 }
 
