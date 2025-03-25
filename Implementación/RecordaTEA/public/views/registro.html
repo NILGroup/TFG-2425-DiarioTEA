@@ -27,18 +27,20 @@
         class="container col-lg-5 col-md-7 col-sm-12 flex-column d-flex align-items-center justify-content-center min-vh-100">
         <h1 class="recordaTEA color-tit">RecordaTEA</h1>
         <form action="/users/login" id="login" method="POST"
-            class=" form-control mt-3 p-4 shadow-lg rounded back-form ">
+            class=" form-control mt-3 p-4 shadow-lg rounded back-form needs-validation" novalidate>
             <h2 class="mb-3 text-center" id="tit-pag">Iniciar sesión</h2>
+            <p>Los campos con (*) son obligatorios.</p>
             <div class="mb-3">
-                <label for="usuario" class="form-label letra-form">Usuario:</label>
+                <label for="usuario" class="form-label letra-form">Usuario*:</label>
                 <div class="input-group">
-                    <span class="input-group-text d-none d-md-block"><i class="bi bi-person"></i></span>
-                    <input type="text" class="form-control" id="usuario" placeholder="Usuario" name="usuario">
+                    <span class="input-group-text d-none d-md-block">@</span>
+                    <input type="text" class="form-control" id="usuario" placeholder="Usuario" name="usuario" required>
+                    <div class="invalid-feedback">Campo obligatorio.</div>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="passw" class="form-label letra-form">Contraseña:</label>
+                <label for="passw" class="form-label letra-form">Contraseña*:</label>
                 <div class="input-group">
                     <span class="input-group-text d-none d-md-block"><i class="bi bi-key"></i></span>
                     <input type="password" class="form-control" id="passw" placeholder="Contraseña" name="passw">
@@ -48,7 +50,7 @@
 
             <div id="registro" style="display: none;">
                 <div class="mb-3">
-                    <label for="passw-confirmacion" class="form-label letra-form">Confirmar Contraseña:</label>
+                    <label for="passw-confirmacion" class="form-label letra-form">Confirmar Contraseña*:</label>
                     <div class="input-group">
                         <span class="input-group-text d-none d-md-block"><i class="bi bi-key"></i></span>
                         <input type="password" class="form-control" id="passw-confirmacion"
@@ -58,14 +60,15 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="nombre" class="form-label letra-form">Nombre:</label>
+                    <label for="nombre" class="form-label letra-form">Nombre*:</label>
                     <div class="input-group">
+                        <span class="input-group-text d-none d-md-block"><i class="bi bi-person"></i></span>
                         <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre">
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="rol" class="form-label letra-form">Rol:</label>
+                    <label for="rol" class="form-label letra-form">Rol*:</label>
                     <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip"
                         data-bs-title="El papel desempeñas en la vida de la persona con TEA." class="info-span"><i
                             class="bi bi-info-circle-fill"></i></span>

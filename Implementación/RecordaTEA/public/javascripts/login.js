@@ -48,4 +48,24 @@ $(document).ready(function () {
             }
         }
     });
+
+    $('#login').on('submit', function(e){
+        e.preventDefault();
+        let usuario = $('#usuario');
+        let passw = $('#passw');
+
+        let usuarioValor = usuario.val().trim();
+        let passwValor = $('#passw').val().trim();
+
+        usuario.removeClass('is-invalid');
+
+        if (usuarioValor === '') {
+            usuario.addClass('is-invalid');
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/inicio',
+        });
+    })
 });
