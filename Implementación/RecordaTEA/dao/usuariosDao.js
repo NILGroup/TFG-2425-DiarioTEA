@@ -182,7 +182,7 @@ class UsuariosDao {
 
     async login(usuario){
         const [u] = await pool.query('SELECT * FROM Usuarios WHERE usuario = ?', [usuario.usuario]);
-        return u;
+        return u[0];
     }
 
     async leerUsuario(usuario){

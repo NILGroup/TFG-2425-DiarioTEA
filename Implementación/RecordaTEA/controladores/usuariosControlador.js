@@ -119,8 +119,11 @@ class UsuariosControlador {
     }
 
     async login(req, res){
-        let usuario = req.body.usuario;
-        let u = await UsuariosService.login(usuario);
+        let usuario = {
+            usuario: req.body.usuario,
+            password: req.body.passw,
+        }
+        let u = await usuariosServicio.login(usuario);
         if(u.mensaje === -1 || u.mensaje === -2){
             res.send(u);
         }

@@ -166,7 +166,9 @@ class UsuariosService {
             return {mensaje: -1};
         }
 
-        const esValida = await bcrypt.compare(usuario.password, u.password);
+        console.log(usuario.password + '\n' + u.contraseña);
+
+        const esValida = await bcrypt.compare(usuario.password, u.contraseña);
         if (!esValida) {
             return {mensaje: -2}
         }
