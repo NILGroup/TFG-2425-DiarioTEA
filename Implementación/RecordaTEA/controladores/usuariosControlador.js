@@ -1,4 +1,7 @@
-const UsuariosService = require('../servicios/usuariosService')
+const UsuariosService = require('../servicios/usuariosService');
+const CuidadoresService = require('../servicios/cuidadoresService');
+
+const cuidadoresService = new CuidadoresService();
 const usuariosServicio = new UsuariosService();
 
 class UsuariosControlador {
@@ -117,7 +120,25 @@ class UsuariosControlador {
 
     async login(req, res){
         let usuario = req.body.usuario;
-        let u;
+        let u = await UsuariosService.login(usuario);
+        if(u.mensaje === -1 || u.mensaje === -2){
+            res.send(u);
+        }
+        else{
+            let cuidador = await cuidadoresService.login(u.mensaje);
+            if(cuidador){
+                req.session.rol = cuidador.rol;
+                req.session.nombre = usuario.nombre;
+                req.session.idUsuario =cuidador.id;
+                req.session.cuidador = 1;
+            }
+            else{
+                req.session.usuario = u.mensaje;
+                req.session.cuidador = 0;
+            }
+            req.session.logged = 1;
+            res.send({mensaje: 1});
+        }
     }
 
 }

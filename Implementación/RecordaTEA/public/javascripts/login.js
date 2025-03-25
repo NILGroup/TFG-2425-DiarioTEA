@@ -74,10 +74,12 @@ $(document).ready(function () {
 
         if (usuarioValor === '') {
             usuario.addClass('is-invalid');
+            $('#usuario-error').text('Campo requerido.');
             valido = false;
         }
         if (passwValor === '') {
             passw.addClass('is-invalid');
+            $('#passw-error').text('Campo requerido.');
             valido = false;
         }
 
@@ -100,22 +102,56 @@ $(document).ready(function () {
         if (valido) {
             if ($('#tit-pag').text() === 'Crear cuenta') {
 
-            } else {
-                let u = {
+                let  usuariocuidador = {
                     usuario: usuarioValor,
-                    passw: passwValor
+                    passw: passwValor,
+                    rol: rolValor,
+                    nombre: nombreValor
                 };
 
                 $.ajax({
+                    url: '/cuidadores/nuevo-usuario',
+                    method: 'POST',
+                    data: usuariocuidador,
+                    success: function (response) {
+                        console.log(response);
+                        if (response.mensaje == 1) {
+                            window.location.href = '/cuidadores/inicio';
+                        } else if (response.mensaje == -3) {
+                            usuario.addClass('is-invalid');
+                            $('#usuario-error').text('Usuario ya existente.');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+
+                    }
+                });
+
+            } else {
+
+                let usuarioform = {
+                    usuario: usuarioValor,
+                    passw: passwValor
+                }
+                
+                $.ajax({
                     url: '/users/login',
                     method: 'POST',
-                    data: {
-                        usuario: u
+                    data: usuarioform,
+                    success: function (response) {
+                        if (response.mensaje == 1) {
+                            window.location.href = '/prueba';
+                        } else if (response.mensaje == -1) {
+                            usuario.addClass('is-invalid');
+                            $('#usuario-error').text('Usuario no existente.');
+                        }
+                        else {
+                            passw.addClass('is-invalid');
+                            $('#passw-error').text('Contraseña incorrecta.');
+                        }
+
                     },
-                    success: function(){
-                        
-                    },
-                    error: function(){
+                    error: function (xhr, status, error) {
 
                     }
                 });

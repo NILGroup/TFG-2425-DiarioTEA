@@ -3,26 +3,22 @@ const bcrypt = require('bcrypt');
 
 const cuidadoresDao = new CuidadoresDao();
 
-class CuidadoresService{
-    constructor(){}
+class CuidadoresService {
+    constructor() { }
 
-    async leerCuidadorId(id){
+    async leerCuidadorId(id) {
         const cuidador = await cuidadoresDao.leerCuidadorId(id);
         return cuidador[0];
     }
 
-    async registroCuidador(usuario){
-        const hashedPassword = await bcrypt.hash(usuario.password, 10);
-        usuario.password = hashedPassword;
+    async registroCuidador(usuario) {
+        let cuidador = await cuidadoresDao.registro(usuario);
+        return { mensaje: cuidador };
+    }
 
-        let cuidador = await cuidadoresDao.leerCuidadorUsuario(usuario.usuario);
-        if(cuidador.usuario === usuario.usuario){
-            return {existe: true};
-        }
-        else{
-            let registro = await cuidadoresDao.registrarUsuario(usuario);
-            return {existe: registro};
-        }
+    async login(usuario) {
+        let u = await cuidadoresDao.login(usuario);
+        return u;
     }
 }
 

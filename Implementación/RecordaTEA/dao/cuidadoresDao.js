@@ -14,24 +14,24 @@ class CuidadoresDao{
         }
     }
 
-    async leerCuidadorUsuario(usuario){
+    async login(usuario){
         try{
-            const [cuidador] = await pool.query('SELECT * FROM Usuarios WHERE usuario = ?', [usuario]);
-            return cuidador;
+            const [resultado] = await pool.query('SELECT * FROM Cuidadores WHERE id = ?', [usuario.id]);
+            return resultado;
         }
         catch(error){
-            console.error('Error al buscar cuidador por Usuario: ', error);
+            console.error('Error al iniciar sesión de un Cuidador: ', error);
             throw error;
         }
     }
 
-    async registrarUsuario(usuario){
+    async registro(usuario){
         try{
-            const [resultado] = await pool.query('INSERT INTO Usuarios (nombre, usuario, contraseña)  VALUES (?, ?, ?)', [usuario.nombre, usuario.usuario, usuario.password]);
+            const [resultado] = await pool.query('INSERT INTO Cuidadores (id, rol) VALUES(?, ?)', [usuario.id, usuario.rol]);
             return resultado;
         }
         catch(error){
-            console.error('Error al registrar un Cuidador: ', error);
+            console.error('Error al iniciar sesión de un Cuidador: ', error);
             throw error;
         }
     }

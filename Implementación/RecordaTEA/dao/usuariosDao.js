@@ -179,10 +179,33 @@ class UsuariosDao {
           conn.release();
         }
     }
-    
-    
 
-    
+    async login(usuario){
+        const [u] = await pool.query('SELECT * FROM Usuarios WHERE usuario = ?', [usuario.usuario]);
+        return u;
+    }
+
+    async leerUsuario(usuario){
+        try{
+            const [usu] = await pool.query('SELECT * FROM Usuarios WHERE usuario = ?', [usuario]);
+            return usu;
+        }
+        catch(error){
+            console.error('Error al buscar cuidador por Usuario: ', error);
+            throw error;
+        }
+    }
+
+    async registrarUsuario(usuario){
+        try{
+            const [resultado] = await pool.query('INSERT INTO Usuarios (nombre, usuario, contraseña)  VALUES (?, ?, ?)', [usuario.nombre, usuario.usuario, usuario.password]);
+            return resultado;
+        }
+        catch(error){
+            console.error('Error al registrar un Cuidador: ', error);
+            throw error;
+        }
+    }
 };
 
 

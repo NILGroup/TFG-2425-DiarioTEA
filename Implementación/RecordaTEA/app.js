@@ -40,11 +40,16 @@ app.use(session({
   store: sessionStore
 }));
 
-app.use('/', cuidadoresRouter);
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'views', 'registro.html'));
+});
+
+app.use('/cuidadores', cuidadoresRouter);
 app.use('/tarjetas-comunicacion', tarjetasRouter);
 app.use('/users', usuariosRouter);
 app.use('/rutinas',rutinasRouter);
 app.use('/diario', entradasRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -22,6 +22,7 @@ router.post('/submit-entry', controllerUsuarios.submitEntry);
 
 router.post('/submit-edit-entry', controllerUsuarios.submitEditEntry);
 
+router.post('/login', controllerUsuarios.login);
 
 router.get('/routines/:idRutina', controllerRutinas.getTarjetasByIdRutina);
 

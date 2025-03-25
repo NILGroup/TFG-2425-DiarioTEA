@@ -35,7 +35,7 @@
                 <div class="input-group">
                     <span class="input-group-text d-none d-md-block">@</span>
                     <input type="text" class="form-control" id="usuario" placeholder="Usuario" name="usuario" required>
-                    <div class="invalid-feedback">Campo obligatorio.</div>
+                    <div class="invalid-feedback" id="usuario-error">Campo obligatorio.</div>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                     <span class="input-group-text d-none d-md-block"><i class="bi bi-key"></i></span>
                     <input type="password" class="form-control" id="passw" placeholder="Contraseña" name="passw" required>
                     <button class="btn btn-ver" type="button" id="ver-passw"><i class="bi bi-eye"></i></button>
-                    <div class="invalid-feedback">Campo obligatorio.</div>
+                    <div class="invalid-feedback" id="passw-error">Campo obligatorio.</div>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@
                             <option value="Docente" class="opcion">Docente</option>
                             <option value="Padre" class="opcion">Padre</option>
                             <option value="Madre" class="opcion">Madre</option>
-                            <option value="Rlegal" class="opcion">Responsable legal</option>
+                            <option value="Responsable legal" class="opcion">Responsable legal</option>
                             <option value="Terapeuta" class="opcion">Terapeuta</option>
                         </select>
                         <div class="invalid-feedback">Campo obligatorio.</div>

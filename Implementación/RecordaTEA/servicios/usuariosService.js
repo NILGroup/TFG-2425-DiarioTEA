@@ -1,4 +1,6 @@
-const UsuariosDao = require('../dao/usuariosDao')
+const UsuariosDao = require('../dao/usuariosDao');
+const bcrypt = require('bcrypt');
+
 const usuariosDao = new UsuariosDao();
 
 
@@ -20,6 +22,8 @@ function formatDateTime(fechaRegistro) {
 
     return { formattedDate, formattedTime, numericDate };
 }
+
+
 class UsuariosService {
     constructor() {
     }
@@ -155,7 +159,34 @@ class UsuariosService {
         return response;
     }
 
+    async login(usuario){
+        let u = await usuariosDao.login(usuario);
 
+        if (!u) {
+            return {mensaje: -1};
+        }
+
+        const esValida = await bcrypt.compare(usuario.password, u.password);
+        if (!esValida) {
+            return {mensaje: -2}
+        }
+
+        return {mensaje: u}
+    }
+
+    async registro(usuario){
+        const hashedPassword = await bcrypt.hash(usuario.passw, 10);
+        usuario.password = hashedPassword;
+        
+        let existeUsuario = await usuariosDao.leerUsuario(usuario.usuario);
+        if(existeUsuario.length !== 0){
+            return {mensaje: -3};
+        }
+        else{
+            let registerResult = await usuariosDao.registrarUsuario(usuario);
+            return {mensaje: registerResult.insertId};
+        }
+    }
 }
 
 module.exports = UsuariosService;
