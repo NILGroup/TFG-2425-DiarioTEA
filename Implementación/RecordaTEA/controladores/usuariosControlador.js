@@ -115,5 +115,10 @@ class UsuariosControlador {
 
     }
 
+    async login(req, res){
+        let usuario = req.body.usuario;
+        let u;
+    }
+
 }
 module.exports = UsuariosControlador;

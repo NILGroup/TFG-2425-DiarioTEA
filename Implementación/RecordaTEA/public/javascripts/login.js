@@ -45,7 +45,7 @@ $(document).ready(function () {
             else {
                 $("#acceder").prop("disabled", true);
                 $("#error").text('Las contraseñas no coinciden');
-                $('##passw-confirmacion').addClass('is-invalid');
+                $('#passw-confirmacion').addClass('is-invalid');
             }
         }
     });

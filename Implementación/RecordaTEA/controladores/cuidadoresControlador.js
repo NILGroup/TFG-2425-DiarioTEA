@@ -20,7 +20,7 @@ class CuidadoresController{
 
     
     async registro(req, res){
-        const { usuario, passw, passwConfirmacion, rol } = req.body;
+        const { usuario, passw } = req.body;
         const u = {usuario: usuario,
             password: passw,
             rol: rol
