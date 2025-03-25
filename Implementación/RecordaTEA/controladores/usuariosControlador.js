@@ -8,9 +8,6 @@ class UsuariosControlador {
     constructor() { }
 
     async leerUsuarioId(req, res) {
-        const r = await usuariosServicio.leerUsuarioId(1);
-        req.session.logged = 1;
-        req.session.usuario = r[0];
         res.render('TEA/indexTEA');
     }
 
@@ -131,16 +128,18 @@ class UsuariosControlador {
             let cuidador = await cuidadoresService.login(u.mensaje);
             if(cuidador){
                 req.session.rol = cuidador.rol;
-                req.session.nombre = usuario.nombre;
+                req.session.nombre = u.mensaje.nombre;
                 req.session.idUsuario =cuidador.id;
                 req.session.cuidador = 1;
             }
             else{
                 req.session.usuario = u.mensaje;
                 req.session.cuidador = 0;
+                
             }
             req.session.logged = 1;
-            res.send({mensaje: 1});
+            let esCuidador = req.session.cuidador;
+            res.send({mensaje: 1, cuidador: esCuidador});
         }
     }
 

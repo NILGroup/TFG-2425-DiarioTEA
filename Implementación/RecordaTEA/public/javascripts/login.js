@@ -140,7 +140,12 @@ $(document).ready(function () {
                     data: usuarioform,
                     success: function (response) {
                         if (response.mensaje == 1) {
-                            window.location.href = '/prueba';
+                            if(response.cuidador){
+                                window.location.href = '/cuidadores/inicio';
+                            }
+                            else{
+                                window.location.href = '/users';
+                            }
                         } else if (response.mensaje == -1) {
                             usuario.addClass('is-invalid');
                             $('#usuario-error').text('Usuario no existente.');
