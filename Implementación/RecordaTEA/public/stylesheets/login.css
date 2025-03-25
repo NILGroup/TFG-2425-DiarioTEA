@@ -74,10 +74,6 @@ h2{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#error{
-    color: #B82132;
-}
-
 .opcion:hover {
     background-color: #213555;
     color: #F9F7F7;

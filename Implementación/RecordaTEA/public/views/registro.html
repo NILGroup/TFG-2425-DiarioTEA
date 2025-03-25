@@ -43,8 +43,9 @@
                 <label for="passw" class="form-label letra-form">Contraseña*:</label>
                 <div class="input-group">
                     <span class="input-group-text d-none d-md-block"><i class="bi bi-key"></i></span>
-                    <input type="password" class="form-control" id="passw" placeholder="Contraseña" name="passw">
+                    <input type="password" class="form-control" id="passw" placeholder="Contraseña" name="passw" required>
                     <button class="btn btn-ver" type="button" id="ver-passw"><i class="bi bi-eye"></i></button>
+                    <div class="invalid-feedback">Campo obligatorio.</div>
                 </div>
             </div>
 
@@ -54,26 +55,27 @@
                     <div class="input-group">
                         <span class="input-group-text d-none d-md-block"><i class="bi bi-key"></i></span>
                         <input type="password" class="form-control" id="passw-confirmacion"
-                            placeholder="Confirmar Contraseña" name="passwConfirmacion">
+                            placeholder="Confirmar Contraseña" name="passwConfirmacion" required>
+                            <div id="error" class="invalid-feedback">La contraseña no coincide</div>
                     </div>
-                    <p id="error" style="display: none;" class="m-0 p-0">La contraseña no coincide</p>
                 </div>
 
                 <div class="mb-3">
                     <label for="nombre" class="form-label letra-form">Nombre*:</label>
                     <div class="input-group">
                         <span class="input-group-text d-none d-md-block"><i class="bi bi-person"></i></span>
-                        <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre">
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre" required>
+                        <div class="invalid-feedback">Campo obligatorio.</div>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="rol" class="form-label letra-form">Rol*:</label>
                     <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip"
-                        data-bs-title="El papel desempeñas en la vida de la persona con TEA." class="info-span"><i
+                        data-bs-title="El papel desempeñas en la vida de la(s) persona(s) con TEA." class="info-span"><i
                             class="bi bi-info-circle-fill"></i></span>
                     <div class="input-group">
-                        <select class="form-select" id="rol" name="rol">
+                        <select class="form-select" id="rol" name="rol" required>
                             <option selected disabled>Seleccione una opción</option>
                             <option value="Docente" class="opcion">Docente</option>
                             <option value="Padre" class="opcion">Padre</option>
@@ -81,6 +83,7 @@
                             <option value="Rlegal" class="opcion">Responsable legal</option>
                             <option value="Terapeuta" class="opcion">Terapeuta</option>
                         </select>
+                        <div class="invalid-feedback">Campo obligatorio.</div>
                     </div>
                 </div>
 
