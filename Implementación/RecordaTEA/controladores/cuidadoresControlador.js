@@ -17,6 +17,18 @@ class CuidadoresController{
         req.session.usuario = usuarios[0];
         res.redirect('/diario');
     }
+
+    
+    async registro(req, res){
+        const { usuario, passw, passwConfirmacion, rol } = req.body;
+        const u = {usuario: usuario,
+            password: passw,
+            rol: rol
+        };
+        
+        const resultado = await cuidadoresService.registroCuidador(u);
+    }
+    
 }
 
 module.exports = CuidadoresController;

@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
     $(document).on('click', '#cambio', function (e) {
         e.preventDefault();
         $('#registro').slideDown();
@@ -31,18 +34,18 @@ $(document).ready(function () {
     });
 
     $('#passw-confirmacion, #passw').on('keyup', function (e) {
-        if( $('#tit-pag').text() === 'Crear cuenta'){
+        if ($('#tit-pag').text() === 'Crear cuenta') {
             let pass = $('#passw').val();
-        let confirm = $('#passw-confirmacion').val();
+            let confirm = $('#passw-confirmacion').val();
 
-        if(pass === confirm){
-            $("#error").hide();
-            $("#acceder").prop("disabled", false);
-        }
-        else{
-            $("#acceder").prop("disabled", true);
-            $("#error").show();
-        }
+            if (pass === confirm) {
+                $("#error").hide();
+                $("#acceder").prop("disabled", false);
+            }
+            else {
+                $("#acceder").prop("disabled", true);
+                $("#error").show();
+            }
         }
     });
 });

@@ -1,13 +1,12 @@
 CREATE TABLE Usuarios(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
-    usuario VARCHAR(50) NOT NULL,
-    contraseña VARCHAR(200) NOT NULL
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    contraseña VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Cuidadores(
     id INT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL,
     rol VARCHAR(10),
     FOREIGN KEY (id) REFERENCES Usuarios(id)
 );

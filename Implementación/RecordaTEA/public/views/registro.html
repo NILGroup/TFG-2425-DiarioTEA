@@ -26,8 +26,9 @@
     <div
         class="container col-lg-5 col-md-7 col-sm-12 flex-column d-flex align-items-center justify-content-center min-vh-100">
         <h1 class="recordaTEA color-tit">RecordaTEA</h1>
-        <form action="/login" id="login" method="GET" class=" form-control mt-3 p-4 shadow-lg rounded back-form ">
-            <h2 class="mb-3 text-center id=" tit-pag">Iniciar sesión</h2>
+        <form action="/users/login" id="login" method="POST"
+            class=" form-control mt-3 p-4 shadow-lg rounded back-form ">
+            <h2 class="mb-3 text-center" id="tit-pag">Iniciar sesión</h2>
             <div class="mb-3">
                 <label for="usuario" class="form-label letra-form">Usuario:</label>
                 <div class="input-group">
@@ -51,12 +52,23 @@
                     <div class="input-group">
                         <span class="input-group-text d-none d-md-block"><i class="bi bi-key"></i></span>
                         <input type="password" class="form-control" id="passw-confirmacion"
-                            placeholder="Confirmar Contraseña" name="passw-confirmacion">
+                            placeholder="Confirmar Contraseña" name="passwConfirmacion">
                     </div>
                     <p id="error" style="display: none;" class="m-0 p-0">La contraseña no coincide</p>
                 </div>
+
+                <div class="mb-3">
+                    <label for="nombre" class="form-label letra-form">Nombre:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre">
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label for="rol" class="form-label letra-form">Rol:</label>
+                    <span data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip"
+                        data-bs-title="El papel desempeñas en la vida de la persona con TEA." class="info-span"><i
+                            class="bi bi-info-circle-fill"></i></span>
                     <div class="input-group">
                         <select class="form-select" id="rol" name="rol">
                             <option selected disabled>Seleccione una opción</option>
@@ -79,6 +91,8 @@
 
         </form>
     </div>
+
+    <div class="container finale"></div>
 
     <script src="../javascripts/login.js"></script>
 </body>

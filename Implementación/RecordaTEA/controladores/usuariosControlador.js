@@ -114,9 +114,6 @@ class UsuariosControlador {
         }
 
     }
-    
-
-
 
 }
 module.exports = UsuariosControlador;

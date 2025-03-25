@@ -82,3 +82,16 @@ h2{
     background-color: #213555;
     color: #F9F7F7;
 }
+
+.custom-tooltip {
+    --bs-tooltip-bg: #213555;
+    --bs-tooltip-color: #F9F7F7;
+}
+
+.info-span{
+    position: relative;
+    top: -0.5em;
+    cursor: pointer;
+    font-size: small;
+    margin-left: 0em;
+}
