@@ -80,10 +80,12 @@ class UsuariosControlador {
 
             // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
             const entrada = await usuariosServicio.viewEntryById(idEntrada, idUsuario);
+            const emocion = vocabulario.filter(t=>t.categoria==="Emocion" && t.categoria!=null);
+
             
 
             if (entrada) {
-                return res.render('TEA/editEntryTEA', { entrada: entrada[0], diary: true, vocabulario: vocabulario });
+                return res.render('TEA/editEntryTEA', { entrada: entrada[0], diary: true, vocabulario: vocabulario, emocion: emocion });
             } else {
                 const error = {
                     status: 403,
@@ -126,7 +128,7 @@ class UsuariosControlador {
         }
         else{
             let cuidador = await cuidadoresService.login(u.mensaje);
-            if(cuidador){
+            if(cuidador.length>0){
                 req.session.rol = cuidador.rol;
                 req.session.nombre = u.mensaje.nombre;
                 req.session.idUsuario =cuidador.id;

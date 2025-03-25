@@ -79,7 +79,7 @@ class UsuariosDao {
                 ORDER BY Entradas.fecha_registro DESC, Entradas_tarjeta.orden ASC;
             `, [idEntrada, idUsuario]);
 
-            
+
             return entradas;
         }
         catch (error) {
@@ -95,7 +95,7 @@ class UsuariosDao {
                 `INSERT INTO entradas (id_usuario, autor, fecha_registro) VALUES (?, ?, ?);`,
                 [data.id_usuario, data.id_usuario, data.fecha_registro]
             );
-    
+
             // Verifica que la fila fue insertada correctamente
             if (entrada.affectedRows === 1) {
                 // Prepara los valores para la inserción masiva
@@ -105,7 +105,7 @@ class UsuariosDao {
                     tarjeta.orden,
                     tarjeta.emocion
                 ]);
-    
+
                 // Inserta en la tabla 'entradas_tarjeta'
                 const [entradas_tarjeta] = await pool.query(
                     `INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden, emocion) VALUES ?;`,
@@ -113,7 +113,7 @@ class UsuariosDao {
                 );
 
                 return { success: true, id: entrada.insertId }; // Devuelve el ID de la entrada
-    
+
             }
 
         } catch (error) {
@@ -122,87 +122,104 @@ class UsuariosDao {
         }
     }
 
-    async actualizarTarjetasEntrada(data){
+    async actualizarTarjetasEntrada(data) {
         const conn = await pool.getConnection();
         try {
-          await conn.beginTransaction();
-      
-          // 1. Actualizar la entrada
-          await conn.execute(
-            'UPDATE entradas SET fecha_registro = ? WHERE id = ?',
-            [data.fecha_registro, data.id]
-          );
-      
-          // 2. Obtener tarjetas actuales de la base de datos
-          const [rows] = await conn.execute(
-            'SELECT id_tarjeta, orden FROM entradas_tarjeta WHERE id_entrada = ?',
-            [data.id]
-          );
-      
-          const actuales = new Map(rows.map(t => [t.id_tarjeta, t.orden]));
-          const nuevas = new Map(data.tarjetas.map(t => [t.id, t.orden]));
-      
-          // 3. Eliminar tarjetas que ya no están
-          for (const [id_tarjeta_actual] of actuales) {
-            if (!nuevas.has(id_tarjeta_actual)) {
-              await conn.execute(
-                'DELETE FROM entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
-                [data.id, id_tarjeta_actual]
-              );
+            await conn.beginTransaction();
+
+            // 1. Actualizar la entrada
+            await conn.execute(
+                'UPDATE entradas SET fecha_registro = ? WHERE id = ?',
+                [data.fecha_registro, data.id]
+            );
+
+            // 2. Obtener tarjetas actuales de la base de datos
+            const [rows] = await conn.execute(
+                'SELECT id_tarjeta, orden, emocion FROM entradas_tarjeta WHERE id_entrada = ?',
+                [data.id]
+            );
+
+            const actuales = new Map(rows.map(t => [t.id_tarjeta, t.orden]));
+            const nuevas = new Map(data.tarjetas.map(t => [t.id, t.orden]));
+
+
+            // 3. Eliminar tarjetas que ya no están
+            for (const [id_tarjeta_actual] of actuales) {
+                if (!nuevas.has(id_tarjeta_actual)) {
+                    await conn.execute(
+                        'DELETE FROM entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
+                        [data.id, id_tarjeta_actual]
+                    );
+                }
             }
-          }
-      
-          // 4. Insertar nuevas tarjetas o actualizar orden
-          for (const { id, orden } of data.tarjetas) {
-            if (!actuales.has(id)) {
-              // No existía antes: insertar
-              await conn.execute(
-                'INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES (?, ?, ?)',
-                [data.id, id, orden]
-              );
-            } else if (actuales.get(id) !== orden) {
-              // Existía pero con distinto orden: actualizar
-              await conn.execute(
-                'UPDATE entradas_tarjeta SET orden = ? WHERE id_entrada = ? AND id_tarjeta = ?',
-                [orden, data.id, id]
-              );
+
+            // 4. Insertar nuevas tarjetas o actualizar orden
+            for (const { id, orden, emocion } of data.tarjetas) {
+                if (!actuales.has(id)) {
+                    // No existía antes: insertar
+
+                    const [existingEntry] = await conn.execute(
+                        'SELECT 1 FROM entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
+                        [data.id, id]
+                    );
+                    
+                    if (existingEntry.length === 0) {
+                        await conn.execute(
+                            'INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden, emocion) VALUES (?, ?, ?, ?)',
+                            [data.id, id, orden, emocion]
+                        );
+                    }
+                    
+                    
+                } else {
+                    const actual = actuales.get(id);
+            
+                    if (actual.orden !== orden) {
+                        // Existía pero con distinto orden: actualizar
+                        await conn.execute(
+                            'UPDATE entradas_tarjeta SET orden = ? WHERE id_entrada = ? AND id_tarjeta = ?',
+                            [orden, data.id, id]
+                        );
+                    }
+            
+                }
             }
-          }
-      
-          await conn.commit();
-          return {success: true};
-      
+            
+
+            await conn.commit();
+            return { success: true };
+
         } catch (err) {
-          await conn.rollback();
-          console.error(err);
-          return {success: false, error: err};
+            await conn.rollback();
+            console.error(err);
+            return { success: false, error: err };
         } finally {
-          conn.release();
+            conn.release();
         }
     }
 
-    async login(usuario){
+    async login(usuario) {
         const [u] = await pool.query('SELECT * FROM Usuarios WHERE usuario = ?', [usuario.usuario]);
         return u[0];
     }
 
-    async leerUsuario(usuario){
-        try{
+    async leerUsuario(usuario) {
+        try {
             const [usu] = await pool.query('SELECT * FROM Usuarios WHERE usuario = ?', [usuario]);
             return usu;
         }
-        catch(error){
+        catch (error) {
             console.error('Error al buscar cuidador por Usuario: ', error);
             throw error;
         }
     }
 
-    async registrarUsuario(usuario){
-        try{
+    async registrarUsuario(usuario) {
+        try {
             const [resultado] = await pool.query('INSERT INTO Usuarios (nombre, usuario, contraseña)  VALUES (?, ?, ?)', [usuario.nombre, usuario.usuario, usuario.password]);
             return resultado;
         }
-        catch(error){
+        catch (error) {
             console.error('Error al registrar un Cuidador: ', error);
             throw error;
         }

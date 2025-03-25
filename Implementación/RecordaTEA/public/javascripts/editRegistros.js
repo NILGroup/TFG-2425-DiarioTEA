@@ -16,6 +16,24 @@ $(document).ready(function () {
         $('#cancel-btn-edit').hide();
     });
 
+    var emocionSeleccionadaAnt = null;
+
+    $('#emocionModal .card').on('click', function (e) {
+        e.preventDefault();
+        if (emocionSeleccionadaAnt != null) {
+            emocionSeleccionadaAnt.find('img').removeClass('seleccionada');
+        }
+        emocionSeleccionadaAnt = $(this);
+        $(this).find('img').addClass('seleccionada');
+    });
+
+    $("#addEmocionButton").on('click', function(){
+        var img= emocionSeleccionadaAnt.find('img').attr('src');
+        $("#emocionSeleccionada").attr('src', img);
+        $('#emocionModal').modal('hide');
+     
+    })
+
     $('#updateButton').on('click', function (e) {
         e.preventDefault();
         const tarjetas = []; // Array para almacenar los datos de las cards
@@ -31,9 +49,22 @@ $(document).ready(function () {
 
             tarjetas.push({
                 id: idTarjeta, // Guardar el id de la tarjeta
-                orden: orden   // Guardar el orden de la tarjeta
+                orden: orden,   // Guardar el orden de la tarjeta
+                emocion: false
             });
         });
+
+        if(emocionSeleccionadaAnt!=null){
+            idTarjeta = parseInt(emocionSeleccionadaAnt.attr('id'));
+            orden= tarjetas.length+1;
+            
+            tarjetas.push({
+                id: idTarjeta,
+                orden: orden,
+                emocion: true
+            })
+        }
+
 
         const fecha = $('#fecha-edit').val(); // Ej: "2025-03-23"
         const hora = $('#hora-edit').val();   // Ej: "10:30"

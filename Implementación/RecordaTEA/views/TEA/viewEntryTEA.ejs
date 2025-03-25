@@ -7,11 +7,22 @@
             </h1>
             <div class="row mt-5">
                 <% entrada.tarjetas.forEach(function(picto) { %>
+                    <% if (!picto.emocion) { %>
                     <div class="col-lg-2 col-md-3 col-sm-5 col-xs-6">
                         <div class="card">
                             <img class="card-img" src="<%= picto.enlace %>">
                         </div>
                     </div>
+                    <% } else { %>
+                        <div class="col-lg-2 col-md-3 col-sm-5 col-xs-6 ms-auto">
+                            <div class="card">
+                                <img class="card-img" src="<%= picto.enlace %>">
+                                
+                            </div>
+                            <p class="card-title texto-boton">EMOCION</p>
+                        </div>
+                       
+                    <% } %>
                     <% }); %>
             </div>
         </div>
@@ -23,7 +34,7 @@
                             <img class="card-img" src="/images/config/botonVolver.png"
                                 alt="Volver a la pestaña anterior">
                         </a>
-                        <p class="card-title texto-boton">VOLVER</p>
+                        <p class="card-title text-center">VOLVER</p>
                     </div>
                 </div>
                 <div class="col-lg-1 col-md-3 col-sm-5 col-xs-6">

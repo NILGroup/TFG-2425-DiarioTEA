@@ -170,7 +170,8 @@ class UsuariosService {
 
         console.log(usuario.password + '\n' + u.contraseña);
 
-        const esValida = await bcrypt.compare(usuario.password, u.contraseña);
+        //const esValida = await bcrypt.compare(usuario.password, u.contraseña);
+        const esValida = usuario.password === u.contraseña;
         if (!esValida) {
             return {mensaje: -2}
         }
