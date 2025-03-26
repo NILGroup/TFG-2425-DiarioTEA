@@ -156,6 +156,7 @@ class UsuariosControlador {
             var u = await usuariosServicio.leerUsuarioId(resultado.mensaje);
             let r = await usuariosServicio.realacionCuidador(u[0].id, req.session.idUsuario);
             if(r.mensaje > 0){
+                req.session.usuarios.push(u[0]);
                 return res.send({mensaje: resultado.mensaje, usuario: u[0]});
             }
         }
