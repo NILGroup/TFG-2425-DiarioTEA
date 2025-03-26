@@ -13,10 +13,10 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
 
-        <link rel="stylesheet" href="/stylesheets/indexStyle.css">
-        <link rel="stylesheet" href="/stylesheets/index.css">
-        <link rel="stylesheet" href="/stylesheets/cuidadores.css">
-        <link rel="stylesheet" href="/stylesheets/i.css">
+    <link rel="stylesheet" href="/stylesheets/indexStyle.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <link rel="stylesheet" href="/stylesheets/cuidadores.css">
+    <link rel="stylesheet" href="/stylesheets/login.css">
     <!--JQUERY-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
@@ -35,41 +35,105 @@
                     </a>
                 </ul>
 
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown test">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center item-perfil" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span><%= data.nombre %> <i class="bi bi-person-circle"></i> </span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="perfilDropdown">
-                        <li><a class="dropdown-item text-danger" href="/cuidadores/logout"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a></li>
-                    </ul>
-                </li>
-            </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown test">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center item-perfil" href="#"
+                            id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span>
+                                <%= data.nombre %> <i class="bi bi-person-circle"></i>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="perfilDropdown">
+                            <li><a class="dropdown-item text-danger" href="/cuidadores/logout"><i
+                                        class="bi bi-box-arrow-right"></i> Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <h2 class="text-center mt-4 titulos-1">Mis usuarios</h2>
-
-    <div class="container d-flex flex-column flex-grow-1 justify-content-center text-center">
-        <div class="row mt-5 justify-content-center align-items-center">
-            <% if (data.usuarios.length > 0) { %>
+    <div class="container container-1 d-flex flex-column flex-grow-1 justify-content-center text-center"
+        id="mostrar-perfiles">
+        <h2 class="text-center mt-4 titulos-1">Mis usuarios</h2>
+        <div class="row mt-5 justify-content-center align-items-center" id="cards-usuarios">
+            <% if (data.usuarios.length> 0) { %>
                 <% data.usuarios.forEach(function(elem){ %>
                     <div class="col-md-3 col-xs-3">
-                        <a href="diary/<%= elem.id %>">
+                        <a href="/diario/<%= elem.id %>">
                             <div class="card card-usuarios">
-                                <h5 class="card-title text-center"><%= elem.nombre %></h5>
+                                <h5 class="card-title text-center">
+                                    <%= elem.nombre %>
+                                </h5>
                                 <div class="card-body"></div>
                             </div>
                         </a>
                     </div>
-                <% }); %>
-            <% } else { %>
-                <p class="align-items-center titulos-2">Todavía no tienes ningún usuario asignado.</p>
-            <% } %>
-            
+                    <% }); %>
+                        <% } else { %>
+                            <div id="aviso-boton">
+                                <p class="align-items-center titulos-2">Todavía no tienes ningún usuario asignado.</p>
+                                <button class="btn btn-background col-lg-2 col-md-3 col-xs-10" id="mostrar-form"><i
+                                        class="bi bi-person-plus" style="margin-right: 0.2em;"></i> Añadir
+                                    Usuario</button>
+                            </div>
+                            <% } %>
+
         </div>
     </div>
+    <div class="container col-lg-6 col-md-6 col-sm-12 text-start mt-4" style="display: none;" id="container-form">
+        <form action="" class="form-control mt-3 p-4 shadow-lg rounded back-form needs-validation" novalidate>
+            <h2 class="mb-3 text-center">Crear perfil para una persona con TEA</h2>
+            <p>Los campos con (*) son obligatorios.</p>
+            <div class="mb-3">
+                <label for="usuario-perfil" class="form-label letra-form">Usuario*:</label>
+                <div class="input-group">
+                    <span class="input-group-text d-none d-md-block">@</span>
+                    <input type="text" class="form-control" id="usuario-perfil" placeholder="Usuario" name="usuarioTEA"
+                        required>
+                    <div class="invalid-feedback" id="usuario-error-perfil">Campo obligatorio.</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="passw-perfil" class="form-label letra-form">Contraseña*:</label>
+                <div class="input-group">
+                    <span class="input-group-text d-none d-md-block"><i class="bi bi-key"></i></span>
+                    <input type="password" class="form-control" id="passw-perfil" placeholder="Contraseña"
+                        name="passwTEA" required>
+                    <button class="btn btn-ver" type="button" id="ver-passw-perfil"><i class="bi bi-eye"></i></button>
+                    <div class="invalid-feedback" id="passw-error-perfil">Campo obligatorio.</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="passw-confirmacion-perfil" class="form-label letra-form">Confirmar Contraseña*:</label>
+                <div class="input-group">
+                    <span class="input-group-text d-none d-md-block"><i class="bi bi-key"></i></span>
+                    <input type="password" class="form-control" id="passw-confirmacion-perfil"
+                        placeholder="Confirmar Contraseña" name="passwConfirmacionTEA" required>
+                    <div id="error-perfil" class="invalid-feedback">La contraseña no coincide</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="nombre-perfil" class="form-label letra-form">Nombre*:</label>
+                <div class="input-group">
+                    <span class="input-group-text d-none d-md-block"><i class="bi bi-person"></i></span>
+                    <input type="text" class="form-control" id="nombre-perfil" placeholder="Nombre" name="nombreTEA"
+                        required>
+                    <div class="invalid-feedback">Campo obligatorio.</div>
+                </div>
+            </div>
+
+            <div class="text-end justify-content-end">
+                <button class="btn btn-background text-end" type="submit" id="add-perfil">Añadir</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container finale"></div>
+    <script src="/javascripts/crearPerfil.js"></script>
 </body>
 
 </html>

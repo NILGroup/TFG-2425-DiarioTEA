@@ -170,8 +170,7 @@ class UsuariosService {
 
         console.log(usuario.password + '\n' + u.contraseña);
 
-        //const esValida = await bcrypt.compare(usuario.password, u.contraseña);
-        const esValida = usuario.password === u.contraseña;
+        const esValida = await bcrypt.compare(usuario.password, u.contraseña);
         if (!esValida) {
             return {mensaje: -2}
         }
@@ -190,6 +189,15 @@ class UsuariosService {
         else{
             let registerResult = await usuariosDao.registrarUsuario(usuario);
             return {mensaje: registerResult.insertId};
+        }
+    }
+
+    async realacionCuidador(usuarioId, cuidadorId){
+        if(usuarioId > 0){
+            let resultado = await usuariosDao.realcionCuidador(usuarioId, cuidadorId);
+            return {mensaje: resultado.affectedRows};
+        }else{
+            return  {mensaje: -4};
         }
     }
 }

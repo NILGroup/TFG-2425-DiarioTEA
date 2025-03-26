@@ -26,6 +26,8 @@ router.post('/login', controllerUsuarios.login);
 
 router.get('/routines/:idRutina', controllerRutinas.getTarjetasByIdRutina);
 
+router.post('/nuevo-usuario', controllerUsuarios.registro);
+
 
 
 module.exports = router;

@@ -4,8 +4,8 @@ const EntradasControlador = require('../controladores/entradasControlador');
 const entradasControlador = new EntradasControlador();
 var router = express.Router();
 
-router.get('/', entradasControlador.cargarDiario);
+router.get('/:id', entradasControlador.cargarDiario);
 
-router.get('/:dia', entradasControlador.cargarDia);
+router.get('/dia/:dia', entradasControlador.cargarDia);
 
 module.exports = router;

@@ -224,6 +224,17 @@ class UsuariosDao {
             throw error;
         }
     }
+
+    async realcionCuidador(usuarioId, cuidadorId){
+        try{
+            const [resultado] = await pool.query('INSERT INTO Cuidadores_usu (Id_cuidador, Id_usuario)  VALUES (?, ?)', [cuidadorId, usuarioId]);
+            return resultado;
+        }
+        catch(error){
+            console.error('Error al vincular un usuario a un cuidador: ', error);
+            throw error;
+        }
+    }
 };
 
 
