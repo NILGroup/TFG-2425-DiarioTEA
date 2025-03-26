@@ -19,7 +19,7 @@ class RutinassDao {
                 FROM Rutinas
                 WHERE Rutinas.id_usuario = ?
                 `, [idUsuario]);
-
+                
             return response;
         }
 

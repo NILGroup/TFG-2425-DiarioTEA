@@ -12,6 +12,7 @@ class TarjetasControlador {
             let vocabulario = await tarjetasService.vocabularioUsuarioId(id_usuario);
             let data = {
                 usuario: req.session.usuario,
+                usuarios: req.session.usuarios,
                 voc: vocabulario
             };
             res.render('cuidadores/gestionTarjetas', { data: data });

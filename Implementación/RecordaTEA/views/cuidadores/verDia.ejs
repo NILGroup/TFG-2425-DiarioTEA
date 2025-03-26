@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <%-include ("navbar", { nombreUsuario: data.usuario.nombre })%>
+    <%-include ("navbar", { nombreUsuario: data.usuario.nombre, idUsuario: data.usuario.id, usuarios: data.usuarios })%>
         <main class="container margen">
             <div class="row mt-4 text-center">
                 <h1 class="titulos-1">Diario de <%= data.usuario.nombre %>

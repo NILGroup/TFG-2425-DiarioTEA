@@ -19,6 +19,10 @@ body {
     margin-right: 0.5em;
 }
 
+.text-azul{
+    color: #213555 !important;
+}
+
 .distribuidor a:hover {
     color: #F9F7F7;
 }

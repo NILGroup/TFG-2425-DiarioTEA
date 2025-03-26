@@ -13,7 +13,8 @@ class EntradasController {
     async cargarDiario(req, res) {
         try {
             let usuario;
-            if (!req.session.usuario) {
+            let usus = req.session.usuarios;
+            if (!req.session.usuario || req.session.usuario.id !== req.params.id) {
                 const resultado = await usuariosService.leerUsuarioId(req.params.id);
                 usuario = resultado[0];
             }
@@ -35,7 +36,8 @@ class EntradasController {
                     entrada.pictos = [];
                 }
             }
-            res.render('cuidadores/diario', { data: { entradas: entradas, usuario: usuario } });
+
+            res.render('cuidadores/diario', { data: { entradas: entradas, usuario: usuario, usuarios: usus } });
         }
         catch (error) {
             throw error;
@@ -46,6 +48,7 @@ class EntradasController {
         try {
             let dia = req.params.dia;
             let usuario = req.session.usuario;
+            let usus = req.session.usuarios;
             let entradas = await entradasService.entradasDia(dia, usuario.id);
             for (let entrada of entradas) {
                 let autor = await usuariosService.leerUsuarioId(entrada.autor);
@@ -60,7 +63,7 @@ class EntradasController {
                 }
             }
             let diaCompleto = fechaUtils.fechaCompleta(dia);
-            res.render('cuidadores/verDia', { data: { entradas: entradas, usuario: usuario, dia: diaCompleto } });
+            res.render('cuidadores/verDia', { data: { entradas: entradas, usuario: usuario, dia: diaCompleto, usuarios: usus } });
         }
         catch (error) {
             throw error;

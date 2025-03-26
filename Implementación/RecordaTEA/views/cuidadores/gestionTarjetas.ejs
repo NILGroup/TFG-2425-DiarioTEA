@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <%-include ("navbar", { nombreUsuario: data.usuario.nombre })%>
+    <%-include ("navbar", { nombreUsuario: data.usuario.nombre, idUsuario: data.usuario.id, usuarios: data.usuarios  })%>
 
         <div class="container mt-5 justify-content-center" id="containerPrincipal">
             <div class="btn-group manage-btn-group" role="group" aria-label="Opciones de seleccion de pictos">
