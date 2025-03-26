@@ -89,10 +89,10 @@ body {
 /*CARDS DE LOS USUARIOS*/
 .card-usuarios {
     background-color: #F9F7F7;
-    border-color: #2A3335;
     border-width: 0.2em;
     border-radius: 0.3em;
     transition: transform 0.3s;
+    min-height: 3em;
 }
 
 .card-usuarios:hover {

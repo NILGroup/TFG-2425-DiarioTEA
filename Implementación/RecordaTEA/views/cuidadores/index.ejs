@@ -66,11 +66,13 @@
                 <% data.usuarios.forEach(function(elem){ %>
                     <div class="col-md-3 col-xs-3">
                         <a href="/diario/<%= elem.id %>">
-                            <div class="card card-usuarios">
-                                <h5 class="card-title text-center">
+                            <div class="card card-usuarios align-content-center justify-content-center">
+                                <div class="card-body">
+                                    <img class="card-img img-fluid" src="/images/config/avatar.png" alt="Opcion por defecto del perfil">
+                                </div>
+                                <h5 class="card-title text-center ">
                                     <%= elem.nombre %>
                                 </h5>
-                                <div class="card-body"></div>
                             </div>
                         </a>
                     </div>
