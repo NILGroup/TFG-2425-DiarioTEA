@@ -137,7 +137,6 @@ class UsuariosControlador {
             else{
                 req.session.usuario = u.mensaje;
                 req.session.cuidador = 0;
-                
             }
             req.session.logged = 1;
             let esCuidador = req.session.cuidador;

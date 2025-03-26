@@ -37,15 +37,10 @@ class UsuariosDao {
                 ORDER BY Entradas.fecha_registro DESC, Entradas_tarjeta.orden ASC;
             `, [idUsuario, idUsuario]);
 
-
-
-
-
-            console.log(entradas);
             return entradas;
         }
         catch (error) {
-            console.error('ERROR[UsuariosDao]: buscar entradas de usuario por Id del usuario');
+            console.error('ERROR[UsuariosDao]: buscar entradas de usuario por Id del usuario' + error);
         }
     }
 
