@@ -15,6 +15,7 @@ class TarjetasControlador {
                 usuarios: req.session.usuarios,
                 voc: vocabulario
             };
+            console.log('he llegado: '+  data)
             res.render('cuidadores/gestionTarjetas', { data: data });
         }
         catch (error) {

@@ -11,11 +11,13 @@ class TarjetasService {
         let vocabulario;
         try {
             if (id_usuario !== null) {
+                console.log(id_usuario)
                 vocabulario = await tarjetasDao.vocabularioUsuarioId(id_usuario);
             }
             else{
                 vocabulario = -1;
             }
+            console.log(vocabulario)
             return vocabulario;
         }
         catch (error) {

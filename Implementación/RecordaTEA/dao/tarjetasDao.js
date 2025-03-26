@@ -7,6 +7,7 @@ class TarjetasDao {
     try {
       let [vocabulario] = await pool.query('SELECT p.id, p.enlace, t.id as idTarjeta FROM Tarjetas t JOIN Pictos p ON t.id_picto = p.id WHERE t.id_usuario = ?',
         [id]);
+        console.log(vocabulario)
       return vocabulario;
     }
     catch (error) {

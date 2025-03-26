@@ -17,6 +17,7 @@ class EntradasController {
             if (!req.session.usuario || req.session.usuario.id !== req.params.id) {
                 const resultado = await usuariosService.leerUsuarioId(req.params.id);
                 usuario = resultado[0];
+                req.session.usuario = resultado[0];
             }
             else {
                 usuario = req.session.usuario;
