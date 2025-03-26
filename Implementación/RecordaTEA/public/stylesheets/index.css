@@ -41,3 +41,7 @@ a {
     height: 100%;
     object-fit: cover;
 }
+
+.texto-perfil{
+    font-size: 2em;
+}

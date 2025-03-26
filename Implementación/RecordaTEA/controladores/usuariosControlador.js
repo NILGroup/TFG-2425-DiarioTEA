@@ -13,7 +13,7 @@ class UsuariosControlador {
 
     async redirectToDiary(req, res) {
         const response = await usuariosServicio.leerDiarioPorUsuario(req.session.usuario.id);
-        res.render('TEA/diaryTEA', { entradas: response, diary: true });
+        res.render('TEA/diaryTEA', { entradas: response, diary: true, nombre: req.session.usuario.nombre });
     }
 
     async addEntry(req, res) {
@@ -23,7 +23,7 @@ class UsuariosControlador {
         console.log(response);
         const tarjetas_emocion = response.filter(t=>t.categoria="Emocion" && t.categoria!=null);
 
-        res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre, emocion:  tarjetas_emocion})
+        res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre, emocion:  tarjetas_emocion, nombre: req.session.usuario.nombre})
 
         //OBTENER PICTOGRAMAS DEL USUARIO PARA ADD ENTRY Y RENDERIZAR
 
@@ -54,7 +54,7 @@ class UsuariosControlador {
             const entrada = await usuariosServicio.viewEntryById(idEntrada, idUsuario);
 
             if (entrada) {
-                return res.render('TEA/viewEntryTEA', { entrada: entrada[0],  diary: true  });
+                return res.render('TEA/viewEntryTEA', { entrada: entrada[0],  diary: true, nombre: req.session.usuario.nombre  });
             } else {
                 const error = {
                     status: 403,
@@ -85,7 +85,7 @@ class UsuariosControlador {
             
 
             if (entrada) {
-                return res.render('TEA/editEntryTEA', { entrada: entrada[0], diary: true, vocabulario: vocabulario, emocion: emocion });
+                return res.render('TEA/editEntryTEA', { entrada: entrada[0], diary: true, vocabulario: vocabulario, emocion: emocion, nombre: req.session.usuario.nombre });
             } else {
                 const error = {
                     status: 403,
@@ -161,6 +161,11 @@ class UsuariosControlador {
             }
         }
         return res.send({mensaje: resultado.mensaje});
+    }
+
+    logout(req, res){
+        req.session.destroy();
+        res.redirect('/');
     }
 
 }

@@ -2,7 +2,7 @@
 
     <body>
         <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;" id="contenedorRutina">
-            <h3 class="text-center">Rutina de <%= nombre %></h3>
+            <h3 class="text-center">Rutina de <%= nombreRutina %></h3>
             <div class="row pb-3" id="cardsRutina">
                 <!--porque se le pasa minimo una entrada pero para obtener el nombre de la rutina aunque no tenga pictos-->
                 <% if (rutinas.length>0 && rutinas[0].id_picto!=null) { %>

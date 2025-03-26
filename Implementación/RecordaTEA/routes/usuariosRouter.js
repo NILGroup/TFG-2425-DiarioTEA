@@ -28,6 +28,6 @@ router.get('/routines/:idRutina', controllerRutinas.getTarjetasByIdRutina);
 
 router.post('/nuevo-usuario', controllerUsuarios.registro);
 
-
+router.get('/logout', controllerUsuarios.logout);
 
 module.exports = router;
