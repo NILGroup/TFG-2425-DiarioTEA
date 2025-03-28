@@ -76,10 +76,12 @@ class TarjetasDao {
 
   async addImagen(tarjeta){
     try{
-      let resultado = await pool.query('INSERT INTO Tarjetas')
+      let [resultado] = await pool.query('INSERT INTO Tarjetas (id_usuario) VALUES (?)', [tarjeta.id_usuario]);
+      let [resultadoImagen] = await pool.query('INSERT INTO Imagenes (imagen, mimetype, id_tarjeta) VALUES (?, ?, ?)', [tarjeta.imagen, tarjeta.mimetype, resultado.insertId]);
+      return resultadoImagen.insertId;
     }
     catch (error){
-
+      console.log('ERROR AL INSERTAR IMAGEN', error);
     }
   }
 }

@@ -1,6 +1,7 @@
 $(document).ready(function () {
     let cropper;
     var modal = new bootstrap.Modal(document.getElementById('recorta-img'));
+    var img;
     const tiposValidos = ["image/jpeg", "image/png", "image/webp"];
 
     $('#imagenSeleccionada').on('change', function (e) {
@@ -51,7 +52,7 @@ $(document).ready(function () {
     $('#recortar-img').on('click', function () {
         if (!cropper) return;
 
-        let img = cropper.getCroppedCanvas({
+        img = cropper.getCroppedCanvas({
             width: 500,
             height: 500
         });
@@ -63,5 +64,33 @@ $(document).ready(function () {
         });
 
         $("#recorta-img").modal("hide");
+    });
+
+    $('#btn-subir').on('click', function (e) {
+        e.preventDefault();
+
+        const inputFile = $('#imagenSeleccionada')[0].files[0];
+        const fileName = inputFile ? inputFile.name : 'imagen_recortada.jpg';
+
+        let formData = new FormData();
+        img.toBlob(function (blob) {
+            formData.append('image', blob, fileName);
+            $.ajax({
+                url: '/tarjetas-comunicacion/nueva-imagen',
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if(response > 0){
+                        
+                    }
+                },
+                error: function () {
+    
+                }
+            });
+        });
+
     });
 });

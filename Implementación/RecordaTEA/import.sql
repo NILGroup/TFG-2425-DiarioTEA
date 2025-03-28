@@ -3,7 +3,7 @@ CREATE TABLE Usuarios(
     nombre VARCHAR(50) NOT NULL,
     usuario VARCHAR(50) NOT NULL UNIQUE,
     contraseña VARCHAR(255) NOT NULL,
-    imagen LONGBLOB,
+    imagen MEDIUMBLOB,
     mimetype VARCHAR(20)
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE Pictos(
 
 CREATE TABLE Imagenes(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    imagen LONGBLOB,
+    imagen MEDIUMBLOB,
     mimetype VARCHAR(255),
     id_tarjeta INT NOT NULL,
     FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas(id)

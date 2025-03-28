@@ -94,12 +94,18 @@ class TarjetasControlador {
     }
 
     async addTarjetaImagen(req, res){
+        console.log('he llegado');
         let tarjeta = {
             imagen: req.file.buffer,
             mimetype: req.file.mimetype,
-            id_usuario: req.session.usuario.id
+            id_usuario: req.session.usuario.id,
+            tam: req.file.size
         }
-        
+
+        console.log('estoy aqui');
+
+        let resultado = await tarjetasService.addTarjetaImagen(tarjeta);
+        res.send(resultado);        
     }
 }
 
