@@ -19,6 +19,7 @@ CREATE TABLE Tarjetas(
     orden INT NOT NULL,
     categoria VARCHAR(100),
     activa BOOLEAN DEFAULT 1,
+    texto text,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
 
