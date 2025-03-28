@@ -223,4 +223,20 @@ $(document).ready(function () {
             divPicto.show();
         });
     });
+
+    $('#btn-pictos').on('click', function(e){
+        $('#btn-pictos').addClass('seleccion');
+        $('#btn-imagenes').removeClass('seleccion');
+        $('#btn-texto').removeClass('seleccion');
+        $('#gestion-imagenes').hide();
+        $('#gestion-pictogramas').show();
+    });
+
+    $('#btn-imagenes').on('click', function(e){
+        $('#btn-imagenes').addClass('seleccion');
+        $('#btn-pictos').removeClass('seleccion');
+        $('#btn-texto').removeClass('seleccion');
+        $('#gestion-pictogramas').hide();
+        $('#gestion-imagenes').show();
+    });
 })

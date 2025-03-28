@@ -25,77 +25,122 @@
 
         <div class="container mt-5 justify-content-center" id="containerPrincipal">
             <div class="btn-group manage-btn-group" role="group" aria-label="Opciones de seleccion de pictos">
-                <button type="button" class="btn manage-buttons seleccion">Pictogramas</button>
+                <button type="button" class="btn manage-buttons seleccion" id="btn-pictos">Pictogramas</button>
+                <button type="button" class="btn manage-buttons" id="btn-imagenes">Imágenes</button>
+                <button type="button" class="btn" id="btn-texto">Texto</button>
             </div>
 
             <div class="row p-3 borde justify-content-center">
-                <div class="row">
-                    <form method="GET" action="" class="d-flex" id="buscadorARASAAC">
-                        <input class="form-control me-2" type="search" placeholder="Buscar pictogramas en ARASAAC"
-                            aria-label="Buscar pictogramas en ARASAAC" name="consulta" required id="campoBusqueda">
-                        <button class="btn btn-background d-flex" type="" id="buscaArasaac"><i
-                                class="bi bi-search me-2"></i> Buscar</button>
-                    </form>
-                </div>
 
-                <div class="row mt-5" id="matrizBusqueda" style="display: none;">
-                    <div class="d-flex justify-content-center text-center" id="avisos">
-                        <div id="cargando" class="spinner-border cargando" role="status" style="display: none;">
-                            <span class="visually-hidden">Loading...</span>
+                <div id="gestion-pictogramas">
+                    <div class="row">
+                        <form method="GET" action="" class="d-flex" id="buscadorARASAAC">
+                            <input class="form-control me-2" type="search" placeholder="Buscar pictogramas en ARASAAC"
+                                aria-label="Buscar pictogramas en ARASAAC" name="consulta" required id="campoBusqueda">
+                            <button class="btn btn-background d-flex" type="" id="buscaArasaac"><i
+                                    class="bi bi-search me-2"></i> Buscar</button>
+                        </form>
+                    </div>
+    
+                    <div class="row mt-5" id="matrizBusqueda" style="display: none;">
+                        <div class="d-flex justify-content-center text-center" id="avisos">
+                            <div id="cargando" class="spinner-border cargando" role="status" style="display: none;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row pb-3 justify-content-center" id="resultBusqueda" style="display: none;">
+    
+                            </div>
+                            <div class="row mt-2" style="display: none;" id="paginas">
+                                <div class="d-flex justify-content-center text-center">
+                                    <nav aria-label="" class="text-center">
+                                        <ul class="pagination">
+                                            <li class="page-item"><button class="page-link btn-borde" href="#"
+                                                    id="anteriorPag">Anterior</button>
+                                            </li>
+                                            <li class="page-item"><button class="page-link btn-borde" href="#"
+                                                    id="siguientePag">Siguiente</button></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="container">
-                        <div class="row pb-3 justify-content-center" id="resultBusqueda" style="display: none;">
-
-                        </div>
-                        <div class="row mt-2" style="display: none;" id="paginas">
-                            <div class="d-flex justify-content-center text-center">
-                                <nav aria-label="" class="text-center">
-                                    <ul class="pagination">
-                                        <li class="page-item"><button class="page-link btn-borde" href="#"
-                                                id="anteriorPag">Anterior</button>
-                                        </li>
-                                        <li class="page-item"><button class="page-link btn-borde" href="#"
-                                                id="siguientePag">Siguiente</button></li>
-                                    </ul>
-                                </nav>
+    
+                    <div class="row mt-5">
+                        <h1 class="titulos-2" data-nombre="<%= data.usuario.nombre %>" id="nomVoc">Pictogramas en el vocabulario de <%=
+                                data.usuario.nombre %>:</h1>
+                        <div class="container mt-3 borde-cont">
+                            <div class="row pb-3 vocabulario" id="contenedorPictogramas">
+                                <% if (data.voc.length> 0) { %>
+                                    <% data.voc.forEach(function(elem){%>
+                                        <div class="col-lg-2 col-md-3 mt-3">
+                                            <div class="dflex">
+                                                <div class="card">
+                                                    <a href="">
+                                                        <img src="<%= elem.enlace%>" class="card-img">
+                                                    </a>
+                                                    <div class="remove-picto"></div>
+                                                    <span id="<%= elem.id %>" class="trash"><i
+                                                            class="bi bi-trash3-fill"></i></span>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+                                        <% }) %>
+                                            <% } else {%>
+                                                <div class="d-flex text-center justify-content-center align-items-center"
+                                                    id="no-pictos">
+                                                    <span>
+                                                        <%= data.usuario.nombre %> todavía no tiene pictogramas.
+                                                    </span>
+                                                </div>
+                                                <% } %>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row mt-5">
-                    <h1 class="titulos-2" data-nombre="<%= data.usuario.nombre %>" id="nomVoc">Vocabulario de <%=
-                            data.usuario.nombre %>:</h1>
-                    <div class="container mt-3 borde-cont">
-                        <div class="row pb-3 vocabulario" id="contenedorPictogramas">
-                            <% if (data.voc.length> 0) { %>
-                                <% data.voc.forEach(function(elem){%>
-                                    <div class="col-lg-2 col-md-3 mt-3">
-                                        <div class="dflex">
-                                            <div class="card">
-                                                <a href="">
-                                                    <img src="<%= elem.enlace%>" class="card-img">
-                                                </a>
-                                                <div class="remove-picto"></div>
-                                                <span id="<%= elem.id %>" class="trash"><i
-                                                        class="bi bi-trash3-fill"></i></span>
-                                            </div>
-                                        </div>
+                <div id="gestion-imagenes" style="display: none;">
+                    <div class="row d-flex justify-content-end mt-3">
+                        <button class="btn btn-background col-lg-2 col-md-4 col-sm-6"><i class="bi bi-cloud-upload"></i> Subir imágen</button>
+                    </div>
 
-                                    </div>
-                                    <% }) %>
-                                        <% } else {%>
-                                            <div class="d-flex text-center justify-content-center align-items-center"
-                                                id="no-pictos">
-                                                <span>
-                                                    <%= data.usuario.nombre %> todavía no tiene pictogramas
-                                                </span>
+                    <div class="row mt-3">
+                        <h1 class="titulos-2" data-nombre="<%= data.usuario.nombre %>" id="nomVoc">Imágenes en el vocabulario de <%=
+                                data.usuario.nombre %>:</h1>
+                        <div class="container mt-3 borde-cont">
+                            <div class="row pb-3 vocabulario" id="contenedorPictogramas">
+                                <% if (data.voc.length> 0) { %>
+                                    <% data.voc.forEach(function(elem){%>
+                                        <div class="col-lg-2 col-md-3 mt-3">
+                                            <div class="dflex">
+                                                <div class="card">
+                                                    <a href="">
+                                                        <img src="<%= elem.enlace%>" class="card-img">
+                                                    </a>
+                                                    <div class="remove-picto"></div>
+                                                    <span id="<%= elem.id %>" class="trash"><i
+                                                            class="bi bi-trash3-fill"></i></span>
+                                                </div>
                                             </div>
-                                            <% } %>
+    
+                                        </div>
+                                        <% }) %>
+                                            <% } else {%>
+                                                <div class="d-flex text-center justify-content-center align-items-center"
+                                                    id="no-pictos">
+                                                    <span>
+                                                        <%= data.usuario.nombre %> todavía no tiene imágenes.
+                                                    </span>
+                                                </div>
+                                                <% } %>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div id="avisosPictos">
             </div>
