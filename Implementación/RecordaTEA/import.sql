@@ -2,7 +2,9 @@ CREATE TABLE Usuarios(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     usuario VARCHAR(50) NOT NULL UNIQUE,
-    contraseña VARCHAR(255) NOT NULL
+    contraseña VARCHAR(255) NOT NULL,
+    imagen LONGBLOB,
+    mimetype VARCHAR(20)
 );
 
 CREATE TABLE Cuidadores(
@@ -11,27 +13,38 @@ CREATE TABLE Cuidadores(
     FOREIGN KEY (id) REFERENCES Usuarios(id)
 );
 
+CREATE TABLE Tarjetas(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    orden INT NOT NULL,
+    categoria VARCHAR(100),
+    activa BOOLEAN DEFAULT 1,
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
+);
+
 CREATE TABLE Pictos(
     id INT AUTO_INCREMENT PRIMARY KEY,
     idArasaac INT,
-    enlace VARCHAR(200) NOT NULL
+    enlace VARCHAR(200) NOT NULL,
+    id_tarjeta INT NOT NULL,
+    FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas(id)
 );
 
 CREATE TABLE Imagenes{
     id INT AUTO_INCREMENT PRIMARY KEY,
     imagen LONGBLOB,
     mimetype VARCHAR(255),
+    id_tarjeta INT NOT NULL,
+    FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas(id)
 }
 
-CREATE TABLE Tarjetas(
+CREATE TABLE Config{
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
-    id_picto INT NOT NULL,
-    orden INT NOT NULL,
-    categoria VARCHAR(100),
-    FOREIGN KEY (id_picto) REFERENCES Pictos(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
-);
+    texto BOOLEAN DEFAULT 0,
+    picto_texto BOOLEAN DEFAULT 0,
+    FOREIGN KEY id_usuario REFERENCES Usuarios(id)
+}
 
 CREATE TABLE Entradas(
     id INT AUTO_INCREMENT PRIMARY KEY,
