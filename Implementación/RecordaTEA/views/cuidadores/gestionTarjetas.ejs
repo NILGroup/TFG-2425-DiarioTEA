@@ -109,24 +109,30 @@
                 </div>
 
                 <div id="gestion-imagenes" style="display: none;">
-                    <div class="row d-flex justify-content-between align-items-center">
-                        <form id="imagen-form" class="p-4 d-flex w-100 justify-content-between">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <form id="imagen-form" class="p-4 d-md-flex w-100 justify-content-between flex-wrap">
 
-                            <div id="preview-container" class="align-items-center text-center">
-                                <p class="text-center"id="texto-vistaprevia">Vista previa de la imagen:</p>
-                                <div class="container-fluid d-flex justify-content-start vista-previa borde-img p-0">
-                                    <img id="preview-image" class="img-fluid">
+                            <div id="preview-container"
+                                class="col-12 col-md-6 text-start justify-content-start mb-3 mb-md-0 justify-content-sm-center">
+                                <div class="container-fluid m-0 text-center justify-content-center align-items-center" style="max-width: fit-content;">
+                                    <p class="text-center" id="texto-vistaprevia">Vista previa de la imagen:</p>
+                                    <div
+                                        class="container-fluid d-flex justify-content-center vista-previa borde-img p-0 ">
+                                        <img id="preview-image" class="img-fluid">
+                                    </div>
+                                    <button class="btn btn-background m-0 mt-2" id="btn-subir" style="display: none;">
+                                        <i class="bi bi-cloud-upload"></i> Subir imagen
+                                    </button>
                                 </div>
-                                <button class="btn btn-background mt-2" id="btn-subir" style="display: none;"><i
-                                        class="bi bi-cloud-upload"></i> Subir imagen</button>
                             </div>
 
-                            <div class="mb-3 text-end">
+                            <div class="col-12 col-md-5 text-center text-md-end">
                                 <input type="file" id="imagenSeleccionada" class="d-none" accept="image/*">
                                 <span id="nombreArchivo" class="ms-2 text-muted me-2">Ningún archivo
                                     seleccionado.</span>
                                 <label for="imagenSeleccionada" class="btn btn-background"> Seleccionar imagen </label>
                             </div>
+
                         </form>
                     </div>
                     <div class="row mt-3">

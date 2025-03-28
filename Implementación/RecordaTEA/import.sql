@@ -17,6 +17,12 @@ CREATE TABLE Pictos(
     enlace VARCHAR(200) NOT NULL
 );
 
+CREATE TABLE Imagenes{
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    imagen LONGBLOB,
+    mimetype VARCHAR(255),
+}
+
 CREATE TABLE Tarjetas(
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
