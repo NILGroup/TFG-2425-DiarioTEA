@@ -94,10 +94,11 @@ CREATE TABLE Cuidadores_Usu(
 );
 
 INSERT INTO Usuarios (id, nombre, usuario, contraseña) 
-VALUES ('1', 'Pedro', 'pedro08', 'test');
+VALUES ('1', 'Pedro', 'pedro08', '$2b$10$JOQIdcGPaYHsjKf6Ks4Hge88z4YFKD8Yb/NYkFqJKpmklgfFc3VrC'); 
+-- CONTRASEÑA: test
 
 INSERT INTO Usuarios(id, nombre, usuario, contraseña)
-VALUES ('2', 'Lorena', 'lorena_gutierrez','test123');
+VALUES ('2', 'Lorena', 'lorena_gutierrez','$2b$10$XlExLG/5iWZ033toxDlSXeUMDU8/HnJkUviYsK/cLczoD3B.7VIdO'); -- CONTRASEÑA: test123
 
 INSERT INTO Cuidadores (id, rol) 
 VALUES ('2', 'Profesora');
@@ -105,25 +106,21 @@ VALUES ('2', 'Profesora');
 INSERT INTO Cuidadores_Usu(id_cuidador, id_usuario)
 VALUES ('2', '1');
 
+INSERT INTO Tarjetas (id, id_usuario, orden, categoria, activa) VALUES ('1','1','1','Emocion',1),
+('2','1','2','Emocion',1),
+('3','1','3','Emocion',1),
+('4','1','4','Emocion',1);
 
-INSERT INTO Pictos (id, idArasaac, enlace) VALUES
-(1, 2245, 'https://api.arasaac.org/v1/pictograms/2245'),
-(2, 3250, 'https://api.arasaac.org/v1/pictograms/3250'),
-(3, 2261, 'https://api.arasaac.org/v1/pictograms/2261'),
-(4, 6964, 'https://api.arasaac.org/v1/pictograms/6964');
+INSERT INTO Pictos(id, idArasaac, enlace, id_tarjeta) VALUES 
+('1','2245','https://api.arasaac.org/v1/pictograms/2245','1'),
+('2','3250','https://api.arasaac.org/v1/pictograms/3250','2'),
+('3', '2261', 'https://api.arasaac.org/v1/pictograms/2261', '3'),
+('4', '6964', 'https://api.arasaac.org/v1/pictograms/6964', '4');
+
 
 INSERT INTO Entradas (id, id_usuario, autor, cuerpo, fecha_registro, tipo) VALUES
 ('1','1', '1', NULL, '2025-03-01 11:30:00', NULL),
 ('2', '1', '2', 'Progresa adecuadamente', '2025-03-01 10:10:00', NULL);
-
-INSERT INTO Tarjetas (id, id_usuario, id_picto, orden, categoria) VALUES
-(1, 1, 1, 1, 'Emocion'),
-(2, 1, 2, 2, 'Emocion'),
-(4, 1, 3, 4, 'Emocion');
-
-
-INSERT INTO Tarjetas (id, id_usuario, id_picto, orden) VALUES
-(3, 1, 4, 3);
 
 
 INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden, emocion) VALUES

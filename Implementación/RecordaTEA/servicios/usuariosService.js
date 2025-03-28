@@ -49,52 +49,7 @@ class UsuariosService {
 
 
 
-    async leerDiarioPorUsuario(idUsuario) {
-        try {
-            const entradas = await usuariosDao.leerDiarioPorUsuario(idUsuario);
     
-            // Agrupa los datos en un array para mantener el orden
-            const groupedData = [];
-            const entryMap = new Map(); // Usamos un Map para hacer referencia rápida por idEntrada
-    
-            entradas[0].forEach((item) => {
-                const { formattedDate, formattedTime, numericDate } = formatDateTime(item.fecha_registro);
-    
-                const id = item.idEntrada;
-    
-                // Si la entrada aún no existe en el Map, la creamos
-                if (!entryMap.has(id)) {
-                    const newEntry = {
-                        idEntrada: id,
-                        autor: item.autor,
-                        fecha_registro: formattedDate,
-                        fecha_editable : numericDate,
-                        hora_registro: formattedTime,
-                        cuerpo: item.cuerpo,
-                        tarjetas: []
-                    };
-                    groupedData.push(newEntry); // Mantenemos el orden al agregar en el array
-                    entryMap.set(id, newEntry);
-                }
-    
-                // Añadimos la tarjeta si existe
-                if (item.id_tarjeta !== null) {
-                    entryMap.get(id).tarjetas.push({
-                        id_tarjeta: item.id_tarjeta,
-                        orden: item.orden,
-                        enlace: item.enlace,
-                        emocion: item.emocion
-                    });
-                }
-            });
-    
-            console.log(groupedData);
-    
-            return groupedData;
-        } catch (error) {
-            console.error(error);
-        }
-    }
     
 
     async obtenerTarjetasPorUsuario(idUsuario) {
