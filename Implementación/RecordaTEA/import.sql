@@ -37,7 +37,7 @@ CREATE TABLE Imagenes(
     mimetype VARCHAR(255),
     id_tarjeta INT NOT NULL,
     FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas(id)
-)
+);
 
 CREATE TABLE Config(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -45,7 +45,7 @@ CREATE TABLE Config(
     texto BOOLEAN DEFAULT 0,
     picto_texto BOOLEAN DEFAULT 0,
     FOREIGN KEY id_usuario REFERENCES Usuarios(id)
-)
+);
 
 CREATE TABLE Entradas(
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -63,7 +63,6 @@ CREATE TABLE Rutinas(
     nombre VARCHAR(50) NOT NULL,
     autor INT NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
 
