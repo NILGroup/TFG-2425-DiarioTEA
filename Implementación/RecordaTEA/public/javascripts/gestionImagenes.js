@@ -1,22 +1,29 @@
 $(document).ready(function () {
     let cropper;
     var modal = new bootstrap.Modal(document.getElementById('recorta-img'));
+    const tiposValidos = ["image/jpeg", "image/png", "image/webp"];
 
     $('#imagenSeleccionada').on('change', function (e) {
         let image = e.target.files[0];
 
         if (image) {
+            if (!tiposValidos.includes(image.type)) {
+                alert("Solo se permiten imágenes (JPG, PNG, WEBP).");
+                this.value = ""; // Borra la selección del archivo
+                return;
+            }
+
             $("#nombreArchivo").text(image.name);
 
             const reader = new FileReader();
 
             reader.onload = function (event) {
-                
+
                 $("#imagenRecortable").attr("src", event.target.result);
-                modal.show(); 
+                modal.show();
             }
 
-            reader.readAsDataURL( e.target.files[0]);
+            reader.readAsDataURL(e.target.files[0]);
         }
         $(this).val('');
     });
@@ -41,9 +48,9 @@ $(document).ready(function () {
 
     });
 
-    $('#recortar-img').on('click', function(){
+    $('#recortar-img').on('click', function () {
         if (!cropper) return;
-        
+
         let img = cropper.getCroppedCanvas({
             width: 500,
             height: 500
