@@ -33,11 +33,11 @@
                     <h2 class="titulos-2 col-10">
                         <%= data.dia %>
                     </h2>
-                    <a href="/diario" class="btn btn-borde col-2" id="consultaMes">Volver al mes</a>
+                    <a href="/diario/<%=data.usuario.id%>" class="btn btn-borde col-2" id="consultaMes">Volver al mes</a>
                 </div>
                 <% if (data.entradas.length> 0) { %>
                     <% data.entradas.forEach(function(elem){%>
-                        <div class="d-flex align-items-center tarjeta-diario mt-5">
+                        <div class="d-flex align-items-center tarjeta-diario mt-5 shadow-lg">
                             <div class="list-group-item list-hora flex-column align-items-center entrada">
                                 <div class="justify-content-center text-center">
                                     <h2>
