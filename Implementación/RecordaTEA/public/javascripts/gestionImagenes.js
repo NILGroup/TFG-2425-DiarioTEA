@@ -18,7 +18,7 @@ $(document).ready(function () {
 
             reader.readAsDataURL( e.target.files[0]);
         }
-
+        $(this).val('');
     });
 
     $('#recorta-img').on('shown.bs.modal', function () {
