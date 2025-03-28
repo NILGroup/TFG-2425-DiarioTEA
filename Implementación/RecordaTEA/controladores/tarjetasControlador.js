@@ -8,14 +8,22 @@ class TarjetasControlador {
 
     async vocabularioUsuarioId(req, res) {
         try {
+            console.log('llego al voc');
             let id_usuario = req.session.usuario.id;
             let vocabulario = await tarjetasService.vocabularioUsuarioId(id_usuario);
+            let imagenes = await tarjetasService.imagenesUsuarioId(id_usuario);
+            imagenes.forEach((elem) => {
+                let imgbase64 = elem.imagen.toString('base64'); 
+                let url = 'data:' + elem.mimetype + ';base64,' + imgbase64;
+                elem.imagen = url;
+            });
             let data = {
                 usuario: req.session.usuario,
                 usuarios: req.session.usuarios,
-                voc: vocabulario
+                voc: vocabulario,
+                imgs: imagenes
             };
-            console.log('he llegado: '+  data)
+            console.log('he llegado: ' + data)
             res.render('cuidadores/gestionTarjetas', { data: data });
         }
         catch (error) {
@@ -68,8 +76,8 @@ class TarjetasControlador {
         }
     }
 
-    async addTarjetaVocabulario(req, res){
-        try{
+    async addTarjetaVocabulario(req, res) {
+        try {
             let id_usuario = req.session.usuario.id;
             let id_arasaac = req.body.id_arasaac;
             let enlace = req.body.enlace;
@@ -77,23 +85,23 @@ class TarjetasControlador {
             let success = await tarjetasService.addTarjetaVocabulario(id_arasaac, enlace, id_usuario);
             res.send(success);
         }
-        catch (error){
+        catch (error) {
             throw error;
         }
     }
 
-    async eliminarTarjetaVocabulario(req, res){
-        try{
+    async eliminarTarjetaVocabulario(req, res) {
+        try {
             let id = req.body.id;
             let eliminacion = await tarjetasService.eliminarTarjetaVocabulario(id);
             res.send(eliminacion);
         }
-        catch(error){
+        catch (error) {
             throw error;
         }
     }
 
-    async addTarjetaImagen(req, res){
+    async addTarjetaImagen(req, res) {
         console.log('he llegado');
         let tarjeta = {
             imagen: req.file.buffer,
@@ -105,7 +113,7 @@ class TarjetasControlador {
         console.log('estoy aqui');
 
         let resultado = await tarjetasService.addTarjetaImagen(tarjeta);
-        res.send(resultado);        
+        res.send(resultado);
     }
 }
 

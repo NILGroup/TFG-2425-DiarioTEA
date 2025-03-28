@@ -139,14 +139,14 @@
                         <h1 class="titulos-2" data-nombre="<%= data.usuario.nombre %>" id="nomVoc">Imágenes en el
                             vocabulario de <%= data.usuario.nombre %>:</h1>
                         <div class="container mt-3 borde-cont">
-                            <div class="row pb-3 vocabulario" id="contenedorPictogramas">
-                                <% if (data.voc.length> 0) { %>
-                                    <% data.voc.forEach(function(elem){%>
+                            <div class="row pb-3 vocabulario" id="contenedorImagenes">
+                                <% if (data.imgs.length> 0) { %>
+                                    <% data.imgs.forEach(function(elem){%>
                                         <div class="col-lg-2 col-md-3 mt-3">
                                             <div class="dflex">
                                                 <div class="card">
                                                     <a href="">
-                                                        <img src="<%= elem.enlace%>" class="card-img">
+                                                        <img src="<%= elem.imagen%>" class="card-img">
                                                     </a>
                                                     <div class="remove-picto"></div>
                                                     <span id="<%= elem.id %>" class="trash"><i

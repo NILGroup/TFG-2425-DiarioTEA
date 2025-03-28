@@ -122,6 +122,12 @@ class TarjetasService {
             return {mensaje: resultado};
         }
     }
+
+    async imagenesUsuarioId(usuarioId){
+        let resultado =  await tarjetasDao.imagenesUsuarioId(usuarioId);
+        console.log('service', resultado)
+        return resultado;
+    }
 }
 
 module.exports = TarjetasService;
