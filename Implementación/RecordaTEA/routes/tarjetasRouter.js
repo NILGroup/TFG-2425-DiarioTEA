@@ -18,4 +18,7 @@ router.post('/picto-vocabulario', tarjetasControlador.addTarjetaVocabulario);
 
 router.delete('/eliminar-picto', tarjetasControlador.eliminarTarjetaVocabulario);
 
+router.post('/nueva-imagen', upload.single('imagen'), tarjetasControlador.addTarjetaImagen);
+
+
 module.exports = router;

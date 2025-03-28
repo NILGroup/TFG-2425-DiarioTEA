@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var mysqlSession = require("express-mysql-session");
+var multer = require('multer');
 
 var usuariosRouter = require('./routes/usuariosRouter');
 var cuidadoresRouter = require('./routes/cuidadoresRouter');
@@ -21,7 +22,12 @@ const sessionStore = new MySQLStore({
   port: process.env.DB_PORT
 });
 
+//Configuramos el multer
+const storage = multer.memoryStorage(); // Almacenar en memoria
+const upload = multer({ storage: storage });
+
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

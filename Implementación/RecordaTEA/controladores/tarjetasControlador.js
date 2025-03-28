@@ -92,6 +92,13 @@ class TarjetasControlador {
             throw error;
         }
     }
+
+    async addTarjetaImagen(req, res){
+        let tarjeta = {
+            imagen: req.file.buffer,
+            mimetype: req.file.mimetype
+        }
+    }
 }
 
 module.exports = TarjetasControlador;

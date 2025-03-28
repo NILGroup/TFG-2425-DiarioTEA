@@ -16,7 +16,7 @@ CREATE TABLE Cuidadores(
 CREATE TABLE Tarjetas(
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
-    orden INT NOT NULL,
+    orden INT AUTO_INCREMENT NOT NULL,
     categoria VARCHAR(100),
     activa BOOLEAN DEFAULT 1,
     texto text,
