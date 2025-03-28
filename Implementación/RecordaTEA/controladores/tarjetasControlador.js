@@ -96,8 +96,10 @@ class TarjetasControlador {
     async addTarjetaImagen(req, res){
         let tarjeta = {
             imagen: req.file.buffer,
-            mimetype: req.file.mimetype
+            mimetype: req.file.mimetype,
+            id_usuario: req.session.usuario.id
         }
+        
     }
 }
 

@@ -73,6 +73,15 @@ class TarjetasDao {
       throw error;
     }
   }
+
+  async addImagen(tarjeta){
+    try{
+      let resultado = await pool.query('INSERT INTO Tarjetas')
+    }
+    catch (error){
+
+    }
+  }
 }
 
 module.exports = TarjetasDao;
