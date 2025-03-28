@@ -44,7 +44,7 @@ CREATE TABLE Config(
     id_usuario INT NOT NULL,
     texto BOOLEAN DEFAULT 0,
     picto_texto BOOLEAN DEFAULT 0,
-    FOREIGN KEY id_usuario REFERENCES Usuarios(id)
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
 
 CREATE TABLE Entradas(
