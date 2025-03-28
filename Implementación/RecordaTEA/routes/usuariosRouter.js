@@ -8,8 +8,6 @@ const controllerRutinas = new RutinasController();
 
 router.get('/', controllerUsuarios.leerUsuarioId);
 
-router.get('/diary', controllerUsuarios.redirectToDiary);
-
 router.get('/routines', controllerRutinas.getUserRutinas);
 
 router.get("/add-entry", controllerUsuarios.addEntry);

@@ -4,8 +4,27 @@ const EntradasDao = require('../dao/entradasDao');
 const tarjetasDao = new TarjetasDao();
 const entradasDao = new EntradasDao();
 
+function formatDateTime(fechaRegistro) {
+    const dateTime = new Date(fechaRegistro);
+
+    // Formatear la fecha
+    const optionsDate = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = dateTime.toLocaleDateString('es-ES', optionsDate);
+
+    //numeric date para poder tenerla en el edit
+    const numericDate = dateTime.toISOString().split("T")[0];
+
+    // Formatear la hora
+    const hours = dateTime.getUTCHours().toString().padStart(2, '0');
+    const minutes = dateTime.getUTCMinutes().toString().padStart(2, '0');
+    const formattedTime = `${hours}:${minutes}`;
+
+    return { formattedDate, formattedTime, numericDate };
+}
+
 class EntradasService{
     constructor(){}
+    
 
     async entradasMes(usuario){
         try{
@@ -26,6 +45,53 @@ class EntradasService{
         catch(error){
             console.error('ERROR[EntradasService]: obtener entradas de un mes: ', error);
             throw error;
+        }
+    }
+
+    async leerEntradasPorUsuario(idUsuario) {
+        try {
+            const entradas = await entradasDao.leerEntradasPorUsuario(idUsuario);
+    
+            // Agrupa los datos en un array para mantener el orden
+            const groupedData = [];
+            const entryMap = new Map(); // Usamos un Map para hacer referencia rápida por idEntrada
+    
+            entradas[0].forEach((item) => {
+                const { formattedDate, formattedTime, numericDate } = formatDateTime(item.fecha_registro);
+    
+                const id = item.idEntrada;
+    
+                // Si la entrada aún no existe en el Map, la creamos
+                if (!entryMap.has(id)) {
+                    const newEntry = {
+                        idEntrada: id,
+                        autor: item.autor,
+                        fecha_registro: formattedDate,
+                        fecha_editable : numericDate,
+                        hora_registro: formattedTime,
+                        cuerpo: item.cuerpo,
+                        tarjetas: []
+                    };
+                    groupedData.push(newEntry); // Mantenemos el orden al agregar en el array
+                    entryMap.set(id, newEntry);
+                }
+    
+                // Añadimos la tarjeta si existe
+                if (item.id_tarjeta !== null) {
+                    entryMap.get(id).tarjetas.push({
+                        id_tarjeta: item.id_tarjeta,
+                        orden: item.orden,
+                        enlace: item.enlace,
+                        emocion: item.emocion
+                    });
+                }
+            });
+    
+            console.log(groupedData);
+    
+            return groupedData;
+        } catch (error) {
+            console.error(error);
         }
     }
 }

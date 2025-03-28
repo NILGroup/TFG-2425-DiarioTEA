@@ -24,26 +24,7 @@ class UsuariosDao {
         }
     }
 
-    async leerDiarioPorUsuario(idUsuario) {
-        try {
-            const entradas = await pool.query(`
-                SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas_tarjeta.emocion
-                FROM Entradas
-                LEFT JOIN Entradas_tarjeta ON Entradas.id = Entradas_tarjeta.id_entrada
-                LEFT JOIN Tarjetas ON Entradas_tarjeta.id_tarjeta = Tarjetas.id
-                LEFT JOIN Pictos ON Tarjetas.id_picto = Pictos.id
-                WHERE Entradas.id_usuario = ?
-                AND Entradas.autor = ?
-                ORDER BY Entradas.fecha_registro DESC, Entradas_tarjeta.orden ASC;
-            `, [idUsuario, idUsuario]);
-
-            return entradas;
-        }
-        catch (error) {
-            console.error('ERROR[UsuariosDao]: buscar entradas de usuario por Id del usuario' + error);
-        }
-    }
-
+    
     async obtenerTarjetasPorUsuario(idUsuario) {
         try {
             const response = await pool.query(`SELECT Tarjetas.id, Pictos.enlace, Pictos.id as id_picto, Tarjetas.categoria

@@ -71,6 +71,11 @@ class EntradasController {
         }
     }
 
+    async redirectToDiary(req, res) {
+        const response = await entradasService.leerEntradasPorUsuario(req.session.usuario.id);
+        res.render('TEA/diaryTEA', { entradas: response, diary: true, nombre: req.session.usuario.nombre });
+    }
+
 }
 
 module.exports = EntradasController;

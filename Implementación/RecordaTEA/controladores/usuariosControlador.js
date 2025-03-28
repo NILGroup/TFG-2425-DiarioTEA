@@ -11,11 +11,7 @@ class UsuariosControlador {
         res.render('TEA/indexTEA');
     }
 
-    async redirectToDiary(req, res) {
-        const response = await usuariosServicio.leerDiarioPorUsuario(req.session.usuario.id);
-        res.render('TEA/diaryTEA', { entradas: response, diary: true, nombre: req.session.usuario.nombre });
-    }
-
+    
     async addEntry(req, res) {
 
         const response = await usuariosServicio.obtenerTarjetasPorUsuario(req.session.usuario.id);
