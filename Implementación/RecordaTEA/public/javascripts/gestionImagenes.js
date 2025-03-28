@@ -40,4 +40,21 @@ $(document).ready(function () {
         });
 
     });
+
+    $('#recortar-img').on('click', function(){
+        if (!cropper) return;
+        
+        let img = cropper.getCroppedCanvas({
+            width: 500,
+            height: 500
+        });
+
+        img.toBlob(function (blob) {
+            const url = URL.createObjectURL(blob);
+            $("#preview-image").attr("src", url);
+            $("#btn-subir").show();
+        });
+
+        $("#recorta-img").modal("hide");
+    });
 });

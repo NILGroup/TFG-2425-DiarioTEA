@@ -428,3 +428,16 @@ body {
 .aviso {
     color: black;
 }
+
+/* RECORTAR IMÁGENES*/
+.vista-previa{
+    width: 15em;
+    min-height: 15em;
+}
+
+.borde-img{
+    border-width: 0.2em;
+    border-radius: 0.1em;
+    border-color: #213555;
+    border-style: solid;
+}
