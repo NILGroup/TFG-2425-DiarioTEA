@@ -31,21 +31,21 @@ CREATE TABLE Pictos(
     FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas(id)
 );
 
-CREATE TABLE Imagenes{
+CREATE TABLE Imagenes(
     id INT AUTO_INCREMENT PRIMARY KEY,
     imagen LONGBLOB,
     mimetype VARCHAR(255),
     id_tarjeta INT NOT NULL,
     FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas(id)
-}
+)
 
-CREATE TABLE Config{
+CREATE TABLE Config(
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     texto BOOLEAN DEFAULT 0,
     picto_texto BOOLEAN DEFAULT 0,
     FOREIGN KEY id_usuario REFERENCES Usuarios(id)
-}
+)
 
 CREATE TABLE Entradas(
     id INT AUTO_INCREMENT PRIMARY KEY,
