@@ -137,6 +137,11 @@ class TarjetasService {
         let resultado = await tarjetasDao.textoLibre(b, idUsuario);
         return resultado;
     }
+
+    async leerConfiguracionVocabulario(idUsuario){
+        let config = tarjetasDao.leerConfiguracionVocabulario(idUsuario);
+        return config;
+    }
 }
 
 module.exports = TarjetasService;

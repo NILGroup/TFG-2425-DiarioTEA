@@ -32,14 +32,20 @@
 
         <div class="container mt-5 justify-content-center" id="containerPrincipal">
             <div class="btn-group manage-btn-group" role="group" aria-label="Opciones de seleccion de pictos">
-                <button type="button" class="btn manage-buttons seleccion" id="btn-pictos">Pictogramas</button>
+                <button type="button" class="btn manage-buttons <%= data.config.texto ? '' : 'seleccion' %>" id="btn-pictos">Pictogramas</button>
                 <button type="button" class="btn manage-buttons" id="btn-imagenes">Imágenes</button>
-                <button type="button" class="btn" id="btn-texto">Texto</button>
+                <button type="button" class="btn <%= data.config.texto ? 'seleccion' : '' %>" id="btn-texto">Texto</button>
             </div>
 
             <div class="row p-3 borde justify-content-center">
 
-                <div id="gestion-pictogramas">
+
+                    <%if(data.config.texto ) { %>
+                        <div id="gestion-pictogramas" style="display: none;">
+                    <%} else {%>
+                        <div id="gestion-pictogramas">
+                    <%}%>
+                    
                     <div class="row">
                         <form method="GET" action="" class="d-flex" id="buscadorARASAAC">
                             <input class="form-control me-2" type="search" placeholder="Buscar pictogramas en ARASAAC"
@@ -172,12 +178,16 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="div" id="texto-libre" style="display: none;">
+                
+                <%if(data.config.texto ) { %>
+                    <div id="texto-libre">
+                <%} else {%>
+                    <div id="texto-libre" style="display: none;">
+                <%}%>
                     <div class="row minimo-texto-libre">
                         <form action="" class="mt-4 ms-3">
                             <div class="form-check form-switch letra-form">
-                                <input class="form-check-input" type="checkbox" id="permisoTextoLibre" role="switch">
+                                <input class="form-check-input" type="checkbox" id="permisoTextoLibre" role="switch" <%= data.config.texto ? 'checked' : '' %>>
                                 <label class="form-check-label letra-form" for="permisoTextoLibre" id="label-permisoTextoLibre">
                                     Texto libre para <%=data.usuario.nombre%>.
                                 </label>

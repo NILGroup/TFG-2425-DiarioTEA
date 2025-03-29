@@ -14,13 +14,18 @@ class EntradasController {
         try {
             let usuario;
             let usus = req.session.usuarios;
+            let con;
             if (!req.session.usuario || req.session.usuario.id !== req.params.id) {
                 const resultado = await usuariosService.leerUsuarioId(req.params.id);
+                const c = await tarjetasService.leerConfiguracionVocabulario(resultado[0].id);
                 usuario = resultado[0];
+                con = c;
                 req.session.usuario = resultado[0];
+                req.session.config = c;
             }
             else {
                 usuario = req.session.usuario;
+                con = req.session.config;
             }
             let entradas = await entradasService.entradasMes(usuario.id);
             for (let entrada of entradas) {
@@ -37,7 +42,6 @@ class EntradasController {
                     entrada.pictos = [];
                 }
             }
-
             res.render('cuidadores/diario', { data: { entradas: entradas, usuario: usuario, usuarios: usus } });
         }
         catch (error) {

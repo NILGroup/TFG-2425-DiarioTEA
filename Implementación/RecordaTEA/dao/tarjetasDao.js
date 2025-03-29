@@ -115,6 +115,16 @@ class TarjetasDao {
       console.log(error);
     }
   }
+
+  async leerConfiguracionVocabulario(idUsuario){
+    try {
+      let [resultado] = await pool.query('SELECT * FROM Config WHERE id_usuario = ?', [idUsuario]);
+      return resultado[0];
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = TarjetasDao;

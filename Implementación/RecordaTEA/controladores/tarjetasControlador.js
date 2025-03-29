@@ -12,6 +12,7 @@ class TarjetasControlador {
             let id_usuario = req.session.usuario.id;
             let vocabulario = await tarjetasService.obtenerPictosUsuarioId(id_usuario);
             let imagenes = await tarjetasService.imagenesUsuarioId(id_usuario);
+            let configuracion;
             imagenes.forEach((elem) => {
                 let imgbase64 = elem.imagen.toString('base64'); 
                 let url = 'data:' + elem.mimetype + ';base64,' + imgbase64;
@@ -21,7 +22,8 @@ class TarjetasControlador {
                 usuario: req.session.usuario,
                 usuarios: req.session.usuarios,
                 voc: vocabulario,
-                imgs: imagenes
+                imgs: imagenes,
+                config: req.session.config
             };
             console.log('he llegado: ' + data)
             res.render('cuidadores/gestionTarjetas', { data: data });
@@ -115,6 +117,9 @@ class TarjetasControlador {
 
     async textoLibre(req, res){
         let resultado = await tarjetasService.textoLibre(req.body.texto, req.session.usuario.id);
+        if(resultado){
+            req.session.config.texto = (req.body.texto === 'true');
+        }
         res.send({success: resultado});
     }
 }
