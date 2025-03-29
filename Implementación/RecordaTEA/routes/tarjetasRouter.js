@@ -6,7 +6,7 @@ const TarjetasControlador = require('../controladores/tarjetasControlador');
 var router = express.Router();
 const tarjetasControlador = new TarjetasControlador();
 
-router.get('/', tarjetasControlador.obtenerPictosUsuarioId);
+router.get('/', tarjetasControlador.obtenerTarjetasUsuarioId);
 
 router.get('/arasaac', (req, res) => {
   tarjetasControlador.consultaArasaac(req, res);

@@ -53,6 +53,7 @@ CREATE TABLE Entradas(
     autor INT NOT NULL,
     cuerpo TEXT,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    emocion VARCHAR(200), 
     tipo VARCHAR(1),
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
@@ -79,7 +80,6 @@ CREATE TABLE Entradas_tarjeta(
     id_entrada INT NOT NULL,
     id_tarjeta INT NOT NULL,
     orden INT NOT NULL,
-    emocion BOOLEAN,
     PRIMARY KEY (id_entrada, id_tarjeta),
     FOREIGN KEY (id_entrada) REFERENCES Entradas(id),
     FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas(id)
@@ -109,7 +109,7 @@ VALUES ('2', '1');
 INSERT INTO Tarjetas (id, id_usuario, orden, categoria, activa) VALUES ('1','1','1','Emocion',1),
 ('2','1','2','Emocion',1),
 ('3','1','3','Emocion',1),
-('4','1','4','Emocion',1);
+('4','1','4','Objeto',1);
 
 INSERT INTO Pictos(id, idArasaac, enlace, id_tarjeta) VALUES 
 ('1','2245','https://api.arasaac.org/v1/pictograms/2245','1'),
@@ -123,10 +123,10 @@ INSERT INTO Entradas (id, id_usuario, autor, cuerpo, fecha_registro, tipo) VALUE
 ('2', '1', '2', 'Progresa adecuadamente', '2025-03-01 10:10:00', NULL);
 
 
-INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden, emocion) VALUES
-(1, 1, 1, true),
-(1, 2, 2, false),
-(1, 3, 3, false);
+INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES
+(1, 1, 1),
+(1, 2, 2),
+(1, 3, 3);
 
 INSERT INTO rutinas (id, id_usuario, nombre, autor, fecha_creacion) VALUES
 (1, 1, 'Colegio', 2, '2025-03-01 23:00:00'),

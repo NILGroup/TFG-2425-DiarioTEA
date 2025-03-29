@@ -15,6 +15,22 @@ class TarjetasDao {
     }
   }
 
+  async obtenerTarjetasUsuarioId(id) {
+    try {
+      let [vocabulario] = await pool.query(`SELECT p.id, p.enlace, t.id as idTarjeta, t.categoria, i.imagen, i.mimetype
+        FROM Tarjetas t 
+        LEFT JOIN Pictos p ON t.id = p.id_tarjeta
+        LEFT JOIN Imagenes i ON t.id = i.id_tarjeta
+        WHERE t.id_usuario = ? AND t.activa = 1`,
+        [id]);
+      return vocabulario;
+    }
+    catch (error) {
+      console.error('ERROR[TarjetasDao]: obtener vocabulario por ID: ', error);
+      throw error;
+    }
+  }
+
   async addTarjetaVocabulario(id_arasaac, enlace, id_usuario) {
     try {
       let [response] = await pool.query('INSERT INTO Tarjetas (id_usuario) VALUES (?)', [id_usuario]);

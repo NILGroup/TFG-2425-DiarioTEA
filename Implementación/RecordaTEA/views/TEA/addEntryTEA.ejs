@@ -11,14 +11,37 @@
                     </div>
                     <div class="modal-body">
                         <div class="row pb-3">
-                            <%emocion.forEach(function(item){%>
+                            
                                 <div class="col-lg-4 col-md-4 mt-3 d-flex">
-                                    <div class="card" id="<%= item.id %>">
-                                        <img src="<%= item.enlace %>" class="card-img">
-
+                                    <div class="card" id="card-aburrido">
+                                        <img src="/images/emotions/aburrido.png" class="card-img">
                                     </div>
                                 </div>
-                                <%})%>
+                                <div class="col-lg-4 col-md-4 mt-3 d-flex">
+                                    <div class="card" id="card-alegre">
+                                        <img src="/images/emotions/alegre.png" class="card-img">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 mt-3 d-flex">
+                                    <div class="card" id="card-asustado">
+                                        <img src="/images/emotions/asustado.png" class="card-img">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 mt-3 d-flex">
+                                    <div class="card" id="card-enfadado">
+                                        <img src="/images/emotions/enfadado.png" class="card-img">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 mt-3 d-flex">
+                                    <div class="card" id="card-triste">
+                                        <img src="/images/emotions/triste.png" class="card-img">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 mt-3 d-flex">
+                                    <div class="card" id="card-sorprendido">
+                                        <img src="/images/emotions/sorprendido.png" class="card-img">
+                                    </div>
+                                </div>
                         </div>
                     </div>
                     <div class="modal-footer dflex justify-content-between align-items-center">
@@ -101,14 +124,27 @@
                     <div class="container mt-3 borde-cont" style="border: 2px solid black; border-radius: 3px;">
                         <div class="row pb-3 contenedorPictogramas color-voc" id="contenedorVocabulario">
                             <% vocabulario.forEach(function(item) { %>
-                                <div class="col-lg-2 col-md-3 mt-3">
-                                    <div class="dflex">
-                                        <div class="card" id="<%= item.id %>">
-                                            <img src="<%= item.enlace %>" class="card-img">
+                                <% if (!item.imagen || item.imagen.length === 0) { %>
+                                    <!-- TIPO DE PICTOGRAMA -->
+                                    <div class="col-lg-2 col-md-3 mt-3">
+                                        <div class="dflex">
+                                            <div class="card" id="<%= item.idTarjeta %>">
+                                                <img src="<%= item.enlace %>" class="card-img">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <% }); %>
+                                <% } else { %>
+                                    <!-- TIPO DE TARJETA -->
+                                    <div class="col-lg-2 col-md-3 mt-3">
+                                        <div class="dflex">
+                                            <div class="card" id="<%= item.idTarjeta %>">
+                                                <img src="data:<%= item.mimetype %>;base64,<%= item.imagen.toString('base64') %>" class="card-img">
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% }); %>
+                            
                         </div>
                     </div>
                 </div>

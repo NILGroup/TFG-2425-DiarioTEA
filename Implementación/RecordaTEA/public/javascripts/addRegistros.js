@@ -3,6 +3,7 @@ $(document).ready(function () {
 
     var fecha = new Date().toISOString().split('T')[0];
     var hora = new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+    var emocion=null;
 
     $('#fecha').val(fecha);
     $('#hora').val(hora);
@@ -66,20 +67,12 @@ $(document).ready(function () {
 
             tarjetas.push({
                 id: idTarjeta, // Guardar el id de la tarjeta
-                orden: orden,   // Guardar el orden de la tarjeta
-                emocion: false
+                orden: orden   // Guardar el orden de la tarjeta
             });
         });
 
         if(emocionSeleccionadaAnt!=null){
-            idTarjeta = parseInt(emocionSeleccionadaAnt.attr('id'));
-            orden= tarjetas.length+1;
-            
-            tarjetas.push({
-                id: idTarjeta,
-                orden: orden,
-                emocion: true
-            })
+            emocion = emocionSeleccionadaAnt.find('img').attr('src');
         }
 
         const fecha = $('#fecha').val(); // Ej: "2025-03-23"
@@ -94,7 +87,8 @@ $(document).ready(function () {
 
         const entrada = {
             fecha_registro: fechaHoraFormatted,
-            tarjetas: tarjetas
+            tarjetas: tarjetas,
+            emocion: emocion
         };
 
         // Convertir el array a JSON y asignarlo al input del formulario
