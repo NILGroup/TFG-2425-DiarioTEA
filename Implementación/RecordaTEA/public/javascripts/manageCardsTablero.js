@@ -192,44 +192,52 @@ $(document).ready(function () {
 
         //Avisamos de que ha eliminaod un picto y que lo puede deshacer
         let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
-        let mensaje = $('<span>').text('Se ha eliminado el pictograma');
+        let contenedorPadre = $(this).closest('#contenedorPictogramas, #contenedorImagenes');
+        let nombreContenedor = contenedorPadre.attr('id');
+        let mensaje;
+        if(nombreContenedor === 'contenedorPictogramas'){
+            mensaje = $('<span>').text('Se ha eliminado el pictograma');
+        }
+        else{
+            mensaje = $('<span>').text('Se ha eliminado la imagen');
+        }
         let deshacer = $('<button>').addClass('btn btn-sm btn-deshacer').attr('id', 'deshacer-elim').text('Deshacer');
         alerta.append(mensaje, deshacer).hide();
         $('#avisosPictos').append(alerta);
         alerta.fadeIn();
         let temp = setTimeout(function () {
-            alerta.fadeOut(function(){
+            alerta.fadeOut(function () {
                 alerta.remove();
             });
-            if(persiste){
-            $.ajax({
-                url: '/tarjetas-comunicacion/eliminar-picto',
-                method: 'DELETE',
-                data: {
-                    id: id
-                },
-                success: function (data, status, xhr) {
-                    if(data.success){
-                        $(`#${id}`).closest('.col-lg-2.col-md-3.mt-3').remove();
+            if (persiste) {
+                $.ajax({
+                    url: '/tarjetas-comunicacion/eliminar-picto',
+                    method: 'DELETE',
+                    data: {
+                        id: id
+                    },
+                    success: function (data, status, xhr) {
+                        if (data.success) {
+                            $(`#${id}`).closest('.col-lg-2.col-md-3.mt-3').remove();
+                        }
+                    },
+                    error: function (data, status, xhr) {
+
                     }
-                },
-                error: function (data, status, xhr) {
-    
-                }
-            }); 
-        }
+                });
+            }
         }, 5000);
 
-        deshacer.on('click', function(e){
+        deshacer.on('click', function (e) {
             e.preventDefault();
             persiste = false;
-            clearTimeout(temp); 
+            clearTimeout(temp);
             alerta.fadeOut();
             divPicto.show();
         });
     });
 
-    $('#btn-pictos').on('click', function(e){
+    $('#btn-pictos').on('click', function (e) {
         $('#btn-pictos').addClass('seleccion');
         $('#btn-imagenes').removeClass('seleccion');
         $('#btn-texto').removeClass('seleccion');
@@ -237,7 +245,7 @@ $(document).ready(function () {
         $('#gestion-pictogramas').show();
     });
 
-    $('#btn-imagenes').on('click', function(e){
+    $('#btn-imagenes').on('click', function (e) {
         $('#btn-imagenes').addClass('seleccion');
         $('#btn-pictos').removeClass('seleccion');
         $('#btn-texto').removeClass('seleccion');
