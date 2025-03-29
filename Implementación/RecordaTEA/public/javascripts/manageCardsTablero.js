@@ -165,7 +165,12 @@ $(document).ready(function () {
                     }, 2000);
                 }
                 else {
-
+                    alerta.text('El picto ya existe en el vocabulario.').attr('id', `alert-${data.id}`).hide();
+                    $('#avisosPictos').append(alerta);
+                    $(`#alert-${data.id}`).fadeIn();
+                    setTimeout(function () {
+                        $(`#alert-${data.id}`).fadeOut().remove();
+                    }, 2000);
                 }
             },
             error: function (xhr, status, error) {
