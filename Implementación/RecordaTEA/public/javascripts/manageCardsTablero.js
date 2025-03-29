@@ -179,7 +179,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#contenedorPictogramas').on('click', '.trash', function (e) {
+    $('#contenedorPictogramas, #contenedorImagenes').on('click', '.trash', function (e) {
         e.preventDefault();
         //Obtenemos los datos
         let id = $(this).attr('id');
