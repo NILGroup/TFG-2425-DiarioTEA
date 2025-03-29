@@ -362,7 +362,7 @@ body {
     background-color: #214055;
 }
 
-#no-pictos span {
+#no-pictos span, #no-imagenes span {
     color: #F9F7F7;
 }
 

@@ -102,6 +102,8 @@ $(document).ready(function () {
                         </div>
                     `;
 
+                    $('#no-imagenes').hide().addClass('d-none');
+
                     $('#contenedorImagenes').prepend(tarjetaImagen);
                         alerta.text('Imagen añadidia con éxito.').attr('id', `alert-${response.mensaje.id}`).hide();
                         $('#avisosPictos').append(alerta);
