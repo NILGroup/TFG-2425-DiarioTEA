@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+
     $(document).on('click', '#ver-passw-perfil', function (e) {
         e.preventDefault();
         if ($("#passw-perfil").attr("type") === "password") {
@@ -86,7 +87,6 @@ $(document).ready(function () {
                 method: 'POST',
                 data: perfil,
                 success: function (response) {
-                    console.log(response.usuario);
                     if (response.mensaje > 0) {
                         let usu = `
                 <div class="col-md-3 col-xs-3">
@@ -101,6 +101,11 @@ $(document).ready(function () {
                         $('#aviso-boton').hide();
                         $('#container-form').fadeOut();
                         $('#mostrar-perfiles').removeClass('d-none').fadeIn();
+
+                        usuario.val('');
+                        passw.val('');
+                        confirm.val('');
+                        nombre.val('');
                     }
                     else if (response.mensaje == -3) {
                         usuario.addClass('is-invalid');
@@ -112,5 +117,14 @@ $(document).ready(function () {
                 }
             });
         }
+    });
+
+    $('#volver-inicio').on('click', function (e) {
+        $('#container-form').hide();
+        $('#mostrar-perfiles').show().removeClass('d-none');
+        $('#usuario-perfil').val('');
+        $('#passw-perfil').val('');
+        $('#passw-confirmacion-perfil').val('');
+        $('#nombre-perfil').val('');
     });
 });

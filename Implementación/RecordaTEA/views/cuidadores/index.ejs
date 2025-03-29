@@ -12,6 +12,8 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 
     <link rel="stylesheet" href="/stylesheets/indexStyle.css">
     <link rel="stylesheet" href="/stylesheets/index.css">
@@ -40,7 +42,7 @@
                         <a class="nav-link dropdown-toggle d-flex align-items-center item-perfil" href="#"
                             id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <span>
-                            <i class="bi bi-person-circle"></i>
+                                <i class="bi bi-person-circle"></i>
                             </span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="perfilDropdown">
@@ -58,21 +60,26 @@
         <h2 class="text-center mt-4 titulos-1">Perfil de mis usuarios</h2>
         <div class="text-end justify-content-end">
             <button class="btn btn-background col-lg-2 col-md-3 col-xs-10" id="mostrar-form"><i
-                class="bi bi-person-plus" style="margin-right: 0.2em;"></i> Nuevo perfil</button>
+                    class="bi bi-person-plus" style="margin-right: 0.2em;"></i> Nuevo perfil</button>
         </div>
-        
+
         <div class="row mt-5 justify-content-center align-items-center" id="cards-usuarios">
             <% if (data.usuarios.length> 0) { %>
                 <% data.usuarios.forEach(function(elem){ %>
-                    <div class="col-md-3 col-xs-3">
+                    <div class="col-md-3 col-xs-3 mb-5">
                         <a href="/diario/<%= elem.id %>">
-                            <div class="card card-usuarios align-content-center justify-content-center">
+                            <div class="card card-usuarios align-content-center justify-content-center text-end">
                                 <div class="card-body">
-                                    <img class="card-img img-fluid" src="/images/config/avatar.png" alt="Opcion por defecto del perfil">
+                                    <img class="card-img img-fluid" src="/images/config/avatar.png"
+                                        alt="Opcion por defecto del perfil">
+                                    <h5 class=" text-center ">
+                                        <%= elem.nombre %>
+                                    </h5>
+                                    <hr class="my-2">
+                                    <button id="btn-compartir" data-id="<%= elem.id %>" data-nombre="<%= elem.nombre %>" class="btn btn-background text-end"
+                                        data-bs-toggle="modal" data-bs-target="#compartirPerfil"><i
+                                            class="fa-solid fa-share"></i></button>
                                 </div>
-                                <h5 class="card-title text-center ">
-                                    <%= elem.nombre %>
-                                </h5>
                             </div>
                         </a>
                     </div>
@@ -131,15 +138,53 @@
             </div>
 
             <div class="text-end justify-content-end">
+                <button class="btn btn-borde text-end" id="volver-inicio">Volver</button>
                 <button class="btn btn-background text-end" type="submit" id="add-perfil">Añadir</button>
             </div>
         </form>
     </div>
 
-    <div class="container finale mt-5">
-        <p class="texto-creditos">Imagen utilizada: <a target="_blank" href="http://www.freepik.com">Designed by rawpixel.com / Freepik</a></p>
+    <div id="avisosPictos">
     </div>
+
+    <div class="container finale mt-5">
+        <p class="texto-creditos">Imagen utilizada: <a target="_blank" href="http://www.freepik.com">Designed by
+                rawpixel.com / Freepik</a></p>
+    </div>
+
+    <div class="modal fade" id="compartirPerfil" tabindex="-1" aria-labelledby="compartirPerfilLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="row">
+                        <h5 class="modal-title titulos-2 mb-2" id="compartirPerfilLabel">Compartir perfil</h5>
+                        <p class="texto-normal"><i class="bi bi-exclamation-circle me-2"></i>Al compartir un perfil con otro usuario, este, podrá consultar su diario y
+                            modificar el vocabulario y las rutinas.</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="compartirConUsuario" class="form-label letra-form">Usuario*:</label>
+                        <div class="input-group">
+                            <span class="input-group-text d-none d-md-block">@</span>
+                            <input type="text" class="form-control" id="compartirConUsuario" placeholder="Usuario" name="compartirUsuario"
+                                required>
+                            <div class="invalid-feedback" id="compartirConUsuario-error">Campo obligatorio.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-borde" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-background" id="btnCompartir">Compartir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="/javascripts/crearPerfil.js"></script>
+    <script src="/javascripts/compartirPerfil.js"></script>
 </body>
 
 </html>

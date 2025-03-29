@@ -35,6 +35,29 @@ class CuidadoresDao{
             throw error;
         }
     }
+
+    async compartirPerfil(idUsuario, idPerfil){
+        try{
+            console.log(idUsuario, idPerfil)
+            let [resultado] = await pool.query('INSERT INTO Cuidadores_usu (id_cuidador, id_usuario) VALUES (?,?)', [idUsuario, idPerfil]);
+            console.log(resultado)
+            return resultado.affectedRows;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+    async perfilVinculadoId(idUsuario, idPerfil){
+        try{
+            console.log(idUsuario, idPerfil)
+            let [resultado] = await pool.query('SELECT * FROM Cuidadores_usu WHERE id_cuidador = ? AND id_usuario = ?', [idUsuario, idPerfil]);
+            return resultado;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
 }
 
 module.exports = CuidadoresDao;

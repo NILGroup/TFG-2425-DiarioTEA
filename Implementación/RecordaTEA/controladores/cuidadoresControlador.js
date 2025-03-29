@@ -47,6 +47,11 @@ class CuidadoresController {
         res.redirect('/');
     }
 
+    async compartirPerfil(req, res){
+        let resultado = await cuidadoresService.compartirPerfil(req.body.usuario, req.body.idPerfil);
+        res.send(resultado);
+    }
+
 }
 
 module.exports = CuidadoresController;

@@ -9,4 +9,6 @@ router.get('/inicio', cuidadoresControlador.inicio);
 
 router.get('/logout', cuidadoresControlador.logout);
 
+router.post('/compartir-usuario', cuidadoresControlador.compartirPerfil);
+
 module.exports = router;
