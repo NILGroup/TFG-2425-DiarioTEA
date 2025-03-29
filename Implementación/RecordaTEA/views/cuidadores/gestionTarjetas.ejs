@@ -86,8 +86,8 @@
                             vocabulario de <%= data.usuario.nombre %>:</h1>
                         <div class="container mt-3 borde-cont">
                             <div class="row pb-3 vocabulario" id="contenedorPictogramas">
+                                <% let hayElem = false; %>
                                 <% if (data.voc.length > 0) { %>
-                                    <% let hayElem = false; %>
                                     <% data.voc.forEach(function(elem){%>
                                         <% if(elem.enlace){%>
                                             <% hayElem = true; %>
@@ -161,8 +161,8 @@
                             vocabulario de <%= data.usuario.nombre %>:</h1>
                         <div class="container mt-3 borde-cont">
                             <div class="row pb-3 vocabulario" id="contenedorImagenes">
+                                <% let hayImg = false; %>
                                 <% if (data.voc.length > 0) { %>
-                                    <% let hayImg = false; %>
                                     <% data.voc.forEach(function(elem){%>
                                         <%if(elem.imagen){%>
                                             <% hayImg = true; %>

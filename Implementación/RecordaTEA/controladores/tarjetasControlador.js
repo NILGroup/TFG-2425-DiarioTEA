@@ -11,7 +11,6 @@ class TarjetasControlador {
             console.log('llego al voc');
             let id_usuario = req.session.usuario.id;
             let vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(id_usuario);
-            console.log('sjsjss')
             vocabulario.forEach((elem) => {
                 if(elem.imagen){
                     let imgbase64 = elem.imagen.toString('base64'); 
@@ -19,14 +18,13 @@ class TarjetasControlador {
                     elem.imagen = url;
                 }
             });
-            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
             let data = {
                 usuario: req.session.usuario,
                 usuarios: req.session.usuarios,
                 voc: vocabulario,
                 config: req.session.config
             };
-            console.log('he llegado: ' + data)
+            console.log('he llegado: ' + data.toString())
             res.render('cuidadores/gestionTarjetas', { data: data });
         }
         catch (error) {
