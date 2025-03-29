@@ -105,6 +105,30 @@ class EntradasDao {
         }
     }
 
+    async viewEntryById(idEntrada, idUsuario) {
+        try {
+            const entradas = await pool.query(`
+                 SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas.emocion
+                FROM Entradas
+                LEFT JOIN Entradas_tarjeta ON Entradas.id = Entradas_tarjeta.id_entrada
+                LEFT JOIN Tarjetas ON Entradas_tarjeta.id_tarjeta = Tarjetas.id
+                LEFT JOIN Pictos ON Tarjetas.id = Pictos.id_tarjeta
+                LEFT JOIN Imagenes ON Tarjetas.id = Pictos.id_tarjeta
+                WHERE Entradas.id = ?
+                AND Entradas.id_Usuario = ?
+                ORDER BY Entradas.fecha_registro DESC, Entradas_tarjeta.orden ASC;
+            `, [idEntrada, idUsuario]);
+
+
+            return entradas;
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+
+    }
+
 }
 
 module.exports = EntradasDao;

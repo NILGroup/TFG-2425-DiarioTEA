@@ -48,53 +48,7 @@ class UsuariosService {
     }
 
 
-    async viewEntryById(idEntrada, idUsuario) {
-        const response = await usuariosDao.viewEntryById(idEntrada, idUsuario);
-
-        try {
-            //para poder agrupar los datos por entrada
-            const groupedData = response[0].reduce((acc, item) => {
-                //basicamente itero con item sobre entradas, y voy metiendo en acc los datos para luego retornarlos en groupedData
-
-                const { formattedDate, formattedTime, numericDate } = formatDateTime(item.fecha_registro);
-
-
-                const id = item.idEntrada;
-                //si no está metido se crea
-                if (!acc[id]) {
-                    acc[id] = {
-                        
-                        idEntrada: id,
-                        autor: item.autor,
-                        fecha_registro: formattedDate,
-                        hora_registro: formattedTime,
-                        fecha_editable: numericDate,
-                        cuerpo: item.cuerpo,
-                        tarjetas: []
-                    };
-                }
-                //para saber si es una entrada con pictos o solo texto del cuerpo
-                if (item.id_tarjeta !== null) {
-                    acc[id].tarjetas.push({
-                        id_tarjeta: item.id_tarjeta,
-                        orden: item.orden,
-                        enlace: item.enlace,
-                        emocion: item.emocion
-                    });
-                }
-
-                return acc;
-            }, {});
-
-            const result = Object.values(groupedData);
-
-            console.log(result);
-
-            return result;
-        }catch(error){
-
-        }
-    }
+   
 
     
 

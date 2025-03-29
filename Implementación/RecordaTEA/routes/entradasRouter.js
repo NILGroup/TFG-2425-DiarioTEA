@@ -11,6 +11,7 @@ router.get("/add-entrada", entradasControlador.addEntry);
 
 router.post('/submit-entry', entradasControlador.submitEntrada);
 
+router.get('/view-entry/:idEntrada', entradasControlador.viewEntry);
 
 // Este para la persona cuidadora
 router.get('/:id', entradasControlador.cargarDiario);

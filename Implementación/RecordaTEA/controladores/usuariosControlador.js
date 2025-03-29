@@ -12,30 +12,7 @@ class UsuariosControlador {
     }
 
     
-    async viewEntry(req, res) {
-        const idEntrada = req.params.idEntrada;
-        const idUsuario = req.session.usuario.id; // Asumiendo que tienes la información del usuario autenticado
-
-        try {
     
-            // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
-            const entrada = await usuariosServicio.viewEntryById(idEntrada, idUsuario);
-
-            if (entrada) {
-                return res.render('TEA/viewEntryTEA', { entrada: entrada[0],  diary: true, nombre: req.session.usuario.nombre  });
-            } else {
-                const error = {
-                    status: 403,
-                    info: "No tienes permisos para ver esta página"
-                };
-                // si no existe, es porque no ha cumplido con que sea el idUsuario
-                return res.render('error', { error: error });
-            }
-        } catch (error) {
-            console.log(error);
-            return res.status(500).send('Error interno del servidor');
-        }
-    }
 
     async editEntryView(req, res){
 

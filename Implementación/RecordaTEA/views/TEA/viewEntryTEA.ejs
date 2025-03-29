@@ -1,59 +1,48 @@
 <%- include("navbarTEA") %>
 
-    <body>
-        <div class="container mt-5">
-            <h1 class="container">
-                <%= entrada.fecha_registro %> a las <%= entrada.hora_registro %>
-            </h1>
-            <div class="row mt-5">
-                <% entrada.tarjetas.forEach(function(picto) { %>
-                    <% if (!picto.emocion) { %>
-                    <div class="col-lg-2 col-md-3 col-sm-5 col-xs-6">
-                        <div class="card">
-                            <img class="card-img" src="<%= picto.enlace %>">
-                        </div>
+<body>
+    <div class="container mt-5">
+        <h1 class="container">
+            <%= entrada.fecha_registro %> a las <%= entrada.hora_registro %>
+        </h1>
+        <div class="row mt-5">
+            <% entrada.tarjetas.forEach(function(picto) { %>
+                <div class="col-lg-2 col-md-3 col-sm-5 col-xs-6">
+                    <div class="card">
+                        <img class="card-img" src="<%= picto.enlace %>">
                     </div>
-                    <% } else { %>
-                        <div class="col-lg-2 col-md-3 col-sm-5 col-xs-6 ms-auto">
-                            <div class="card">
-                                <img class="card-img" src="<%= picto.enlace %>">
-                                
-                            </div>
-                            <p class="card-title texto-boton">EMOCION</p>
-                        </div>
-                       
-                    <% } %>
-                    <% }); %>
-            </div>
+                </div>
+            <% }); %>
+
+            <% if (entrada.emocion != null) { %>
+                <div class="col-lg-2 col-md-3 col-sm-5 col-xs-6 ms-auto">
+                    <div class="card">
+                        <img class="card-img" src="<%= entrada.emocion %>">
+                    </div>
+                    <p class="card-title texto-boton">EMOCIÓN</p>
+                </div>
+            <% } %>
         </div>
-        <div class="container-fluid mt-5">
-            <div class="row d-flex text-center justify-content-center">
-                <div class="col-lg-1 col-md-3 col-sm-5 col-xs-6">
-                    <div class="card no-border text-center">
-                        <a href="/users/diary">
-                            <img class="card-img" src="/images/config/botonVolver.png"
-                                alt="Volver a la pestaña anterior">
-                        </a>
-                        <p class="card-title text-center">VOLVER</p>
-                    </div>
+    </div>
+
+    <div class="container-fluid mt-5">
+        <div class="row d-flex text-center justify-content-center">
+            <div class="col-lg-1 col-md-3 col-sm-5 col-xs-6">
+                <div class="card no-border text-center">
+                    <a href="/diario">
+                        <img class="card-img" src="/images/config/botonVolver.png" alt="Volver a la pestaña anterior">
+                    </a>
+                    <p class="card-title text-center">VOLVER</p>
                 </div>
-                <div class="col-lg-1 col-md-3 col-sm-5 col-xs-6">
-                    <div class="card no-border text-center" id="botonEditarEntrada">
-                        <a href="/users/diary/edit-entry/<%= entrada.idEntrada %>">
-                            <img class="card-img" src="/images/config/botonEditar.png" alt="Editar entrada del diario">
-                            <p class="card-title texto-boton">EDITAR</p>
-                        </a>
-                    </div>
-                </div>
-                <!-- <div class="col-lg-1 col-md-3 col-sm-5 col-xs-6">
-                <a href="/users/diary/view-entry/<%=  %>">
-                <div class="card no-border">
-                    <a href="diaryTEA.html">
-                        <img class="card-img" src="/images/config/botonBorrar.png" alt="Borrar entrada del diario">
-                        <p class="card-title texto-boton">BORRAR</p>
+            </div>
+            <div class="col-lg-1 col-md-3 col-sm-5 col-xs-6">
+                <div class="card no-border text-center" id="botonEditarEntrada">
+                    <a href="/diario/edit-entry/<%= entrada.idEntrada %>">
+                        <img class="card-img" src="/images/config/botonEditar.png" alt="Editar entrada del diario">
+                        <p class="card-title texto-boton">EDITAR</p>
                     </a>
                 </div>
-            </div> -->
             </div>
         </div>
-    </body>
+    </div>
+</body>
