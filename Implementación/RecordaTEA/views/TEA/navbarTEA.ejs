@@ -30,14 +30,14 @@
                 <ul class="navbar-nav me-auto"> <!--me-auto los alinea a la izquierda-->
                     <% if (diary) { %>
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="/users/routines">
+                            <a class="nav-link text-center" href="/routines">
                                 <img src="/images/pictos/rutinas.png" alt="Rutinas" class="img-fluid navegacion-icono">
                                 <p class="card-title texto-boton">RUTINAS</p>
                             </a>
                         </li>
                     <% } else { %>
                         <li class="nav-item">
-                            <a class="nav-link text-center" href="/users/diary">
+                            <a class="nav-link text-center" href="/diary">
                                 <img src="/images/config/libro.png" alt="Diario digital" class="nav-icon img-fluid navegacion-icono" >
                                 <p class="card-title texto-boton">DIARIO</p>
                             </a>
@@ -50,7 +50,7 @@
                         <a class="nav-link dropdown-toggle d-flex align-items-center item-perfil texto-perfil" href="#"
                             id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <span>
-                                <%= nombre %>
+                                <%= usuario %>
                             </span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="perfilDropdown">

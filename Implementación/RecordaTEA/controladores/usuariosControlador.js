@@ -12,34 +12,6 @@ class UsuariosControlador {
     }
 
     
-    async addEntry(req, res) {
-
-        const response = await usuariosServicio.obtenerTarjetasPorUsuario(req.session.usuario.id);
-
-        console.log(response);
-        const tarjetas_emocion = response.filter(t=>t.categoria="Emocion" && t.categoria!=null);
-
-        res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre, emocion:  tarjetas_emocion, nombre: req.session.usuario.nombre})
-
-        //OBTENER PICTOGRAMAS DEL USUARIO PARA ADD ENTRY Y RENDERIZAR
-
-    }
-
-    async submitEntry(req, res){
-        
-
-        const registrosString = req.body.registros; 
-        const registros = JSON.parse(registrosString); 
-        registros.id_usuario = req.session.usuario.id;
-
-        const response = await usuariosServicio.submitEntry(registros);
-
-        if(response.success){
-            res.redirect('/users/diary'); // Redirigir a la página del diario, por ejemplo
-        }   
-        
-    }
-
     async viewEntry(req, res) {
         const idEntrada = req.params.idEntrada;
         const idUsuario = req.session.usuario.id; // Asumiendo que tienes la información del usuario autenticado
@@ -72,7 +44,7 @@ class UsuariosControlador {
 
         try {
 
-            const vocabulario = await usuariosServicio.obtenerTarjetasPorUsuario(idUsuario);
+            const vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(idUsuario);
 
             // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
             const entrada = await usuariosServicio.viewEntryById(idEntrada, idUsuario);

@@ -73,8 +73,37 @@ class EntradasController {
 
     async redirectToDiary(req, res) {
         const response = await entradasService.leerEntradasPorUsuario(req.session.usuario.id);
-        res.render('TEA/diaryTEA', { entradas: response, diary: true, nombre: req.session.usuario.nombre });
+        res.render('TEA/diaryTEA', { entradas: response, diary: true, usuario: req.session.usuario.nombre });
     }
+
+    async addEntry(req, res) {
+
+        const response = await tarjetasService.obtenerTarjetasUsuarioId(req.session.usuario.id);
+
+        console.log(response);
+        const tarjetas_emocion = response.filter(t=>t.categoria="Emocion" && t.categoria!=null);
+
+        res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre})
+
+        //OBTENER PICTOGRAMAS DEL USUARIO PARA ADD ENTRY Y RENDERIZAR
+
+    }
+
+    async submitEntrada(req, res){
+        
+
+        const registrosString = req.body.registros; 
+        const registros = JSON.parse(registrosString); 
+        registros.id_usuario = req.session.usuario.id;
+
+        const response = await entradasService.submitEntrada(registros);
+
+        if(response.success){
+            res.redirect('/diario'); // Redirigir a la página del diario, por ejemplo
+        }   
+        
+    }
+
 
 }
 

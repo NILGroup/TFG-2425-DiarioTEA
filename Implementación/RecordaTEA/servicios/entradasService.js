@@ -70,6 +70,7 @@ class EntradasService{
                         fecha_editable : numericDate,
                         hora_registro: formattedTime,
                         cuerpo: item.cuerpo,
+                        emocion: item.emocion,
                         tarjetas: []
                     };
                     groupedData.push(newEntry); // Mantenemos el orden al agregar en el array
@@ -81,8 +82,7 @@ class EntradasService{
                     entryMap.get(id).tarjetas.push({
                         id_tarjeta: item.id_tarjeta,
                         orden: item.orden,
-                        enlace: item.enlace,
-                        emocion: item.emocion
+                        enlace: item.enlace          
                     });
                 }
             });
@@ -94,6 +94,13 @@ class EntradasService{
             console.error(error);
         }
     }
+
+    async submitEntrada(data){
+        const response = await entradasDao.submitEntrada(data);
+        return response;
+    }
+
+
 }
 
 module.exports = EntradasService;

@@ -10,13 +10,13 @@ const maxSize = 16 * 1024 * 1024;
 class TarjetasService {
     constructor() { }
 
-    async obtenerPictosUsuarioId(id_usuario) {
+    async obtenerTarjetasUsuarioId(id_usuario) {
 
         let vocabulario;
         try {
             if (id_usuario !== null) {
                 console.log(id_usuario)
-                vocabulario = await tarjetasDao.obtenerPictosUsuarioId(id_usuario);
+                vocabulario = await tarjetasDao.obtenerTarjetasUsuarioId(id_usuario);
             }
             else {
                 vocabulario = -1;

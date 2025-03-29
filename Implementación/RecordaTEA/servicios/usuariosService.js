@@ -48,16 +48,6 @@ class UsuariosService {
     }
 
 
-
-    
-    
-
-    async obtenerTarjetasPorUsuario(idUsuario) {
-        const response = await usuariosDao.obtenerTarjetasPorUsuario(idUsuario);
-
-        return response[0];
-    }
-
     async viewEntryById(idEntrada, idUsuario) {
         const response = await usuariosDao.viewEntryById(idEntrada, idUsuario);
 
@@ -106,10 +96,7 @@ class UsuariosService {
         }
     }
 
-    async submitEntry(data){
-        const response = await usuariosDao.submitEntry(data);
-        return response;
-    }
+    
 
     async submitEditEntry(data){
         const response = await usuariosDao.actualizarTarjetasEntrada(data);
