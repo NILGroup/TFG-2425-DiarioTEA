@@ -21,7 +21,6 @@ class TarjetasService {
             else {
                 vocabulario = -1;
             }
-            console.log(vocabulario)
             return vocabulario;
         }
         catch (error) {

@@ -86,22 +86,33 @@
                             vocabulario de <%= data.usuario.nombre %>:</h1>
                         <div class="container mt-3 borde-cont">
                             <div class="row pb-3 vocabulario" id="contenedorPictogramas">
-                                <% if (data.voc.length> 0) { %>
+                                <% if (data.voc.length > 0) { %>
+                                    <% let hayElem = false; %>
                                     <% data.voc.forEach(function(elem){%>
-                                        <div class="col-lg-2 col-md-3 mt-3">
-                                            <div class="dflex">
-                                                <div class="card">
-                                                    <a href="">
-                                                        <img src="<%= elem.enlace%>" class="card-img">
-                                                    </a>
-                                                    <div class="remove-picto"></div>
-                                                    <span id="<%= elem.idTarjeta %>" class="trash"><i
-                                                            class="bi bi-trash3-fill"></i></span>
+                                        <% if(elem.enlace){%>
+                                            <% hayElem = true; %>
+                                            <div class="col-lg-2 col-md-3 mt-3">
+                                                <div class="dflex">
+                                                    <div class="card">
+                                                        <a href="">
+                                                            <img src="<%= elem.enlace%>" class="card-img">
+                                                        </a>
+                                                        <div class="remove-picto"></div>
+                                                        <span id="<%= elem.idTarjeta %>" class="trash"><i
+                                                                class="bi bi-trash3-fill"></i></span>
+                                                    </div>
                                                 </div>
+    
                                             </div>
-
-                                        </div>
+                                        <%}%>
                                         <% }) %>
+                                        <% if (!hayElem) { %> 
+                                            <div class="d-flex text-center justify-content-center align-items-center" id="no-pictos">
+                                                <span>
+                                                    <%= data.usuario.nombre %> todavía no tiene pictogramas.
+                                                </span>
+                                            </div>
+                                        <% } %>
                                             <% } else {%>
                                                 <div class="d-flex text-center justify-content-center align-items-center"
                                                     id="no-pictos">
@@ -150,22 +161,34 @@
                             vocabulario de <%= data.usuario.nombre %>:</h1>
                         <div class="container mt-3 borde-cont">
                             <div class="row pb-3 vocabulario" id="contenedorImagenes">
-                                <% if (data.imgs.length> 0) { %>
-                                    <% data.imgs.forEach(function(elem){%>
-                                        <div class="col-lg-2 col-md-3 mt-3">
-                                            <div class="dflex">
-                                                <div class="card">
-                                                    <a href="">
-                                                        <img src="<%= elem.imagen%>" class="card-img">
-                                                    </a>
-                                                    <div class="remove-picto"></div>
-                                                    <span id="<%= elem.id %>" class="trash"><i
-                                                            class="bi bi-trash3-fill"></i></span>
+                                <% if (data.voc.length > 0) { %>
+                                    <% let hayImg = false; %>
+                                    <% data.voc.forEach(function(elem){%>
+                                        <%if(elem.imagen){%>
+                                            <% hayImg = true; %>
+                                            <div class="col-lg-2 col-md-3 mt-3">
+                                                <div class="dflex">
+                                                    <div class="card">
+                                                        <a href="">
+                                                            <img src="<%= elem.imagen%>" class="card-img">
+                                                        </a>
+                                                        <div class="remove-picto"></div>
+                                                        <span id="<%= elem.id %>" class="trash"><i
+                                                                class="bi bi-trash3-fill"></i></span>
+                                                    </div>
                                                 </div>
+    
                                             </div>
-
-                                        </div>
+                                        <%}%>
                                         <% }) %>
+                                        <% if (!hayImg) { %> 
+                                            <div class="d-flex text-center justify-content-center align-items-center"
+                                            id="no-imagenes">
+                                            <span>
+                                                <%= data.usuario.nombre %> todavía no tiene imágenes.
+                                            </span>
+                                        </div>
+                                        <% } %>
                                             <% } else {%>
                                                 <div class="d-flex text-center justify-content-center align-items-center"
                                                     id="no-imagenes">
