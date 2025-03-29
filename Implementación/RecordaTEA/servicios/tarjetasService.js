@@ -107,9 +107,6 @@ class TarjetasService {
     }
 
     async addTarjetaImagen(tarjeta) {
-        console.log(tarjeta.imagen);
-        console.log('Es un Buffer:', Buffer.isBuffer(tarjeta.imagen)); // Debe ser true
-
         let dimensiones = imageSize(tarjeta.imagen);
         if (!dimensiones) {
             //Código de error: El archivo no es una imagen
@@ -132,6 +129,12 @@ class TarjetasService {
     async imagenesUsuarioId(usuarioId) {
         let resultado = await tarjetasDao.imagenesUsuarioId(usuarioId);
         console.log('service', resultado)
+        return resultado;
+    }
+
+    async textoLibre(textoLibre, idUsuario){
+        let b = (textoLibre === 'true');
+        let resultado = await tarjetasDao.textoLibre(b, idUsuario);
         return resultado;
     }
 }

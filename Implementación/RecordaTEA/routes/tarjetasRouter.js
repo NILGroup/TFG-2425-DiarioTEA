@@ -22,5 +22,7 @@ router.delete('/eliminar-picto', tarjetasControlador.eliminarTarjetaVocabulario)
 
 router.post('/nueva-imagen', upload.single('image'), tarjetasControlador.addTarjetaImagen);
 
+router.put('/cambiar-texto-libre', tarjetasControlador.textoLibre);
+
 
 module.exports = router;

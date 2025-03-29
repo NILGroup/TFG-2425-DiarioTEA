@@ -242,6 +242,7 @@ $(document).ready(function () {
         $('#btn-imagenes').removeClass('seleccion');
         $('#btn-texto').removeClass('seleccion');
         $('#gestion-imagenes').hide();
+        $('#texto-libre').hide();
         $('#gestion-pictogramas').show();
     });
 
@@ -250,6 +251,16 @@ $(document).ready(function () {
         $('#btn-pictos').removeClass('seleccion');
         $('#btn-texto').removeClass('seleccion');
         $('#gestion-pictogramas').hide();
+        $('#texto-libre').hide();
         $('#gestion-imagenes').show();
+    });
+
+    $('#btn-texto').on('click', function(e){
+        $('#btn-imagenes').removeClass('seleccion');
+        $('#btn-pictos').removeClass('seleccion');
+        $('#btn-texto').addClass('seleccion');
+        $('#gestion-pictogramas').hide();
+        $('#gestion-imagenes').hide();
+        $('#texto-libre').show();
     });
 })

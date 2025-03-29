@@ -14,6 +14,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <link rel="stylesheet" href="/stylesheets/login.css">
     <link rel="stylesheet" href="/stylesheets/indexStyle.css">
     <link rel="stylesheet" href="/stylesheets/index.css">
     <link rel="stylesheet" href="/stylesheets/cuidadores.css">
@@ -114,8 +115,10 @@
 
                             <div id="preview-container"
                                 class="col-12 col-md-6 text-start justify-content-start mb-3 mb-md-0 justify-content-sm-center">
-                                <div class="container-fluid m-0 text-center justify-content-center align-items-center" style="max-width: fit-content;">
-                                    <p class="text-center texto-normal" id="texto-vistaprevia">Vista previa de la imagen:</p>
+                                <div class="container-fluid m-0 text-center justify-content-center align-items-center"
+                                    style="max-width: fit-content;">
+                                    <p class="text-center texto-normal" id="texto-vistaprevia">Vista previa de la
+                                        imagen:</p>
                                     <div
                                         class="container-fluid d-flex justify-content-center vista-previa borde-img p-0 ">
                                         <img id="preview-image" class="img-fluid">
@@ -130,7 +133,8 @@
                                 <input type="file" id="imagenSeleccionada" class="d-none" accept="image/*">
                                 <span id="nombreArchivo" class="ms-2 text-muted me-2">Ningún archivo
                                     seleccionado.</span>
-                                <label for="imagenSeleccionada" class="btn btn-background"><i class="bi bi-card-image"></i> Seleccionar imagen </label>
+                                <label for="imagenSeleccionada" class="btn btn-background"><i
+                                        class="bi bi-card-image"></i> Seleccionar imagen </label>
                             </div>
 
                         </form>
@@ -169,6 +173,23 @@
                     </div>
                 </div>
 
+                <div class="div" id="texto-libre" style="display: none;">
+                    <div class="row minimo-texto-libre">
+                        <form action="" class="mt-4 ms-3">
+                            <div class="form-check form-switch letra-form">
+                                <input class="form-check-input" type="checkbox" id="permisoTextoLibre" role="switch">
+                                <label class="form-check-label letra-form" for="permisoTextoLibre" id="label-permisoTextoLibre">
+                                    Texto libre para <%=data.usuario.nombre%>.
+                                </label>
+                                <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                data-bs-custom-class="custom-tooltip"
+                                data-bs-title="Si esta casilla esta activada cambiará el método de comunicación, permitiendo que el usuario registre entradas con el teclado."
+                                class="info-span"><i class="bi bi-info-circle-fill"></i></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -184,7 +205,7 @@
                     <div class="modal-header">
                         <div class="row">
                             <h5 class="modal-title titulos-2" id="cropModalLabel">Recortar imagen.</h5>
-                        <p class="texto-normal">El tamaño de las imágenes tiene que ser de 500 x 500 píxeles.</p>
+                            <p class="texto-normal">El tamaño de las imágenes tiene que ser de 500 x 500 píxeles.</p>
                         </div>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -205,6 +226,7 @@
 
         <script src="javascripts/manageCardsTablero.js"></script>
         <script src="javascripts/gestionImagenes.js"></script>
+        <script src="javascripts/textoLibre.js"></script>
 </body>
 
 </html>

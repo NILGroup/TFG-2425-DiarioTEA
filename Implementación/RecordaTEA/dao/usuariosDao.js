@@ -193,6 +193,7 @@ class UsuariosDao {
     async registrarUsuario(usuario) {
         try {
             const [resultado] = await pool.query('INSERT INTO Usuarios (nombre, usuario, contraseña)  VALUES (?, ?, ?)', [usuario.nombre, usuario.usuario, usuario.password]);
+            const [r] = await pool.query('INSERT INTO Config (id_usuario) VALUES (?)', [resultado.insertId]);
             return resultado;
         }
         catch (error) {

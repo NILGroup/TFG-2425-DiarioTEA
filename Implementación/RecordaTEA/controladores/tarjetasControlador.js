@@ -102,7 +102,6 @@ class TarjetasControlador {
     }
 
     async addTarjetaImagen(req, res) {
-        console.log('he llegado');
         let tarjeta = {
             imagen: req.file.buffer,
             mimetype: req.file.mimetype,
@@ -110,10 +109,13 @@ class TarjetasControlador {
             tam: req.file.size
         }
 
-        console.log('estoy aqui');
-
         let resultado = await tarjetasService.addTarjetaImagen(tarjeta);
         res.send(resultado);
+    }
+
+    async textoLibre(req, res){
+        let resultado = await tarjetasService.textoLibre(req.body.texto, req.session.usuario.id);
+        res.send({success: resultado});
     }
 }
 

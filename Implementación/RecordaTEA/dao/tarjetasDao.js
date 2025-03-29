@@ -95,13 +95,24 @@ class TarjetasDao {
     }
   }
 
-  async activarPicto(idTarjeta){
-    try{
+  async activarPicto(idTarjeta) {
+    try {
       let [resultado] = await pool.query('UPDATE Tarjetas SET activa = 1 WHERE id = ?', [idTarjeta]);
       return resultado.affectedRows;
     }
-    catch(error){
+    catch (error) {
 
+    }
+  }
+
+  async textoLibre(textoLibre, idUsuario) {
+    try {
+      let [resultado] = await pool.query('UPDATE Config SET texto = ? WHERE id_usuario = ?', [textoLibre, idUsuario]);
+      console.log(resultado);
+      return resultado.affectedRows;
+    }
+    catch (error) {
+      console.log(error);
     }
   }
 }
