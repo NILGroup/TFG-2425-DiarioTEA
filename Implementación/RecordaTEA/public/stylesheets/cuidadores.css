@@ -86,6 +86,11 @@ body {
     font-size: 1.5em;
 }
 
+.texto-normal{
+    color: #213555;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 /*CARDS DE LOS USUARIOS*/
 .card-usuarios {
     background-color: #F9F7F7;

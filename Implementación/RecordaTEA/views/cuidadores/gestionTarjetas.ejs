@@ -88,7 +88,7 @@
                                                         <img src="<%= elem.enlace%>" class="card-img">
                                                     </a>
                                                     <div class="remove-picto"></div>
-                                                    <span id="<%= elem.id %>" class="trash"><i
+                                                    <span id="<%= elem.idTarjeta %>" class="trash"><i
                                                             class="bi bi-trash3-fill"></i></span>
                                                 </div>
                                             </div>
@@ -115,7 +115,7 @@
                             <div id="preview-container"
                                 class="col-12 col-md-6 text-start justify-content-start mb-3 mb-md-0 justify-content-sm-center">
                                 <div class="container-fluid m-0 text-center justify-content-center align-items-center" style="max-width: fit-content;">
-                                    <p class="text-center" id="texto-vistaprevia">Vista previa de la imagen:</p>
+                                    <p class="text-center texto-normal" id="texto-vistaprevia">Vista previa de la imagen:</p>
                                     <div
                                         class="container-fluid d-flex justify-content-center vista-previa borde-img p-0 ">
                                         <img id="preview-image" class="img-fluid">
@@ -182,7 +182,10 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="cropModalLabel">Recortar imagen.</h5>
+                        <div class="row">
+                            <h5 class="modal-title titulos-2" id="cropModalLabel">Recortar imagen.</h5>
+                        <p class="texto-normal">El tamaño de las imágenes tiene que ser de 500 x 500 píxeles.</p>
+                        </div>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
@@ -200,9 +203,6 @@
             </div>
         </div>
 
-        <script src="https://unpkg.com/sortablejs-make/Sortable.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
-        <script src="javascripts/sortableCards.js"></script>
         <script src="javascripts/manageCardsTablero.js"></script>
         <script src="javascripts/gestionImagenes.js"></script>
 </body>

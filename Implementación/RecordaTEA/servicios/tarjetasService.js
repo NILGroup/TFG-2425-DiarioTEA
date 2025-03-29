@@ -1,5 +1,5 @@
 const TarjetasDao = require('../dao/tarjetasDao');
-const {imageSize} = require('image-size');
+const { imageSize } = require('image-size');
 const axios = require('axios');
 
 const tarjetasDao = new TarjetasDao();
@@ -10,13 +10,13 @@ const maxSize = 16 * 1024 * 1024;
 class TarjetasService {
     constructor() { }
 
-    async vocabularioUsuarioId(id_usuario) {
+    async obtenerPictosUsuarioId(id_usuario) {
 
         let vocabulario;
         try {
             if (id_usuario !== null) {
                 console.log(id_usuario)
-                vocabulario = await tarjetasDao.vocabularioUsuarioId(id_usuario);
+                vocabulario = await tarjetasDao.obtenerPictosUsuarioId(id_usuario);
             }
             else {
                 vocabulario = -1;
@@ -56,11 +56,19 @@ class TarjetasService {
         try {
             let existe = await tarjetasDao.comprobarExistenciaPicto(id_arasaac, enlace, id_usuario);
             if (existe.length > 0) {
-                return { success: false, id: 0, id_arasaac: id_arasaac };
+                if (existe[0].activa) {
+                    return { success: false, id: 0, id_arasaac: id_arasaac };
+                }
+                else {
+                    let activado = await tarjetasDao.activarPicto(existe[0].id_tarjeta);
+                    return { success: true, id: existe.id_Tarjeta, id_arasaac: id_arasaac }
+                }
             }
             else {
+
                 let insertado = await tarjetasDao.addTarjetaVocabulario(id_arasaac, enlace, id_usuario);
                 return { success: true, id: insertado, id_arasaac: id_arasaac };
+
             }
         }
         catch (error) {
@@ -71,9 +79,7 @@ class TarjetasService {
 
     async eliminarTarjetaVocabulario(idTarjeta) {
         try {
-            let recurso = await tarjetasDao.buscarPictoIdTarjeta(idTarjeta);
-            console.log(recurso);
-            let eliminar = await tarjetasDao.eliminarTarjetaVocabulario(idTarjeta, recurso[0].id);
+            let eliminar = await tarjetasDao.eliminarTarjetaVocabulario(idTarjeta);
             let elim = true;
             if (eliminar > 0) {
                 elim = true;
@@ -111,20 +117,20 @@ class TarjetasService {
         }
         else if (!tiposPermitidos.includes(tarjeta.mimetype)) {
             //Código de error: El archivo no es un tipo de imagen permitido
-            return {mensaje: -6};
+            return { mensaje: -6 };
         }
-        else if(tarjeta.tam > maxSize){
+        else if (tarjeta.tam > maxSize) {
             //Código de error: El archivo excede el tamaño máximo permitido
-            return {mensaje: -7};
+            return { mensaje: -7 };
         }
-        else{
+        else {
             let resultado = await tarjetasDao.addImagen(tarjeta);
-            return {mensaje: resultado};
+            return { mensaje: resultado };
         }
     }
 
-    async imagenesUsuarioId(usuarioId){
-        let resultado =  await tarjetasDao.imagenesUsuarioId(usuarioId);
+    async imagenesUsuarioId(usuarioId) {
+        let resultado = await tarjetasDao.imagenesUsuarioId(usuarioId);
         console.log('service', resultado)
         return resultado;
     }

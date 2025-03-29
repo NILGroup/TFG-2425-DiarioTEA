@@ -3,11 +3,10 @@ const pool = require('../config/conexionbbdd');
 class TarjetasDao {
   constructor() { }
 
-  async vocabularioUsuarioId(id) {
+  async obtenerPictosUsuarioId(id) {
     try {
-      let [vocabulario] = await pool.query('SELECT p.id, p.enlace, t.id as idTarjeta FROM Tarjetas t JOIN Pictos p ON t.id = p.id_tarjeta WHERE t.id_usuario = ?',
+      let [vocabulario] = await pool.query('SELECT p.id, p.enlace, t.id as idTarjeta FROM Tarjetas t JOIN Pictos p ON t.id = p.id_tarjeta WHERE t.id_usuario = ? AND t.activa = 1',
         [id]);
-      console.log(vocabulario)
       return vocabulario;
     }
     catch (error) {
@@ -18,8 +17,8 @@ class TarjetasDao {
 
   async addTarjetaVocabulario(id_arasaac, enlace, id_usuario) {
     try {
-      let [picto] = await pool.query('INSERT INTO Pictos (idArasaac, enlace) VALUES (?, ?)', [id_arasaac, enlace]);
-      let [response] = await pool.query('INSERT INTO Tarjetas (id_usuario, id_picto) VALUES (?, ?)', [id_usuario, picto.insertId]);
+      let [response] = await pool.query('INSERT INTO Tarjetas (id_usuario) VALUES (?)', [id_usuario]);
+      let [picto] = await pool.query('INSERT INTO Pictos (idArasaac, enlace, id_tarjeta) VALUES (?, ?, ?)', [id_arasaac, enlace, response.insertId]);
       return response.insertId;
     }
     catch (error) {
@@ -30,7 +29,7 @@ class TarjetasDao {
 
   async comprobarExistenciaPicto(id_arasaac, enlace, id_usuario) {
     try {
-      let [response] = await pool.query('SELECT * FROM Tarjetas JOIN Pictos ON Tarjetas.id_picto = Pictos.id' +
+      let [response] = await pool.query('SELECT * FROM Tarjetas JOIN Pictos ON Tarjetas.id = Pictos.id_tarjeta' +
         ' WHERE Tarjetas.id_usuario = ? AND Pictos.idArasaac = ? AND Pictos.enlace = ?', [id_usuario, id_arasaac, enlace]);
       return response;
     }
@@ -40,10 +39,10 @@ class TarjetasDao {
     }
   }
 
-  async eliminarTarjetaVocabulario(idTarjeta, idRecurso) {
+  async eliminarTarjetaVocabulario(idTarjeta) {
     try {
-      let [response] = await pool.query('DELETE FROM Tarjetas WHERE id = ?', [idTarjeta]);
-      let a = await pool.query('DELETE FROM Pictos WHERE id = ?', [idRecurso]);
+      let [response] = await pool.query('UPDATE Tarjetas SET activa = 0 WHERE id = ?', [idTarjeta]);
+      console.log(idTarjeta)
       return response.affectedRows;
     }
     catch (error) {
@@ -54,7 +53,7 @@ class TarjetasDao {
 
   async buscarPictoIdTarjeta(idTarjeta) {
     try {
-      let [picto] = await pool.query('SELECT Pictos.id FROM Pictos JOIN Tarjetas ON Pictos.id = Tarjetas.id_picto WHERE Tarjetas.id = ?', [idTarjeta]);
+      let [picto] = await pool.query('SELECT Pictos.id FROM Pictos JOIN Tarjetas ON Pictos.id_tarjeta = Tarjetas.id WHERE Tarjetas.id = ?', [idTarjeta]);
       return picto;
     }
     catch (error) {
@@ -65,7 +64,7 @@ class TarjetasDao {
 
   async tarjetasEntrada(id_entrada) {
     try {
-      let [pictos] = await pool.query('SELECT p.enlace FROM Pictos p JOIN Tarjetas t ON p.id = t.id_picto JOIN Entradas_tarjeta et ON t.id = et.id_tarjeta WHERE et.id_entrada = ? ORDER BY et.orden', [id_entrada]);
+      let [pictos] = await pool.query('SELECT p.enlace FROM Pictos p JOIN Tarjetas t ON p.id_tarjeta = t.id JOIN Entradas_tarjeta et ON t.id = et.id_tarjeta WHERE et.id_entrada = ? ORDER BY et.orden', [id_entrada]);
       return pictos;
     }
     catch (error) {
@@ -92,6 +91,16 @@ class TarjetasDao {
       return imagenes;
     }
     catch (error) {
+
+    }
+  }
+
+  async activarPicto(idTarjeta){
+    try{
+      let [resultado] = await pool.query('UPDATE Tarjetas SET activa = 1 WHERE id = ?', [idTarjeta]);
+      return resultado.affectedRows;
+    }
+    catch(error){
 
     }
   }

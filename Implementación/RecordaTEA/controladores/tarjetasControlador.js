@@ -6,11 +6,11 @@ class TarjetasControlador {
         this.resultadoArasaac = [];
     }
 
-    async vocabularioUsuarioId(req, res) {
+    async obtenerPictosUsuarioId(req, res) {
         try {
             console.log('llego al voc');
             let id_usuario = req.session.usuario.id;
-            let vocabulario = await tarjetasService.vocabularioUsuarioId(id_usuario);
+            let vocabulario = await tarjetasService.obtenerPictosUsuarioId(id_usuario);
             let imagenes = await tarjetasService.imagenesUsuarioId(id_usuario);
             imagenes.forEach((elem) => {
                 let imgbase64 = elem.imagen.toString('base64'); 
