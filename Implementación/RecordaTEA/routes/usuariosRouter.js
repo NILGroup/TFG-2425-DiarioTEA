@@ -8,8 +8,6 @@ const controllerRutinas = new RutinasController();
 
 router.get('/', controllerUsuarios.leerUsuarioId);
 
-router.get('/diary/edit-entry/:idEntrada', controllerUsuarios.editEntryView);
-
 router.post('/submit-edit-entry', controllerUsuarios.submitEditEntry);
 
 router.post('/login', controllerUsuarios.login);
