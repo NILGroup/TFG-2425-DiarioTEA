@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     $('#buttonIniciar').click(function () {
         if ($('#contenedorRutina .col-lg-2').length === 0) {
-            window.location.href="/users/routines/";
+            window.location.href="/rutinas/mis-rutinas";
         }
         // Selecciona la primera tarjeta dentro del contenedorRutina
         var primeraTarjeta = $('#contenedorRutina .col-lg-2').first();

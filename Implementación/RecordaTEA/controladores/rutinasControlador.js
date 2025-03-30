@@ -12,7 +12,7 @@ class RutinasControlador {
 
         const response = await rutinasServicio.getRutinasById(idUsuario);
 
-        res.render('TEA/rutinasTEA', {rutinas: response, diary: false, nombre: req.session.usuario.nombre})
+        res.render('TEA/rutinasTEA', {rutinas: response, diary: false, usuario: req.session.usuario.nombre})
     }
 
     async getCuidadoresRutinas(req, res){
@@ -35,7 +35,7 @@ class RutinasControlador {
         const idRutina = req.params.idRutina;
         const response = await rutinasServicio.getTarjetasByIdRutina(idRutina);
 
-        res.render('TEA/viewRutinaTEA', {rutinas: response, diary: false, nombreRutina: response[0].nombre, nombre: req.session.usuario.nombre})
+        res.render('TEA/viewRutinaTEA', {rutinas: response, diary: false, nombreRutina: response[0].nombre, usuario: req.session.usuario.nombre})
     }
 
     async getTarjetasByIdRutinaCuidador(req, res){
@@ -49,6 +49,7 @@ class RutinasControlador {
             idUsuario: req.session.usuario.id, 
             usuarios: req.session.usuarios 
         }
+        console.log(data);
 
         res.render('cuidadores/viewRutina', {data:data})
     }

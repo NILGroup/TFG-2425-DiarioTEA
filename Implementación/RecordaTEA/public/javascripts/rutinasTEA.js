@@ -22,7 +22,7 @@ $(document).ready(function () {
 
 
     $("#botonVolverRutinas").on('click', function(e){
-        window.location.href="/users/routines/";
+        window.location.href="/rutinas/mis-rutinas";
     })
 
     $("#botonIniciarRutina").on('click', function(){
