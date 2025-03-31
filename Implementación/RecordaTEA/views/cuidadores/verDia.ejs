@@ -33,7 +33,8 @@
                     <h2 class="titulos-2 col-10">
                         <%= data.dia %>
                     </h2>
-                    <a href="/diario/<%=data.usuario.id%>" class="btn btn-borde col-2" id="consultaMes">Volver al mes</a>
+                    <a href="/diario/<%=data.usuario.id%>" class="btn btn-borde col-2" id="consultaMes">Volver al
+                        mes</a>
                 </div>
                 <% if (data.entradas.length> 0) { %>
                     <% data.entradas.forEach(function(elem){%>
@@ -48,7 +49,8 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="list-group-item list-contenido d-flex flex-column justify-content-center align-items-start entrada">
+                            <div
+                                class="list-group-item list-contenido d-flex flex-column justify-content-center align-items-start entrada">
                                 <div class="align-items-center">
                                     <div class="img-registro gap-3">
                                         <% if (elem.cuerpo===null){%>
@@ -56,14 +58,15 @@
                                                 <img src="<%= p.enlace %>" alt="">
 
                                                 <%}) %>
+
+                                                    <%} else {%>
+                                                        <div class=" align-items-center">
+                                                            <p class="no-margen texto-entrada">
+                                                                <%= elem.cuerpo%>
+                                                            </p>
+                                                        </div>
+                                                        <%}%>
                                     </div>
-                                    <%} else {%>
-                                        <div class="d-flex align-items-center text-center">
-                                            <p class="no-margen">
-                                                <%= elem.cuerpo%>
-                                            </p>
-                                        </div>
-                                        <%}%>
                                 </div>
                             </div>
                         </div>

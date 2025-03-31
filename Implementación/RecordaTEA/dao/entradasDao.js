@@ -6,19 +6,20 @@ class EntradasDao {
     async entradasMes(usuario) {
         try {
             let [entradas] = await pool.query(`
-                SELECT e.cuerpo, 
-                       DATE(e.fecha_registro) AS fecha, 
-                       COUNT(*) AS entradas, 
-                       (SELECT e2.id 
-                        FROM Entradas e2 
-                        WHERE DATE(e2.fecha_registro) = DATE(e.fecha_registro) 
-                              AND e2.id_usuario = e.id_usuario 
-                        ORDER BY e2.fecha_registro DESC 
-                        LIMIT 1) AS id
-                FROM Entradas e 
-                WHERE e.id_usuario = ? 
-                      AND MONTH(e.fecha_registro) = MONTH(CURDATE()) 
-                      AND YEAR(e.fecha_registro) = YEAR(CURDATE()) 
+                SELECT e.tipo, DATE(e.fecha_registro) AS fecha, 
+                    COUNT(*) AS entradas,
+                    e2.id AS id,
+                    e2.cuerpo AS cuerpo
+                FROM Entradas e
+                JOIN Entradas e2 ON DATE(e2.fecha_registro) = DATE(e.fecha_registro)
+                    AND e2.id_usuario = e.id_usuario
+                    AND e2.fecha_registro = (SELECT MAX(fecha_registro)
+                                          FROM Entradas 
+                                          WHERE DATE(fecha_registro) = DATE(e.fecha_registro)
+                                            AND id_usuario = e.id_usuario)
+                WHERE e.id_usuario = 3 
+                    AND MONTH(e.fecha_registro) = MONTH(CURDATE()) 
+                    AND YEAR(e.fecha_registro) = YEAR(CURDATE()) 
                 GROUP BY DATE(e.fecha_registro)
                 ORDER BY DATE(e.fecha_registro) DESC;
             `, [usuario]);
@@ -46,7 +47,7 @@ class EntradasDao {
     async leerEntradasPorUsuario(idUsuario) {
         try {
             const entradas = await pool.query(`
-                SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas.emocion
+                SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas.tipo, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas.emocion
                 FROM Entradas
                 LEFT JOIN Entradas_tarjeta ON Entradas.id = Entradas_tarjeta.id_entrada
                 LEFT JOIN Tarjetas ON Entradas_tarjeta.id_tarjeta = Tarjetas.id
@@ -71,8 +72,8 @@ class EntradasDao {
 
             // 1. Insertar en la tabla 'entradas'
             const [entradaResult] = await conn.execute(
-                `INSERT INTO Entradas (id_usuario, autor, fecha_registro, emocion) VALUES (?, ?, ?, ?);`,
-                [data.id_usuario, data.id_usuario, data.fecha_registro, data.emocion]
+                `INSERT INTO Entradas (id_usuario, autor, fecha_registro, emocion, cuerpo, tipo) VALUES (?, ?, ?, ?, ?, ?);`,
+                [data.id_usuario, data.id_usuario, data.fecha_registro, data.emocion, data.cuerpo, data.pictos]
             );
 
             // Verificar que la inserción fue exitosa

@@ -24,7 +24,8 @@
                         </h2>
                     </div>
                     <div class="d-flex gap-3 mt-4" id="<%=item.idEntrada%>">
-                        <% item.tarjetas.forEach(function(picto) { %>
+                        <% if(item.tipo){%>
+                            <% item.tarjetas.forEach(function(picto) { %>
                           
                                 <div class=" card tamaño-lista">
                                     <img class="card-img-top" src="<%= picto.enlace %>">
@@ -33,6 +34,12 @@
                                 <% tarjetaEmocion = picto; %>
                             
                         <% }); %>
+                        <%} else{ %>
+                            <div class="me-2">
+                                <p class="parrafo"><%= item.cuerpo %></p>
+                            </div>
+
+                        <%}%>
 
                         <!-- Contenedor d-flex para alinear las tarjetas -->
                         <div class="d-flex align-items-center gap-3 ms-auto">

@@ -8,7 +8,6 @@ class TarjetasControlador {
 
     async obtenerTarjetasUsuarioId(req, res) {
         try {
-            console.log('llego al voc');
             let id_usuario = req.session.usuario.id;
             let vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(id_usuario);
             vocabulario.forEach((elem) => {
@@ -24,7 +23,6 @@ class TarjetasControlador {
                 voc: vocabulario,
                 config: req.session.config
             };
-            console.log('he llegado: ' + data.toString())
             res.render('cuidadores/gestionTarjetas', { data: data });
         }
         catch (error) {

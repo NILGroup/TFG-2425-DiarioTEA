@@ -51,9 +51,9 @@ CREATE TABLE Entradas(
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     autor INT NOT NULL,
-    cuerpo TEXT,
+    cuerpo TEXT DEFAULT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    emocion VARCHAR(200), 
+    emocion VARCHAR(200) DEFAULT NULL, 
     tipo VARCHAR(1),
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );

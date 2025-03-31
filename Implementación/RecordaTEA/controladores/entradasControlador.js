@@ -87,7 +87,7 @@ class EntradasController {
         console.log(response);
         const tarjetas_emocion = response.filter(t=>t.categoria="Emocion" && t.categoria!=null);
 
-        res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre})
+        res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre, config: req.session.config})
 
         //OBTENER PICTOGRAMAS DEL USUARIO PARA ADD ENTRY Y RENDERIZAR
 
@@ -119,7 +119,6 @@ class EntradasController {
     }
 
     async submitEntrada(req, res){
-        
 
         const registrosString = req.body.registros; 
         const registros = JSON.parse(registrosString); 

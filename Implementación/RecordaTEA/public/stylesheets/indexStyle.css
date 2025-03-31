@@ -150,3 +150,8 @@ a {
 .no-editable{
     pointer-events: none;
 }
+
+.parrafo{
+    text-align: justify;
+    font-family: Arial, Helvetica, sans-serif;
+}

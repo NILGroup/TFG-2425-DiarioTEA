@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     var fecha = new Date().toISOString().split('T')[0];
     var hora = new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
-    var emocion=null;
+    var emocion = null;
 
     $('#fecha').val(fecha);
     $('#hora').val(hora);
@@ -54,45 +54,63 @@ $(document).ready(function () {
 
     $('#addButton').on('click', function (e) {
         e.preventDefault();
-        const tarjetas = []; // Array para almacenar los datos de las cards
-
-
-
-        // Recorrer todas las cards dentro del contenedorRegistros
-        $('#contenedorRegistros .card').each(function (index) {
-            const card = $(this); // Obtener la card actual
-            const idTarjeta = parseInt(card.attr('id')); // Obtener el id de la tarjeta
-            const orden = index + 1; // Obtener el orden (posición) de la tarjeta (empezando desde 1)
-
-
-            tarjetas.push({
-                id: idTarjeta, // Guardar el id de la tarjeta
-                orden: orden   // Guardar el orden de la tarjeta
-            });
-        });
-
-        if(emocionSeleccionadaAnt!=null){
-            emocion = emocionSeleccionadaAnt.find('img').attr('src');
-        }
-
         const fecha = $('#fecha').val(); // Ej: "2025-03-23"
         const hora = $('#hora').val();   // Ej: "10:30"
+        
+        // Crear un objeto Date en la zona local
+        const [year, month, day] = fecha.split('-');
+        const [hours, minutes] = hora.split(':');
+        
+        // Formatear como "YYYY-MM-DD HH:MM:SS"
+        const fechaHoraFormatted = `${year}-${month}-${day} ${hora}:00`;
+        
+        console.log(fechaHoraFormatted);
+        
 
-        // Combinamos en string ISO y luego lo parseamos a Date
-        const fechaHoraStr = `${fecha}T${hora}:00`; // "2025-03-23T10:30:00"
-        const fechaHora = new Date(fechaHoraStr);
+        if ($('#text-area').length > 0) {
 
-        // Formateamos como string para MySQL: "YYYY-MM-DD HH:MM:SS"
-        const fechaHoraFormatted = fechaHora.toISOString().slice(0, 19).replace('T', ' ');
+            let escrito = $('#text-area').val();
 
-        const entrada = {
-            fecha_registro: fechaHoraFormatted,
-            tarjetas: tarjetas,
-            emocion: emocion
-        };
+            const entrada = {
+                fecha_registro: fechaHoraFormatted,
+                cuerpo: escrito,
+                pictos : 0,
+                emocion: null,
+                tarjetas: []
+            };
 
-        // Convertir el array a JSON y asignarlo al input del formulario
-        $('#registrosInput').val(JSON.stringify(entrada));
+            $('#registrosInput').val(JSON.stringify(entrada));
+
+        } else {
+            const tarjetas = []; // Array para almacenar los datos de las cards
+
+            // Recorrer todas las cards dentro del contenedorRegistros
+            $('#contenedorRegistros .card').each(function (index) {
+                const card = $(this); // Obtener la card actual
+                const idTarjeta = parseInt(card.attr('id')); // Obtener el id de la tarjeta
+                const orden = index + 1; // Obtener el orden (posición) de la tarjeta (empezando desde 1)
+
+                tarjetas.push({
+                    id: idTarjeta, // Guardar el id de la tarjeta
+                    orden: orden   // Guardar el orden de la tarjeta
+                });
+            });
+
+            if (emocionSeleccionadaAnt != null) {
+                emocion = emocionSeleccionadaAnt.find('img').attr('src');
+            }
+
+            const entrada = {
+                fecha_registro: fechaHoraFormatted,
+                tarjetas: tarjetas,
+                emocion: emocion,
+                pictos : 1,
+                cuerpo: null
+            };
+
+            // Convertir el array a JSON y asignarlo al input del formulario
+            $('#registrosInput').val(JSON.stringify(entrada));
+        }
 
         // Enviar el formulario
         $('#registrosForm').submit();
@@ -109,11 +127,11 @@ $(document).ready(function () {
         $(this).find('img').addClass('seleccionada');
     });
 
-    $("#addEmocionButton").on('click', function(){
-        var img= emocionSeleccionadaAnt.find('img').attr('src');
+    $("#addEmocionButton").on('click', function () {
+        var img = emocionSeleccionadaAnt.find('img').attr('src');
         $("#emocionSeleccionada").attr('src', img);
         $('#emocionModal').modal('hide');
-     
+
     })
 
 });

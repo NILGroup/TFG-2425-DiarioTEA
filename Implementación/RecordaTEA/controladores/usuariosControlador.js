@@ -1,8 +1,10 @@
 const UsuariosService = require('../servicios/usuariosService');
 const CuidadoresService = require('../servicios/cuidadoresService');
+const TarjetasService = require('../servicios/tarjetasService');
 
 const cuidadoresService = new CuidadoresService();
 const usuariosServicio = new UsuariosService();
+const tarjetasService = new TarjetasService();
 
 class UsuariosControlador {
     constructor() { }
@@ -49,8 +51,11 @@ class UsuariosControlador {
                 req.session.cuidador = 1;
             }
             else{
+                console.log(u.mensaje);
+                let config = await tarjetasService.leerConfiguracionVocabulario(u.mensaje.id);
                 req.session.usuario = u.mensaje;
                 req.session.cuidador = 0;
+                req.session.config = config;
             }
             req.session.logged = 1;
             let esCuidador = req.session.cuidador;

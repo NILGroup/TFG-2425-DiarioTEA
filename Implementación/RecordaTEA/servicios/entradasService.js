@@ -29,6 +29,7 @@ class EntradasService{
     async entradasMes(usuario){
         try{
             let entradasMes = await entradasDao.entradasMes(usuario);
+            console.log(entradasMes)
             return entradasMes;
         }
         catch(error){
@@ -71,7 +72,8 @@ class EntradasService{
                         hora_registro: formattedTime,
                         cuerpo: item.cuerpo,
                         emocion: item.emocion,
-                        tarjetas: []
+                        tarjetas: [],
+                        tipo: item.tipo
                     };
                     groupedData.push(newEntry); // Mantenemos el orden al agregar en el array
                     entryMap.set(id, newEntry);

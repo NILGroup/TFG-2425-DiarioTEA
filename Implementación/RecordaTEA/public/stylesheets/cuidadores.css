@@ -90,7 +90,14 @@ body {
 .texto-normal {
     color: #213555;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+}
+
+.texto-entrada{
+    color: #2A3335;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 0.9em;
+    text-align: justify;
 }
 
 /*CARDS DE LOS USUARIOS*/
