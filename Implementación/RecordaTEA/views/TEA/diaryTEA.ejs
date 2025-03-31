@@ -28,7 +28,7 @@
                             <% item.tarjetas.forEach(function(picto) { %>
                           
                                 <div class=" card tamaño-lista">
-                                    <img class="card-img-top" src="<%= picto.enlace %>">
+                                    <img class="card-img-top" src="<%= picto.enlace || picto.imagen %>">
                                 </div>
                             
                                 <% tarjetaEmocion = picto; %>

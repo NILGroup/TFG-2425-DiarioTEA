@@ -77,6 +77,7 @@ class EntradasController {
 
     async redirectToDiary(req, res) {
         const response = await entradasService.leerEntradasPorUsuario(req.session.usuario.id);
+        console.log(response[0].tarjetas);
         res.render('TEA/diaryTEA', { entradas: response, diary: true, usuario: req.session.usuario.nombre });
     }
 
@@ -101,8 +102,8 @@ class EntradasController {
     
             // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
             const entrada = await entradasService.viewEntryById(idEntrada, idUsuario);
-
             if (entrada) {
+                console.log(entrada[0].tarjetas);
                 return res.render('TEA/viewEntryTEA', { entrada: entrada[0],  diary: true, usuario: req.session.usuario.nombre  });
             } else {
                 const error = {
@@ -143,8 +144,6 @@ class EntradasController {
 
             // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
             const entrada = await entradasService.viewEntryById(idEntrada, idUsuario);
-            
-
             
 
             if (entrada) {

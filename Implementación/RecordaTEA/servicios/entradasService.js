@@ -1,5 +1,6 @@
 const TarjetasDao = require('../dao/tarjetasDao');
 const EntradasDao = require('../dao/entradasDao');
+const imagenUtils = require('../utils/imagenUtils');
 
 const tarjetasDao = new TarjetasDao();
 const entradasDao = new EntradasDao();
@@ -84,7 +85,8 @@ class EntradasService{
                     entryMap.get(id).tarjetas.push({
                         id_tarjeta: item.id_tarjeta,
                         orden: item.orden,
-                        enlace: item.enlace          
+                        enlace: item.enlace,
+                        imagen: imagenUtils.renderImage(item) || item.imagen           
                     });
                 }
             });
@@ -104,7 +106,7 @@ class EntradasService{
 
      async viewEntryById(idEntrada, idUsuario) {
             const response = await entradasDao.viewEntryById(idEntrada, idUsuario);
-    
+
             try {
                 //para poder agrupar los datos por entrada
                 const groupedData = response[0].reduce((acc, item) => {
@@ -133,17 +135,15 @@ class EntradasService{
                         acc[id].tarjetas.push({
                             id_tarjeta: item.id_tarjeta,
                             orden: item.orden,
-                            enlace: item.enlace
-                            
+                            enlace: item.enlace,
+                            imagen: imagenUtils.renderImage(item) || item.imagen 
                         });
                     }
-    
+
                     return acc;
                 }, {});
     
                 const result = Object.values(groupedData);
-    
-                console.log(result);
     
                 return result;
             }catch(error){

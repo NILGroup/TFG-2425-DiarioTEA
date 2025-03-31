@@ -1,4 +1,5 @@
 const TarjetasService = require('../servicios/tarjetasService');
+const imagenUtils = require('../utils/imagenUtils');
 const tarjetasService = new TarjetasService();
 
 class TarjetasControlador {
@@ -11,11 +12,7 @@ class TarjetasControlador {
             let id_usuario = req.session.usuario.id;
             let vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(id_usuario);
             vocabulario.forEach((elem) => {
-                if(elem.imagen){
-                    let imgbase64 = elem.imagen.toString('base64'); 
-                    let url = 'data:' + elem.mimetype + ';base64,' + imgbase64;
-                    elem.imagen = url;
-                }
+                elem.imagen = imagenUtils.renderImage(elem) || elem.imagen;
             });
             let data = {
                 usuario: req.session.usuario,
