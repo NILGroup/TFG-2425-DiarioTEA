@@ -87,8 +87,6 @@ class EntradasController {
         const response = await tarjetasService.obtenerTarjetasUsuarioId(req.session.usuario.id);
 
         console.log(response);
-        const tarjetas_emocion = response.filter(t=>t.categoria="Emocion" && t.categoria!=null);
-
         res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre, config: req.session.config})
 
         //OBTENER PICTOGRAMAS DEL USUARIO PARA ADD ENTRY Y RENDERIZAR
@@ -118,6 +116,7 @@ class EntradasController {
     
             // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
             const entrada = await entradasService.viewEntryById(idEntrada, idUsuario);
+            console.log(entrada);
             if (entrada) {
                 console.log(entrada[0].tarjetas);
                 return res.render('TEA/viewEntryTEA', { entrada: entrada[0],  diary: true, usuario: req.session.usuario.nombre  });
@@ -142,7 +141,7 @@ class EntradasController {
         registros.id_usuario = req.session.usuario.id;
 
         const response = await entradasService.submitEntrada(registros);
-
+        console.log(response);
         if(response.success){
             res.redirect('/diario'); // Redirigir a la página del diario, por ejemplo
         }   

@@ -79,7 +79,7 @@ $(document).ready(function () {
             tarjetas: tarjetas,
             id: idEntrada,
             emocion: emocion,
-            pictos: 1,
+            tipo: "Picto",
             cuerpo: null
         };
 

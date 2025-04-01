@@ -102,6 +102,14 @@
                 <h5>Registro:</h5>
                 <div class="container mt-3 col-lg-10 col-md-10 mt-3" style="border: 2px solid black; border-radius: 3px;">
                     <div class="row pb-3 contenedorPictogramas" id="contenedorRegistros">
+                        <% if(config.texto){%>
+                            <form class="w-100 h-100 d-flex flex-column">
+                                <div class="flex-grow-1">
+                                    <textarea class="form-control w-100" aria-label="With textarea" id="text-area" placeholder="Escribe aquí la entrada."
+                                        style=" min-height: 10em; resize: vertical;"></textarea>
+                                </div>
+                            </form>
+                        <%} %>
                         <% entrada.tarjetas.forEach(function(item) { %>
                             <% if (!item.imagen || item.imagen.length === 0) { %>
                                 <!-- TIPO DE PICTOGRAMA -->
@@ -167,14 +175,14 @@
             <div class="container mt-5 pb-5">
                 <div class="row d-flex justify-content-center">
                     <div class="card no-border col-lg-2 col-md-3 col-sm-4 text-center" style="cursor:pointer">
-                        <a href="/users/diary">
+                        <a href="/diario">
                             <img class="card-img img-fluid" src="/images/config/cancelar.png" alt="Cancelar entrada"
                                 style="max-width: 150px; max-height: 150px; cursor: pointer;">
                         </a>
                         <p class="card-title texto-boton">CANCELAR</p>
                     </div>
                     <div class="card no-border col-lg-2 col-md-3 col-sm-4 text-center" style="cursor:pointer" id="updateButton">
-                        <a href="/users/diary">
+                        <a href="/diario">
                             <img class="card-img img-fluid" src="/images/config/tick.png" alt="Añadir entrada"
                                 style="max-width: 150px; max-height: 150px; cursor: pointer;">
                         </a>
@@ -188,7 +196,7 @@
     <div class="container finale"></div>
 
     <!-- Formulario oculto para enviar los datos -->
-    <form id="registrosFormEdit" action="/users/submit-edit-entry" method="POST" style="display: none;">
+    <form id="registrosFormEdit" action="/diario/submit-edit-entry" method="POST" style="display: none;">
         <input type="hidden" name="registros" id="registrosEditadosInput">
     </form>
 

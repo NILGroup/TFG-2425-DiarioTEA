@@ -5,14 +5,23 @@
         <h1 class="container">
             <%= entrada.fecha_registro %> a las <%= entrada.hora_registro %>
         </h1>
+
         <div class="row mt-5">
-            <% entrada.tarjetas.forEach(function(picto) { %>
-                <div class="col-lg-2 col-md-3 col-sm-5 col-xs-6">
-                    <div class="card">
-                        <img class="card-img" src="<%= picto.enlace || picto.imagen %>">
+            <% if (entrada.tipo === "Picto") { %>
+                <% entrada.tarjetas.forEach(function(picto) { %>
+                    <div class="col-lg-2 col-md-3 col-sm-5 col-xs-6">
+                        <div class="card">
+                            <img class="card-img" src="<%= picto.enlace || picto.imagen %>">
+                        </div>
                     </div>
+                <% }); %>
+            <% } else { %>
+                <div class="me-2">
+                    <p class="parrafo">
+                        <%= entrada.cuerpo %>
+                    </p>
                 </div>
-            <% }); %>
+            <% } %>
 
             <% if (entrada.emocion != null) { %>
                 <div class="col-lg-2 col-md-3 col-sm-5 col-xs-6 ms-auto">

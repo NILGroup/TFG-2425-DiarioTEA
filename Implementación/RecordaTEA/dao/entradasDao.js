@@ -76,7 +76,7 @@ class EntradasDao {
             // 1. Insertar en la tabla 'entradas'
             const [entradaResult] = await conn.execute(
                 `INSERT INTO Entradas (id_usuario, autor, fecha_registro, emocion, cuerpo, tipo) VALUES (?, ?, ?, ?, ?, ?);`,
-                [data.id_usuario, data.id_usuario, data.fecha_registro, data.emocion, data.cuerpo, data.pictos]
+                [data.id_usuario, data.id_usuario, data.fecha_registro, data.emocion, data.cuerpo, data.tipo]
             );
 
             // Verificar que la inserción fue exitosa
@@ -191,11 +191,49 @@ class EntradasDao {
             conn.release();
         }
     }
+    
+    async actualizarTextoLibreEntrada(data) {
+        const conn = await pool.getConnection();
+        try {
+            await conn.beginTransaction();
+
+            // Obtener entrada actuale de la base de datos
+            const [rows] = await conn.execute(
+                'SELECT cuerpo FROM entradas WHERE id = ?',
+                [data.id]
+            );
+
+            // Actualizarlas si hay cambios
+            if(rows[0].cuerpo!=data.cuerpo){
+                await conn.execute(
+                    'UPDATE entradas SET cuerpo = ? WHERE id = ?',
+                    [data.cuerpo, data.id]
+                );
+            }
+
+            if(rows[0].fecha_registro!=data.fecha_registro){
+                await conn.execute(
+                    'UPDATE entradas SET fecha_registro = ? WHERE id = ?',
+                    [data.fecha_registro, data.id]
+                );
+            }
+            
+            await conn.commit();
+            return { success: true };
+
+        } catch (err) {
+            await conn.rollback();
+            console.error(err);
+            return { success: false, error: err };
+        } finally {
+            conn.release();
+        }
+    }
 
     async viewEntryById(idEntrada, idUsuario) {
         try {
             const entradas = await pool.query(`
-                 SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas.emocion, Imagenes.imagen, Imagenes.mimetype
+                 SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.tipo, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas.emocion, Imagenes.imagen, Imagenes.mimetype
                 FROM Entradas
                 LEFT JOIN Entradas_tarjeta ON Entradas.id = Entradas_tarjeta.id_entrada
                 LEFT JOIN Tarjetas ON Entradas_tarjeta.id_tarjeta = Tarjetas.id

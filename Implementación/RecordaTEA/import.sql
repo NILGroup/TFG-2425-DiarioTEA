@@ -50,11 +50,11 @@ CREATE TABLE Config(
 CREATE TABLE Entradas(
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
     autor INT NOT NULL,
     cuerpo TEXT DEFAULT NULL,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_registro TIMESTAMP,
     emocion VARCHAR(200) DEFAULT NULL, 
-    tipo VARCHAR(1),
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );
 
@@ -96,9 +96,17 @@ CREATE TABLE Cuidadores_Usu(
 INSERT INTO Usuarios (id, nombre, usuario, contraseña) 
 VALUES ('1', 'Pedro', 'pedro08', '$2b$10$JOQIdcGPaYHsjKf6Ks4Hge88z4YFKD8Yb/NYkFqJKpmklgfFc3VrC'); 
 -- CONTRASEÑA: test
+INSERT INTO Config(id, id_usuario, texto, picto_texto) 
+VALUES ('1', '1', '0', '0');
 
 INSERT INTO Usuarios(id, nombre, usuario, contraseña)
 VALUES ('2', 'Lorena', 'lorena_gutierrez','$2b$10$XlExLG/5iWZ033toxDlSXeUMDU8/HnJkUviYsK/cLczoD3B.7VIdO'); -- CONTRASEÑA: test123
+
+INSERT INTO Usuarios (id, nombre, usuario, contraseña) 
+VALUES ('3', 'Marta', 'msanchez', '$2b$10$JOQIdcGPaYHsjKf6Ks4Hge88z4YFKD8Yb/NYkFqJKpmklgfFc3VrC'); 
+-- CONTRASEÑA: test
+INSERT INTO Config(id, id_usuario, texto, picto_texto) 
+VALUES ('2', '3', '1', '0');
 
 INSERT INTO Cuidadores (id, rol) 
 VALUES ('2', 'Profesora');
@@ -106,7 +114,11 @@ VALUES ('2', 'Profesora');
 INSERT INTO Cuidadores_Usu(id_cuidador, id_usuario)
 VALUES ('2', '1');
 
-INSERT INTO Tarjetas (id, id_usuario, orden, categoria, activa) VALUES ('1','1','1','Emocion',1),
+INSERT INTO Cuidadores_Usu(id_cuidador, id_usuario)
+VALUES ('2', '3');
+
+INSERT INTO Tarjetas (id, id_usuario, orden, categoria, activa) VALUES 
+('1','1','1','Emocion',1),
 ('2','1','2','Emocion',1),
 ('3','1','3','Emocion',1),
 ('4','1','4','Objeto',1);
@@ -119,8 +131,10 @@ INSERT INTO Pictos(id, idArasaac, enlace, id_tarjeta) VALUES
 
 
 INSERT INTO Entradas (id, id_usuario, autor, cuerpo, fecha_registro, tipo) VALUES
-('1','1', '1', NULL, '2025-03-01 11:30:00', NULL),
-('2', '1', '2', 'Progresa adecuadamente', '2025-03-01 10:10:00', NULL);
+('1','1', '1', NULL, '2025-03-01 11:30:00', "Picto"),
+('2', '1', '2', 'Progresa adecuadamente', '2025-03-01 10:10:00', "Picto"),
+('3', '3', '3', 'Hoy me he aburrido mucho en clase, y Laura me ha dado un trozo de su bocadillo', '2025-03-11 10:10:00', "Texto");
+
 
 
 INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES

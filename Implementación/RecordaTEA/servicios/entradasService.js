@@ -105,7 +105,14 @@ class EntradasService {
     }
 
     async submitEditEntry(data) {
-        const response = await entradasDao.actualizarTarjetasEntrada(data);
+       const response = null;
+        if(data.tipo="Picto"){
+            response = await entradasDao.actualizarTextoLibreEntrada(data);
+        }
+        else{
+            response = await entradasDao.actualizarTextoLibreEntrada(data);
+        }
+        
         return response;
     }
 
@@ -134,7 +141,8 @@ class EntradasService {
                         fecha_editable: numericDate,
                         cuerpo: item.cuerpo,
                         emocion: item.emocion,
-                        tarjetas: []
+                        tarjetas: [],
+                        tipo: item.tipo
                     };
                 }
                 //para saber si es una entrada con pictos o solo texto del cuerpo

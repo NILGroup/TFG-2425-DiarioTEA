@@ -74,9 +74,10 @@ $(document).ready(function () {
             const entrada = {
                 fecha_registro: fechaHoraFormatted,
                 cuerpo: escrito,
-                pictos : 0,
+                tipo : "Texto",
                 emocion: null,
                 tarjetas: []
+                
             };
 
             $('#registrosInput').val(JSON.stringify(entrada));
@@ -104,7 +105,7 @@ $(document).ready(function () {
                 fecha_registro: fechaHoraFormatted,
                 tarjetas: tarjetas,
                 emocion: emocion,
-                pictos : 1,
+                tipo : "Picto",
                 cuerpo: null
             };
 

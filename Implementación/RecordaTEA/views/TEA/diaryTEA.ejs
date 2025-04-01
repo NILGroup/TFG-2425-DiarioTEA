@@ -24,14 +24,14 @@
                         </h2>
                     </div>
                     <div class="d-flex gap-3 mt-4" id="<%=item.idEntrada%>">
-                        <% if(item.tipo){%>
+                        <% if(item.tipo=="Picto"){%>
                             <% item.tarjetas.forEach(function(picto) { %>
                           
                                 <div class=" card tamaño-lista">
                                     <img class="card-img-top" src="<%= picto.enlace || picto.imagen %>">
                                 </div>
                             
-                                <% tarjetaEmocion = picto; %>
+                                
                             
                         <% }); %>
                         <%} else{ %>
