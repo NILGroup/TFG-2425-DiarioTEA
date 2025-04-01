@@ -13,25 +13,6 @@ class UsuariosControlador {
         res.render('TEA/indexTEA');
     }
 
-    
-    
-
-    
-
-    async submitEditEntry(req, res){
-        const registrosString = req.body.registros; 
-        const registros = JSON.parse(registrosString); 
-       
-        const response = await usuariosServicio.submitEditEntry(registros);
-
-        if(response.success){
-            return res.redirect('/users/diary'); // Redirigir a la página del diario, por ejemplo
-        }   
-        else{
-            return res.status(500).send('Error interno del servidor');
-        }
-
-    }
 
     async login(req, res){
         let usuario = {

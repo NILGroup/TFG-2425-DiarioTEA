@@ -1,6 +1,7 @@
 
 $(document).ready(function () {
 
+    var emocion = null;
 
     $('#editar-btn-edit').click(function () {
         $('#fecha-edit').removeAttr('readonly').removeClass('no-editable');;
@@ -49,20 +50,14 @@ $(document).ready(function () {
 
             tarjetas.push({
                 id: idTarjeta, // Guardar el id de la tarjeta
-                orden: orden,   // Guardar el orden de la tarjeta
-                emocion: false
+                orden: orden   // Guardar el orden de la tarjeta
+               
             });
         });
 
         if(emocionSeleccionadaAnt!=null){
-            idTarjeta = parseInt(emocionSeleccionadaAnt.attr('id'));
-            orden= tarjetas.length+1;
-            
-            tarjetas.push({
-                id: idTarjeta,
-                orden: orden,
-                emocion: true
-            })
+            emocion = emocionSeleccionadaAnt.find('img').attr('src');
+
         }
 
 
@@ -82,7 +77,10 @@ $(document).ready(function () {
         const entrada = {
             fecha_registro: fechaHoraFormatted,
             tarjetas: tarjetas,
-            id: idEntrada
+            id: idEntrada,
+            emocion: emocion,
+            pictos: 1,
+            cuerpo: null
         };
 
         // Convertir el array a JSON y asignarlo al input del formulario

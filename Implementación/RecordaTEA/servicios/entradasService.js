@@ -104,6 +104,28 @@ class EntradasService{
         return response;
     }
 
+     async submitEditEntry(data){
+            const response = await entradasDao.actualizarTarjetasEntrada(data);
+            return response;
+        }
+    
+        async login(usuario){
+            let u = await usuariosDao.login(usuario);
+    
+            if (!u) {
+                return {mensaje: -1};
+            }
+    
+            console.log(usuario.password + '\n' + u.contraseña);
+    
+            const esValida = await bcrypt.compare(usuario.password, u.contraseña);
+            if (!esValida) {
+                return {mensaje: -2}
+            }
+    
+            return {mensaje: u}
+        }
+
      async viewEntryById(idEntrada, idUsuario) {
             const response = await entradasDao.viewEntryById(idEntrada, idUsuario);
 

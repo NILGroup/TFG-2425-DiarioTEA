@@ -48,32 +48,6 @@ class UsuariosService {
     }
 
 
-   
-
-    
-
-    async submitEditEntry(data){
-        const response = await usuariosDao.actualizarTarjetasEntrada(data);
-        return response;
-    }
-
-    async login(usuario){
-        let u = await usuariosDao.login(usuario);
-
-        if (!u) {
-            return {mensaje: -1};
-        }
-
-        console.log(usuario.password + '\n' + u.contraseña);
-
-        const esValida = await bcrypt.compare(usuario.password, u.contraseña);
-        if (!esValida) {
-            return {mensaje: -2}
-        }
-
-        return {mensaje: u}
-    }
-
     async registro(usuario){
         const hashedPassword = await bcrypt.hash(usuario.passw, 10);
         usuario.password = hashedPassword;

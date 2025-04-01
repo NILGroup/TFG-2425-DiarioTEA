@@ -11,6 +11,8 @@ router.get("/add-entrada", entradasControlador.addEntry);
 
 router.post('/submit-entry', entradasControlador.submitEntrada);
 
+router.post('/submit-edit-entry', entradasControlador.submitEditEntry);
+
 router.get('/view-entry/:idEntrada', entradasControlador.viewEntry);
 
 router.get('/edit-entry/:idEntrada', entradasControlador.editEntryView);

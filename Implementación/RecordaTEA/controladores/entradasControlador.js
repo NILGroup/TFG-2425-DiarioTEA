@@ -95,6 +95,21 @@ class EntradasController {
 
     }
 
+    async submitEditEntry(req, res){
+        const registrosString = req.body.registros; 
+        const registros = JSON.parse(registrosString); 
+       
+        const response = await entradasService.submitEditEntry(registros);
+
+        if(response.success){
+            return res.redirect('/diario'); // Redirigir a la página del diario, por ejemplo
+        }   
+        else{
+            return res.status(500).send('Error interno del servidor');
+        }
+
+    }
+
     async viewEntry(req, res) {
         const idEntrada = req.params.idEntrada;
         const idUsuario = req.session.usuario.id; // Asumiendo que tienes la información del usuario autenticado

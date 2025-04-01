@@ -109,6 +109,89 @@ class EntradasDao {
         }
     }
 
+    async actualizarTarjetasEntrada(data) {
+        const conn = await pool.getConnection();
+        try {
+            await conn.beginTransaction();
+
+            // 1. Actualizar la entrada
+            await conn.execute(
+                'UPDATE entradas SET fecha_registro = ? WHERE id = ?',
+                [data.fecha_registro, data.id]
+            );
+
+
+            // 2. Obtener tarjetas actuales de la base de datos
+            const [rows] = await conn.execute(
+                'SELECT id_tarjeta, orden FROM entradas_tarjeta WHERE id_entrada = ?',
+                [data.id]
+            );
+
+            const actuales = new Map(rows.map(t => [t.id_tarjeta, t.orden]));
+            const nuevas = new Map(data.tarjetas.map(t => [t.id, t.orden]));
+
+
+            // 3. Eliminar tarjetas que ya no están
+            for (const [id_tarjeta_actual] of actuales) {
+                if (!nuevas.has(id_tarjeta_actual)) {
+                    await conn.execute(
+                        'DELETE FROM entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
+                        [data.id, id_tarjeta_actual]
+                    );
+                }
+            }
+
+            // 4. Insertar nuevas tarjetas o actualizar orden
+            for (const { id, orden } of data.tarjetas) {
+                if (!actuales.has(id)) {
+                    // No existía antes: insertar
+
+                    const [existingEntry] = await conn.execute(
+                        'SELECT 1 FROM entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
+                        [data.id, id]
+                    );
+                    
+                    if (existingEntry.length === 0) {
+                        await conn.execute(
+                            'INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES (?, ?, ?)',
+                            [data.id, id, orden]
+                        );
+                    }
+                    
+                    
+                } else {
+                    const actual = actuales.get(id);
+            
+                    if (actual.orden !== orden) {
+                        // Existía pero con distinto orden: actualizar
+                        await conn.execute(
+                            'UPDATE entradas_tarjeta SET orden = ? WHERE id_entrada = ? AND id_tarjeta = ?',
+                            [orden, data.id, id]
+                        );
+                    }
+            
+                }
+            }
+
+            // 5. Actualizar la emocion
+            await conn.execute(
+                'UPDATE entradas SET emocion = ? WHERE id = ?',
+                [data.emocion, data.id]
+            );
+            
+
+            await conn.commit();
+            return { success: true };
+
+        } catch (err) {
+            await conn.rollback();
+            console.error(err);
+            return { success: false, error: err };
+        } finally {
+            conn.release();
+        }
+    }
+
     async viewEntryById(idEntrada, idUsuario) {
         try {
             const entradas = await pool.query(`
