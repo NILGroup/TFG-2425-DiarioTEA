@@ -1,8 +1,8 @@
 
 $(document).ready(function () {
 
-    var emocion = null;
-
+    var emocion = $("#emocionSeleccionada").attr('src');
+    console.log(emocion);
     $('#editar-btn-edit').click(function () {
         $('#fecha-edit').removeAttr('readonly').removeClass('no-editable');;
         $('#hora-edit').removeAttr('readonly').removeClass('no-editable');
@@ -28,11 +28,11 @@ $(document).ready(function () {
         $(this).find('img').addClass('seleccionada');
     });
 
-    $("#addEmocionButton").on('click', function(){
-        var img= emocionSeleccionadaAnt.find('img').attr('src');
+    $("#addEmocionButton").on('click', function () {
+        var img = emocionSeleccionadaAnt.find('img').attr('src');
         $("#emocionSeleccionada").attr('src', img);
         $('#emocionModal').modal('hide');
-     
+
     })
 
     $('#updateButton').on('click', function (e) {
@@ -51,11 +51,11 @@ $(document).ready(function () {
             tarjetas.push({
                 id: idTarjeta, // Guardar el id de la tarjeta
                 orden: orden   // Guardar el orden de la tarjeta
-               
+
             });
         });
 
-        if(emocionSeleccionadaAnt!=null){
+        if (emocionSeleccionadaAnt != null) {
             emocion = emocionSeleccionadaAnt.find('img').attr('src');
 
         }
@@ -72,20 +72,39 @@ $(document).ready(function () {
         const fechaHoraFormatted = fechaHora.toISOString().slice(0, 19).replace('T', ' ');
 
         // Para obtener el ID de la entrada
-        const idEntrada = window.location.pathname.split('/').pop(); 
+        const idEntrada = window.location.pathname.split('/').pop();
 
-        const entrada = {
-            fecha_registro: fechaHoraFormatted,
-            tarjetas: tarjetas,
-            id: idEntrada,
-            emocion: emocion,
-            tipo: "Picto",
-            cuerpo: null
-        };
+        if ($('#text-area-edit').length > 0) {
 
-        // Convertir el array a JSON y asignarlo al input del formulario
-        $('#registrosEditadosInput').val(JSON.stringify(entrada));
-        
+            let escrito = $('#text-area-edit').val();
+            const entrada = {
+                fecha_registro: fechaHoraFormatted,
+                tarjetas: [],
+                id: idEntrada,
+                emocion: null,
+                tipo: "Texto",
+                cuerpo: escrito
+            };
+
+            // Convertir el array a JSON y asignarlo al input del formulario
+            $('#registrosEditadosInput').val(JSON.stringify(entrada));
+
+        }
+        else {
+
+            const entrada = {
+                fecha_registro: fechaHoraFormatted,
+                tarjetas: tarjetas,
+                id: idEntrada,
+                emocion: emocion,
+                tipo: "Picto",
+                cuerpo: null
+            };
+
+            // Convertir el array a JSON y asignarlo al input del formulario
+            $('#registrosEditadosInput').val(JSON.stringify(entrada));
+        }
+
 
         // Enviar el formulario
         $('#registrosFormEdit').submit();

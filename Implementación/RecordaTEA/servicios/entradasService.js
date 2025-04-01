@@ -105,9 +105,9 @@ class EntradasService {
     }
 
     async submitEditEntry(data) {
-       const response = null;
-        if(data.tipo="Picto"){
-            response = await entradasDao.actualizarTextoLibreEntrada(data);
+       var response = null;
+        if(data.tipo==="Picto"){
+            response = await entradasDao.actualizarTarjetasEntrada(data);
         }
         else{
             response = await entradasDao.actualizarTextoLibreEntrada(data);

@@ -84,10 +84,14 @@ class EntradasController {
 
     async addEntry(req, res) {
 
-        const response = await tarjetasService.obtenerTarjetasUsuarioId(req.session.usuario.id);
+        // Significa que no tiene tarjetas
+        var vocabulario =[];
+        if(!req.session.config.texto){
+            vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(req.session.usuario.id);
+        }
 
-        console.log(response);
-        res.render('TEA/addEntryTEA', {vocabulario: response, diary: true, usuario: req.session.usuario.nombre, config: req.session.config})
+        console.log(vocabulario);
+        res.render('TEA/addEntryTEA', {vocabulario: vocabulario, diary: true, usuario: req.session.usuario.nombre, config: req.session.config})
 
         //OBTENER PICTOGRAMAS DEL USUARIO PARA ADD ENTRY Y RENDERIZAR
 
@@ -155,14 +159,18 @@ class EntradasController {
 
         try {
 
-            const vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(idUsuario);
-
+            // Significa que no tiene tarjetas
+            var vocabulario =[];
+            if(!req.session.config.texto){
+                vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(idUsuario);
+            }
+            
             // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
             const entrada = await entradasService.viewEntryById(idEntrada, idUsuario);
             
 
             if (entrada) {
-                return res.render('TEA/editEntryTEA', { entrada: entrada[0], diary: true, vocabulario: vocabulario, usuario: req.session.usuario.nombre });
+                return res.render('TEA/editEntryTEA', { entrada: entrada[0], diary: true, vocabulario: vocabulario, usuario: req.session.usuario.nombre, config: req.session.config });
             } else {
                 const error = {
                     status: 403,

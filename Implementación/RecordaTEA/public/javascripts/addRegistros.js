@@ -47,11 +47,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#contenedorEmocion").on('click', function (e) {
-
-
-    })
-
+ 
     $('#addButton').on('click', function (e) {
         e.preventDefault();
         const fecha = $('#fecha').val(); // Ej: "2025-03-23"
