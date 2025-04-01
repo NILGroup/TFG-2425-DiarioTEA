@@ -116,26 +116,6 @@
         </main>
     </div>
     <script src="/javascripts/diary.js"></script>
-    <script>
-        $(document).ready(function () {
-            const currentYear = new Date().getFullYear();
-            const startYear = '2000';
-            // Configurar el datepicker para que solo muestre años
-            $('#anio').datepicker({
-                format: "yyyy",  // Solo mostrar el año
-                startView: "years",  // Iniciar en la vista de años
-                minViewMode: "years",  // Impedir elegir meses
-                startDate: startYear,  // Establecer el primer año disponible
-                endDate: currentYear + '-12-31',  // Establecer el año máximo disponible (año actual)
-                autoclose: true
-            }).datepicker("setDate", currentYear + "-01-01");
-
-            const currentMonth = new Date().getMonth() + 1;  // Sumamos 1 porque los meses empiezan desde 0
-
-    // Establecer el valor del <select> al mes actual
-    $('#mes').val(currentMonth);
-        });
-    </script>
 </body>
 
 </html>
