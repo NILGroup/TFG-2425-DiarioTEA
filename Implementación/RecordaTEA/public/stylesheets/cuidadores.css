@@ -477,3 +477,51 @@ body {
     box-shadow: 0 0 5px #213555;
     border-color: #213555;
 }
+.datepicker-wrapper {
+    position: relative;
+}
+
+.datepicker-wrapper input {
+    padding-right: 30px; /* Para dejar espacio para la flecha */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-position: right 10px center; /* Aseguramos que la flecha esté a la derecha */
+    background-repeat: no-repeat;
+    background-size: 16px 12px;
+    color: #213555;
+}
+
+.back-form{
+    background-color: #F9F7F7;
+}
+
+.form-control {
+    background-color: #F9F7F7;
+    color: #213555;
+    font-family: Arial, Helvetica, sans-serif;
+    border-color: #c9c8c7;
+}
+
+.form-select {
+    background-color: #F9F7F7;
+    color: #213555;
+    font-family: Arial, Helvetica, sans-serif;
+    border-color: #c9c8c7;
+}
+
+.form-control:focus {
+    background-color: #ffffff;
+    border-color: #213555;
+    box-shadow: 0 0 2px #213555;
+}
+
+.form-select:focus {
+    background-color: #ffffff;
+    border-color: #213555;
+    box-shadow: 0 0 2px #213555;
+}
+
+.input-group-text {
+    background-color: #34425a00;
+    color: #213555;
+    border-color: #c9c8c7;
+}
