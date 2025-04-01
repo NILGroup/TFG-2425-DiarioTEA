@@ -28,6 +28,7 @@ class EntradasController {
                 con = req.session.config;
             }
             let entradas = await entradasService.entradasMes(usuario.id);
+            console.log(entradas);
             for (let entrada of entradas) {
                 entrada.mes = fechaUtils.mesAbreviatura(entrada.fecha).toUpperCase();
                 entrada.dia = fechaUtils.dia(entrada.fecha);

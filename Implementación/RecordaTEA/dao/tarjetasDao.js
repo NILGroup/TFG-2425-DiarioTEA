@@ -80,7 +80,20 @@ class TarjetasDao {
 
   async tarjetasEntrada(id_entrada) {
     try {
-      let [pictos] = await pool.query('SELECT p.enlace FROM Pictos p JOIN Tarjetas t ON p.id_tarjeta = t.id JOIN Entradas_tarjeta et ON t.id = et.id_tarjeta WHERE et.id_entrada = ? ORDER BY et.orden', [id_entrada]);
+      let [pictos] = await pool.query(`SELECT
+                                        p.enlace,
+                                        i.imagen,
+                                        i.mimetype
+                                      FROM Entradas_tarjeta et
+                                      LEFT JOIN Tarjetas t ON
+                                        t.id = et.id_tarjeta
+                                      LEFT JOIN Pictos p ON
+                                        p.id_tarjeta = t.id
+                                      LEFT JOIN Imagenes i ON
+                                        i.id_tarjeta = t.id
+                                      WHERE
+                                        et.id_entrada = ?
+                                      ORDER BY et.orden`, [id_entrada]);
       return pictos;
     }
     catch (error) {
@@ -132,7 +145,7 @@ class TarjetasDao {
     }
   }
 
-  async leerConfiguracionVocabulario(idUsuario){
+  async leerConfiguracionVocabulario(idUsuario) {
     try {
       let [resultado] = await pool.query('SELECT * FROM Config WHERE id_usuario = ?', [idUsuario]);
       return resultado[0];

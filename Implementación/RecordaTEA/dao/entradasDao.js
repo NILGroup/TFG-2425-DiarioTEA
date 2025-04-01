@@ -6,23 +6,26 @@ class EntradasDao {
     async entradasMes(usuario) {
         try {
             let [entradas] = await pool.query(`
-                SELECT e.tipo, DATE(e.fecha_registro) AS fecha, 
-                    COUNT(*) AS entradas,
-                    e2.id AS id,
-                    e2.cuerpo AS cuerpo
-                FROM Entradas e
-                JOIN Entradas e2 ON DATE(e2.fecha_registro) = DATE(e.fecha_registro)
-                    AND e2.id_usuario = e.id_usuario
-                    AND e2.fecha_registro = (SELECT MAX(fecha_registro)
-                                          FROM Entradas 
-                                          WHERE DATE(fecha_registro) = DATE(e.fecha_registro)
-                                            AND id_usuario = e.id_usuario)
-                WHERE e.id_usuario = 3 
-                    AND MONTH(e.fecha_registro) = MONTH(CURDATE()) 
-                    AND YEAR(e.fecha_registro) = YEAR(CURDATE()) 
-                GROUP BY DATE(e.fecha_registro)
-                ORDER BY DATE(e.fecha_registro) DESC;
-            `, [usuario]);
+               SELECT e.tipo, DATE(e.fecha_registro) AS fecha, 
+           COUNT(*) AS entradas,
+           e2.id AS id,
+           e2.cuerpo AS cuerpo
+    FROM Entradas e
+    JOIN Entradas e2 
+        ON DATE(e2.fecha_registro) = DATE(e.fecha_registro)
+        AND e2.id_usuario = e.id_usuario
+        AND e2.fecha_registro = (
+            SELECT MAX(fecha_registro)
+            FROM Entradas 
+            WHERE DATE(fecha_registro) = DATE(e.fecha_registro)
+            AND id_usuario = e.id_usuario
+        )
+    WHERE e.id_usuario = ? 
+    AND MONTH(e.fecha_registro) = ?  
+    AND YEAR(e.fecha_registro) = ?   
+    GROUP BY DATE(e.fecha_registro)
+    ORDER BY DATE(e.fecha_registro) DESC;
+            `, [usuario, 3, 2025]);
 
 
             return entradas;

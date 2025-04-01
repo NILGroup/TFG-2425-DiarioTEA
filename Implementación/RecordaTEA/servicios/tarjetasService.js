@@ -1,6 +1,7 @@
 const TarjetasDao = require('../dao/tarjetasDao');
 const { imageSize } = require('image-size');
 const axios = require('axios');
+const imagenUtils = require('../utils/imagenUtils');
 
 const tarjetasDao = new TarjetasDao();
 
@@ -96,7 +97,13 @@ class TarjetasService {
 
     async tarjetasEntrada(id_entrada) {
         try {
-            let pictos = tarjetasDao.tarjetasEntrada(id_entrada);
+            let pictos = await tarjetasDao.tarjetasEntrada(id_entrada);
+            console.log(pictos);
+            pictos.forEach(elem => {
+                if(elem.enlace === null){
+                    elem.enlace = imagenUtils.renderImage(elem) || item.imagen 
+                }
+            });
             return pictos;
         }
         catch (error) {
