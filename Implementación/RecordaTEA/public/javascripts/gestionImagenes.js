@@ -109,32 +109,40 @@ $(document).ready(function () {
                         $('#avisosPictos').append(alerta);
                         $(`#alert-${response.mensaje.id}`).fadeIn();
                         setTimeout(function () {
-                            $(`#alert-${response.mensaje.id}`).fadeOut().remove();
-                        }, 2000);
+                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function(){
+                                $(this).remove();
+                            });
+                        }, 500);
                     }
                     else if(response.mensaje == -5){
                         alerta.text('Error al añadir el archivo: no es una imagen.').attr('id', `alert-${response.mensaje.id}`).hide();
                         $('#avisosPictos').append(alerta);
                         $(`#alert-${response.mensaje.id}`).fadeIn();
                         setTimeout(function () {
-                            $(`#alert-${response.mensaje.id}`).fadeOut().remove();
-                        }, 2000);
+                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function(){
+                                $(this).remove();
+                            });
+                        }, 1000);
                     }
                     else if(response.mensaje == -6){
                         alerta.text('Error al añadir el archivo: tipo no permitido.').attr('id', `alert-${response.mensaje.id}`).hide();
                         $('#avisosPictos').append(alerta);
                         $(`#alert-${response.mensaje.id}`).fadeIn();
                         setTimeout(function () {
-                            $(`#alert-${response.mensaje.id}`).fadeOut().remove();
-                        }, 2000);
+                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function(){
+                                $(this).remove();
+                            });
+                        }, 1000);
                     }
                     else if(response.mensaje == -7){
                         alerta.text('Error al añadir el archivo: excede el tamaño máximo permitido (16MB).').attr('id', `alert-${response.mensaje.id}`).hide();
                         $('#avisosPictos').append(alerta);
                         $(`#alert-${response.mensaje.id}`).fadeIn();
                         setTimeout(function () {
-                            $(`#alert-${response.mensaje.id}`).fadeOut().remove();
-                        }, 2000);
+                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function(){
+                                $(this).remove();
+                            });
+                        }, 1000);
                     }
                 },
                 error: function () {

@@ -161,16 +161,20 @@ $(document).ready(function () {
                     $('#avisosPictos').append(alerta);
                     $(`#alert-${data.id}`).fadeIn();
                     setTimeout(function () {
-                        $(`#alert-${data.id}`).fadeOut().remove();
-                    }, 2000);
+                        $(`#alert-${data.id}`).fadeOut(400, function () {
+                            $(this).remove();
+                        });
+                    }, 500);
                 }
                 else {
                     alerta.text('El picto ya existe en el vocabulario.').attr('id', `alert-${data.id}`).hide();
                     $('#avisosPictos').append(alerta);
                     $(`#alert-${data.id}`).fadeIn();
                     setTimeout(function () {
-                        $(`#alert-${data.id}`).fadeOut().remove();
-                    }, 2000);
+                        $(`#alert-${data.id}`).fadeOut(400, function () {
+                            $(this).remove();
+                        });
+                    }, 500);
                 }
             },
             error: function (xhr, status, error) {
@@ -195,10 +199,10 @@ $(document).ready(function () {
         let contenedorPadre = $(this).closest('#contenedorPictogramas, #contenedorImagenes');
         let nombreContenedor = contenedorPadre.attr('id');
         let mensaje;
-        if(nombreContenedor === 'contenedorPictogramas'){
+        if (nombreContenedor === 'contenedorPictogramas') {
             mensaje = $('<span>').text('Se ha eliminado el pictograma');
         }
-        else{
+        else {
             mensaje = $('<span>').text('Se ha eliminado la imagen');
         }
         let deshacer = $('<button>').addClass('btn btn-sm btn-deshacer').attr('id', 'deshacer-elim').text('Deshacer');
@@ -255,7 +259,7 @@ $(document).ready(function () {
         $('#gestion-imagenes').show();
     });
 
-    $('#btn-texto').on('click', function(e){
+    $('#btn-texto').on('click', function (e) {
         $('#btn-imagenes').removeClass('seleccion');
         $('#btn-pictos').removeClass('seleccion');
         $('#btn-texto').addClass('seleccion');

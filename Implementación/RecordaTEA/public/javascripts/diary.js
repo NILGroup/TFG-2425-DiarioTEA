@@ -102,10 +102,15 @@ $(document).ready(function () {
                 } else {
                     codigo = `<div class="col-12 text-center"><p class="texto-diario">El diario no tiene entradas este mes.</p></div>`;
                 }
-                
+
                 $("#consultaDiario").fadeOut(300, function () {
-                    $(this).html(codigo);
-                    $(this).fadeIn(300);
+                    $(this).html(codigo); // Cambia el contenido aquí, no antes
+                    setTimeout(function() {
+                        // Luego de un pequeño retraso, ajustamos las alturas
+                        ajustarAlturas();
+                        // Realizamos fadeIn solo después de haber ajustado las alturas
+                        $("#consultaDiario").fadeIn(300);
+                    }, 500);
                 });
             }
         });
@@ -113,7 +118,7 @@ $(document).ready(function () {
 
     function ajustarAlturas() {
         let maxHeight = Math.max($(".list-dia").outerHeight(), $(".list-contenido").outerHeight());
-        $(".list-dia, .list-contenido").height(maxHeight);
+        $(".list-dia, .list-contenido").css('min-height', maxHeight);
     }
 
     function debounce(funcion, time) {
