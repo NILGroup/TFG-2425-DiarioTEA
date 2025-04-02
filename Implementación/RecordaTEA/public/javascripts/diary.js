@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     const currentMonth = new Date().getMonth() + 1;
     $('#mes').val(currentMonth);
-
+/* 
     if (sessionStorage.getItem("recup")) {
         let mesGuardado = sessionStorage.getItem("mesDiario");
         let anyoGuardado = sessionStorage.getItem("anyo");
@@ -35,7 +35,7 @@ $(document).ready(function () {
     else {
         sessionStorage.setItem("mesDiario", $("#mes").val());
         sessionStorage.setItem("anyo", $("#anyo").val());
-    }
+    } */
 
     const cargaDiario = debounce(actializarDiario, 600);
     ajustarAlturas();
