@@ -3,7 +3,7 @@ const pool = require('../config/conexionbbdd');
 class EntradasDao {
     constructor() { }
 
-    async entradasMes(usuario) {
+    async entradasMes(usuario, mes, año) {
         try {
             let [entradas] = await pool.query(`
                SELECT e.tipo, DATE(e.fecha_registro) AS fecha, 
@@ -25,7 +25,7 @@ class EntradasDao {
     AND YEAR(e.fecha_registro) = ?   
     GROUP BY DATE(e.fecha_registro)
     ORDER BY DATE(e.fecha_registro) DESC;
-            `, [usuario, 3, 2025]);
+            `, [usuario, mes, año]);
 
 
             return entradas;
@@ -252,6 +252,16 @@ class EntradasDao {
         }
 
 
+    }
+
+    async obtenerAnyos(idUsuario){
+        try{
+            let [response] = await pool.query('SELECT DISTINCT YEAR(fecha_registro) AS anyo FROM entradas WHERE id_usuario = ? ORDER BY anyo DESC;', [idUsuario])
+            return response;
+        }
+        catch(error){
+
+        }
     }
 
 }

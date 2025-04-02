@@ -18,9 +18,11 @@ router.get('/view-entry/:idEntrada', entradasControlador.viewEntry);
 router.get('/edit-entry/:idEntrada', entradasControlador.editEntryView);
 
 // Este para la persona cuidadora
-router.get('/:id', entradasControlador.cargarDiario);
-
 router.get('/dia/:dia', entradasControlador.cargarDia);
+
+router.get('/actualizar-diario', entradasControlador.actualizarDiario);
+
+router.get('/:id', entradasControlador.cargarDiario);
 
 
 

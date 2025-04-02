@@ -27,9 +27,9 @@ class EntradasService {
     constructor() { }
 
 
-    async entradasMes(usuario) {
+    async entradasMes(usuario, mes, año) {
         try {
-            let entradasMes = await entradasDao.entradasMes(usuario);
+            let entradasMes = await entradasDao.entradasMes(usuario, mes, año);
             console.log(entradasMes)
             return entradasMes;
         }
@@ -166,6 +166,12 @@ class EntradasService {
         }
     }
 
+    async obtenerAnyos(idUsuario){
+        if(idUsuario > 0){
+            let anyos = await entradasDao.obtenerAnyos(idUsuario);
+            return anyos;
+        }
+    }
 
 }
 

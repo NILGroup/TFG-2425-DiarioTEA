@@ -27,8 +27,13 @@ class EntradasController {
                 usuario = req.session.usuario;
                 con = req.session.config;
             }
-            let entradas = await entradasService.entradasMes(usuario.id);
-            console.log(entradas);
+            let fecha = new Date();
+            let año = fecha.getFullYear(); 
+            let mes = fecha.getMonth() + 1; 
+    
+            console.log(mes, año)
+
+            let entradas = await entradasService.entradasMes(usuario.id, mes, año);
             for (let entrada of entradas) {
                 entrada.mes = fechaUtils.mesAbreviatura(entrada.fecha).toUpperCase();
                 entrada.dia = fechaUtils.dia(entrada.fecha);
@@ -43,7 +48,9 @@ class EntradasController {
                     entrada.pictos = [];
                 }
             }
-            res.render('cuidadores/diario', { data: { entradas: entradas, usuario: usuario, usuarios: usus } });
+
+            let anyos = await entradasService.obtenerAnyos(usuario.id);
+            res.render('cuidadores/diario', { data: { entradas: entradas, usuario: usuario, usuarios: usus, anyos: anyos } });
         }
         catch (error) {
             throw error;
@@ -76,9 +83,28 @@ class EntradasController {
         }
     }
 
+    async actualizarDiario(req, res){
+        let entradas = await entradasService.entradasMes(req.session.usuario.id, req.query.mes, req.query.anyo);
+        for (let entrada of entradas) {
+            entrada.mes = fechaUtils.mesAbreviatura(entrada.fecha).toUpperCase();
+            entrada.dia = fechaUtils.dia(entrada.fecha);
+            entrada.hoy = fechaUtils.esHoy(entrada.fecha);
+            entrada.f = fechaUtils.fechaCompleta(entrada.fecha);
+            entrada.fecha = fechaUtils.fechaSinHora(entrada.fecha);
+            if (entrada.cuerpo === null) {
+                let pictos = await tarjetasService.tarjetasEntrada(entrada.id);
+                entrada.pictos = pictos;
+            }
+            else {
+                entrada.pictos = [];
+            }
+        }
+        console.log(entradas);
+        res.status(200).send({data: entradas});
+    }
+
     async redirectToDiary(req, res) {
         const response = await entradasService.leerEntradasPorUsuario(req.session.usuario.id);
-        console.log(response[0].tarjetas);
         res.render('TEA/diaryTEA', { entradas: response, diary: true, usuario: req.session.usuario.nombre });
     }
 
