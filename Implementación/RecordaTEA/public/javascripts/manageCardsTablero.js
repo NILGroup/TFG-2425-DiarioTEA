@@ -2,6 +2,7 @@ $(document).ready(function () {
     var pagina = 1;
     var consulta = "";
     var ultPag;
+    var persiste = false;
 
     $('#buscaArasaac').on('click', function (e) {
         e.preventDefault();
@@ -189,12 +190,12 @@ $(document).ready(function () {
         let id = $(this).attr('id');
         let divPicto = $(this).closest('.col-lg-2.col-md-3.mt-3');
         let card = $(this).closest('.card');
-        let persiste = true;
+        persiste = true;
 
         //Escondemos el picto como si estuviese eliminado
         divPicto.hide();
 
-        //Avisamos de que ha eliminaod un picto y que lo puede deshacer
+        //Avisamos de que ha eliminado un picto y que lo puede deshacer
         let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
         let contenedorPadre = $(this).closest('#contenedorPictogramas, #contenedorImagenes');
         let nombreContenedor = contenedorPadre.attr('id');
@@ -214,21 +215,7 @@ $(document).ready(function () {
                 alerta.remove();
             });
             if (persiste) {
-                $.ajax({
-                    url: '/tarjetas-comunicacion/eliminar-picto',
-                    method: 'DELETE',
-                    data: {
-                        id: id
-                    },
-                    success: function (data, status, xhr) {
-                        if (data.success) {
-                            $(`#${id}`).closest('.col-lg-2.col-md-3.mt-3').remove();
-                        }
-                    },
-                    error: function (data, status, xhr) {
-
-                    }
-                });
+                eliminarPicto(id);
             }
         }, 5000);
 
@@ -238,6 +225,14 @@ $(document).ready(function () {
             clearTimeout(temp);
             alerta.fadeOut();
             divPicto.show();
+        });
+
+        $(window).on('beforeunload', function () {
+            if (persiste) {
+                let data = new FormData();
+                data.append('id', id);
+                navigator.sendBeacon('/tarjetas-comunicacion/eliminar-picto', data);
+            }
         });
     });
 
@@ -267,4 +262,22 @@ $(document).ready(function () {
         $('#gestion-imagenes').hide();
         $('#texto-libre').show();
     });
+
+    function eliminarPicto(id) {
+        $.ajax({
+            url: '/tarjetas-comunicacion/eliminar-picto',
+            method: 'DELETE',
+            data: {
+                id: id
+            },
+            success: function (data, status, xhr) {
+                if (data.success) {
+                    $(`#${id}`).closest('.col-lg-2.col-md-3.mt-3').remove();
+                }
+            },
+            error: function (data, status, xhr) {
+
+            }
+        });
+    }
 })

@@ -20,6 +20,8 @@ router.post('/picto-vocabulario', tarjetasControlador.addTarjetaVocabulario);
 
 router.delete('/eliminar-picto', tarjetasControlador.eliminarTarjetaVocabulario);
 
+router.post('/eliminar-picto', upload.none(), tarjetasControlador.eliminarTarjetaVocabulario);
+
 router.post('/nueva-imagen', upload.single('image'), tarjetasControlador.addTarjetaImagen);
 
 router.put('/cambiar-texto-libre', tarjetasControlador.textoLibre);

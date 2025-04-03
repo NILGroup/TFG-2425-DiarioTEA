@@ -88,8 +88,10 @@ class TarjetasControlador {
 
     async eliminarTarjetaVocabulario(req, res) {
         try {
+            console.log(req.body);
             let id = req.body.id;
             let eliminacion = await tarjetasService.eliminarTarjetaVocabulario(id);
+            console.log(eliminacion);
             res.send(eliminacion);
         }
         catch (error) {
