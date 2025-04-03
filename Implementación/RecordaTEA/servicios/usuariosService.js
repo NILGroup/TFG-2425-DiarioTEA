@@ -16,9 +16,11 @@ function formatDateTime(fechaRegistro) {
     const numericDate = dateTime.toISOString().split("T")[0];
 
     // Formatear la hora
-    const hours = dateTime.getUTCHours().toString().padStart(2, '0');
-    const minutes = dateTime.getUTCMinutes().toString().padStart(2, '0');
-    const formattedTime = `${hours}:${minutes}`;
+    const hours = dateTime.getHours();       
+    const minutes = dateTime.getMinutes();  
+
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+
 
     return { formattedDate, formattedTime, numericDate };
 }
