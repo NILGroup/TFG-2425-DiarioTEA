@@ -35,11 +35,32 @@ function horaMinutos(fecha){
     return h +':' + m;
 }
 
+function formatDateTime(fechaRegistro) {
+    const dateTime = new Date(fechaRegistro);
+
+    // Formatear la fecha
+    const optionsDate = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = dateTime.toLocaleDateString('es-ES', optionsDate);
+
+    //numeric date para poder tenerla en el edit
+    const numericDate = dateTime.toISOString().split("T")[0];
+
+    // Formatear la hora
+    const hours = dateTime.getHours();       
+    const minutes = dateTime.getMinutes();  
+
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+
+
+    return { formattedDate, formattedTime, numericDate };
+}
+
 module.exports = {
     fechaCompleta,
     mesAbreviatura,
     dia,
     esHoy,
     fechaSinHora,
-    horaMinutos
+    horaMinutos,
+    formatDateTime
 };

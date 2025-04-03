@@ -1,29 +1,11 @@
 const TarjetasDao = require('../dao/tarjetasDao');
 const EntradasDao = require('../dao/entradasDao');
 const imagenUtils = require('../utils/imagenUtils');
+const fechaUitls = require('../utils/fechaUtils');
 
 const tarjetasDao = new TarjetasDao();
 const entradasDao = new EntradasDao();
 
-function formatDateTime(fechaRegistro) {
-    const dateTime = new Date(fechaRegistro);
-
-    // Formatear la fecha
-    const optionsDate = { day: 'numeric', month: 'long', year: 'numeric' };
-    const formattedDate = dateTime.toLocaleDateString('es-ES', optionsDate);
-
-    //numeric date para poder tenerla en el edit
-    const numericDate = dateTime.toISOString().split("T")[0];
-
-    // Formatear la hora
-    const hours = dateTime.getHours();       
-    const minutes = dateTime.getMinutes();  
-
-    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-
-
-    return { formattedDate, formattedTime, numericDate };
-}
 
 class EntradasService {
     constructor() { }
@@ -61,7 +43,7 @@ class EntradasService {
             const entryMap = new Map(); // Usamos un Map para hacer referencia rápida por idEntrada
 
             entradas[0].forEach((item) => {
-                const { formattedDate, formattedTime, numericDate } = formatDateTime(item.fecha_registro);
+                const { formattedDate, formattedTime, numericDate } = fechaUitls.formatDateTime(item.fecha_registro);
 
                 const id = item.idEntrada;
 
@@ -128,7 +110,7 @@ class EntradasService {
             const groupedData = response[0].reduce((acc, item) => {
                 //basicamente itero con item sobre entradas, y voy metiendo en acc los datos para luego retornarlos en groupedData
 
-                const { formattedDate, formattedTime, numericDate } = formatDateTime(item.fecha_registro);
+                const { formattedDate, formattedTime, numericDate } = fechaUitls.formatDateTime(item.fecha_registro);
 
 
                 const id = item.idEntrada;

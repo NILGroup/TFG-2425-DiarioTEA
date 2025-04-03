@@ -1,83 +1,117 @@
-
 $(document).ready(function () {
+   
+    const defaultSrc = "/images/emotions/emociones.png";
+    const emocionActual = $("#emocionSeleccionada").attr('src');
+    const emocion = emocionActual === defaultSrc ? null : emocionActual;
 
-    var emocion = $("#emocionSeleccionada").attr('src');
-    console.log(emocion);
-    $('#editar-btn-edit').click(function () {
-        $('#fecha-edit').removeAttr('readonly').removeClass('no-editable');;
-        $('#hora-edit').removeAttr('readonly').removeClass('no-editable');
-        $('#editar-btn-edit').hide();
-        $('#cancel-btn-edit').show();
-    });
+    if (emocion !== null) {
+        marcarEmocionSeleccionada(emocion);
+    }
 
-    $('#cancel-btn-edit').click(function () {
-        $('#fecha-edit').addClass('no-editable').prop("readonly", true);
-        $('#hora-edit').addClass('no-editable').prop("readonly", true);
-        $('#editar-btn-edit').show();
-        $('#cancel-btn-edit').hide();
-    });
+    function marcarEmocionSeleccionada(srcEmocion) {
+        $('#emocionModal .card img').removeClass('seleccionada');
+        const matchingCard = $(`#emocionModal .card img[src="${srcEmocion}"]`);
+        if (matchingCard.length) {
+            matchingCard.addClass('seleccionada');
+        }
+    }
 
-    var emocionSeleccionadaAnt = null;
 
     $('#emocionModal .card').on('click', function (e) {
         e.preventDefault();
-        if (emocionSeleccionadaAnt != null) {
-            emocionSeleccionadaAnt.find('img').removeClass('seleccionada');
-        }
-        emocionSeleccionadaAnt = $(this);
+        $('#emocionModal .card img').removeClass('seleccionada');
         $(this).find('img').addClass('seleccionada');
     });
 
     $("#addEmocionButton").on('click', function () {
-        var img = emocionSeleccionadaAnt.find('img').attr('src');
-        $("#emocionSeleccionada").attr('src', img);
-        $('#emocionModal').modal('hide');
+        const seleccionada = $('#emocionModal .card img.seleccionada').attr('src');
 
-    })
+        if (seleccionada) {
+            $("#emocionSeleccionada").attr('src', seleccionada);
+        } else {
+            $("#emocionSeleccionada").attr('src', defaultSrc);
+        }
+
+        $('#emocionModal').modal('hide');
+    });
+
+    $('#editar-btn-edit').click(function () {
+        $('#fecha-edit, #hora-edit')
+            .removeAttr('readonly')
+            .removeClass('no-editable');
+
+        $('#editar-btn-edit').hide();
+        $('#cancel-btn-edit').show();
+    });
+
+  
+    $('#cancel-btn-edit').click(function () {
+        $('#fecha-edit, #hora-edit')
+            .addClass('no-editable')
+            .prop("readonly", true);
+
+        $('#editar-btn-edit').show();
+        $('#cancel-btn-edit').hide();
+    });
+
+    $("#fecha-edit, #hora-edit").on("change", function () {
+        console.log("Fecha: " + $('#fecha-edit').val());
+        console.log("Hora: " + $('#hora-edit').val());
+    });
+
+
+    $('#contenedorVocabulario').on('click', '.card', function (event) {
+        event.preventDefault();
+
+        const card = $(this);
+        const column = card.closest('.col-lg-2, .col-md-3, .mt-3');
+        const contenedorRegistros = $('#contenedorRegistrosEdit');
+        const clonedColumn = column.clone();
+
+        // Añadir X si no existe
+        if (clonedColumn.find('.cross-icon').length === 0) {
+            clonedColumn.find('.card').append(
+                '<span class="cross-icon" style="position: absolute; top: 5px; right: 10px; font-size: 20px; cursor: pointer;">X;</span>'
+            );
+        }
+
+        // Asegurar posición relativa para posicionar bien la X
+        clonedColumn.find('.card').css('position', 'relative');
+        contenedorRegistros.append(clonedColumn);
+    });
+
+    
+    $('#contenedorRegistrosEdit').on('click', '.card', function (event) {
+        event.stopPropagation();
+        $(this).closest('.col-lg-2, .col-md-3, .mt-3').remove();
+    });
+
 
     $('#updateButton').on('click', function (e) {
         e.preventDefault();
-        const tarjetas = []; // Array para almacenar los datos de las cards
 
-
-
-        // Recorrer todas las cards dentro del contenedorRegistros
-        $('#contenedorRegistros .card').each(function (index) {
-            const card = $(this); // Obtener la card actual
-            const idTarjeta = parseInt(card.attr('id')); // Obtener el id de la tarjeta
-            const orden = index + 1; // Obtener el orden (posición) de la tarjeta (empezando desde 1)
-
-
-            tarjetas.push({
-                id: idTarjeta, // Guardar el id de la tarjeta
-                orden: orden   // Guardar el orden de la tarjeta
-
-            });
+        const tarjetas = [];
+        $('#contenedorRegistrosEdit .card').each(function (index) {
+            const idTarjeta = parseInt($(this).attr('id'));
+            tarjetas.push({ id: idTarjeta, orden: index + 1 });
         });
 
-        if (emocionSeleccionadaAnt != null) {
-            emocion = emocionSeleccionadaAnt.find('img').attr('src');
+        const emocionSeleccionada = $('#emocionSeleccionada').attr('src');
+        const emocionFinal = emocionSeleccionada === defaultSrc ? null : emocionSeleccionada;
 
-        }
+        const fecha = $('#fecha-edit').val();
+        const hora = $('#hora-edit').val();
+        const [year, month, day] = fecha.split('-');
+        const [hours, minutes] = hora.split(':');
 
-
-        const fecha = $('#fecha-edit').val(); // Ej: "2025-03-23"
-        const hora = $('#hora-edit').val();   // Ej: "10:30"
-
-        // Combinamos en string ISO y luego lo parseamos a Date
-        const fechaHoraStr = `${fecha}T${hora}:00`; // "2025-03-23T10:30:00"
-        const fechaHora = new Date(fechaHoraStr);
-
-        // Formateamos como string para MySQL: "YYYY-MM-DD HH:MM:SS"
-        const fechaHoraFormatted = fechaHora.toISOString().slice(0, 19).replace('T', ' ');
-
-        // Para obtener el ID de la entrada
+        const fechaHoraFormatted = `${year}-${month}-${day} ${hours}:${minutes}:00`;
         const idEntrada = window.location.pathname.split('/').pop();
 
-        if ($('#text-area-edit').length > 0) {
+        let entrada;
 
-            let escrito = $('#text-area-edit').val();
-            const entrada = {
+        if ($('#text-area-edit').length > 0) {
+            const escrito = $('#text-area-edit').val();
+            entrada = {
                 fecha_registro: fechaHoraFormatted,
                 tarjetas: [],
                 id: idEntrada,
@@ -85,38 +119,18 @@ $(document).ready(function () {
                 tipo: "Texto",
                 cuerpo: escrito
             };
-
-            // Convertir el array a JSON y asignarlo al input del formulario
-            $('#registrosEditadosInput').val(JSON.stringify(entrada));
-
-        }
-        else {
-
-            const entrada = {
+        } else {
+            entrada = {
                 fecha_registro: fechaHoraFormatted,
                 tarjetas: tarjetas,
                 id: idEntrada,
-                emocion: emocion,
+                emocion: emocionFinal,
                 tipo: "Picto",
                 cuerpo: null
             };
-
-            // Convertir el array a JSON y asignarlo al input del formulario
-            $('#registrosEditadosInput').val(JSON.stringify(entrada));
         }
 
-
-        // Enviar el formulario
+        $('#registrosEditadosInput').val(JSON.stringify(entrada));
         $('#registrosFormEdit').submit();
     });
-
-
-
-
-
-
-
-
-
-
-})
+});

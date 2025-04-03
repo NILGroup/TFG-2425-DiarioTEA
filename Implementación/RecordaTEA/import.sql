@@ -53,7 +53,7 @@ CREATE TABLE Entradas(
     tipo VARCHAR(50) NOT NULL,
     autor INT NOT NULL,
     cuerpo TEXT DEFAULT NULL,
-    fecha_registro TIMESTAMP,
+    fecha_registro TIMESTAMP NULL DEFAULT NULL,
     emocion VARCHAR(200) DEFAULT NULL, 
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
 );

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     
-    $('#contenedorPictogramas, #cardsRutina, #contenedorRegistros, #composiciónRutina').sortable({
+    $('#contenedorPictogramas, #cardsRutina, #contenedorRegistros, #contenedorRegistrosEdit , #composiciónRutina').sortable({
         // Define los elementos que serán "draggeables"
         items: '.col-lg-2',
         animation: 200,
