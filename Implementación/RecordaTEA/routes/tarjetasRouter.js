@@ -26,5 +26,6 @@ router.post('/nueva-imagen', upload.single('image'), tarjetasControlador.addTarj
 
 router.put('/cambiar-texto-libre', tarjetasControlador.textoLibre);
 
+router.put('/cambiar-texto-picto', tarjetasControlador.textoPicto);
 
 module.exports = router;

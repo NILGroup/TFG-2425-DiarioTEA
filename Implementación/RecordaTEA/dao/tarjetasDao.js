@@ -145,6 +145,17 @@ class TarjetasDao {
     }
   }
 
+  async textoPicto(picto, idUsuario) {
+    try {
+      let [resultado] = await pool.query('UPDATE Config SET picto_texto = ? WHERE id_usuario = ?', [picto, idUsuario]);
+      console.log(resultado);
+      return resultado.affectedRows;
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   async leerConfiguracionVocabulario(idUsuario) {
     try {
       let [resultado] = await pool.query('SELECT * FROM Config WHERE id_usuario = ?', [idUsuario]);

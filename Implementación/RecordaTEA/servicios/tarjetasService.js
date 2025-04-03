@@ -144,6 +144,12 @@ class TarjetasService {
         return resultado;
     }
 
+    async textoPicto(picto, idUsuario){
+        let b = (picto === 'true');
+        let resultado = await tarjetasDao.textoPicto(b, idUsuario);
+        return resultado;
+    }
+
     async leerConfiguracionVocabulario(idUsuario){
         let config = tarjetasDao.leerConfiguracionVocabulario(idUsuario);
         return config;

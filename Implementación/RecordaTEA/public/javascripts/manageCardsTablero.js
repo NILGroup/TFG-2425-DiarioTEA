@@ -4,6 +4,46 @@ $(document).ready(function () {
     var ultPag;
     var persiste = false;
 
+    
+    $('#permisoTextoPicto').on('change', function () {
+        let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
+        let mensaje;
+        var cambio;
+
+        if ($(this).prop('checked')) {
+            mensaje = 'Se ha activado el texto al Pictograma.'
+            cambio = true;
+        } else {
+            mensaje = 'Se ha desactivado el texto al Pictograma.'
+            cambio = false;
+        }
+
+        $.ajax({
+            url: '/tarjetas-comunicacion/cambiar-texto-picto',
+            method: 'PUT',
+            data: {
+                picto: cambio
+            },
+            success: function (data, status, xhr) {
+                if (data.success) {
+                    alerta.append(mensaje).hide();
+                    alerta.attr('id', 'activo');
+                    $('#avisosPictos').append(alerta);
+                    alerta.fadeIn();
+                    setTimeout(function () {
+                        $('#activo').fadeOut(400, function () {
+                            $(this).remove();
+                        });
+                    }, 500);
+                }
+            },
+            error: function (data, status, xhr) {
+
+            }
+        });
+
+    });
+
     $('#buscaArasaac').on('click', function (e) {
         e.preventDefault();
         consulta = $('#campoBusqueda').val();
@@ -34,8 +74,9 @@ $(document).ready(function () {
                             const imagen = $('<img>').attr('src', picto.enlace).attr('alt', consulta).addClass('card-img');
                             const fondo = $('<div>').addClass('add-picto');
                             const mas = $('<span>').attr('id', picto.id_arasaac).attr('data-enlace', picto.enlace).addClass('mas').text('+');
+                            const titulo = $('<h5>').addClass('nombre-pictograma text-center').text(picto.keyword);
                             enlace.append(imagen);
-                            card.append(enlace, fondo, mas);
+                            card.append(enlace, fondo, mas, titulo);
                             divPicto.append(card);
                             cont.append(divPicto);
                         });
@@ -51,6 +92,9 @@ $(document).ready(function () {
                         $('#avisos').append(sp);
                     }
                     $('#cargando').hide();
+                    if (!$('#permisoTextoPicto').prop('checked')) {
+                        $(".nombre-pictograma").hide();
+                    }
                     contenedorPictos.show();
                 },
                 error: function (xhr, status, error) {
@@ -60,6 +104,7 @@ $(document).ready(function () {
         }
     });
 
+    
     $('#siguientePag').on('click', function (e) {
         e.preventDefault();
         $(`#page-${(pagina)}`).hide();

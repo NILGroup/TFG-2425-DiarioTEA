@@ -37,7 +37,7 @@ class TarjetasControlador {
                 if (this.resultadoArasaac.length > 0) {
                     for (let i = 0; i < this.resultadoArasaac.length && i < 18; i++) {
                         let picto = await tarjetasService.pictosArasaac(this.resultadoArasaac[i]._id);
-                        pictos.push({ id_arasaac: this.resultadoArasaac[i]._id, enlace: picto.image });
+                        pictos.push({ id_arasaac: this.resultadoArasaac[i]._id, enlace: picto.image,  keyword: this.resultadoArasaac[i].keywords[0]?.keyword.toUpperCase() || '' });
                     }
                 }
                 res.send({ pictos: pictos, paginacion: this.resultadoArasaac.length });
@@ -113,6 +113,14 @@ class TarjetasControlador {
 
     async textoLibre(req, res){
         let resultado = await tarjetasService.textoLibre(req.body.texto, req.session.usuario.id);
+        if(resultado){
+            req.session.config.texto = (req.body.texto === 'true');
+        }
+        res.send({success: resultado});
+    }
+
+    async textoPicto(req, res){
+        let resultado = await tarjetasService.textoPicto(req.body.picto, req.session.usuario.id);
         if(resultado){
             req.session.config.texto = (req.body.texto === 'true');
         }
