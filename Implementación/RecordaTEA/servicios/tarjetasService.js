@@ -52,7 +52,7 @@ class TarjetasService {
         }
     }
 
-    async addTarjetaVocabulario(id_arasaac, enlace, id_usuario) {
+    async addTarjetaVocabulario(id_arasaac, enlace, id_usuario, keyword) {
         try {
             let existe = await tarjetasDao.comprobarExistenciaPicto(id_arasaac, enlace, id_usuario);
             if (existe.length > 0) {
@@ -66,7 +66,7 @@ class TarjetasService {
             }
             else {
 
-                let insertado = await tarjetasDao.addTarjetaVocabulario(id_arasaac, enlace, id_usuario);
+                let insertado = await tarjetasDao.addTarjetaVocabulario(id_arasaac, enlace, id_usuario, keyword);
                 return { success: true, id: insertado, id_arasaac: id_arasaac };
 
             }

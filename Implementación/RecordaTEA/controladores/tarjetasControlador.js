@@ -77,8 +77,9 @@ class TarjetasControlador {
             let id_usuario = req.session.usuario.id;
             let id_arasaac = req.body.id_arasaac;
             let enlace = req.body.enlace;
+            let keyword = req.body.keyword;
 
-            let success = await tarjetasService.addTarjetaVocabulario(id_arasaac, enlace, id_usuario);
+            let success = await tarjetasService.addTarjetaVocabulario(id_arasaac, enlace, id_usuario, keyword);
             res.send(success);
         }
         catch (error) {

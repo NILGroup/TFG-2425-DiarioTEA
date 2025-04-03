@@ -114,6 +114,9 @@
                                                         <div class="remove-picto"></div>
                                                         <span id="<%= elem.idTarjeta %>" class="trash"><i
                                                                 class="bi bi-trash3-fill"></i></span>
+                                                                <% if(data.config.picto_texto=1){%>
+                                                                <h5 class="nombre-pictograma text-center"> <%= elem.texto %></h5>
+                                                                <%}%>
                                                     </div>
                                                 </div>
     

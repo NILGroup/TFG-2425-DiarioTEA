@@ -17,7 +17,7 @@ class TarjetasDao {
 
   async obtenerTarjetasUsuarioId(id) {
     try {
-      let [vocabulario] = await pool.query(`SELECT p.id, p.enlace, t.id as idTarjeta, t.categoria, i.imagen, i.mimetype
+      let [vocabulario] = await pool.query(`SELECT p.id, p.enlace, t.id as idTarjeta, t.categoria, t.texto, i.imagen, i.mimetype
         FROM Tarjetas t 
         LEFT JOIN Pictos p ON t.id = p.id_tarjeta
         LEFT JOIN Imagenes i ON t.id = i.id_tarjeta
@@ -31,9 +31,9 @@ class TarjetasDao {
     }
   }
 
-  async addTarjetaVocabulario(id_arasaac, enlace, id_usuario) {
+  async addTarjetaVocabulario(id_arasaac, enlace, id_usuario, keyword) {
     try {
-      let [response] = await pool.query('INSERT INTO Tarjetas (id_usuario) VALUES (?)', [id_usuario]);
+      let [response] = await pool.query('INSERT INTO Tarjetas (id_usuario, texto) VALUES (?, ?)', [id_usuario,keyword]);
       let [picto] = await pool.query('INSERT INTO Pictos (idArasaac, enlace, id_tarjeta) VALUES (?, ?, ?)', [id_arasaac, enlace, response.insertId]);
       return response.insertId;
     }

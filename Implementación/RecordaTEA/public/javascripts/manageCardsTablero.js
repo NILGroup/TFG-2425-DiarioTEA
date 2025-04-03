@@ -31,10 +31,19 @@ $(document).ready(function () {
                     $('#avisosPictos').append(alerta);
                     alerta.fadeIn();
                     setTimeout(function () {
-                        $('#activo').fadeOut(400, function () {
+                        $('#activo').fadeOut(1500, function () {
                             $(this).remove();
                         });
-                    }, 500);
+                    }, 1500);
+
+                    if(cambio){
+                        $(".nombre-pictograma").show();
+                    }
+                    else{
+                        $(".nombre-pictograma").hide();
+                    }
+
+                    
                 }
             },
             error: function (data, status, xhr) {
@@ -135,8 +144,9 @@ $(document).ready(function () {
                             const imagen = $('<img>').attr('src', picto.enlace).attr('alt', consulta).addClass('card-img');
                             const fondo = $('<div>').addClass('add-picto');
                             const mas = $('<span>').attr('id', picto.id_arasaac).attr('data-enlace', picto.enlace).addClass('mas').text('+');
+                            const titulo = $('<h5>').addClass('nombre-pictograma text-center').text(picto.keyword);
                             enlace.append(imagen);
-                            card.append(enlace, fondo, mas);
+                            card.append(enlace, fondo, mas, titulo);
                             divPicto.append(card);
                             cont.append(divPicto);
                         });
@@ -145,6 +155,9 @@ $(document).ready(function () {
                             $('#siguientePag').prop('disabled', true);
                         }
                         $('#cargando').hide();
+                        if (!$('#permisoTextoPicto').prop('checked')) {
+                            $(".nombre-pictograma").hide();
+                        }
                         $('#anteriorPag').prop('disabled', false);
                         contenedorPictos.append(cont);
                     }
@@ -170,6 +183,7 @@ $(document).ready(function () {
         e.preventDefault();
         let id = $(this).attr('id');
         let enlace = $(this).attr('data-enlace');
+        let texto = $(this).closest('.card').find('.nombre-pictograma').text();
         let divPicto = $(this).closest('.col-lg-2.col-md-3.mt-3.d-flex');
         let carta = $(this).closest('.card.gestion');
         let copia = carta.clone(true);
@@ -179,7 +193,8 @@ $(document).ready(function () {
             method: 'POST',
             data: {
                 id_arasaac: id,
-                enlace: enlace
+                enlace: enlace,
+                keyword : texto
             },
             success: function (data, status, xhr) {
                 if (data.success) {
