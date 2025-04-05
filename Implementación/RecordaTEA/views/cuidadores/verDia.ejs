@@ -54,18 +54,29 @@
                                 <div class="align-items-center">
                                     <div class="img-registro gap-3">
                                         <% if (elem.cuerpo===null){%>
-                                            <% elem.pictos.forEach(function(p){%>
-                                                <img src="<%= p.enlace %>" alt="">
+                                            <div class="d-flex">
+                                                <% elem.pictos.forEach(function(p){%>
+                                                    <div>
+                                                        <img src="<%= p.enlace %>" alt="">
 
-                                                <%}) %>
+                                                        <% if(data.config.picto_texto = 1){%>
+                                                            <h5 class="nombre-pictograma text-center">
+                                                                <%= p.texto %>
+                                                            </h5>
 
-                                                    <%} else {%>
-                                                        <div class=" align-items-center">
-                                                            <p class="no-margen texto-entrada">
-                                                                <%= elem.cuerpo%>
-                                                            </p>
-                                                        </div>
-                                                        <%}%>
+                                                            <%}%>
+                                                    </div>
+
+                                                    <%}) %>
+                                            </div>
+
+                                            <%} else {%>
+                                                <div class=" align-items-center">
+                                                    <p class="no-margen texto-entrada">
+                                                        <%= elem.cuerpo%>
+                                                    </p>
+                                                </div>
+                                                <%}%>
                                     </div>
                                 </div>
                             </div>

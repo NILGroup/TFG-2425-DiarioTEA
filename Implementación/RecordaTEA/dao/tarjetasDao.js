@@ -83,7 +83,8 @@ class TarjetasDao {
       let [pictos] = await pool.query(`SELECT
                                         p.enlace,
                                         i.imagen,
-                                        i.mimetype
+                                        i.mimetype,
+                                        t.texto
                                       FROM Entradas_tarjeta et
                                       LEFT JOIN Tarjetas t ON
                                         t.id = et.id_tarjeta

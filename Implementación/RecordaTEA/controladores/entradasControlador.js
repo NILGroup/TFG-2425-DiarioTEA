@@ -76,7 +76,7 @@ class EntradasController {
                 }
             }
             let diaCompleto = fechaUtils.fechaCompleta(dia);
-            res.render('cuidadores/verDia', { data: { entradas: entradas, usuario: usuario, dia: diaCompleto, usuarios: usus } });
+            res.render('cuidadores/verDia', { data: { entradas: entradas, usuario: usuario, dia: diaCompleto, usuarios: usus, config: req.session.config } });
         }
         catch (error) {
             throw error;
