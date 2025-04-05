@@ -178,6 +178,33 @@ class EntradasController {
         
     }
 
+    async eliminarEntrada(req, res){
+
+        const idEntrada = req.params.idEntrada;
+        const idUsuario = req.session.usuario.id; // Asumiendo que tienes la información del usuario autenticado
+
+        try {
+    
+            const response = await entradasService.eliminarEntrada(idEntrada, idUsuario);
+            // si no se encuentra en la sesión, realiza la búsqueda en la base de datos
+            if(response.success){
+                res.redirect('/diario'); // Redirigir a la página del diario, por ejemplo
+            }  else {
+                const error = {
+                    status: 403,
+                    info: "No tienes permisos para ver esta página"
+                };
+                // si no existe, es porque no ha cumplido con que sea el idUsuario
+                return res.render('error', { error: error });
+            }
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send('Error interno del servidor');
+        } 
+        
+    }
+
+
     async editEntryView(req, res){
 
         const idEntrada = req.params.idEntrada;

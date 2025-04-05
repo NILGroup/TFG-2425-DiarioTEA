@@ -117,11 +117,11 @@ VALUES ('2', '1');
 INSERT INTO Cuidadores_Usu(id_cuidador, id_usuario)
 VALUES ('2', '3');
 
-INSERT INTO Tarjetas (id, id_usuario, orden, categoria, activa) VALUES 
-('1','1','1','Emocion',1),
-('2','1','2','Emocion',1),
-('3','1','3','Emocion',1),
-('4','1','4','Objeto',1);
+INSERT INTO Tarjetas (id, id_usuario, orden, categoria, activa, texto) VALUES 
+('1','1','1','Emocion',1,'Aburrimiento'),
+('2','1','2','Emocion',1, 'Feliz'),
+('3','1','3','Emocion',1, 'Sorpresa'),
+('4','1','4','Objeto',1,'Casa');
 
 INSERT INTO Pictos(id, idArasaac, enlace, id_tarjeta) VALUES 
 ('1','2245','https://api.arasaac.org/v1/pictograms/2245','1'),

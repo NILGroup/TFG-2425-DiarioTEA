@@ -109,6 +109,48 @@ class EntradasDao {
         }
     }
 
+    async eliminarEntrada(id, idUsuario) {
+        const conn = await pool.getConnection();
+        try {
+            await conn.beginTransaction();
+
+            // 1. Eliminar 'entradas' de entradas_Tarjeta
+            const [entradaResult] = await conn.execute(
+                `DELETE FROM entradas_tarjeta WHERE id_entrada = ?;`,
+                [id]
+            );
+
+            // Verificar que la eliminación fue exitosa
+            if (entradaResult.affectedRows < 0) {
+                throw new Error('No se pudo eliminar la entrada_tarjeta');
+            }
+
+            // 3. Eliminar en 'entradas'
+
+            const [entrada] = await conn.query(
+                `DELETE FROM entradas WHERE id = ? AND id_usuario = ?;`,
+                [id, idUsuario]
+            );
+
+            // Verificar que la eliminación fue exitosa
+            if (entrada.affectedRows !== 1) {
+                throw new Error('No se pudo eliminar la entrada');
+            }
+
+
+            await conn.commit();
+            return { success: true, id: id };
+
+        } catch (error) {
+            await conn.rollback();
+            console.error('Error al registrar la entrada:', error);
+            return { success: false, error };
+        } finally {
+            conn.release();
+        }
+    }
+
+
     async actualizarTarjetasEntrada(data) {
         const conn = await pool.getConnection();
         try {
@@ -150,18 +192,18 @@ class EntradasDao {
                         'SELECT 1 FROM entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
                         [data.id, id]
                     );
-                    
+
                     if (existingEntry.length === 0) {
                         await conn.execute(
                             'INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES (?, ?, ?)',
                             [data.id, id, orden]
                         );
                     }
-                    
-                    
+
+
                 } else {
                     const actual = actuales.get(id);
-            
+
                     if (actual.orden !== orden) {
                         // Existía pero con distinto orden: actualizar
                         await conn.execute(
@@ -169,7 +211,7 @@ class EntradasDao {
                             [orden, data.id, id]
                         );
                     }
-            
+
                 }
             }
 
@@ -178,7 +220,7 @@ class EntradasDao {
                 'UPDATE entradas SET emocion = ? WHERE id = ?',
                 [data.emocion, data.id]
             );
-            
+
 
             await conn.commit();
             return { success: true };
@@ -191,7 +233,7 @@ class EntradasDao {
             conn.release();
         }
     }
-    
+
     async actualizarTextoLibreEntrada(data) {
         const conn = await pool.getConnection();
         try {
@@ -204,20 +246,20 @@ class EntradasDao {
             );
 
             // Actualizarlas si hay cambios
-            if(rows[0].cuerpo!=data.cuerpo){
+            if (rows[0].cuerpo != data.cuerpo) {
                 await conn.execute(
                     'UPDATE entradas SET cuerpo = ? WHERE id = ?',
                     [data.cuerpo, data.id]
                 );
             }
 
-            if(rows[0].fecha_registro!=data.fecha_registro){
+            if (rows[0].fecha_registro != data.fecha_registro) {
                 await conn.execute(
                     'UPDATE entradas SET fecha_registro = ? WHERE id = ?',
                     [data.fecha_registro, data.id]
                 );
             }
-            
+
             await conn.commit();
             return { success: true };
 
@@ -254,15 +296,16 @@ class EntradasDao {
 
     }
 
-    async obtenerAnyos(idUsuario){
-        try{
+    async obtenerAnyos(idUsuario) {
+        try {
             let [response] = await pool.query('SELECT DISTINCT YEAR(fecha_registro) AS anyo FROM entradas WHERE id_usuario = ? ORDER BY anyo DESC;', [idUsuario])
             return response;
         }
-        catch(error){
+        catch (error) {
 
         }
     }
+
 
 }
 

@@ -15,6 +15,8 @@ router.post('/submit-edit-entry', entradasControlador.submitEditEntry);
 
 router.get('/view-entry/:idEntrada', entradasControlador.viewEntry);
 
+router.get('/delete-entry/:idEntrada', entradasControlador.eliminarEntrada);
+
 router.get('/edit-entry/:idEntrada', entradasControlador.editEntryView);
 
 // Este para la persona cuidadora

@@ -88,6 +88,11 @@ class EntradasService {
         return response;
     }
 
+    async eliminarEntrada(idEntrada, idUsuario) {
+        const response = await entradasDao.eliminarEntrada(idEntrada, idUsuario);
+        return response;
+    }
+
     async submitEditEntry(data) {
         var response = null;
         if (data.tipo === "Picto") {
