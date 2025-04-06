@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     function ajustarAlturas() {
         let maxHeight = Math.max($(".list-hora").outerHeight(), $(".list-contenido").outerHeight());
-        $(".list-hora, .list-contenido").height(maxHeight);
+        $(".list-hora, .list-contenido").css('min-height', maxHeight);
     }
     sessionStorage.setItem("mes", $("#mes").val());
 

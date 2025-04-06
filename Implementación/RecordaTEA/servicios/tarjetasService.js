@@ -6,7 +6,7 @@ const imagenUtils = require('../utils/imagenUtils');
 const tarjetasDao = new TarjetasDao();
 
 const tiposPermitidos = ['image/jpeg', 'image/png', 'image/webp'];
-const maxSize = 16 * 1024 * 1024;
+const maxSize = 500 * 1024; 
 
 class TarjetasService {
     constructor() { }

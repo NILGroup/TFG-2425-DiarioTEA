@@ -1,5 +1,18 @@
 $(document).ready(function () {
 
+    var progreso = 0;
+    var userEscrito = { valor: false };
+    var passwEscrita = { valor: false };
+    var passwConfirmacion = { valor: false };
+    var nombreEscrito = { valor: false };
+    var img;
+    var url;
+    var cropper;
+    var modal = new bootstrap.Modal(document.getElementById('recorta-img'));
+
+    const tiposValidos = ["image/jpeg", "image/png", "image/webp"];
+    const barraProgreso = $('#progreso-crear-usuario');
+
 
     $(document).on('click', '#ver-passw-perfil', function (e) {
         e.preventDefault();
@@ -76,46 +89,25 @@ $(document).ready(function () {
 
         if (valido) {
 
-            let perfil = {
-                usuario: usuarioValor,
-                passw: passwValor,
-                nombre: nombreValor
-            };
+            let formData = new FormData();
+            formData.append('usuario', usuarioValor);
+            formData.append('passw', passwValor);
+            formData.append('nombre', nombreValor);
 
-            $.ajax({
-                url: '/users/nuevo-usuario',
-                method: 'POST',
-                data: perfil,
-                success: function (response) {
-                    if (response.mensaje > 0) {
-                        let usu = `
-                <div class="col-md-3 col-xs-3">
-                    <a href="/diario/${response.usuario.id}">
-                        <div class="card card-usuarios">
-                            <h5 class="card-title text-center">${response.usuario.nombre}</h5>
-                            <div class="card-body"></div>
-                        </div>
-                    </a>
-                </div>`;
-                        $('#cards-usuarios').append(usu);
-                        $('#aviso-boton').hide();
-                        $('#container-form').fadeOut();
-                        $('#mostrar-perfiles').removeClass('d-none').fadeIn();
+            const inputFile = $('#imgPerfil')[0].files[0];
+            const fileName = inputFile ? inputFile.name : 'imagen_recortada.jpg';
+            if (img) {
+                // Si la imagen existe, agregarla al FormData
+                img.toBlob(function (blob) {
+                    formData.append('imagen', blob, fileName);
+                    enviarFormulario(formData);
+                });
+            }
+            else {
+                enviarFormulario(formData);
+            }
 
-                        usuario.val('');
-                        passw.val('');
-                        confirm.val('');
-                        nombre.val('');
-                    }
-                    else if (response.mensaje == -3) {
-                        usuario.addClass('is-invalid');
-                        $('#usuario-error-perfil').text('Usuario ya existente.');
-                    }
-                },
-                error: function () {
 
-                }
-            });
         }
     });
 
@@ -127,4 +119,142 @@ $(document).ready(function () {
         $('#passw-confirmacion-perfil').val('');
         $('#nombre-perfil').val('');
     });
+
+    $('#usuario-perfil').on('input', function () {
+        actualizaProgreso($(this), userEscrito);
+    });
+
+    $('#passw-perfil').on('input', function () {
+        actualizaProgreso($(this), passwEscrita);
+    });
+
+    $('#passw-confirmacion-perfil').on('input', function () {
+        actualizaProgreso($(this), passwConfirmacion);
+    });
+
+    $('#nombre-perfil').on('input', function () {
+        actualizaProgreso($(this), nombreEscrito);
+    });
+
+    $('#imgPerfil').on('change', function (e) {
+        let image = e.target.files[0];
+
+        if (image) {
+            if (!tiposValidos.includes(image.type)) {
+                alert("Solo se permiten imágenes (JPG, PNG, WEBP).");
+                this.value = ""; // Borra la selección del archivo
+                return;
+            }
+
+            $("#nombreImgPerfil").text(image.name);
+
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+
+                $("#imagenRecortable").attr("src", event.target.result);
+                modal.show();
+            }
+
+            reader.readAsDataURL(e.target.files[0]);
+        }
+        $(this).val('');
+    });
+
+    $('#recorta-img').on('shown.bs.modal', function () {
+        if (cropper) cropper.destroy();
+
+        cropper = new Cropper(document.getElementById("imagenRecortable"), {
+            aspectRatio: 1,
+            viewMode: 1,
+            background: true,
+            autoCropArea: 0.8,
+            movable: true,
+            rotatable: true,
+            scalable: false,
+            zoomable: true,
+            minCropBoxWidth: 500,
+            minCropBoxHeight: 500,
+            cropBoxResizable: false,
+            cropBoxMovable: false,
+            responsive: true,
+            dragMode: 'move'
+        });
+
+    });
+
+    $('#recortar-img').on('click', function () {
+        if (!cropper) return;
+
+        img = cropper.getCroppedCanvas({
+            width: 500,
+            height: 500
+        });
+
+        img.toBlob(function (blob) {
+            url = URL.createObjectURL(blob);
+            $("#imagenPerfil").attr("src", url);
+        });
+
+        $("#recorta-img").modal("hide");
+    });
+
+
+
+    function actualizaProgreso(componente, comprobacion) {
+        if (componente.val().trim() === '') {
+            progreso -= 25;
+            comprobacion.valor = false;
+            barraProgreso.css('width', progreso + '%');
+        }
+        else {
+            if (!comprobacion.valor) {
+                progreso += 25;
+                comprobacion.valor = true;
+                barraProgreso.css('width', progreso + '%');
+            }
+        }
+    }
+
+    function enviarFormulario(formData) {
+        for (let pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]);
+        }
+        $.ajax({
+            url: '/users/nuevo-usuario',
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.mensaje > 0) {
+                    let usu = `
+            <div class="col-md-3 col-xs-3">
+                <a href="/diario/${response.usuario.id}">
+                    <div class="card card-usuarios">
+                        <h5 class="card-title text-center">${response.usuario.nombre}</h5>
+                        <div class="card-body"></div>
+                    </div>
+                </a>
+            </div>`;
+                    $('#cards-usuarios').append(usu);
+                    $('#aviso-boton').hide();
+                    $('#container-form').fadeOut();
+                    $('#mostrar-perfiles').removeClass('d-none').fadeIn();
+
+                    usuario.val('');
+                    passw.val('');
+                    confirm.val('');
+                    nombre.val('');
+                }
+                else if (response.mensaje == -3) {
+                    usuario.addClass('is-invalid');
+                    $('#usuario-error-perfil').text('Usuario ya existente.');
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
 });

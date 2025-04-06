@@ -45,6 +45,7 @@ class UsuariosControlador {
     }
 
     async registro(req, res){
+        console.log(req.body)
         let usuario = {
             usuario: req.body.usuario,
             passw: req.body.passw,

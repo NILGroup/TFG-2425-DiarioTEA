@@ -3,9 +3,15 @@ CREATE TABLE Usuarios(
     nombre VARCHAR(50) NOT NULL,
     usuario VARCHAR(50) NOT NULL UNIQUE,
     contraseña VARCHAR(255) NOT NULL,
-    imagen MEDIUMBLOB,
-    mimetype VARCHAR(20)
 );
+
+CREATE TABLE ImgPerfil(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    imagen MEDIUMBLOB,
+    mimetype VARCHAR(20),
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios (id)
+)
 
 CREATE TABLE Cuidadores(
     id INT PRIMARY KEY,

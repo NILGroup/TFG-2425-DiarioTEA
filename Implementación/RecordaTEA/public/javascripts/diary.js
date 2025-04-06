@@ -104,11 +104,9 @@ $(document).ready(function () {
                 }
 
                 $("#consultaDiario").fadeOut(300, function () {
-                    $(this).html(codigo); // Cambia el contenido aquí, no antes
+                    $(this).html(codigo);
                     setTimeout(function() {
-                        // Luego de un pequeño retraso, ajustamos las alturas
                         ajustarAlturas();
-                        // Realizamos fadeIn solo después de haber ajustado las alturas
                         $("#consultaDiario").fadeIn(300);
                     }, 500);
                 });

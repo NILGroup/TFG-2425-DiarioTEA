@@ -11,7 +11,7 @@ $(document).ready(function () {
         if (image) {
             if (!tiposValidos.includes(image.type)) {
                 alert("Solo se permiten imágenes (JPG, PNG, WEBP).");
-                this.value = ""; // Borra la selección del archivo
+                this.value = "";
                 return;
             }
 
@@ -36,8 +36,8 @@ $(document).ready(function () {
         cropper = new Cropper(document.getElementById("imagenRecortable"), {
             aspectRatio: 1,
             viewMode: 1,
-            background: false,
-            autoCropArea: 1,
+            background: true,
+            autoCropArea: 0.8,
             movable: true,
             rotatable: true,
             scalable: false,
@@ -45,7 +45,9 @@ $(document).ready(function () {
             minCropBoxWidth: 500,
             minCropBoxHeight: 500,
             cropBoxResizable: false,
-            responsive: true
+            cropBoxMovable: false,
+            responsive: true,
+            dragMode: 'move'
         });
 
     });
@@ -85,7 +87,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    if(response.mensaje > 0){
+                    if (response.mensaje > 0) {
                         let tarjetaImagen = `
                         <div class="col-lg-2 col-md-3 mt-3">
                             <div class="dflex">
@@ -102,51 +104,51 @@ $(document).ready(function () {
                         </div>
                     `;
 
-                    $('#no-imagenes').hide().addClass('d-none');
+                        $('#no-imagenes').hide().addClass('d-none');
 
-                    $('#contenedorImagenes').prepend(tarjetaImagen);
+                        $('#contenedorImagenes').prepend(tarjetaImagen);
                         alerta.text('Imagen añadidia con éxito.').attr('id', `alert-${response.mensaje.id}`).hide();
                         $('#avisosPictos').append(alerta);
                         $(`#alert-${response.mensaje.id}`).fadeIn();
                         setTimeout(function () {
-                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function(){
+                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function () {
                                 $(this).remove();
                             });
                         }, 500);
                     }
-                    else if(response.mensaje == -5){
+                    else if (response.mensaje == -5) {
                         alerta.text('Error al añadir el archivo: no es una imagen.').attr('id', `alert-${response.mensaje.id}`).hide();
                         $('#avisosPictos').append(alerta);
                         $(`#alert-${response.mensaje.id}`).fadeIn();
                         setTimeout(function () {
-                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function(){
+                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function () {
                                 $(this).remove();
                             });
                         }, 1000);
                     }
-                    else if(response.mensaje == -6){
+                    else if (response.mensaje == -6) {
                         alerta.text('Error al añadir el archivo: tipo no permitido.').attr('id', `alert-${response.mensaje.id}`).hide();
                         $('#avisosPictos').append(alerta);
                         $(`#alert-${response.mensaje.id}`).fadeIn();
                         setTimeout(function () {
-                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function(){
+                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function () {
                                 $(this).remove();
                             });
                         }, 1000);
                     }
-                    else if(response.mensaje == -7){
-                        alerta.text('Error al añadir el archivo: excede el tamaño máximo permitido (16MB).').attr('id', `alert-${response.mensaje.id}`).hide();
+                    else if (response.mensaje == -7) {
+                        alerta.text('Error al añadir el archivo: excede el tamaño máximo permitido (500KB).').attr('id', `alert-${response.mensaje.id}`).hide();
                         $('#avisosPictos').append(alerta);
                         $(`#alert-${response.mensaje.id}`).fadeIn();
                         setTimeout(function () {
-                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function(){
+                            $(`#alert-${response.mensaje.id}`).fadeOut(400, function () {
                                 $(this).remove();
                             });
                         }, 1000);
                     }
                 },
                 error: function () {
-    
+
                 }
             });
         });
