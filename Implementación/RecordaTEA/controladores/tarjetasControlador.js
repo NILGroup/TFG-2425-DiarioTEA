@@ -123,7 +123,7 @@ class TarjetasControlador {
     async textoPicto(req, res){
         let resultado = await tarjetasService.textoPicto(req.body.picto, req.session.usuario.id);
         if(resultado){
-            req.session.config.texto = (req.body.picto_texto === 'true');
+            req.session.config.picto_texto = (req.body.picto === 'true');
         }
         res.send({success: resultado});
     }
