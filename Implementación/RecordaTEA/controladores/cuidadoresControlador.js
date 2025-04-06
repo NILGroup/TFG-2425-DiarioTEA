@@ -24,7 +24,7 @@ class CuidadoresController {
             nombre: req.body.nombre
         }
 
-        let resultRegister = await usuariosService.registro(u);
+        let resultRegister = await usuariosService.registro(u, null);
         if (resultRegister.mensaje > 0) {
             u.id = resultRegister.mensaje;
             const resultado = await cuidadoresService.registroCuidador(u);

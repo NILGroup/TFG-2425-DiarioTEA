@@ -14,24 +14,24 @@ class UsuariosControlador {
     }
 
 
-    async login(req, res){
+    async login(req, res) {
         let usuario = {
             usuario: req.body.usuario,
             password: req.body.passw,
         }
         let u = await usuariosServicio.login(usuario);
-        if(u.mensaje === -1 || u.mensaje === -2){
+        if (u.mensaje === -1 || u.mensaje === -2) {
             res.send(u);
         }
-        else{
+        else {
             let cuidador = await cuidadoresService.login(u.mensaje);
-            if(cuidador.length > 0){
+            if (cuidador.length > 0) {
                 req.session.rol = cuidador[0].rol;
                 req.session.nombre = u.mensaje.nombre;
-                req.session.idUsuario =u.mensaje.id;
+                req.session.idUsuario = u.mensaje.id;
                 req.session.cuidador = 1;
             }
-            else{
+            else {
                 console.log(u.mensaje);
                 let config = await tarjetasService.leerConfiguracionVocabulario(u.mensaje.id);
                 req.session.usuario = u.mensaje;
@@ -40,11 +40,11 @@ class UsuariosControlador {
             }
             req.session.logged = 1;
             let esCuidador = req.session.cuidador;
-            res.send({mensaje: 1, cuidador: esCuidador});
+            res.send({ mensaje: 1, cuidador: esCuidador });
         }
     }
 
-    async registro(req, res){
+    async registro(req, res) {
         console.log(req.body)
         let usuario = {
             usuario: req.body.usuario,
@@ -52,19 +52,32 @@ class UsuariosControlador {
             nombre: req.body.nombre
         };
 
-        let resultado = await usuariosServicio.registro(usuario);
-        if(resultado.mensaje > 0){
-            var u = await usuariosServicio.leerUsuarioId(resultado.mensaje);
-            let r = await usuariosServicio.realacionCuidador(u[0].id, req.session.idUsuario);
-            if(r.mensaje > 0){
-                req.session.usuarios.push(u[0]);
-                return res.send({mensaje: resultado.mensaje, usuario: u[0]});
+        let imagen;
+
+        if(req.file){
+            imagen = {
+                imagen: req.file.buffer,
+                mimetype: req.file.mimetype,
             }
         }
-        return res.send({mensaje: resultado.mensaje});
+        else{
+            imagen = null;
+        }
+
+        let resultado = await usuariosServicio.registro(usuario, imagen);
+        if (resultado.mensaje > 0) {
+            var u = await usuariosServicio.leerUsuarioId(resultado.mensaje);
+            let r = await usuariosServicio.realacionCuidador(u[0].id, req.session.idUsuario);
+            if (r.mensaje > 0) {
+                req.session.usuarios.push(u[0]);
+                return res.send({ mensaje: resultado.mensaje, usuario: u[0] });
+            }
+        }
+        console.log(resultado)
+        return res.send({ mensaje: resultado.mensaje });
     }
 
-    logout(req, res){
+    logout(req, res) {
         req.session.destroy();
         res.redirect('/');
     }

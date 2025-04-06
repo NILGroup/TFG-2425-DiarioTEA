@@ -97,9 +97,9 @@ $(document).ready(function () {
             const inputFile = $('#imgPerfil')[0].files[0];
             const fileName = inputFile ? inputFile.name : 'imagen_recortada.jpg';
             if (img) {
-                // Si la imagen existe, agregarla al FormData
                 img.toBlob(function (blob) {
-                    formData.append('imagen', blob, fileName);
+                    console.log('ENTRO')
+                    formData.append('image', blob, fileName);
                     enviarFormulario(formData);
                 });
             }
@@ -217,6 +217,7 @@ $(document).ready(function () {
     }
 
     function enviarFormulario(formData) {
+        let usuario = $('#usuario-perfil');
         for (let pair of formData.entries()) {
             console.log(pair[0]+ ', ' + pair[1]);
         }
@@ -248,6 +249,7 @@ $(document).ready(function () {
                     nombre.val('');
                 }
                 else if (response.mensaje == -3) {
+                    console.log('ERROR')
                     usuario.addClass('is-invalid');
                     $('#usuario-error-perfil').text('Usuario ya existente.');
                 }

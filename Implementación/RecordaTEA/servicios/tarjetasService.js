@@ -1,12 +1,10 @@
 const TarjetasDao = require('../dao/tarjetasDao');
-const { imageSize } = require('image-size');
 const axios = require('axios');
 const imagenUtils = require('../utils/imagenUtils');
 
 const tarjetasDao = new TarjetasDao();
 
-const tiposPermitidos = ['image/jpeg', 'image/png', 'image/webp'];
-const maxSize = 500 * 1024; 
+
 
 class TarjetasService {
     constructor() { }
@@ -101,7 +99,7 @@ class TarjetasService {
             console.log(pictos);
             pictos.forEach(elem => {
                 if(elem.enlace === null){
-                    elem.enlace = imagenUtils.renderImage(elem) || item.imagen 
+                    elem.enlace = imagenUtils.renderImage(elem)
                 }
             });
             return pictos;
@@ -113,16 +111,15 @@ class TarjetasService {
     }
 
     async addTarjetaImagen(tarjeta) {
-        let dimensiones = imageSize(tarjeta.imagen);
-        if (!dimensiones) {
+        if (!imagenUtils.comprobarDimensiones(tarjeta)) {
             //Código de error: El archivo no es una imagen
             return { mensaje: -5 };
         }
-        else if (!tiposPermitidos.includes(tarjeta.mimetype)) {
+        else if (!imagenUtils.comprobarTipo(tarjeta)) {
             //Código de error: El archivo no es un tipo de imagen permitido
             return { mensaje: -6 };
         }
-        else if (tarjeta.tam > maxSize) {
+        else if (!imagenUtils.comprobarTamaño(tarjeta)) {
             //Código de error: El archivo excede el tamaño máximo permitido
             return { mensaje: -7 };
         }

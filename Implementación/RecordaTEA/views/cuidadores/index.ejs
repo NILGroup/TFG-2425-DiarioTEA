@@ -74,8 +74,13 @@
                         <a href="/diario/<%= elem.id %>">
                             <div class="card card-usuarios align-content-center justify-content-center text-end">
                                 <div class="card-body">
+                                    <% if(elem.imagen){%>
+                                        <img class="card-img img-fluid" src="<%=elem.imagen%>"
+                                        alt="Imagen de perfil de <%=elem.nombre%>">
+                                   <% } else { %>
                                     <img class="card-img img-fluid" src="/images/config/perfilDefecto.png"
                                         alt="Opcion por defecto del perfil" style="opacity: 70%;">
+                                   <%}%>
                                     <h5 class=" text-center ">
                                         <%= elem.nombre %>
                                     </h5>
