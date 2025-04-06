@@ -37,7 +37,7 @@ class TarjetasControlador {
                 if (this.resultadoArasaac.length > 0) {
                     for (let i = 0; i < this.resultadoArasaac.length && i < 18; i++) {
                         let picto = await tarjetasService.pictosArasaac(this.resultadoArasaac[i]._id);
-                        pictos.push({ id_arasaac: this.resultadoArasaac[i]._id, enlace: picto.image,  keyword: this.resultadoArasaac[i].keywords[0]?.keyword.toUpperCase() || '' });
+                        pictos.push({ id_arasaac: this.resultadoArasaac[i]._id, enlace: picto.image, keyword: this.resultadoArasaac[i].keywords[0]?.keyword.toUpperCase() || '' });
                     }
                 }
                 res.send({ pictos: pictos, paginacion: this.resultadoArasaac.length });

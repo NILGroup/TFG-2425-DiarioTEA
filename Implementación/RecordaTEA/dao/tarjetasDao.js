@@ -160,6 +160,7 @@ class TarjetasDao {
   async leerConfiguracionVocabulario(idUsuario) {
     try {
       let [resultado] = await pool.query('SELECT * FROM Config WHERE id_usuario = ?', [idUsuario]);
+      
       return resultado[0];
     }
     catch (error) {
