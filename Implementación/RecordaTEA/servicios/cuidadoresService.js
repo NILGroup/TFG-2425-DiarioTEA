@@ -9,39 +9,64 @@ class CuidadoresService {
     constructor() { }
 
     async leerCuidadorId(id) {
-        const cuidador = await cuidadoresDao.leerCuidadorId(id);
-        return cuidador[0];
+        try{
+            if(id > 0){
+                const cuidador = await cuidadoresDao.leerCuidadorId(id);
+                return cuidador[0];
+            }
+            else{
+                return null;
+            }
+        }
+        catch(error){
+            throw error;
+        }
     }
 
     async registroCuidador(usuario) {
-        let cuidador = await cuidadoresDao.registro(usuario);
-        return { mensaje: cuidador };
+        try{
+            let cuidador = await cuidadoresDao.registro(usuario);
+            return { mensaje: cuidador };
+        }
+        catch (error){
+            throw error;
+        }
     }
 
     async login(usuario) {
-        let u = await cuidadoresDao.login(usuario);
-        return u;
+        try{
+            let u = await cuidadoresDao.login(usuario);
+            return u;
+        }
+        catch (error){
+            throw error;
+        }
     }
 
     async compartirPerfil(usuario, idPerfil){
-        if(idPerfil > 0){
-            let existe = await usuariosDao.leerUsuario(usuario);
-            if(existe.length > 0){
-                let hayRelacion = await cuidadoresDao.perfilVinculadoId(existe[0].id, idPerfil);
-                if(hayRelacion.length > 0){
-                    return {mensaje: -9};
+        try{
+            if(idPerfil > 0){
+                let existe = await usuariosDao.leerUsuario(usuario);
+                if(existe.length > 0){
+                    let hayRelacion = await cuidadoresDao.perfilVinculadoId(existe[0].id, idPerfil);
+                    if(hayRelacion.length > 0){
+                        return {mensaje: -9};
+                    }
+                    else{
+                        let msj = await cuidadoresDao.compartirPerfil(existe[0].id, idPerfil);
+                        return {mensaje: msj};
+                    }
                 }
                 else{
-                    let msj = await cuidadoresDao.compartirPerfil(existe[0].id, idPerfil);
-                    return {mensaje: msj};
+                    return {mensaje: -1};
                 }
             }
             else{
-                return {mensaje: -1};
+                return {mensaje: -8};
             }
         }
-        else{
-            return {mensaje: -8};
+        catch (error){
+            throw error;
         }
     }
 

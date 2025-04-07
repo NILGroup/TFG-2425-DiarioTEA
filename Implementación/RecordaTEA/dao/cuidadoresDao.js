@@ -44,7 +44,8 @@ class CuidadoresDao{
             return resultado.affectedRows;
         }
         catch(error){
-            console.log(error);
+            console.error('Error al compartir perfil: ', error);
+            throw error;
         }
     }
 
@@ -55,7 +56,8 @@ class CuidadoresDao{
             return resultado;
         }
         catch(error){
-            console.log(error);
+            console.error('Error al comprobar si el perfil esta vinculado al cuidador: ', error);
+            throw error;
         }
     }
 }
