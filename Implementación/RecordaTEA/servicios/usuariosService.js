@@ -61,7 +61,6 @@ class UsuariosService {
         }
         else {
             let registerResult = await usuariosDao.registrarUsuario(usuario);
-            console.log(imagen);
             if (registerResult.insertId > 0 && imagen !== null) {
                 imagen.id_usuario = registerResult.insertId;
                 if (!imagenUtils.comprobarDimensiones(imagen)) {
@@ -79,12 +78,16 @@ class UsuariosService {
                 else {
                     let result = await usuariosDao.imagenUsuario(imagen);
                     if (result > 0) {
+                        console.log(registerResult.insertId)
                         return { mensaje: registerResult.insertId };
                     }
                     else {
                         return { mensaje: -11 };
                     }
                 }
+            }
+            else{
+                return { mensaje: registerResult.insertId };
             }
         }
     }

@@ -216,10 +216,10 @@ $(document).ready(function () {
         }
     }
 
-    function enviarFormulario(formData) {
+    async function enviarFormulario(formData) {
         let usuario = $('#usuario-perfil');
         for (let pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]);
+            console.log(pair[0] + ', ' + pair[1]);
         }
         $.ajax({
             url: '/users/nuevo-usuario',
@@ -229,24 +229,48 @@ $(document).ready(function () {
             processData: false,
             success: function (response) {
                 if (response.mensaje > 0) {
+                    const estiloImagen = img ? '' : 'style="opacity: 70%;"';
+
                     let usu = `
-            <div class="col-md-3 col-xs-3">
-                <a href="/diario/${response.usuario.id}">
-                    <div class="card card-usuarios">
-                        <h5 class="card-title text-center">${response.usuario.nombre}</h5>
-                        <div class="card-body"></div>
-                    </div>
-                </a>
-            </div>`;
-                    $('#cards-usuarios').append(usu);
+                        <div class="col-md-3 col-xs-3 mb-5">
+                            <a href="/diario/${response.mensaje}">
+                                <div class="card card-usuarios align-content-center justify-content-center text-end">
+                                    <div class="card-body">
+                                        <img class="card-img img-fluid placeholder" src="" ${estiloImagen} id="img-${response.mensaje}">
+                                        <h5 class="text-center">${formData.get('nombre')}</h5>
+                                        <hr class="my-2">
+                                        <button class="btn-compartir btn btn-background text-end" 
+                                                data-id="${response.mensaje}" 
+                                                data-nombre="${formData.get('nombre')}" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#compartirPerfil">
+                                            <i class="fa-solid fa-share"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>`;
+
+                    $('#cards-usuarios').prepend(usu);
                     $('#aviso-boton').hide();
                     $('#container-form').fadeOut();
                     $('#mostrar-perfiles').removeClass('d-none').fadeIn();
+                    obtenerImgSrc(img).then((imagenSrc) => {
+                        $(`#img-${response.mensaje}`).attr('src', imagenSrc).removeClass('placeholder');
+                    });
 
-                    usuario.val('');
-                    passw.val('');
-                    confirm.val('');
-                    nombre.val('');
+
+                    $('#usuario-perfil').val('');
+                    $('#passw-perfil').val('');
+                    $('#passw-confirmacion-perfil').val('');
+                    $('#nombre-perfil').val('');
+                    $('#imgPerfil').val('');
+                    $('#nombreImgPerfil').text('Ninguna imagen seleccionada.');
+                    $("#imagenPerfil").attr('src', '/images/config/perfilDefecto.png');
+                    progreso = 0;
+                    barraProgreso.css('width', progreso + '%');
+
+                    img = null;
                 }
                 else if (response.mensaje == -3) {
                     console.log('ERROR')
@@ -257,6 +281,17 @@ $(document).ready(function () {
             error: function () {
 
             }
+        });
+    }
+
+    async function obtenerImgSrc(i) {
+        if (!i) return '/images/config/perfilDefecto.png';
+
+        return new Promise((resolve) => {
+            i.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                resolve(url);
+            });
         });
     }
 });

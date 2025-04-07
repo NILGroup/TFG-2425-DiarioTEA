@@ -65,6 +65,7 @@ class UsuariosControlador {
         }
 
         let resultado = await usuariosServicio.registro(usuario, imagen);
+        console.log(resultado);
         if (resultado.mensaje > 0) {
             var u = await usuariosServicio.leerUsuarioId(resultado.mensaje);
             let r = await usuariosServicio.realacionCuidador(u[0].id, req.session.idUsuario);
