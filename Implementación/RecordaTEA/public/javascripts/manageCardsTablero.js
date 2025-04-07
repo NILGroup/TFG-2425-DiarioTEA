@@ -4,7 +4,8 @@ $(document).ready(function () {
     var ultPag;
     var persiste = false;
 
-    
+    if (!$("#permisoTextoPicto").prop('checked')) { $(".nombre-pictograma").hide() }
+
     $('#permisoTextoPicto').on('change', function () {
         let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
         let mensaje;
@@ -36,14 +37,14 @@ $(document).ready(function () {
                         });
                     }, 1500);
 
-                    if(cambio){
+                    if (cambio) {
                         $(".nombre-pictograma").show();
                     }
-                    else{
+                    else {
                         $(".nombre-pictograma").hide();
                     }
 
-                    
+
                 }
             },
             error: function (data, status, xhr) {
@@ -113,7 +114,7 @@ $(document).ready(function () {
         }
     });
 
-    
+
     $('#siguientePag').on('click', function (e) {
         e.preventDefault();
         $(`#page-${(pagina)}`).hide();
@@ -194,7 +195,7 @@ $(document).ready(function () {
             data: {
                 id_arasaac: id,
                 enlace: enlace,
-                keyword : texto
+                keyword: texto
             },
             success: function (data, status, xhr) {
                 if (data.success) {

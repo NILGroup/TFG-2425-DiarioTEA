@@ -13,7 +13,7 @@ class CuidadoresController {
                 const usuarios = await usuariosService.leerUsuariosCuidador(req.session.idUsuario);
                 req.session.usuarios = usuarios;
                 let nombre = req.session.nombre;
-                res.render('cuidadores/index.ejs', { data: {usuarios, nombre} });
+                res.render('cuidadores/index', { data: {usuarios, nombre} });
             }
             else{
                 res.redirect('/');

@@ -18,7 +18,7 @@
 
           <!-- Botón Confirmar Borrar -->
           <div class="card no-border d-flex text-center">
-            <a id="confirmDeleteBtn" class="btn btn-light">
+            <a id="confirm  DeleteBtn" class="btn btn-light">
               <img src="/images/config/botonBorrar.png" alt="Borrar">
             </a>
             <p class="card-title texto-boton">BORRAR</p>
@@ -55,6 +55,9 @@
               <% item.tarjetas.forEach(function(picto) { %>
                 <div class="card tamaño-lista">
                   <img class="card-img-top" src="<%= picto.enlace || picto.imagen %>">
+                  <% if(config.picto_texto)  { %>
+                    <h6 class="nombre-pictograma text-center"> <%= picto.texto %></h6>
+                    <% }%>
                 </div>
               <% }); %>
             <% } else { %>

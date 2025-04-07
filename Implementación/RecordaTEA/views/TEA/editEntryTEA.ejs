@@ -122,6 +122,9 @@
                                             <div class="dflex">
                                                 <div class="card" id="<%= item.id_tarjeta %>">
                                                     <img src="<%= item.enlace %>" class="card-img">
+                                                    <% if(config.picto_texto)  { %>
+                                                        <h5 class="nombre-pictograma text-center"> <%= item.texto %></h5>
+                                                        <% }%>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,6 +166,9 @@
                                             <div class="dflex">
                                                 <div class="card" id="<%= item.idTarjeta %>">
                                                     <img src="<%= item.enlace %>" class="card-img">
+                                                    <% if(config.picto_texto)  { %>
+                                                        <h5 class="nombre-pictograma text-center"> <%= item.texto %></h5>
+                                                        <% }%>
                                                 </div>
                                             </div>
                                         </div>

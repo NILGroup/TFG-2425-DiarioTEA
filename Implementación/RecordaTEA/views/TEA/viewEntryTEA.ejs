@@ -12,6 +12,9 @@
                     <div class="col-lg-2 col-md-3 col-sm-5 col-xs-6">
                         <div class="card">
                             <img class="card-img" src="<%= picto.enlace || picto.imagen %>">
+                            <% if(config.picto_texto)  { %>
+                                <h5 class="nombre-pictograma text-center"> <%= picto.texto %></h5>
+                                <% }%>
                         </div>
                     </div>
                 <% }); %>

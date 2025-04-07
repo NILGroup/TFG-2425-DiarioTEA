@@ -70,7 +70,8 @@ class EntradasService {
                         id_tarjeta: item.id_tarjeta,
                         orden: item.orden,
                         enlace: item.enlace,
-                        imagen: imagenUtils.renderImage(item) || item.imagen
+                        imagen: imagenUtils.renderImage(item) || item.imagen,
+                        texto: item.texto
                     });
                 }
             });
@@ -140,7 +141,8 @@ class EntradasService {
                         id_tarjeta: item.id_tarjeta,
                         orden: item.orden,
                         enlace: item.enlace,
-                        imagen: imagenUtils.renderImage(item) || item.imagen
+                        imagen: imagenUtils.renderImage(item) || item.imagen,
+                        texto: item.texto
                     });
                 }
 

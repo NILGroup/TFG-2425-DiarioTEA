@@ -105,7 +105,7 @@ class EntradasController {
 
     async redirectToDiary(req, res) {
         const response = await entradasService.leerEntradasPorUsuario(req.session.usuario.id);
-        res.render('TEA/diaryTEA', { entradas: response, diary: true, usuario: req.session.usuario.nombre });
+        res.render('TEA/diaryTEA', { entradas: response, diary: true, usuario: req.session.usuario.nombre, config: req.session.config });
     }
 
     async addEntry(req, res) {
@@ -149,7 +149,7 @@ class EntradasController {
             console.log(entrada);
             if (entrada) {
                 console.log(entrada[0].tarjetas);
-                return res.render('TEA/viewEntryTEA', { entrada: entrada[0],  diary: true, usuario: req.session.usuario.nombre  });
+                return res.render('TEA/viewEntryTEA', { entrada: entrada[0],  diary: true, usuario: req.session.usuario.nombre,config: req.session.config  });
             } else {
                 const error = {
                     status: 403,

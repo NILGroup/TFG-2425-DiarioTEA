@@ -50,7 +50,7 @@ class EntradasDao {
     async leerEntradasPorUsuario(idUsuario) {
         try {
             const entradas = await pool.query(`
-                SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas.tipo, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas.emocion, Imagenes.imagen, Imagenes.mimetype
+                SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas.tipo, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Tarjetas.texto, Entradas.emocion, Imagenes.imagen, Imagenes.mimetype
                 FROM Entradas
                 LEFT JOIN Entradas_tarjeta ON Entradas.id = Entradas_tarjeta.id_entrada
                 LEFT JOIN Tarjetas ON Entradas_tarjeta.id_tarjeta = Tarjetas.id
@@ -275,7 +275,7 @@ class EntradasDao {
     async viewEntryById(idEntrada, idUsuario) {
         try {
             const entradas = await pool.query(`
-                 SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.tipo, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas.emocion, Imagenes.imagen, Imagenes.mimetype
+                 SELECT Entradas.id AS idEntrada, Entradas.autor, Entradas_tarjeta.id_entrada, Entradas_tarjeta.id_tarjeta, Entradas.tipo, Entradas.fecha_registro, Entradas_tarjeta.orden, Pictos.enlace, Entradas.cuerpo, Entradas.emocion, Imagenes.imagen, Imagenes.mimetype, Tarjetas.texto
                 FROM Entradas
                 LEFT JOIN Entradas_tarjeta ON Entradas.id = Entradas_tarjeta.id_entrada
                 LEFT JOIN Tarjetas ON Entradas_tarjeta.id_tarjeta = Tarjetas.id
