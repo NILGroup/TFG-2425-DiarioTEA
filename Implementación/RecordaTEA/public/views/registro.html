@@ -19,13 +19,18 @@
     <link rel="stylesheet" href="../stylesheets/login.css">
     <!--JQUERY-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="icon" href="../images/config/favicon.png" type="image/x-icon">
     <title>RecordaTEA</title>
 </head>
 
 <body>
     <div
         class="container col-lg-5 col-md-7 col-sm-12 flex-column d-flex align-items-center justify-content-center min-vh-100">
-        <h1 class="recordaTEA color-tit">RecordaTEA</h1>
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <img src="../images/config/logotipo-grande-azul.png" alt="Logotipo de RecordaTEA"
+                class="img-fluid" style="max-height: 5em;">
+            <h1 class="recordaTEA color-tit recordaTEA-log">RecordaTEA</h1>
+        </div>
         <form action="/users/login" id="login" method="POST"
             class=" form-control mt-3 p-4 shadow-lg rounded back-form needs-validation" novalidate>
             <h2 class="mb-3 text-center" id="tit-pag">Iniciar sesión</h2>
@@ -43,7 +48,8 @@
                 <label for="passw" class="form-label letra-form">Contraseña*:</label>
                 <div class="input-group">
                     <span class="input-group-text d-none d-md-block"><i class="bi bi-key"></i></span>
-                    <input type="password" class="form-control" id="passw" placeholder="Contraseña" name="passw" required>
+                    <input type="password" class="form-control" id="passw" placeholder="Contraseña" name="passw"
+                        required>
                     <button class="btn btn-ver" type="button" id="ver-passw"><i class="bi bi-eye"></i></button>
                     <div class="invalid-feedback" id="passw-error">Campo obligatorio.</div>
                 </div>
@@ -56,7 +62,7 @@
                         <span class="input-group-text d-none d-md-block"><i class="bi bi-key"></i></span>
                         <input type="password" class="form-control" id="passw-confirmacion"
                             placeholder="Confirmar Contraseña" name="passwConfirmacion" required>
-                            <div id="error" class="invalid-feedback">La contraseña no coincide</div>
+                        <div id="error" class="invalid-feedback">La contraseña no coincide</div>
                     </div>
                 </div>
 

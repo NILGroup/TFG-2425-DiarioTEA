@@ -91,3 +91,7 @@ h2{
     font-size: small;
     margin-left: 0em;
 }
+
+.recordaTEA-log:hover{
+    transform: none;
+}
