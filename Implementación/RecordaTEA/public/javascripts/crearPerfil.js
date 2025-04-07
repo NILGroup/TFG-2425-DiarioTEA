@@ -196,6 +196,7 @@ $(document).ready(function () {
             $("#imagenPerfil").attr("src", url);
         });
 
+        $('#errores-img').hide();
         $("#recorta-img").modal("hide");
     });
 
@@ -228,6 +229,7 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function (response) {
+                let errImg = $('#errores-img');
                 if (response.mensaje > 0) {
                     const estiloImagen = img ? '' : 'style="opacity: 70%;"';
 
@@ -259,7 +261,6 @@ $(document).ready(function () {
                         $(`#img-${response.mensaje}`).attr('src', imagenSrc).removeClass('placeholder');
                     });
 
-
                     $('#usuario-perfil').val('');
                     $('#passw-perfil').val('');
                     $('#passw-confirmacion-perfil').val('');
@@ -276,6 +277,14 @@ $(document).ready(function () {
                     console.log('ERROR')
                     usuario.addClass('is-invalid');
                     $('#usuario-error-perfil').text('Usuario ya existente.');
+                } else if (response.mensaje == -5) {
+                    errImg.text('Error al añadir el archivo: no es una imagen.').show();
+                }
+                else if (response.mensaje == -6) {
+                    errImg.text('Error al añadir el archivo: tipo no permitido.').show();
+                }
+                else if (response.mensaje == -7) {
+                    errImg.text('Error al añadir el archivo: excede el tamaño máximo permitido (500KB).').show();
                 }
             },
             error: function () {
