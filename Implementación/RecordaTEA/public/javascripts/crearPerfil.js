@@ -236,7 +236,7 @@ $(document).ready(function () {
                             <a href="/diario/${response.mensaje}">
                                 <div class="card card-usuarios align-content-center justify-content-center text-end">
                                     <div class="card-body">
-                                        <img class="card-img img-fluid placeholder" src="" ${estiloImagen} id="img-${response.mensaje}">
+                                        <img class="card-img img-fluid placeholder" src="/images/config/perfilDefecto.png" ${estiloImagen} id="img-${response.mensaje}">
                                         <h5 class="text-center">${formData.get('nombre')}</h5>
                                         <hr class="my-2">
                                         <button class="btn-compartir btn btn-background text-end" 
