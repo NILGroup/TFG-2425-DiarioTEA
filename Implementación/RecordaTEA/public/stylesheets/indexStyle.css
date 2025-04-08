@@ -78,7 +78,7 @@ body {
 
 .tamaño-lista {
     width: 7em;
-    
+    object-fit: contain;
 }
 
 .tableros {

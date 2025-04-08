@@ -12,7 +12,7 @@ class EntradasController {
 
     async cargarDiario(req, res) {
         try {
-            if (req.session.logged && req.session.cuidador) {
+            if (req.session.logged === 1 && req.session.cuidador === 1) {
                 let usuario;
                 let usus = req.session.usuarios;
                 let con;

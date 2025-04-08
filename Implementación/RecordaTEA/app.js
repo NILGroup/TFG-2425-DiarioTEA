@@ -42,23 +42,28 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'views', 'registro.html'));
+  if (!req.session.logged) { res.sendFile(path.join(__dirname, 'public', 'views', 'registro.html')); }
+  else {
+    if (req.session.cuidador) { res.redirect('/cuidadores/inicio'); }
+    else res.redirect('/users');
+  }
+
 });
 
 app.use('/cuidadores', cuidadoresRouter);
 app.use('/tarjetas-comunicacion', tarjetasRouter);
 app.use('/users', usuariosRouter);
-app.use('/rutinas',rutinasRouter);
+app.use('/rutinas', rutinasRouter);
 app.use('/diario', entradasRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.sendFile(path.join(__dirname, 'public', 'views', 'error404.html'));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
