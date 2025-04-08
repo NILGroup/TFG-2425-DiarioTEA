@@ -14,7 +14,7 @@ class UsuariosControlador {
             res.render('TEA/indexTEA');
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -52,7 +52,7 @@ class UsuariosControlador {
             }
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -90,7 +90,7 @@ class UsuariosControlador {
             return res.send({ mensaje: resultado.mensaje });
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -102,7 +102,7 @@ class UsuariosControlador {
             res.redirect('/');
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }

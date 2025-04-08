@@ -14,6 +14,7 @@ class EntradasController {
         try {
             let usuario;
             let usus = req.session.usuarios;
+            let con;
             if (!req.session.usuario || req.session.usuario.id !== req.params.id) {
                 const resultado = await usuariosService.leerUsuarioId(req.params.id);
                 const c = await tarjetasService.leerConfiguracionVocabulario(resultado[0].id);
@@ -50,7 +51,7 @@ class EntradasController {
             res.status(200).render('cuidadores/diario', { data: { entradas: entradas, usuario: usuario, usuarios: usus, anyos: anyos } });
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -79,7 +80,7 @@ class EntradasController {
 
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -115,7 +116,7 @@ class EntradasController {
             res.status(200).render('TEA/diaryTEA', { entradas: response, diary: true, usuario: req.session.usuario.nombre, config: req.session.config });
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -132,7 +133,7 @@ class EntradasController {
             //OBTENER PICTOGRAMAS DEL USUARIO PARA ADD ENTRY Y RENDERIZAR
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -153,7 +154,7 @@ class EntradasController {
             }
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -193,7 +194,7 @@ class EntradasController {
             }
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }

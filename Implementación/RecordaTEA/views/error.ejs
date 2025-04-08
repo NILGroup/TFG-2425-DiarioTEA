@@ -28,7 +28,7 @@
             <% if(!err.message){%>
                 <span class="texto-error">Ha ocurrido un error en el servidor, lamentamos las molestias.</span>
                 <% } else{%>
-                    <span class="texto-error">err.message</span>
+                    <span class="texto-error"><%=err.message%></span>
                     <% } %>
                         <a href="/"> <button class="btn btn-background mt-3">Volver a inicio</button></a>
         </div>

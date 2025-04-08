@@ -15,7 +15,7 @@ class RutinasControlador {
             res.render('TEA/rutinasTEA', { rutinas: response, diary: false, usuario: req.session.usuario.nombre, config: req.session.config })
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -36,7 +36,7 @@ class RutinasControlador {
             res.status(200).render('cuidadores/rutinas', { data: data });
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -50,7 +50,7 @@ class RutinasControlador {
             res.status(200).render('TEA/viewRutinaTEA', { rutinas: response, diary: false, nombreRutina: response[0].nombre, usuario: req.session.usuario.nombre, config: req.session.config });
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -71,7 +71,7 @@ class RutinasControlador {
             res.status(200).render('cuidadores/viewRutina', { data: data });
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -93,7 +93,7 @@ class RutinasControlador {
             res.status(200).render('cuidadores/crearRutina', { data: data });
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -116,7 +116,7 @@ class RutinasControlador {
             }
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }

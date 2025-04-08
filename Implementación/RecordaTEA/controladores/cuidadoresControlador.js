@@ -15,7 +15,7 @@ class CuidadoresController {
             res.render('cuidadores/index', { data: { usuarios, nombre } });
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
@@ -58,7 +58,7 @@ class CuidadoresController {
             res.status(200).redirect('/');
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }

@@ -23,7 +23,7 @@ class TarjetasControlador {
             res.status(200).render('cuidadores/gestionTarjetas', { data: data });
         }
         catch (error) {
-            const rr = new Error('Algo salió mal');
+            const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);
         }
