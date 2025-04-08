@@ -7,7 +7,7 @@ const usuariosService = new UsuariosService();
 class CuidadoresController {
     constructor() { }
 
-    async inicio(req, res) {
+    async inicio(req, res, next) {
         try {
             const usuarios = await usuariosService.leerUsuariosCuidador(req.session.idUsuario);
             req.session.usuarios = usuarios;
@@ -52,7 +52,7 @@ class CuidadoresController {
         }
     }
 
-    logout(req, res) {
+    logout(req, res, next) {
         try {
             req.session.destroy();
             res.status(200).redirect('/');
