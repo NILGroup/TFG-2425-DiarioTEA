@@ -12,7 +12,7 @@ class RutinasControlador {
 
         const response = await rutinasServicio.getRutinasById(idUsuario);
 
-        res.render('TEA/rutinasTEA', {rutinas: response, diary: false, usuario: req.session.usuario.nombre})
+        res.render('TEA/rutinasTEA', {rutinas: response, diary: false, usuario: req.session.usuario.nombre, config: req.session.config})
     }
 
     async getCuidadoresRutinas(req, res){
@@ -23,7 +23,8 @@ class RutinasControlador {
             rutinas: response, 
             nombreUsuario: req.session.usuario.nombre, 
             idUsuario: req.session.usuario.id, 
-            usuarios: req.session.usuarios 
+            usuarios: req.session.usuarios,
+            config: req.session.config
         }
         
         res.render('cuidadores/rutinas', {data: data});
@@ -35,7 +36,7 @@ class RutinasControlador {
         const idRutina = req.params.idRutina;
         const response = await rutinasServicio.getTarjetasByIdRutina(idRutina);
 
-        res.render('TEA/viewRutinaTEA', {rutinas: response, diary: false, nombreRutina: response[0].nombre, usuario: req.session.usuario.nombre})
+        res.render('TEA/viewRutinaTEA', {rutinas: response, diary: false, nombreRutina: response[0].nombre, usuario: req.session.usuario.nombre, config:req.session.config})
     }
 
     async getTarjetasByIdRutinaCuidador(req, res){
@@ -47,7 +48,8 @@ class RutinasControlador {
             rutinas: response, 
             nombreUsuario: req.session.usuario.nombre, 
             idUsuario: req.session.usuario.id, 
-            usuarios: req.session.usuarios 
+            usuarios: req.session.usuarios,
+            config: req.session.config
         }
         console.log(data);
 
@@ -56,13 +58,14 @@ class RutinasControlador {
 
     async addRutina(req, res){
         //let id_usuario = req.session.usuario.id;
-        let vocabulario = await tarjetasService.vocabularioUsuarioId(1);
+        let vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(req.session.usuario.id);
 
         let data = {
             vocabulario: vocabulario, 
             nombreUsuario: req.session.usuario.nombre, 
             idUsuario: req.session.usuario.id, 
-            usuarios: req.session.usuarios 
+            usuarios: req.session.usuarios,
+            config: req.session.config 
         }
         
         res.render('cuidadores/crearRutina', { data: data});

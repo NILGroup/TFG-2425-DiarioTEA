@@ -11,6 +11,9 @@
 
                             <div class="card">
                                 <img src=" <%= item.enlace %>" class="card-img">
+                                <% if(config.picto_texto) { %>
+                                    <h5 class="nombre-pictograma text-center"> <%= item.texto %></h5>
+                                <%}%>
                             </div>
 
                         </div>
