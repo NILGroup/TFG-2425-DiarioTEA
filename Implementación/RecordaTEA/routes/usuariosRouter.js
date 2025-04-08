@@ -1,13 +1,16 @@
 var express = require('express');
 var router = express.Router();
-const UsuariosController = require('../controladores/usuariosControlador')
-const controllerUsuarios = new UsuariosController();
-const RutinasController = require('../controladores/rutinasControlador')
-const controllerRutinas = new RutinasController();
+
+const verificarSesion = require('../middlewares/verificarSesion');
+const verificarRolCuidador = require('../middlewares/verificarRol');
+const verificarRolUsuario = require('../middlewares/verificarUsuario');
 const upload = require('../config/configMulter');
 
+const UsuariosController = require('../controladores/usuariosControlador')
+const controllerUsuarios = new UsuariosController();
 
-router.get('/', controllerUsuarios.leerUsuarioId);
+
+router.get('/', verificarSesion, verificarRolUsuario, controllerUsuarios.leerUsuarioId);
 
 router.post('/login', controllerUsuarios.login);
 

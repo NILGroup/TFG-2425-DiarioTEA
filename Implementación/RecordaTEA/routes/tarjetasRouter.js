@@ -1,31 +1,33 @@
 var express = require('express');
+var router = express.Router();
+
+const verificarSesion = require('../middlewares/verificarSesion');
+const verificarRolCuidador = require('../middlewares/verificarRol');
 const upload = require('../config/configMulter');
 
 const TarjetasControlador = require('../controladores/tarjetasControlador');
-
-var router = express.Router();
 const tarjetasControlador = new TarjetasControlador();
 
-router.get('/', tarjetasControlador.obtenerTarjetasUsuarioId);
+router.get('/', verificarSesion, verificarRolCuidador, tarjetasControlador.obtenerTarjetasUsuarioId);
 
-router.get('/arasaac', (req, res) => {
+router.get('/arasaac', verificarSesion, verificarRolCuidador, (req, res) => {
   tarjetasControlador.consultaArasaac(req, res);
 });
 
-router.get('/pagina', (req, res) => {
+router.get('/pagina', verificarSesion, verificarRolCuidador, (req, res) => {
   tarjetasControlador.pasarPagina(req, res);
 });
 
-router.post('/picto-vocabulario', tarjetasControlador.addTarjetaVocabulario);
+router.post('/picto-vocabulario', verificarSesion, verificarRolCuidador, tarjetasControlador.addTarjetaVocabulario);
 
-router.delete('/eliminar-picto', tarjetasControlador.eliminarTarjetaVocabulario);
+router.delete('/eliminar-picto', verificarSesion, verificarRolCuidador, tarjetasControlador.eliminarTarjetaVocabulario);
 
-router.post('/eliminar-picto', upload.none(), tarjetasControlador.eliminarTarjetaVocabulario);
+router.post('/eliminar-picto', upload.none(), verificarSesion, verificarRolCuidador, tarjetasControlador.eliminarTarjetaVocabulario);
 
-router.post('/nueva-imagen', upload.single('image'), tarjetasControlador.addTarjetaImagen);
+router.post('/nueva-imagen', upload.single('image'), verificarSesion, verificarRolCuidador, tarjetasControlador.addTarjetaImagen);
 
-router.put('/cambiar-texto-libre', tarjetasControlador.textoLibre);
+router.put('/cambiar-texto-libre', verificarSesion, verificarRolCuidador, tarjetasControlador.textoLibre);
 
-router.put('/cambiar-texto-picto', tarjetasControlador.textoPicto);
+router.put('/cambiar-texto-picto', verificarSesion, verificarRolCuidador, tarjetasControlador.textoPicto);
 
 module.exports = router;

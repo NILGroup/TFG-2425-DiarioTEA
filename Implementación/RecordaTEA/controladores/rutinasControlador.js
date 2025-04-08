@@ -7,19 +7,12 @@ class RutinasControlador {
 
     constructor() { }
 
-    async getUserRutinas(req, res) {
+    async getUserRutinas(req, res, next) {
         try {
-            if (req.session.logged) {
-                if (req.session.cuidador) { res.status(403).redirect('/cuidadores/inicio') }
-                const idUsuario = req.session.usuario.id;
+            const idUsuario = req.session.usuario.id;
+            const response = await rutinasServicio.getRutinasById(idUsuario);
 
-                const response = await rutinasServicio.getRutinasById(idUsuario);
-
-                res.render('TEA/rutinasTEA', { rutinas: response, diary: false, usuario: req.session.usuario.nombre, config: req.session.config })
-            }
-            else {
-                res.redirect('/');
-            }
+            res.render('TEA/rutinasTEA', { rutinas: response, diary: false, usuario: req.session.usuario.nombre, config: req.session.config })
         }
         catch (error) {
             const rr = new Error('Algo salió mal');
@@ -28,25 +21,19 @@ class RutinasControlador {
         }
     }
 
-    async getCuidadoresRutinas(req, res) {
+    async getCuidadoresRutinas(req, res, next) {
         try {
-            if (req.session.logged) {
-                if (!req.session.cuidador) { res.status(403).redirect('/users'); }
-                const response = await rutinasServicio.getRutinasById(req.session.usuario.id);
+            const response = await rutinasServicio.getRutinasById(req.session.usuario.id);
 
-                let data = {
-                    rutinas: response,
-                    nombreUsuario: req.session.usuario.nombre,
-                    idUsuario: req.session.usuario.id,
-                    usuarios: req.session.usuarios,
-                    config: req.session.config
-                }
+            let data = {
+                rutinas: response,
+                nombreUsuario: req.session.usuario.nombre,
+                idUsuario: req.session.usuario.id,
+                usuarios: req.session.usuarios,
+                config: req.session.config
+            }
 
-                res.status(200).render('cuidadores/rutinas', { data: data });
-            }
-            else {
-                res.redirect('/');
-            }
+            res.status(200).render('cuidadores/rutinas', { data: data });
         }
         catch (error) {
             const rr = new Error('Algo salió mal');
@@ -55,18 +42,12 @@ class RutinasControlador {
         }
     }
 
-    async getTarjetasByIdRutina(req, res) {
+    async getTarjetasByIdRutina(req, res, next) {
         try {
-            if (req.session.logged) {
-                if (req.session.cuidador) { res.status(403).redirect('/cuidadores/inicio') }
-                const idRutina = req.params.idRutina;
-                const response = await rutinasServicio.getTarjetasByIdRutina(idRutina);
+            const idRutina = req.params.idRutina;
+            const response = await rutinasServicio.getTarjetasByIdRutina(idRutina);
 
-                res.status(200).render('TEA/viewRutinaTEA', { rutinas: response, diary: false, nombreRutina: response[0].nombre, usuario: req.session.usuario.nombre, config: req.session.config });
-            }
-            else {
-                res.redirect('/');
-            }
+            res.status(200).render('TEA/viewRutinaTEA', { rutinas: response, diary: false, nombreRutina: response[0].nombre, usuario: req.session.usuario.nombre, config: req.session.config });
         }
         catch (error) {
             const rr = new Error('Algo salió mal');
@@ -75,25 +56,19 @@ class RutinasControlador {
         }
     }
 
-    async getTarjetasByIdRutinaCuidador(req, res) {
+    async getTarjetasByIdRutinaCuidador(req, res, next) {
         try {
-            if (req.session.logged) {
-                if (!req.session.cuidador) { res.status(403).redirect('/users'); }
-                const idRutina = req.params.idRutina;
-                const response = await rutinasServicio.getTarjetasByIdRutina(idRutina);
+            const idRutina = req.params.idRutina;
+            const response = await rutinasServicio.getTarjetasByIdRutina(idRutina);
 
-                let data = {
-                    rutinas: response,
-                    nombreUsuario: req.session.usuario.nombre,
-                    idUsuario: req.session.usuario.id,
-                    usuarios: req.session.usuarios,
-                    config: req.session.config
-                }
-                res.status(200).render('cuidadores/viewRutina', { data: data });
+            let data = {
+                rutinas: response,
+                nombreUsuario: req.session.usuario.nombre,
+                idUsuario: req.session.usuario.id,
+                usuarios: req.session.usuarios,
+                config: req.session.config
             }
-            else {
-                res.redirect('/');
-            }
+            res.status(200).render('cuidadores/viewRutina', { data: data });
         }
         catch (error) {
             const rr = new Error('Algo salió mal');
@@ -102,27 +77,20 @@ class RutinasControlador {
         }
     }
 
-    async addRutina(req, res) {
+    async addRutina(req, res, next) {
         try {
-            if (req.session.logged) {
-                if (!req.session.cuidador) { res.status(403).redirect('/users'); }
-                //let id_usuario = req.session.usuario.id;
-                let vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(req.session.usuario.id);
+            //let id_usuario = req.session.usuario.id;
+            let vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(req.session.usuario.id);
 
-                let data = {
-                    vocabulario: vocabulario,
-                    nombreUsuario: req.session.usuario.nombre,
-                    idUsuario: req.session.usuario.id,
-                    usuarios: req.session.usuarios,
-                    config: req.session.config
-                }
-
-                res.status(200).render('cuidadores/crearRutina', { data: data });
-            }
-            else {
-                res.redirect('/');
+            let data = {
+                vocabulario: vocabulario,
+                nombreUsuario: req.session.usuario.nombre,
+                idUsuario: req.session.usuario.id,
+                usuarios: req.session.usuarios,
+                config: req.session.config
             }
 
+            res.status(200).render('cuidadores/crearRutina', { data: data });
         }
         catch (error) {
             const rr = new Error('Algo salió mal');
@@ -131,26 +99,20 @@ class RutinasControlador {
         }
     }
 
-    async submitRutina(req, res) {
+    async submitRutina(req, res, next) {
         try {
-            if (req.session.logged) {
-                if (!req.session.cuidador) { res.status(403).redirect('/users'); }
-                const tarjetasRutina = req.body.rutina;
-                const rutina = JSON.parse(tarjetasRutina);
-                rutina.autor = req.session.idUsuario;
+            const tarjetasRutina = req.body.rutina;
+            const rutina = JSON.parse(tarjetasRutina);
+            rutina.autor = req.session.idUsuario;
 
 
-                const response = await rutinasServicio.crearRutina(rutina);
+            const response = await rutinasServicio.crearRutina(rutina);
 
-                if (response.success) {
-                    res.redirect("/rutinas");
-                }
-                else {
-                    res.status(500).render('error', { error: response })
-                }
+            if (response.success) {
+                res.redirect("/rutinas");
             }
             else {
-                res.redirect('/');
+                res.status(500).render('error', { error: response })
             }
         }
         catch (error) {
