@@ -32,8 +32,6 @@ class EntradasController {
                 let año = fecha.getFullYear();
                 let mes = fecha.getMonth() + 1;
 
-                console.log(mes, año)
-
                 let entradas = await entradasService.entradasMes(usuario.id, mes, año);
                 for (let entrada of entradas) {
                     entrada.mes = fechaUtils.mesAbreviatura(entrada.fecha).toUpperCase();
@@ -58,7 +56,9 @@ class EntradasController {
             }
         }
         catch (error) {
-            res.status(500).render('error');
+            const rr = new Error('Algo salió mal');
+            rr.status = 500;
+            next(rr);
         }
     }
 
@@ -89,7 +89,9 @@ class EntradasController {
             }
         }
         catch (error) {
-            res.status(500).render('error');
+            const rr = new Error('Algo salió mal');
+            rr.status = 500;
+            next(rr);
         }
     }
 
@@ -131,7 +133,9 @@ class EntradasController {
             }
         }
         catch (error) {
-            res.status(500).render('error');
+            const rr = new Error('Algo salió mal');
+            rr.status = 500;
+            next(rr);
         }
     }
 
@@ -151,7 +155,9 @@ class EntradasController {
             }
         }
         catch (error) {
-            res.status(500).render('error');
+            const rr = new Error('Algo salió mal');
+            rr.status = 500;
+            next(rr);
         }
     }
 
@@ -173,7 +179,9 @@ class EntradasController {
             else { res.redirect('/') }
         }
         catch (error) {
-            res.status(500).render('error');
+            const rr = new Error('Algo salió mal');
+            rr.status = 500;
+            next(rr);
         }
     }
 
@@ -215,8 +223,10 @@ class EntradasController {
                 res.redirect('/diario'); // Redirigir a la página del diario, por ejemplo
             }
         }
-        catch(error){
-            res.status(500).render('error');
+        catch (error) {
+            const rr = new Error('Algo salió mal');
+            rr.status = 500;
+            next(rr);
         }
     }
 

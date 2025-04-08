@@ -20,7 +20,9 @@ class CuidadoresController {
             }
         }
         catch (error){
-            res.status(500).render('error');
+            const rr = new Error('Algo salió mal');
+            rr.status = 500;
+            next(rr);
         }
     }
     
