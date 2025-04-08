@@ -8,33 +8,28 @@ class CuidadoresController {
     constructor() { }
 
     async inicio(req, res) {
-        try{
-            if(req.session.logged && req.session.cuidador){
-                const usuarios = await usuariosService.leerUsuariosCuidador(req.session.idUsuario);
-                req.session.usuarios = usuarios;
-                let nombre = req.session.nombre;
-                res.render('cuidadores/index', { data: {usuarios, nombre} });
-            }
-            else{
-                res.redirect('/');
-            }
+        try {
+            const usuarios = await usuariosService.leerUsuariosCuidador(req.session.idUsuario);
+            req.session.usuarios = usuarios;
+            let nombre = req.session.nombre;
+            res.render('cuidadores/index', { data: { usuarios, nombre } });
         }
-        catch (error){
+        catch (error) {
             const rr = new Error('Algo salió mal');
             rr.status = 500;
             next(rr);
         }
     }
-    
+
     async registro(req, res) {
-        try{
+        try {
             let u = {
                 usuario: req.body.usuario,
                 passw: req.body.passw,
                 rol: req.body.rol,
                 nombre: req.body.nombre
             }
-    
+
             let resultRegister = await usuariosService.registro(u, null);
             if (resultRegister.mensaje > 0) {
                 u.id = resultRegister.mensaje;
@@ -52,22 +47,29 @@ class CuidadoresController {
                 res.status(201).send({ mensaje: resultRegister.mensaje });
             }
         }
-        catch (error){
+        catch (error) {
             res.status(500).send('Ha ocurrido algo en el servidor.');
         }
     }
 
-    logout(req, res){
-        req.session.destroy();
-        res.status(200).redirect('/');
+    logout(req, res) {
+        try {
+            req.session.destroy();
+            res.status(200).redirect('/');
+        }
+        catch (error) {
+            const rr = new Error('Algo salió mal');
+            rr.status = 500;
+            next(rr);
+        }
     }
 
-    async compartirPerfil(req, res){
-        try{
+    async compartirPerfil(req, res) {
+        try {
             let resultado = await cuidadoresService.compartirPerfil(req.body.usuario, req.body.idPerfil);
             res.status(200).send(resultado);
         }
-        catch (error){
+        catch (error) {
             res.status(500).send('Ha ocurrido algo en el servidor.')
         }
     }

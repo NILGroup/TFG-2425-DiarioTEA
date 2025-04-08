@@ -25,8 +25,12 @@
         <h1 class="recordaTEA text-center color-tit mt-0 pt-4">RecordaTEA</h1>
         <div class="container d-flex text-center align-items-center flex-column flex-grow-1 mt-5 ">
             <h2 class="error mt-2"><i class="bi bi-emoji-frown"></i></i></h2>
-            <span class="texto-error">Ha ocurrido un error en el servidor, lamentamos las molestias.</span>
-            <a href="/"> <button class="btn btn-background mt-3">Volver a inicio</button></a>
+            <% if(!err.message){%>
+                <span class="texto-error">Ha ocurrido un error en el servidor, lamentamos las molestias.</span>
+                <% } else{%>
+                    <span class="texto-error">err.message</span>
+                    <% } %>
+                        <a href="/"> <button class="btn btn-background mt-3">Volver a inicio</button></a>
         </div>
     </div>
 </body>
