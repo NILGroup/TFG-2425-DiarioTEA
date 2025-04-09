@@ -71,6 +71,11 @@ $(document).ready(function () {
         let $card = $(this).closest(".col-lg-2.col-md-3"); // Capturar toda la columna
         let imgSrc = $card.find("img").attr("src");
         let cardId = $card.find(".card").attr("id");
+        let cardText = $card.find(".card").find("h5").text();
+        let h5Text = (cardText !== null && cardText !== undefined && cardText.trim() !== '') 
+    ? `<h5 class="nombre-pictograma text-center">${cardText}</h5>` 
+    : '';
+
 
         // Crear nueva tarjeta con el formato de eliminación
         let newCard = $(`
@@ -79,6 +84,7 @@ $(document).ready(function () {
                     <img src="${imgSrc}" class="card-img">
                     <div class="remove-picto"></div>
                     <span class="trash"><i class="bi bi-trash3-fill"></i></span>
+                    ${h5Text}
                 </div>
             </div>
         `);
