@@ -26,7 +26,7 @@ $(document).ready(function () {
 
             else {
                 $('#buttonIniciar .card-img').attr('src', "/images/config/iniciar.png");
-                $('#texto-tarjeta').text('');
+                $('#texto-tarjeta').text('SIGUIENTE PASO');
 
             }
         } else {

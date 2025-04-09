@@ -12,6 +12,13 @@ body {
     background-color: #213555eb;
 }
 
+.dropdown-item:focus, 
+.dropdown-item:active {
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+}
+
 .distribuidor a,
 .distribuidor span {
     color: #F9F7F7;

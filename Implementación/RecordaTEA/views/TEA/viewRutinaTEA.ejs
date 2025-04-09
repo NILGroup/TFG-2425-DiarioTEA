@@ -39,14 +39,16 @@
             </div>
             <div class="container mt-5 pb-5" id="buttonsRutina">
                 <div class="row d-flex justify-content-center">
-                    <div class="col-lg-2 col-md-3 col-sm-4" id="botonVolverRutinas">
+                    <div class="col-lg-2 col-md-3 col-sm-4 text-center" id="botonVolverRutinas">
                         <img class="img-fluid" src="/images/config/botonVolver.png" alt="Volver a las rutinas"
                             style="cursor:pointer">
+                            <p class="card-title texto-boton">VOLVER</p>
                     </div>
 
                     <% if (rutinas.length>0) { %>
-                        <div class="col-lg-2 col-md-3 col-sm-4" id="botonIniciarRutina">
+                        <div class="col-lg-2 col-md-3 col-sm-4 text-center" id="botonIniciarRutina">
                             <img class="img-fluid" src="/images/config/ir.png" alt="Ir" style="cursor:pointer">
+                            <p class="card-title texto-boton">INICIAR</p>
                         </div>
                         <% } %>
                 </div>
@@ -60,7 +62,7 @@
                         <button class="btn" id="buttonIniciar">
                             <img src="/images/config/iniciar.png" alt="" class="card-img" style="max-width: 14em;">
                         </button>
-                        <h5 id="texto-tarjeta" class="mb-3"></h5>
+                        <h5 id="texto-tarjeta" class="mb-3">SIGUIENTE PASO</h5>
                         <p id="terminado"></p>
                     </div>
 
