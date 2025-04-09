@@ -118,10 +118,10 @@
                                 <% entrada.tarjetas.forEach(function(item) { %>
                                     <% if (!item.imagen || item.imagen.length===0) { %>
                                         <!-- TIPO DE PICTOGRAMA -->
-                                        <div class="col-lg-2 col-md-3 mt-3">
-                                            <div class="dflex">
-                                                <div class="card" id="<%= item.id_tarjeta %>">
-                                                    <img src="<%= item.enlace %>" class="card-img">
+                                        <div class="col-auto">
+                                            <div class="d-flex">
+                                                <div class="card mb-3" id="<%= item.id_tarjeta %>" style="object-fit: contain; align-items: center;">
+                                                    <img src="<%= item.enlace %>" class="card-img tamaño-texto">
                                                     <% if(config.picto_texto)  { %>
                                                         <h5 class="nombre-pictograma text-center"> <%= item.texto %></h5>
                                                         <% }%>
@@ -144,7 +144,7 @@
                     <% if(!config.texto){%>
                         <!-- Modal para la emoción, donde cambiamos la imagen si existe una emoción -->
                         <div class="container d-flex justify-content-center align-items-center mt-3 col-lg-2 col-md-2 mt-3"
-                            style="border: 2px solid black; border-radius: 3px;" data-bs-toggle="modal"
+                             data-bs-toggle="modal"
                             data-bs-target="#emocionModal">
                             <div class="card" id="cardEmocionEdit">
                                 <!-- Si existe emocionSeleccionada, mostramos la imagen que se pasó, si no, mostramos la predeterminada -->

@@ -26,7 +26,6 @@ class TarjetasService {
             return vocabulario;
         }
         catch (error) {
-            console.error('ERROR[TarjetasService]: obtener vocabulario por ID: ', error);
             throw error;
         }
     }
@@ -37,7 +36,6 @@ class TarjetasService {
             return response.data;
         }
         catch (error) {
-            console.log('ERROR[TarjetasService]: obtener consulta de ARASAAC: ', error)
             throw error;
         }
     }
@@ -48,7 +46,6 @@ class TarjetasService {
             return response.data;
         }
         catch (error) {
-            console.log('ERROR[TarjetasService]: obtener pictograma de ARASAAC: ', error)
             throw error;
         }
     }
@@ -73,7 +70,6 @@ class TarjetasService {
             }
         }
         catch (error) {
-            console.log('ERROR[TarjetasService]: añadir pictograma al vocabulario: ', error);
             throw error;
         }
     }
@@ -91,7 +87,6 @@ class TarjetasService {
             return { success: elim };
         }
         catch (error) {
-            console.log('ERROR[TarjetasService]: eliminar tarjeta vocabulario: ', error);
             throw error;
         }
     }
@@ -99,7 +94,6 @@ class TarjetasService {
     async tarjetasEntrada(id_entrada) {
         try {
             let pictos = await tarjetasDao.tarjetasEntrada(id_entrada);
-            console.log(pictos);
             pictos.forEach(elem => {
                 if(elem.enlace === null){
                     elem.enlace = imagenUtils.renderImage(elem)
@@ -108,7 +102,6 @@ class TarjetasService {
             return pictos;
         }
         catch (error) {
-            console.log('ERROR[TarjetasService]: buscar tarjetas de una entrada: ', error);
             throw error;
         }
     }
@@ -134,7 +127,6 @@ class TarjetasService {
 
     async imagenesUsuarioId(usuarioId) {
         let resultado = await tarjetasDao.imagenesUsuarioId(usuarioId);
-        console.log('service', resultado)
         return resultado;
     }
 

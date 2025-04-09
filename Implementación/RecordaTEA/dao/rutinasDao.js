@@ -24,10 +24,8 @@ class RutinassDao {
 
             return response;
         }
-
-
         catch (error) {
-            console.log(error);
+          throw error;
         }
     }
 
@@ -48,7 +46,7 @@ class RutinassDao {
 
 
         catch (error) {
-            console.log(error);
+            throw error;
         }
     }
 

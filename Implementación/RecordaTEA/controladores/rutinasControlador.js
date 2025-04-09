@@ -116,7 +116,6 @@ class RutinasControlador {
             }
         }
         catch (error) {
-            console.log(error)
             const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);

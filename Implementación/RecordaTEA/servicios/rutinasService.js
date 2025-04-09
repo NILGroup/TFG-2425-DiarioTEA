@@ -28,7 +28,6 @@ class RutinasService{
                 elem.enlace = imagenUtils.renderImage(elem);
             }
         });
-        console.log(response[0]);
         return response[0];
     }
 

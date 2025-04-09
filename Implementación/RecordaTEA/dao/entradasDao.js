@@ -31,7 +31,6 @@ class EntradasDao {
             return entradas;
         }
         catch (error) {
-            console.log('ERROR[EntradasDao]: obtener entrdas de un mes: ', error);
             throw error;
         }
     }
@@ -42,7 +41,6 @@ class EntradasDao {
             return entradas;
         }
         catch (error) {
-            console.log('ERROR[EntradasDao]: obtener entrdas de un día: ', error);
             throw error;
         }
     }
@@ -64,7 +62,7 @@ class EntradasDao {
             return entradas;
         }
         catch (error) {
-            console.error('ERROR[entradasDao]: buscar entradas de usuario por Id del usuario' + error);
+            throw error;
         }
     }
 
@@ -102,7 +100,6 @@ class EntradasDao {
 
         } catch (error) {
             await conn.rollback();
-            console.error('Error al registrar la entrada:', error);
             return { success: false, error };
         } finally {
             conn.release();
@@ -143,7 +140,6 @@ class EntradasDao {
 
         } catch (error) {
             await conn.rollback();
-            console.error('Error al registrar la entrada:', error);
             return { success: false, error };
         } finally {
             conn.release();
@@ -227,7 +223,6 @@ class EntradasDao {
 
         } catch (err) {
             await conn.rollback();
-            console.error(err);
             return { success: false, error: err };
         } finally {
             conn.release();
@@ -265,7 +260,6 @@ class EntradasDao {
 
         } catch (err) {
             await conn.rollback();
-            console.error(err);
             return { success: false, error: err };
         } finally {
             conn.release();
@@ -290,7 +284,7 @@ class EntradasDao {
             return entradas;
         }
         catch (error) {
-            console.log(error);
+            throw error;
         }
 
 
@@ -302,7 +296,7 @@ class EntradasDao {
             return response;
         }
         catch (error) {
-
+            throw error;
         }
     }
 

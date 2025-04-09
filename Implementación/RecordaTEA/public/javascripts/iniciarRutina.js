@@ -2,6 +2,7 @@ $(document).ready(function () {
 
 
     $('#buttonIniciar').click(function () {
+        $('#texto-tarjeta').text('');
         if ($('#contenedorRutina .col-lg-2').length === 0) {
             window.location.href="/rutinas/mis-rutinas";
         }
@@ -9,13 +10,14 @@ $(document).ready(function () {
         var primeraTarjeta = $('#contenedorRutina .col-lg-2').first();
         var imagenBtnActual = $('#buttonIniciar').find('img').attr('src');
 
-        console.log(imagenBtnActual);
         if (imagenBtnActual === "/images/config/iniciar.png") {
 
             if (primeraTarjeta.length > 0) {
 
                 var imagenTarjeta = primeraTarjeta.find('.card-img').attr('src');
+                let txtTrajeta = primeraTarjeta.find('h5').text();
                 $('#buttonIniciar .card-img').attr('src', imagenTarjeta);
+                $('#texto-tarjeta').text(txtTrajeta);
                 var ocultarTarjeta = primeraTarjeta.find('.card');
 
                 // $('#contenedorRutinaHecha .row').append(primeraTarjeta);
@@ -24,6 +26,7 @@ $(document).ready(function () {
 
             else {
                 $('#buttonIniciar .card-img').attr('src', "/images/config/iniciar.png");
+                $('#texto-tarjeta').text('');
 
             }
         } else {

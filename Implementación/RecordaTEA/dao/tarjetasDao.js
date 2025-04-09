@@ -10,7 +10,6 @@ class TarjetasDao {
       return vocabulario;
     }
     catch (error) {
-      console.error('ERROR[TarjetasDao]: obtener vocabulario por ID: ', error);
       throw error;
     }
   }
@@ -26,7 +25,6 @@ class TarjetasDao {
       return vocabulario;
     }
     catch (error) {
-      console.error('ERROR[TarjetasDao]: obtener vocabulario por ID: ', error);
       throw error;
     }
   }
@@ -38,7 +36,6 @@ class TarjetasDao {
       return response.insertId;
     }
     catch (error) {
-      console.error('ERROR[TarjetasDao]: agregar tarjeta al vocabulario: ', error);
       throw error;
     }
   }
@@ -50,7 +47,6 @@ class TarjetasDao {
       return response;
     }
     catch (error) {
-      console.error('ERROR[TarjetasDao]: comprobar picto: ', error);
       throw error;
     }
   }
@@ -58,11 +54,9 @@ class TarjetasDao {
   async eliminarTarjetaVocabulario(idTarjeta) {
     try {
       let [response] = await pool.query('UPDATE Tarjetas SET activa = 0 WHERE id = ?', [idTarjeta]);
-      console.log(idTarjeta)
       return response.affectedRows;
     }
     catch (error) {
-      console.error('ERROR[TarjetasDao]: eliminar tarjeta: ', error);
       throw error;
     }
   }
@@ -73,7 +67,6 @@ class TarjetasDao {
       return picto;
     }
     catch (error) {
-      console.error('ERROR[TarjetasDao]: buscar picto con id tarjeta: ', error);
       throw error;
     }
   }
@@ -98,7 +91,6 @@ class TarjetasDao {
       return pictos;
     }
     catch (error) {
-      console.error('ERROR[TarjetasDao]: buscar picto con id entrada: ', error);
       throw error;
     }
   }
@@ -110,18 +102,17 @@ class TarjetasDao {
       return resultadoImagen.insertId;
     }
     catch (error) {
-      console.log('ERROR AL INSERTAR IMAGEN', error);
+      throw error;
     }
   }
 
   async imagenesUsuarioId(usuarioId) {
     try {
       let [imagenes] = await pool.query('SELECT t.id AS idTarjeta, i.imagen, i.mimetype, i.id FROM Tarjetas t JOIN Imagenes i ON t.id = i.id_tarjeta WHERE t.id_usuario = ? AND t.activa = 1', [usuarioId]);
-      console.log(imagenes)
       return imagenes;
     }
     catch (error) {
-
+      throw error;
     }
   }
 
@@ -131,40 +122,37 @@ class TarjetasDao {
       return resultado.affectedRows;
     }
     catch (error) {
-
+      throw error;
     }
   }
 
   async textoLibre(textoLibre, idUsuario) {
     try {
       let [resultado] = await pool.query('UPDATE Config SET texto = ? WHERE id_usuario = ?', [textoLibre, idUsuario]);
-      console.log(resultado);
       return resultado.affectedRows;
     }
     catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 
   async textoPicto(picto, idUsuario) {
     try {
       let [resultado] = await pool.query('UPDATE Config SET picto_texto = ? WHERE id_usuario = ?', [picto, idUsuario]);
-      console.log(resultado);
       return resultado.affectedRows;
     }
     catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 
   async leerConfiguracionVocabulario(idUsuario) {
     try {
       let [resultado] = await pool.query('SELECT * FROM Config WHERE id_usuario = ?', [idUsuario]);
-      
       return resultado[0];
     }
     catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 }

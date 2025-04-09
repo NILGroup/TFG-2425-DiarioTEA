@@ -114,7 +114,6 @@ $(document).ready(function () {
                     method: 'POST',
                     data: usuariocuidador,
                     success: function (response) {
-                        console.log(response);
                         if (response.mensaje == 1) {
                             window.location.href = '/cuidadores/inicio';
                         } else if (response.mensaje == -3) {

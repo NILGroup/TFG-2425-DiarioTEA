@@ -98,7 +98,6 @@ $(document).ready(function () {
             const fileName = inputFile ? inputFile.name : 'imagen_recortada.jpg';
             if (img) {
                 img.toBlob(function (blob) {
-                    console.log('ENTRO')
                     formData.append('image', blob, fileName);
                     enviarFormulario(formData);
                 });
@@ -219,9 +218,6 @@ $(document).ready(function () {
 
     async function enviarFormulario(formData) {
         let usuario = $('#usuario-perfil');
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
         $.ajax({
             url: '/users/nuevo-usuario',
             method: 'POST',
@@ -274,7 +270,6 @@ $(document).ready(function () {
                     img = null;
                 }
                 else if (response.mensaje == -3) {
-                    console.log('ERROR')
                     usuario.addClass('is-invalid');
                     $('#usuario-error-perfil').text('Usuario ya existente.');
                 } else if (response.mensaje == -5) {

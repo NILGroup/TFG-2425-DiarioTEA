@@ -2,15 +2,15 @@
 
     <body>
         <div class="container" id="conjuntoRutinas">
-            <div class="row mt-5 justify-content-center align-items-center">
-                <h3 class="text-center mb-3">Mis rutinas</h3>
+            <div class="row mt-3 justify-content-center align-items-center">
+                <h3 class="text-center mb-5">Mis rutinas</h3>
                 <% if (rutinas.length> 0) { %>
                     <% rutinas.forEach(function(item) { %>
-                        <div class="col-md-3 col-xs-3">
+                        <div class="col-md-3 col-xs-3 mb-5">
                             <div class="card">
                                 <a href="/rutinas/mis-rutinas/<%= item.id %>">
                                     <div class="card-body">
-                                        <img src="/images/pictos/rutinas.png">
+                                        <img src="<%=item.enlace%>">
                                     </div>
                                     <h5 class="card-title text-center">
                                         <%= item.nombre %>
