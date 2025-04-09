@@ -34,7 +34,7 @@ class RutinassDao {
     async getTarjetasByIdRutina(idRutina) {
         try {
             const tarjetas = await pool.query(`
-                SELECT Rutinas.id, Rutinas.nombre, Tarjetas.id, Pictos.id as id_picto, Pictos.enlace, Imagenes.mimetype, Imagenes.imagen, Tarjetas.texto
+                SELECT Rutinas.id, Rutinas.nombre, Pictos.id as id_picto, Pictos.enlace, Imagenes.mimetype, Imagenes.imagen, Tarjetas.texto
                 FROM Rutinas LEFT JOIN Rutinas_tarjeta ON Rutinas.id = Rutinas_tarjeta.id_rutina
                 LEFT JOIN Tarjetas ON Rutinas_tarjeta.id_tarjeta = Tarjetas.id
                 LEFT JOIN Pictos ON Tarjetas.id = Pictos.id_tarjeta
