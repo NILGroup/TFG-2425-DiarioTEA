@@ -1,7 +1,9 @@
-<%-include ("navbarTEA")%>
+<head>
+    <link rel="icon" href="/images/config/favicon.png" type="image/x-icon">
+</head>
 
-    <body>
-
+<body>
+    <%-include ("navbarTEA")%>
         <div class="modal fade" id="emocionModal" tabindex="-1" aria-labelledby="emocionModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -120,8 +122,7 @@
                     </div>
                     <% if(!config.texto){%>
                         <div class="container d-flex justify-content-center align-items-center mt-3 col-lg-2 col-md-2 mt-3"
-                             data-bs-toggle="modal"
-                            data-bs-target="#emocionModal">
+                            data-bs-toggle="modal" data-bs-target="#emocionModal">
                             <div class="card" id="cardEmocion">
                                 <img src="/images/emotions/emociones.png" class="card-img" id="emocionSeleccionada">
                             </div>
@@ -141,8 +142,10 @@
                                             <div class="dflex">
                                                 <div class="card" id="<%= item.idTarjeta %>">
                                                     <img src="<%= item.enlace %>" class="card-img">
-                                                    <% if(config.picto_texto)  { %>
-                                                        <h5 class="nombre-pictograma text-center"> <%= item.texto %></h5>
+                                                    <% if(config.picto_texto) { %>
+                                                        <h5 class="nombre-pictograma text-center">
+                                                            <%= item.texto %>
+                                                        </h5>
                                                         <% }%>
                                                 </div>
                                             </div>
@@ -203,4 +206,4 @@
         <script src="https://unpkg.com/sortablejs-make/Sortable.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
         <script src="/javascripts/sortableCards.js"></script>
-    </body>
+</body>
