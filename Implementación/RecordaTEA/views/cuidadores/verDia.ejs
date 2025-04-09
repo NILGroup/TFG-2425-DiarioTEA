@@ -40,7 +40,7 @@
                 <% if (data.entradas.length> 0) { %>
                     <% data.entradas.forEach(function(elem){%>
                         <div class="d-flex align-items-center tarjeta-diario mt-5 shadow-lg">
-                            <div class="list-group-item list-hora flex-column align-items-center entrada">
+                            <div class="list-group-item list-hora flex-column align-items-center entrada p-2">
                                 <div class="justify-content-center text-center">
                                     <h2>
                                         <%= elem.hora %>
@@ -50,34 +50,32 @@
                                     </p>
                                 </div>
                             </div>
-                            <div
-                                class="list-group-item list-contenido d-flex flex-column justify-content-center align-items-start entrada">
-                                <div class=" d-flex align-items-center">
-                                    <div class="img-registro gap-3 d-flex">
+                            <div class="list-group-item list-contenido flex-column align-items-start entrada p-2">
+                                <div class="d-flex w-100">
+                                    <div class="row d-flex img-registro gap-2">
                                         <% if (elem.cuerpo===null){%>
-                                            <div class="d-flex flex-column flex-sm-row">
-                                                <% elem.pictos.forEach(function(p){%>
-                                                    <div>
-                                                        <img src="<%= p.enlace %>" alt="">
+                                            <% elem.pictos.forEach(function(p){%>
+                                                <div class="col-auto">
+                                                    <div class="card mb-2 p-1">
+                                                        <img class="card-img-top me-2" src="<%=p.enlace%>" alt="">
 
                                                         <% if(data.config.picto_texto){%>
-                                                            <h5 class="nombre-pictograma text-center">
+                                                            <span class="card-text nombre-pictograma text-center">
                                                                 <%= p.texto %>
-                                                            </h5>
+                                                            </span>
 
                                                             <%}%>
                                                     </div>
-
-                                                    <%}) %>
-                                            </div>
-
-                                            <%} else {%>
-                                                <div class=" align-items-center">
-                                                    <p class="no-margen texto-entrada">
-                                                        <%= elem.cuerpo%>
-                                                    </p>
                                                 </div>
-                                                <%}%>
+                                                    <%}) %>
+                                                        <%} else {%>
+                                                            <div class="d-flex">
+                                                                <p class="align-items-center texto-entrada">
+                                                                    <%= elem.cuerpo%>
+                                                                </p>
+                                                            </div>
+                                                            <%}%>
+                                                </div>
                                     </div>
                                 </div>
                             </div>

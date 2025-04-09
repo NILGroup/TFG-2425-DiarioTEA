@@ -88,7 +88,7 @@ CREATE TABLE Entradas_tarjeta(
     id_entrada INT NOT NULL,
     id_tarjeta INT NOT NULL,
     orden INT NOT NULL,
-    PRIMARY KEY (id_entrada, id_tarjeta),
+    PRIMARY KEY (id_entrada, id_tarjeta, orden),
     FOREIGN KEY (id_entrada) REFERENCES Entradas(id),
     FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas(id)
 );
