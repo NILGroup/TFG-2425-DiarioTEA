@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var imgSeleccionadaAnt = null;
+    var idImg;
     var progreso = 0;
     var escrito = false;
     var pictos = false;
@@ -7,16 +8,17 @@ $(document).ready(function () {
     $('#portadaModal img').on('click', function (e) {
         e.preventDefault();
         if (imgSeleccionadaAnt != null) {
-            imgSeleccionadaAnt.removeClass('seleccionada');
+            imgSeleccionadaAnt.parent().removeClass('seleccionada');
         }
         imgSeleccionadaAnt = $(this);
-        $(this).addClass('seleccionada');
+        $(this).parent().addClass('seleccionada');
+        idImg = imgSeleccionadaAnt.parent().attr('id');
     });
 
     $('#seleccionarPortada').on('click', function () {
         if (imgSeleccionadaAnt != null) {
             let imgSeleccionada = imgSeleccionadaAnt.attr('src');
-            $('#portadaImagen').attr('src', imgSeleccionada);
+            $('#portadaImagen').attr('src', imgSeleccionada).attr('data-id', idImg);
         }
         progreso+=25;
         $('#barra-progreso').css('width', progreso +'%');
@@ -136,10 +138,10 @@ $(document).ready(function () {
             });
 
             const rutina = {
-                id_usuario: 1,
                 nombre: $("#nombreRutina").val(),
                 fecha_creacion: new Date(),
-                tarjetas: tarjetas
+                tarjetas: tarjetas,
+                id_portada: idImg
             };
 
             $("#rutinaInput").val(JSON.stringify(rutina));

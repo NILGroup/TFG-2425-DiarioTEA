@@ -70,14 +70,16 @@ CREATE TABLE Rutinas(
     nombre VARCHAR(50) NOT NULL,
     autor INT NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id)
+    id_portada INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id),
+    FOREIGN KEY (id_portada) REFERENCES Tarjetas(id)
 );
 
 CREATE TABLE Rutinas_tarjeta(
     id_rutina INT NOT NULL,
     id_tarjeta INT NOT NULL,
     orden INT NOT NULL,
-    PRIMARY KEY(id_rutina, id_tarjeta),
+    PRIMARY KEY(id_rutina, id_tarjeta, orden),
     FOREIGN KEY (id_rutina) REFERENCES Rutinas(id),
     FOREIGN KEY (id_tarjeta) REFERENCES Tarjetas(id)
 );

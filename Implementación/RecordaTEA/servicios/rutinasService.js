@@ -1,6 +1,8 @@
 const RutinasDao = require('../dao/rutinasDao')
 const rutinasDao = new RutinasDao();
 
+const imagenUtils = require('../utils/imagenUtils');
+
 class RutinasService{
     constructor(){}
 
@@ -10,12 +12,20 @@ class RutinasService{
     }
 
     async getRutinasById(idUsuario){
-        const response = await rutinasDao.getRutinasById(idUsuario);
-        return response[0];
+        let response = await rutinasDao.getRutinasById(idUsuario);
+        if(!response.enlace){
+            response.enlace = imagenUtils.renderImage(response);
+        }
+        return response;
     }
 
     async getTarjetasByIdRutina(idRutina){
-        const response = await rutinasDao.getTarjetasByIdRutina(idRutina);
+        let response = await rutinasDao.getTarjetasByIdRutina(idRutina);
+        response[0].forEach(elem =>{
+            if(!elem.enlace){
+                elem.enlace = imagenUtils.renderImage(elem);
+            }
+        });
         return response[0];
     }
 

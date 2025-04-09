@@ -78,7 +78,13 @@ body {
 
 .tamaño-lista {
     width: 7em;
-    object-fit: contain;
+    object-fit: cover;
+}
+
+.tamaño-lista-notexto{
+    width: 7em;
+    object-fit: cover;
+    height: 7em;
 }
 
 .tableros {

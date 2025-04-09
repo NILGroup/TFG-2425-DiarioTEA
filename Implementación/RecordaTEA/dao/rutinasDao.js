@@ -15,11 +15,13 @@ class RutinassDao {
 
     async getRutinasById(idUsuario) {
         try {
-            const response = await pool.query(`SELECT * 
-                FROM Rutinas
-                WHERE Rutinas.id_usuario = ?
+            const [response] = await pool.query(`SELECT r.id, r.id_usuario, r.nombre, r.autor, r.fecha_creacion, p.enlace, i.mimetype, i.imagen 
+                FROM Rutinas r LEFT JOIN Tarjetas t ON t.id = r.id_portada 
+                LEFT JOIN Pictos p ON p.id_tarjeta = t.id 
+                LEFT JOIN Imagenes i ON i.id_tarjeta = t.id
+                WHERE r.id_usuario = ?
                 `, [idUsuario]);
-                
+
             return response;
         }
 
@@ -51,10 +53,12 @@ class RutinassDao {
     }
 
     async crearRutina(data) {
+        const connection = await pool.getConnection();
         try {
-            const [rutina] = await pool.query(
-                `INSERT INTO Rutinas (id_usuario, nombre, autor, fecha_creacion) VALUES (?, ?, ?, ?);`,
-                [data.id_usuario, data.nombre, data.autor, data.fecha_creacion]
+            await connection.beginTransaction();
+            const [rutina] = await connection.query(
+                `INSERT INTO Rutinas (id_usuario, nombre, autor, fecha_creacion, id_portada) VALUES (?, ?, ?, ?, ?);`,
+                [data.id_usuario, data.nombre, data.autor, data.fecha_creacion, data.id_portada]
             );
 
             if (rutina.affectedRows === 1) {
@@ -63,18 +67,21 @@ class RutinassDao {
                     tarjeta.id_tarjeta,
                     tarjeta.orden
                 ]);
-                // Inserta en la tabla 'entradas_tarjeta'
-                const [rutinas_tarjeta] = await pool.query(
+
+                await connection.query(
                     `INSERT INTO rutinas_tarjeta (id_rutina, id_tarjeta, orden) VALUES ?;`,
                     [queries]
                 );
-                return { success: true, id: rutina.insertId }; // Devuelve el ID de la entrada
+                await connection.commit();
+                return { success: true, id: rutina.insertId };
             }
 
-            return e;
-            
         } catch (e) {
-            console.log(e);
+            await connection.rollback();
+            throw e;
+        }
+        finally {
+            connection.release();
         }
     }
 }

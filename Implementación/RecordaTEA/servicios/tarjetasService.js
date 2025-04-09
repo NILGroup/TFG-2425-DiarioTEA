@@ -10,12 +10,15 @@ class TarjetasService {
     constructor() { }
 
     async obtenerTarjetasUsuarioId(id_usuario) {
-
         let vocabulario;
         try {
             if (id_usuario !== null) {
-                console.log(id_usuario)
                 vocabulario = await tarjetasDao.obtenerTarjetasUsuarioId(id_usuario);
+                vocabulario.forEach(elem => {
+                    if(elem.enlace === null){
+                        elem.enlace = imagenUtils.renderImage(elem)
+                    }
+                });
             }
             else {
                 vocabulario = -1;

@@ -47,8 +47,16 @@ $(document).ready(function () {
 
                 }
             },
-            error: function (data, status, xhr) {
-
+            error: function (xhr, status, error) {
+                let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
+                alerta.text(error.message).attr('id', `alert-${status}`).hide();
+                    $('#avisosPictos').append(alerta);
+                    $(`#alert-${status}`).fadeIn();
+                    setTimeout(function () {
+                        $(`#alert-${status}`).fadeOut(400, function () {
+                            $(this).remove();
+                        });
+                    }, 1000);
             }
         });
 
@@ -56,12 +64,11 @@ $(document).ready(function () {
 
     $('#buscaArasaac').on('click', function (e) {
         e.preventDefault();
-        consulta = $('#campoBusqueda').val();
+        consulta = $('#campoBusqueda').val().trim();
         pagina = 1;
         let contenedorPictos = $('#resultBusqueda');
         let cont = $('<div>').attr('id', 'page-1').addClass('row');
         if (consulta === null || consulta === undefined || consulta === "") {
-            alert('La consulta está vacía o no definida.');
         }
         else {
             $('#paginas').hide();
@@ -108,7 +115,15 @@ $(document).ready(function () {
                     contenedorPictos.show();
                 },
                 error: function (xhr, status, error) {
-
+                    let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
+                    alerta.text(error.message).attr('id', `alert-${status}`).hide();
+                        $('#avisosPictos').append(alerta);
+                        $(`#alert-${status}`).fadeIn();
+                        setTimeout(function () {
+                            $(`#alert-${status}`).fadeOut(400, function () {
+                                $(this).remove();
+                            });
+                        }, 1000);
                 }
             });
         }
@@ -162,6 +177,17 @@ $(document).ready(function () {
                         $('#anteriorPag').prop('disabled', false);
                         contenedorPictos.append(cont);
                     }
+                },
+                error: function(xhr, status, error){
+                    let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
+                    alerta.text(error.message).attr('id', `alert-${status}`).hide();
+                        $('#avisosPictos').append(alerta);
+                        $(`#alert-${status}`).fadeIn();
+                        setTimeout(function () {
+                            $(`#alert-${status}`).fadeOut(400, function () {
+                                $(this).remove();
+                            });
+                        }, 1000);
                 }
             });
         }
@@ -240,7 +266,15 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-
+                let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
+                alerta.text(error.message).attr('id', `alert-${status}`).hide();
+                    $('#avisosPictos').append(alerta);
+                    $(`#alert-${status}`).fadeIn();
+                    setTimeout(function () {
+                        $(`#alert-${status}`).fadeOut(400, function () {
+                            $(this).remove();
+                        });
+                    }, 1000);
             }
         });
     });
@@ -336,8 +370,16 @@ $(document).ready(function () {
                     $(`#${id}`).closest('.col-lg-2.col-md-3.mt-3').remove();
                 }
             },
-            error: function (data, status, xhr) {
-
+            error: function (xhr, status, error) {
+                let alerta = $('<div>').addClass('alert alert-light alert-custom').attr('role', 'alert');
+                alerta.text(error.message).attr('id', `alert-${status}`).hide();
+                    $('#avisosPictos').append(alerta);
+                    $(`#alert-${status}`).fadeIn();
+                    setTimeout(function () {
+                        $(`#alert-${status}`).fadeOut(400, function () {
+                            $(this).remove();
+                        });
+                    }, 1000);
             }
         });
     }

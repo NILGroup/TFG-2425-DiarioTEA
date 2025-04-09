@@ -79,7 +79,6 @@ class RutinasControlador {
 
     async addRutina(req, res, next) {
         try {
-            //let id_usuario = req.session.usuario.id;
             let vocabulario = await tarjetasService.obtenerTarjetasUsuarioId(req.session.usuario.id);
 
             let data = {
@@ -104,6 +103,7 @@ class RutinasControlador {
             const tarjetasRutina = req.body.rutina;
             const rutina = JSON.parse(tarjetasRutina);
             rutina.autor = req.session.idUsuario;
+            rutina.id_usuario = req.session.usuario.id;
 
 
             const response = await rutinasServicio.crearRutina(rutina);
@@ -116,6 +116,7 @@ class RutinasControlador {
             }
         }
         catch (error) {
+            console.log(error)
             const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
             rr.status = 500;
             next(rr);

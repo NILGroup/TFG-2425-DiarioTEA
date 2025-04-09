@@ -120,7 +120,7 @@
                     </div>
                     <% if(!config.texto){%>
                         <div class="container d-flex justify-content-center align-items-center mt-3 col-lg-2 col-md-2 mt-3"
-                            style="border: 2px solid black; border-radius: 3px;" data-bs-toggle="modal"
+                             data-bs-toggle="modal"
                             data-bs-target="#emocionModal">
                             <div class="card" id="cardEmocion">
                                 <img src="/images/emotions/emociones.png" class="card-img" id="emocionSeleccionada">
@@ -200,4 +200,7 @@
         </form>
 
         <script src="/javascripts/addRegistros.js"></script>
+        <script src="https://unpkg.com/sortablejs-make/Sortable.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+        <script src="/javascripts/sortableCards.js"></script>
     </body>

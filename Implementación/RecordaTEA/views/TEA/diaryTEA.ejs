@@ -18,7 +18,7 @@
 
           <!-- Botón Confirmar Borrar -->
           <div class="card no-border d-flex text-center">
-            <a id="confirm  DeleteBtn" class="btn btn-light">
+            <a id="confirm-DeleteBtn" class="btn btn-light">
               <img src="/images/config/botonBorrar.png" alt="Borrar">
             </a>
             <p class="card-title texto-boton">BORRAR</p>
@@ -51,14 +51,24 @@
 
           <div class="d-flex gap-3 mt-4" id="<%= item.idEntrada %>">
 
+            <% if (item.emocion != null) { %>
+              <div class="card tamaño-lista-notexto m-0 align-items-start justify-content-start">
+                <img class="card-img-top" src="<%= item.emocion %>">
+              </div>
+              <div class="vr mx-2" style="width: 4px; background-color: #000; height: 7em; border-radius: 10px;"></div>
+            <% } %>
+
             <% if (item.tipo === "Picto") { %>
               <% item.tarjetas.forEach(function(picto) { %>
-                <div class="card tamaño-lista">
+                <div class="card tamaño-lista-notexto">
                   <img class="card-img-top" src="<%= picto.enlace || picto.imagen %>">
-                  <% if(config.picto_texto)  { %>
-                    <h6 class="card-title nombre-pictograma text-center"> <%= picto.texto %></h6>
-                    <% }%>
                 </div>
+                  <% if(config.picto_texto)  { %>
+                    <div class="card tamaño-lista">
+                      <img class="card-img-top" src="<%= picto.enlace || picto.imagen %>">
+                    <h6 class="card-title nombre-pictograma text-center"> <%= picto.texto %></h6>
+                    </div>
+                    <% }%>
               <% }); %>
             <% } else { %>
               <div class="me-2">
@@ -68,12 +78,6 @@
 
             <!-- CONTENEDOR DE BOTONES A LA DERECHA -->
             <div class="d-flex align-items-center gap-3 ms-auto">
-
-              <% if (item.emocion != null) { %>
-                <div class="card tamaño-lista">
-                  <img class="card-img-top" src="<%= item.emocion %>">
-                </div>
-              <% } %>
 
               <!-- VER ENTRADA -->
               <div class="card no-border tamaño-lista d-flex text-center">
@@ -109,7 +113,7 @@
     $(document).ready(function () {
       $('.open-delete-modal').on('click', function () {
         const entradaId = $(this).data('id');
-        $('#confirmDeleteBtn').attr('href', `/diario/delete-entry/${entradaId}`);
+        $('#confirm-DeleteBtn').attr('href', `/diario/delete-entry/${entradaId}`);
       });
     });
   </script>

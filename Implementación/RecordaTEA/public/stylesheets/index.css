@@ -33,7 +33,8 @@ a {
 }
 
 .seleccionada{
-    background-color:forestgreen;
+    background-color:#619661 !important;
+    border-color: #406840 !important;
 }
 
 .card img {
