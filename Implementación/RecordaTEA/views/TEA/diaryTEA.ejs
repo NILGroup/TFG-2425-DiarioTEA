@@ -60,12 +60,14 @@
 
             <% if (item.tipo === "Picto") { %>
               <% item.tarjetas.forEach(function(picto) { %>
-                <div class="card tamaño-lista-notexto">
-                  <img class="card-img-top" src="<%= picto.enlace || picto.imagen %>">
-                </div>
+                <%if (!config.picto_texto){%>
+                  <div class="card tamaño-lista-notexto">
+                    <img class="card-img-top" src="<%= picto.enlace || picto.imagen %>">
+                  </div>
+                  <%}%>
                   <% if(config.picto_texto)  { %>
-                    <div class="card tamaño-lista">
-                      <img class="card-img-top" src="<%= picto.enlace || picto.imagen %>">
+                    <div class="card p-1" style="object-fit: contain; align-items: center;">
+                      <img class="card-img-top tamaño-texto" src="<%= picto.enlace || picto.imagen %>">
                     <h6 class="card-title nombre-pictograma text-center"> <%= picto.texto %></h6>
                     </div>
                     <% }%>

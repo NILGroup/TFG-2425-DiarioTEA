@@ -10,10 +10,10 @@ body {
     border-width: 0.2em;
     border-radius: 0.3em;
     cursor: pointer;
-    -webkit-user-select: none; /* Chrome, Safari, Opera */
-    -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none;     /* Internet Explorer/Edge */
-    user-select: none;         /* Estándar */
+    -webkit-user-select: none; 
+    -moz-user-select: none;    
+    -ms-user-select: none;    
+    user-select: none;         
 }
 
 .card:hover {
@@ -79,6 +79,10 @@ body {
 .tamaño-lista {
     width: 7em;
     object-fit: cover;
+}
+
+.tamaño-texto{
+    width: 7em !important;
 }
 
 .tamaño-lista-notexto{
