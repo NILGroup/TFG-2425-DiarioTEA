@@ -13,9 +13,11 @@ class RutinasService{
 
     async getRutinasById(idUsuario){
         let response = await rutinasDao.getRutinasById(idUsuario);
-        if(!response.enlace){
-            response.enlace = imagenUtils.renderImage(response);
-        }
+        response.forEach(elem =>{
+            if(!elem.enlace){
+                elem.enlace = imagenUtils.renderImage(elem);
+            }
+        });
         return response;
     }
 
