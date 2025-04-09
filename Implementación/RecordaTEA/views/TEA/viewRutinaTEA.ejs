@@ -1,75 +1,76 @@
-<%- include("navbarTEA") %>
-
     <body>
-        <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;" id="contenedorRutina">
-            <h3 class="text-center">Rutina de <%= nombreRutina %></h3>
-            <div class="row pb-3" id="cardsRutina">
-                <!--porque se le pasa minimo una entrada pero para obtener el nombre de la rutina aunque no tenga pictos-->
-                <% if (rutinas.length>0 && rutinas[0].id_picto!=null) { %>
-                    <% rutinas.forEach(function(item) { %>
-                        <div class="col-lg-2 col-md-3 mt-3 d-flex">
-
-                            <div class="card">
-                                <img src=" <%= item.enlace %>" class="card-img">
-                                <% if(config.picto_texto) { %>
-                                    <h5 class="nombre-pictograma text-center"> <%= item.texto %></h5>
-                                <%}%>
+        <%- include("navbarTEA") %>
+        <div class="container">
+            <h3 class="text-center mt-5"><%= nombreRutina.toUpperCase() %></h3>
+            <div class="container mt-5" style="border: 2px solid black; border-radius: 3px;" id="contenedorRutina">
+                <div class="row pb-3" id="cardsRutina">
+                    <!--porque se le pasa minimo una entrada pero para obtener el nombre de la rutina aunque no tenga pictos-->
+                    <% if (rutinas.length>0) { %>
+                        <% rutinas.forEach(function(item) { %>
+                            <div class="col-lg-2 col-md-3 mt-3 d-flex">
+    
+                                <div class="card">
+                                    <img src=" <%= item.enlace %>" class="card-img">
+                                    <% if(config.picto_texto) { %>
+                                        <h5 class="nombre-pictograma text-center"> <%= item.texto %></h5>
+                                    <%}%>
+                                </div>
+    
                             </div>
-
-                        </div>
-                        <% }); %>
-
-                            <% } else { %>
-                                <p>No existen tarjetas para dicha rutina</p>
-                                <% } %>
-
-
-
-
-            </div>
-
-        </div>
-        <div class="container mt-5 pb-5" id="buttonsRutina">
-            <div class="row d-flex justify-content-center">
-                <div class="col-lg-2 col-md-3 col-sm-4" id="botonVolverRutinas">
-                    <img class="img-fluid" src="/images/config/botonVolver.png" alt="Volver a las rutinas"
-                        style="cursor:pointer">
+                            <% }); %>
+    
+                                <% } else { %>
+                                    <p>No existen tarjetas para dicha rutina</p>
+                                    <% } %>
+    
+    
+    
+    
                 </div>
-
-                <% if (rutinas.length>0 && rutinas[0].id_picto!=null) { %>
-                <div class="col-lg-2 col-md-3 col-sm-4" id="botonIniciarRutina">
-                    <img class="img-fluid" src="/images/config/ir.png" alt="Ir" style="cursor:pointer">
-                </div>
-                <% } %>
+    
             </div>
-        </div>
-
-        <div class="" id="containerInicioRutina">
-            <div class="container d-flex mt-3" id="containerAccionActual">
-
-                <div class="col-lg-12 col-md-12 mt-12 d-flex flex-column align-items-center justify-content-center">
-                    <button class="btn"
-                        style="max-width: 250px; max-height: 250px; border: 2px solid black; border-radius: 3px;"
-                        id="buttonIniciar">
-
-                        <img src="/images/config/iniciar.png" alt="" class="card-img">
-
-                    </button>
-                    <p id="terminado"></p>
+            <div class="container mt-5 pb-5" id="buttonsRutina">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-2 col-md-3 col-sm-4" id="botonVolverRutinas">
+                        <img class="img-fluid" src="/images/config/botonVolver.png" alt="Volver a las rutinas"
+                            style="cursor:pointer">
+                    </div>
+    
+                    <% if (rutinas.length>0) { %>
+                    <div class="col-lg-2 col-md-3 col-sm-4" id="botonIniciarRutina">
+                        <img class="img-fluid" src="/images/config/ir.png" alt="Ir" style="cursor:pointer">
+                    </div>
+                    <% } %>
                 </div>
-
-
             </div>
-            <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;" id="contenedorRutinaHecha">
-
-                <div class="row pb-3">
-
-
-
+    
+            <div class="" id="containerInicioRutina">
+                <div class="container d-flex mt-3" id="containerAccionActual">
+    
+                    <div class="col-lg-12 col-md-12 mt-12 d-flex flex-column align-items-center justify-content-center">
+                        <button class="btn"
+                            style="max-width: 250px; max-height: 250px; border: 2px solid black; border-radius: 3px;"
+                            id="buttonIniciar">
+    
+                            <img src="/images/config/iniciar.png" alt="" class="card-img">
+    
+                        </button>
+                        <p id="terminado"></p>
+                    </div>
+    
+    
                 </div>
-
+                <div class="container mt-3" style="border: 2px solid black; border-radius: 3px;" id="contenedorRutinaHecha">
+    
+                    <div class="row pb-3">
+    
+    
+    
+                    </div>
+    
+                </div>
+                
             </div>
-            
         </div>
 
         <script src="https://unpkg.com/sortablejs-make/Sortable.min.js"></script>

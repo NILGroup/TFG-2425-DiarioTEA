@@ -9,7 +9,6 @@ $(document).ready(function () {
         var primeraTarjeta = $('#contenedorRutina .col-lg-2').first();
         var imagenBtnActual = $('#buttonIniciar').find('img').attr('src');
 
-        console.log(imagenBtnActual);
         if (imagenBtnActual === "/images/config/iniciar.png") {
 
             if (primeraTarjeta.length > 0) {

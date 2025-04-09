@@ -60,7 +60,6 @@ $(document).ready(function () {
         // Formatear como "YYYY-MM-DD HH:MM:SS"
         const fechaHoraFormatted = `${year}-${month}-${day} ${hora}:00`;
         
-        console.log(fechaHoraFormatted);
         
 
         if ($('#text-area').length > 0) {

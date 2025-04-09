@@ -5,7 +5,6 @@ $(document).ready(function () {
     let puedeHaberCambio = false;
     let anyos = $("#anyo").data("anyos");
     anyos = anyos.map(item => item.anyo);
-    console.log("Años disponibles:", anyos);
 
     $('#anyo').datepicker({
         format: "yyyy",

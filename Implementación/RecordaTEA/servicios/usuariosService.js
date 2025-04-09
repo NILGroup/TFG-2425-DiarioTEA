@@ -21,7 +21,6 @@ class UsuariosService {
         try {
             let usuarios = await usuariosDao.leerUsuariosCuidador(idCuidador);
             usuarios.forEach(elem => {
-                console.log(elem)
                 if (elem.imagen !== null) {
                     elem.imagen = imagenUtils.renderImage(elem)
                 }
@@ -39,8 +38,6 @@ class UsuariosService {
         if (!u) {
             return { mensaje: -1 };
         }
-
-        console.log(usuario.password + '\n' + u.contraseña);
 
         const esValida = await bcrypt.compare(usuario.password, u.contraseña);
         if (!esValida) {
@@ -78,7 +75,6 @@ class UsuariosService {
                 else {
                     let result = await usuariosDao.imagenUsuario(imagen);
                     if (result > 0) {
-                        console.log(registerResult.insertId)
                         return { mensaje: registerResult.insertId };
                     }
                     else {

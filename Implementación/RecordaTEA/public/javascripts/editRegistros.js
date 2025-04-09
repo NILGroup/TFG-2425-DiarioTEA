@@ -54,11 +54,6 @@ $(document).ready(function () {
         $('#cancel-btn-edit').hide();
     });
 
-    $("#fecha-edit, #hora-edit").on("change", function () {
-        console.log("Fecha: " + $('#fecha-edit').val());
-        console.log("Hora: " + $('#hora-edit').val());
-    });
-
 
     $('#contenedorVocabulario').on('click', '.card', function (event) {
         event.preventDefault();

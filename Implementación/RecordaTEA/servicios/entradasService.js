@@ -14,7 +14,6 @@ class EntradasService {
     async entradasMes(usuario, mes, año) {
         try {
             let entradasMes = await entradasDao.entradasMes(usuario, mes, año);
-            console.log(entradasMes)
             return entradasMes;
         }
         catch (error) {
@@ -75,8 +74,6 @@ class EntradasService {
                     });
                 }
             });
-
-            console.log(groupedData);
 
             return groupedData;
         } catch (error) {

@@ -40,7 +40,6 @@ class UsuariosControlador {
                     req.session.cuidador = 1;
                 }
                 else {
-                    console.log(u.mensaje);
                     let config = await tarjetasService.leerConfiguracionVocabulario(u.mensaje.id);
                     req.session.usuario = u.mensaje;
                     req.session.cuidador = 0;
