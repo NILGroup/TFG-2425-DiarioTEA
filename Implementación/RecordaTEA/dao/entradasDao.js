@@ -6,31 +6,34 @@ class EntradasDao {
     async entradasMes(usuario, mes, año) {
         try {
             let [entradas] = await pool.query(`
-               SELECT e.tipo, DATE(e.fecha_registro) AS fecha, 
-           COUNT(*) AS entradas,
-           e2.id AS id,
-           e2.cuerpo AS cuerpo
-    FROM Entradas e
-    JOIN Entradas e2 
-        ON DATE(e2.fecha_registro) = DATE(e.fecha_registro)
-        AND e2.id_usuario = e.id_usuario
-        AND e2.fecha_registro = (
-            SELECT MAX(fecha_registro)
-            FROM Entradas 
-            WHERE DATE(fecha_registro) = DATE(e.fecha_registro)
-            AND id_usuario = e.id_usuario
-        )
-    WHERE e.id_usuario = ? 
-    AND MONTH(e.fecha_registro) = ?  
-    AND YEAR(e.fecha_registro) = ?   
-    GROUP BY DATE(e.fecha_registro)
-    ORDER BY DATE(e.fecha_registro) DESC;
+SELECT 
+    e.tipo, 
+    DATE(e.fecha_registro) AS fecha, 
+    COUNT(*) AS entradas,
+    e2.id AS id,
+    e2.cuerpo AS cuerpo
+FROM Entradas e
+JOIN Entradas e2 
+    ON DATE(e2.fecha_registro) = DATE(e.fecha_registro)
+    AND e2.id_usuario = e.id_usuario
+    AND e2.fecha_registro = (
+        SELECT MAX(fecha_registro)
+        FROM Entradas 
+        WHERE DATE(fecha_registro) = DATE(e.fecha_registro)
+        AND id_usuario = e.id_usuario
+    )
+WHERE e.id_usuario = ? 
+  AND MONTH(e.fecha_registro) = ?  
+  AND YEAR(e.fecha_registro) = ?   
+GROUP BY DATE(e.fecha_registro), e.tipo, e2.id, e2.cuerpo
+ORDER BY DATE(e.fecha_registro) DESC;
             `, [usuario, mes, año]);
 
 
             return entradas;
         }
         catch (error) {
+            console.error('[ERROR] EntradasDao: al buscar las entradas de un mes: ', error);
             throw error;
         }
     }
@@ -41,6 +44,7 @@ class EntradasDao {
             return entradas;
         }
         catch (error) {
+            console.error('[ERROR] EntradasDao: al buscar las entradas de un día: ', error);
             throw error;
         }
     }
@@ -62,6 +66,7 @@ class EntradasDao {
             return entradas;
         }
         catch (error) {
+            console.error('[ERROR] EntradasDao: al buscar las entradas de un usuario: ', error);
             throw error;
         }
     }
@@ -90,7 +95,7 @@ class EntradasDao {
             // 3. Insertar en 'entradas_tarjeta'
             if (tarjetasValues.length > 0) {
                 await conn.query(
-                    `INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES ?;`,
+                    `INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES ?;`,
                     [tarjetasValues]
                 );
             }
@@ -100,6 +105,7 @@ class EntradasDao {
 
         } catch (error) {
             await conn.rollback();
+            console.error('[ERROR] EntradasDao: al añadir una entrada: ', error);
             return { success: false, error };
         } finally {
             conn.release();
@@ -113,7 +119,7 @@ class EntradasDao {
 
             // 1. Eliminar 'entradas' de entradas_Tarjeta
             const [entradaResult] = await conn.execute(
-                `DELETE FROM entradas_tarjeta WHERE id_entrada = ?;`,
+                `DELETE FROM Entradas_tarjeta WHERE id_entrada = ?;`,
                 [id]
             );
 
@@ -125,7 +131,7 @@ class EntradasDao {
             // 3. Eliminar en 'entradas'
 
             const [entrada] = await conn.query(
-                `DELETE FROM entradas WHERE id = ? AND id_usuario = ?;`,
+                `DELETE FROM Entradas WHERE id = ? AND id_usuario = ?;`,
                 [id, idUsuario]
             );
 
@@ -140,6 +146,7 @@ class EntradasDao {
 
         } catch (error) {
             await conn.rollback();
+            console.error('[ERROR] EntradasDao: al eliminar una entrada: ', error);
             return { success: false, error };
         } finally {
             conn.release();
@@ -154,14 +161,14 @@ class EntradasDao {
 
             // 1. Actualizar la entrada
             await conn.execute(
-                'UPDATE entradas SET fecha_registro = ? WHERE id = ?',
+                'UPDATE Entradas SET fecha_registro = ? WHERE id = ?',
                 [data.fecha_registro, data.id]
             );
 
 
             // 2. Obtener tarjetas actuales de la base de datos
             const [rows] = await conn.execute(
-                'SELECT id_tarjeta, orden FROM entradas_tarjeta WHERE id_entrada = ?',
+                'SELECT id_tarjeta, orden FROM Entradas_tarjeta WHERE id_entrada = ?',
                 [data.id]
             );
 
@@ -173,7 +180,7 @@ class EntradasDao {
             for (const [id_tarjeta_actual] of actuales) {
                 if (!nuevas.has(id_tarjeta_actual)) {
                     await conn.execute(
-                        'DELETE FROM entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
+                        'DELETE FROM Entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
                         [data.id, id_tarjeta_actual]
                     );
                 }
@@ -185,13 +192,13 @@ class EntradasDao {
                     // No existía antes: insertar
 
                     const [existingEntry] = await conn.execute(
-                        'SELECT 1 FROM entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
+                        'SELECT 1 FROM Entradas_tarjeta WHERE id_entrada = ? AND id_tarjeta = ?',
                         [data.id, id]
                     );
 
                     if (existingEntry.length === 0) {
                         await conn.execute(
-                            'INSERT INTO entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES (?, ?, ?)',
+                            'INSERT INTO Entradas_tarjeta (id_entrada, id_tarjeta, orden) VALUES (?, ?, ?)',
                             [data.id, id, orden]
                         );
                     }
@@ -203,7 +210,7 @@ class EntradasDao {
                     if (actual.orden !== orden) {
                         // Existía pero con distinto orden: actualizar
                         await conn.execute(
-                            'UPDATE entradas_tarjeta SET orden = ? WHERE id_entrada = ? AND id_tarjeta = ?',
+                            'UPDATE Entradas_tarjeta SET orden = ? WHERE id_entrada = ? AND id_tarjeta = ?',
                             [orden, data.id, id]
                         );
                     }
@@ -213,7 +220,7 @@ class EntradasDao {
 
             // 5. Actualizar la emocion
             await conn.execute(
-                'UPDATE entradas SET emocion = ? WHERE id = ?',
+                'UPDATE Entradas SET emocion = ? WHERE id = ?',
                 [data.emocion, data.id]
             );
 
@@ -223,6 +230,7 @@ class EntradasDao {
 
         } catch (err) {
             await conn.rollback();
+            console.error('[ERROR] EntradasDao: al editar las tarjetas de una entrada: ', error);
             return { success: false, error: err };
         } finally {
             conn.release();
@@ -236,21 +244,21 @@ class EntradasDao {
 
             // Obtener entrada actuale de la base de datos
             const [rows] = await conn.execute(
-                'SELECT cuerpo FROM entradas WHERE id = ?',
+                'SELECT cuerpo FROM Entradas WHERE id = ?',
                 [data.id]
             );
 
             // Actualizarlas si hay cambios
             if (rows[0].cuerpo != data.cuerpo) {
                 await conn.execute(
-                    'UPDATE entradas SET cuerpo = ? WHERE id = ?',
+                    'UPDATE Entradas SET cuerpo = ? WHERE id = ?',
                     [data.cuerpo, data.id]
                 );
             }
 
             if (rows[0].fecha_registro != data.fecha_registro) {
                 await conn.execute(
-                    'UPDATE entradas SET fecha_registro = ? WHERE id = ?',
+                    'UPDATE Entradas SET fecha_registro = ? WHERE id = ?',
                     [data.fecha_registro, data.id]
                 );
             }
@@ -260,6 +268,7 @@ class EntradasDao {
 
         } catch (err) {
             await conn.rollback();
+            console.error('[ERROR] EntradasDao: al editar el texto de una entrada: ', error);
             return { success: false, error: err };
         } finally {
             conn.release();
@@ -284,6 +293,7 @@ class EntradasDao {
             return entradas;
         }
         catch (error) {
+            console.error('[ERROR] EntradasDao: al obtener una entrada por id: ', error);
             throw error;
         }
 
@@ -292,10 +302,11 @@ class EntradasDao {
 
     async obtenerAnyos(idUsuario) {
         try {
-            let [response] = await pool.query('SELECT DISTINCT YEAR(fecha_registro) AS anyo FROM entradas WHERE id_usuario = ? ORDER BY anyo DESC;', [idUsuario])
+            let [response] = await pool.query('SELECT DISTINCT YEAR(fecha_registro) AS anyo FROM Entradas WHERE id_usuario = ? ORDER BY anyo DESC;', [idUsuario])
             return response;
         }
         catch (error) {
+            console.error('[ERROR] EntradasDao: al obetener los años en los que hay entradas: ', error);
             throw error;
         }
     }

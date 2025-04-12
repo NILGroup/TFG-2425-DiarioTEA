@@ -9,7 +9,10 @@ class CuidadoresController {
 
     async inicio(req, res, next) {
         try {
-            const usuarios = await usuariosService.leerUsuariosCuidador(req.session.idUsuario);
+            let usuarios = await usuariosService.leerUsuariosCuidador(req.session.idUsuario);
+            if(usuarios == null){
+                usuarios = [];
+            }
             req.session.usuarios = usuarios;
             let nombre = req.session.nombre;
             res.render('cuidadores/index', { data: { usuarios, nombre } });
@@ -48,6 +51,7 @@ class CuidadoresController {
             }
         }
         catch (error) {
+            console.log(error);
             res.status(500).send('Ha ocurrido algo en el servidor.');
         }
     }

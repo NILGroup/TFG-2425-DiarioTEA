@@ -101,13 +101,12 @@ class RutinasControlador {
     async submitRutina(req, res, next) {
         try {
             const tarjetasRutina = req.body.rutina;
-            const rutina = JSON.parse(tarjetasRutina);
+            let rutina = JSON.parse(tarjetasRutina);
             rutina.autor = req.session.idUsuario;
             rutina.id_usuario = req.session.usuario.id;
 
 
             const response = await rutinasServicio.crearRutina(rutina);
-
             if (response.success) {
                 res.redirect("/rutinas");
             }
@@ -117,6 +116,7 @@ class RutinasControlador {
         }
         catch (error) {
             const rr = new Error('Ha ocurrido algo en el servidor, lamentamos las molestias.');
+            console.error(error);
             rr.status = 500;
             next(rr);
         }

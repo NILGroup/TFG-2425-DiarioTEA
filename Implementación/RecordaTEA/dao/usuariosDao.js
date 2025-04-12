@@ -16,17 +16,22 @@ class UsuariosDao {
 
     async leerUsuariosCuidador(idCuidador) {
         try {
-            const usuarios = await pool.query('SELECT Usuarios.nombre, Usuarios.id, i.imagen, i.mimetype FROM Usuarios JOIN Cuidadores_Usu ON Usuarios.id = Cuidadores_Usu.id_usuario LEFT JOIN Imgperfil i ON i.id_usuario = Cuidadores_Usu.id_usuario WHERE Cuidadores_Usu.id_cuidador = ?', [idCuidador]);
+            const usuarios = await pool.query('SELECT Usuarios.nombre, Usuarios.id, i.imagen, i.mimetype FROM Usuarios JOIN Cuidadores_Usu ON Usuarios.id = Cuidadores_Usu.id_usuario LEFT JOIN ImgPerfil i ON i.id_usuario = Cuidadores_Usu.id_usuario WHERE Cuidadores_Usu.id_cuidador = ?', [idCuidador]);
             return usuarios[0];
         }
         catch (error) {
-            console.error('ERROR[UsuariosDao]: buscar usuarios por Id del cuidador');
+            console.error('ERROR[UsuariosDao]: buscar usuarios por Id del cuidador', error);
         }
     }
 
     async login(usuario) {
-        const [u] = await pool.query('SELECT * FROM Usuarios WHERE usuario = ?', [usuario.usuario]);
-        return u[0];
+        try{
+            const [u] = await pool.query('SELECT * FROM Usuarios WHERE usuario = ?', [usuario.usuario]);
+            return u[0];
+        }
+        catch(error){
+            console.error('ERROR[UsuariosDao]: al hacer login: ', error);
+        }
     }
 
     async leerUsuario(usuario) {
@@ -54,7 +59,7 @@ class UsuariosDao {
 
     async realcionCuidador(usuarioId, cuidadorId){
         try{
-            const [resultado] = await pool.query('INSERT INTO Cuidadores_usu (Id_cuidador, Id_usuario)  VALUES (?, ?)', [cuidadorId, usuarioId]);
+            const [resultado] = await pool.query('INSERT INTO Cuidadores_Usu (Id_cuidador, Id_usuario)  VALUES (?, ?)', [cuidadorId, usuarioId]);
             return resultado;
         }
         catch(error){
@@ -65,11 +70,12 @@ class UsuariosDao {
 
     async imagenUsuario(imagen) {
         try{
-            let [resultado] = await pool.query('INSERT INTO Imgperfil (imagen, mimetype, id_usuario) VALUES (?, ?, ?)', [imagen.imagen, imagen.mimetype, imagen.id_usuario]);
+            let [resultado] = await pool.query('INSERT INTO ImgPerfil (imagen, mimetype, id_usuario) VALUES (?, ?, ?)', [imagen.imagen, imagen.mimetype, imagen.id_usuario]);
             return resultado.insertId;
         }
         catch(error){
-
+            console.error('Error al añadir una imagen de perfil: ', error);
+            throw error;
         }
     }
 };
