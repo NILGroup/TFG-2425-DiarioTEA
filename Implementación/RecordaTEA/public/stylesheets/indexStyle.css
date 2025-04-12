@@ -77,7 +77,8 @@ body {
 
 
 .tamaño-lista {
-    width: 7em;
+    max-width: 7em;
+    min-width: 7em;
     object-fit: cover;
 }
 
